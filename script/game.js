@@ -1,10 +1,11 @@
 const { commands, getPrefix } = require("./../config")
 
 module.exports = (api, event) => {
-	let message += "Game Commands:\n"
+	let message = ""
+	message += "Game Commands:\n"
 	i = 1
-	commands.forEach(r => {
-		let data = r.data
+	for(let r = 0; r < commands.length; r++) {
+		let data = commands[r].data
 		let show = true
 		if(data.show != undefined)
 			show = data.show
@@ -19,6 +20,6 @@ module.exports = (api, event) => {
 			message += "\n"
 			i += 1
 		}
-	})
+	}
 	api.sendMessage(message, event.threadID)
 }

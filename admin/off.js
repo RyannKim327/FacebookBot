@@ -1,9 +1,10 @@
+const { getPrefix } = require("./../config")
 const fs = require("fs")
 
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let body = event.body.toLowerCase()
-	if(body == "√on"){
+	if(body == (getPrefix() + "on")){
 		if(event.type == "message_reply" && json.off.includes(event.messageReply.senderID)){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
@@ -48,7 +49,7 @@ module.exports = async (api, event) => {
 				}, event.threadID)
 			}
 		}
-	}else if(body == "√off"){
+	}else if(body == (getPrefix() + "off")){
 		if(event.type == "message_reply" && !json.off.includes(event.messageReply.senderID)){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)

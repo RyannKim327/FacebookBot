@@ -7,7 +7,7 @@ const enc = parser.urlencoded({extended: false})
 module.exports = () => {
 	app.use(express.static("public"))
 	app.get("/", (req, res) => {
-		res.send("Developed by RyannKim327")
+		res.sendFile(__dirname + "/index.html")
 	})
 	app.post("/feed", enc, (req, res) => {
 		let json = JSON.parse(fs.readFileSync("data/feedback.json", "utf8"))

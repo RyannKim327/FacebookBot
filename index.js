@@ -278,7 +278,7 @@ config.add("wiki", {
 	hasArgs: true
 })
 
-config.setAdmins("100081698814451")
+// config.setAdmins("100081698814451")
 
 config.setPrefix("--")
 config.setOptions({
