@@ -1,6 +1,7 @@
 const axios = require("axios")
 const cronjob = require("node-cron")
 const fs = require("fs")
+const gateway = require("biblegateway-scrape")
 
 let date = require("./../utils/date")
 
@@ -48,7 +49,7 @@ module.exports = async (api) => {
 		schedule: true,
 		timezone: "Asia/Manila"
 	})
-	cronjob.schedule("30 6 * * *", async () => {
+	cronjob.schedule("0 7 * * *", async () => {
 		let q_data = await quote()
 		let v_data = await verses()
 		let time = await today()
@@ -56,6 +57,7 @@ module.exports = async (api) => {
 		let res = ""
 		let lastBook = ""
 		let lastChapter = ""
+		let tlb = await gateway.dailyVerse(gateway.version.TAG_ANG_DATING_BIBLIYA_1905)
 		for(let r of v_data){
 			let book = r.bookname
 			let chapter = r.chapter
@@ -82,7 +84,8 @@ module.exports = async (api) => {
 					let ents = eve[Math.floor(Math.random() * eve.length)]
 					let txt = ents.text.replace(/\d\s&#8211;/gi, "").replace(/&#91;\d&#93;/gi, "")
 					let message = "Bible verse of the day:\n"
-					message += res + "\n\n"
+					//message += res + "\n\n"
+					message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
 					message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\nRandom event trivia for today\n~ ${txt}`
 					api.sendMessage(message, r.threadID)
 					i += 1

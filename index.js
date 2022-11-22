@@ -135,6 +135,16 @@ config.add("info", {
 	hasCooldown: false
 })
 
+config.add("audioverse", {
+	title: "Audio Verse",
+	description: "An audio version of a whole chapter in the bible",
+	commands: [
+		"audio verse ([\\w\\W]+)"
+	],
+	hasCooldown: false,
+	hasArgs: true
+})
+
 config.add("baybayin", {
 	title: "Baybayin Transliterator",
 	description: "A command which can transform a normal text into baybayin characters.",
@@ -223,7 +233,8 @@ config.add("music", {
 		"sing ([\\w\\W]+)",
 		"play ([\\w\\W]+)"
 	],
-	hasArgs: true
+	hasArgs: true,
+	cd: 0.5
 })
 
 config.add("pin", {
@@ -232,6 +243,16 @@ config.add("pin", {
 	commands: [
 		"pin"
 	],
+	hasCooldown: false
+})
+
+config.add("tlverse", {
+	title: "Tagalog verse Test",
+	description: "Tagalog bible verses",
+	commands: [
+		"tlverse ([\\w\\W]+)"
+	],
+	hasArgs: true,
 	hasCooldown: false
 })
 
@@ -247,7 +268,8 @@ config.add("verse", {
 		"verse$",
 		"verse ([\\w\\W]+)$"
 	],
-	hasArgs: true
+	hasArgs: true,
+	hasCooldown: false
 })
 
 config.add("video", {
