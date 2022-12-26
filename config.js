@@ -8,12 +8,38 @@ const openai = require("./auto/openai")
 const bw = require("./utils/badwords")
 //const { read } = require("./utils/database")
 const regex = require("./utils/regex")
+const manila = require("manilatimes-scrape")
+const gen = require("./utils/gender")
 
 let invervals = {}
-
+let calls = []
 let options = {
 	listenEvents: true,
 	selfListen: false
+}
+
+let cooldowns = {
+	oneTime: "",
+	multimedia: "",
+	theology: "",
+	knowledge: "",
+	dump: ""
+}
+
+let categories = {
+	oneTime: "oneTime",
+	multimedia: "multimedia",
+	theology: "theology",
+	knowledge: "knowledge",
+	dump: "dump"
+}
+
+let time = {
+	oneTime: 0,
+	multimedia: 1.5,
+	theology: 0.5,
+	knowledge: 2,
+	dump: 0
 }
 
 let commands = []
@@ -56,15 +82,15 @@ let interval_ = () => {
 	setTimeout(interval_, 90000)
 }
 
-let cd = (api, event, cooldown, json, time) => {
-	if(cooldown && !admins.includes(event.senderID)){
-		json.cooldown[event.senderID] = true
+let cd = (api, event, _cats, json) => {
+	if(!admins.includes(event.senderID)){
+		cooldowns[_cats] += `${event.senderID}, `
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 		setTimeout(() => {
-			json.cooldown[event.senderID] = undefined
-			api.sendMessage("Cooldown done", event.threadID, event.messageID)
+			cooldowns[_cats] = cooldowns[_cats].replace(`${event.senderID}, `, "")
+			api.sendMessage(`Cooldown done [${_cats.toLowerCase()}]`, event.threadID, event.messageID)
 			fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-		}, (1000 * 60) * time)
+		}, (1000 * 60) * time[_cats])
 	}
 }
 
@@ -74,7 +100,7 @@ let system = (api, event, r, q, _prefix) => {
 	let admin = false
 	let args = false
 	let game = false
-	let _cd = 1.5
+	let _cats = "dump"
 	let type = ["message"]
 	let reg = regex(_prefix + q.replace(/ /gi, "\\s"))
 	let notAffect = false
@@ -88,12 +114,12 @@ let system = (api, event, r, q, _prefix) => {
 		game = r.data.game
 	if(r.data.type != undefined)
 		type = r.data.type
-	if(r.data.cd != undefined)
-		_cd = r.data.cd
+	if(r.data.category != undefined)
+		_cats = r.data.category
 	if(r.data.affect != undefined)
 		notAffect = r.data.affect
 	
-	if(json.cooldown[event.senderID] == undefined){
+	if(!cooldowns[_cats].includes(event.senderID)){
 		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || notAffect || admins.includes(event.senderID))){
 			let script
 			if(admin){
@@ -115,10 +141,10 @@ let system = (api, event, r, q, _prefix) => {
 			}else{
 				script = require("./script/" + r.script)
 				if(args){
-					cd(api, event, cooldown, json, _cd)
+					cd(api, event, _cats, json)
 					script(api, event, reg)
 				}else{
-					cd(api, event, cooldown, json, _cd)
+					cd(api, event, _cats, json)
 					script(api, event)
 				}
 			}
@@ -146,6 +172,9 @@ let start = (state) => {
 		admins.forEach(id => {
 			api.sendMessage(`Bot service is now activated.`, id)
 		})
+
+		//let vm = await manila.todayNews()
+		//console.log(vm)
 		
 		await cron(api)
 		await cron_api(api)
@@ -168,6 +197,7 @@ let start = (state) => {
 		api.listen(async (error, event) => {
 			if(error) return console.error(`Error [Listen Emitter]: ${error}`)
 			
+			json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 			if(options.autoMarkRead != undefined){
 				if(options.autoMarkRead){
 					await api.markAsReadAll()
@@ -182,6 +212,14 @@ let start = (state) => {
 				let name_lowercase = name.toLowerCase()
 				let loop = true
 
+				if(json.ai && event.type == "message_reply"){
+					if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
+						openai(api, event)	
+						console.log("AI")
+						loop = false
+					}
+				}
+				
 				if(intervals[event.senderID] == undefined)
 					intervals[event.senderID] = 5
 
@@ -203,9 +241,15 @@ let start = (state) => {
 					}
 				}
 				
-				if(body_lowercase == name_lowercase && !json.off.includes(event.senderID)){
+				if(body_lowercase == name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
 					intervals[event.senderID] -= 1
-					api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
+					let user = await api.getUserInfo(event.senderID)
+					let username = user[event.senderID]['name']
+					let firstName = user[event.senderID]['firstName']
+					let gender = gen(firstName)['eng']
+					calls.push(event.senderID)
+					api.sendMessage(`Yes ${gender} ${username}? Would you like to ask something?`, event.threadID)
+					// api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 					//api.sendMessage(JSON.stringify(intervals), self)
 				}else if(body_lowercase.startsWith(name_lowercase)){
 					intervals[event.senderID] -= 1
@@ -219,7 +263,7 @@ let start = (state) => {
 							})
 						}
 					})
-					if(loop && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
+					if(loop && json.ai == false && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
 						let cooldown = true
 						openai(api, event)
 						cd(api, event, cooldown, json, 3)
@@ -248,8 +292,11 @@ module.exports = {
 	setOptions,
 	setPrefix,
 	start,
-	
+
+	categories,
 	commands,
+	cooldowns,
+	time,
 	getAdmins,
 	getName,
 	getPrefix
