@@ -10,6 +10,15 @@ config.add("admin", {
 	admin: true
 })
 
+config.add("ai", {
+	title: "AI Mode",
+	description: "For auto responses using reply method",
+	commands: [
+		"ai"
+	],
+	admin: true
+})
+
 config.add("busy", {
 	title: "Busy Mode",
 	description: "Setup by an admin during busy.",
@@ -132,7 +141,8 @@ config.add("info", {
 		"how",
 		"tut"
 	],
-	hasCooldown: false
+	hasCooldown: false,
+	category: "oneTime"
 })
 
 config.add("audioverse", {
@@ -142,7 +152,8 @@ config.add("audioverse", {
 		"audio verse ([\\w\\W]+)"
 	],
 	hasCooldown: false,
-	hasArgs: true
+	hasArgs: true,
+	category: "theology"
 })
 
 config.add("baybayin", {
@@ -155,7 +166,8 @@ config.add("baybayin", {
 		"baybay ([\\w\\W]+)",
 		"baybayin ([\\w\\W]+)"
 	],
-	hasArgs: true
+	hasArgs: true,
+	category: "knowledge"
 })
 
 config.add("cron", {
@@ -165,7 +177,7 @@ config.add("cron", {
 		"off cron"
 	],
 	hasCooldown: false,
-	affect: true
+	affect: true,
 })
 
 config.add("game", {
@@ -174,7 +186,8 @@ config.add("game", {
 	commands: [
 		"game lists"
 	],
-	hasCooldown: false
+	hasCooldown: false,
+	category: "oneTime"
 })
 
 config.add("genimg", {
@@ -186,7 +199,7 @@ config.add("genimg", {
 		"generate an image that ([\\w\\W]+)"
 	],
 	hasArgs: true,
-	cd: 3
+	category: "multimedia"
 })
 
 config.add("google", {
@@ -196,7 +209,7 @@ config.add("google", {
 		"google ([\\w\\W]+)"
 	],
 	hasArgs: true,
-	cd: 3
+	category: "knowledge"
 })
 
 config.add("guitar", {
@@ -206,7 +219,8 @@ config.add("guitar", {
 		"guitar ([\\w\\W]+)",
 		"tabs ([\\w\\W]+)"
 	],
-	hasArgs: true
+	hasArgs: true,
+	category: "multimedia"
 })
 
 config.add("imgtxt", {
@@ -218,7 +232,7 @@ config.add("imgtxt", {
 	type: [
 		"message_reply"
 	],
-	cd: 1
+	category: "multimedia"
 })
 
 config.add("music", {
@@ -234,7 +248,7 @@ config.add("music", {
 		"play ([\\w\\W]+)"
 	],
 	hasArgs: true,
-	cd: 0.5
+	category: "multimedia"
 })
 
 config.add("pin", {
@@ -243,7 +257,8 @@ config.add("pin", {
 	commands: [
 		"pin"
 	],
-	hasCooldown: false
+	hasCooldown: false,
+	category: "oneTime"
 })
 
 config.add("tlverse", {
@@ -253,7 +268,8 @@ config.add("tlverse", {
 		"tlverse ([\\w\\W]+)"
 	],
 	hasArgs: true,
-	hasCooldown: false
+	hasCooldown: false,
+	category: "theology"
 })
 
 config.add("verse", {
@@ -269,7 +285,8 @@ config.add("verse", {
 		"verse ([\\w\\W]+)$"
 	],
 	hasArgs: true,
-	hasCooldown: false
+	hasCooldown: false,
+	category: "theology"
 })
 
 config.add("video", {
@@ -283,7 +300,7 @@ config.add("video", {
 		"video ([\\w\\W]+)$"
 	],
 	hasArgs: true,
-	cd: 5
+	category: "multimedia"
 })
 
 config.add("wiki", {
@@ -297,7 +314,8 @@ config.add("wiki", {
 		"wiki search ([\\w\\W]+)$",
 		"wiki ([\\w\\W]+)$"
 	],
-	hasArgs: true
+	hasArgs: true,
+	category: "knowledge"
 })
 
 // config.setAdmins("100081698814451")
@@ -315,7 +333,7 @@ config.start({
 
 let run = () => {
 	console.log("Run")
-	setTimeout(run, 60000)
+	setTimeout(run, (1000 * 60) * 60)
 }
-
+run()
 server()
