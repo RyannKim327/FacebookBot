@@ -120,9 +120,9 @@ module.exports = async (api) => {
 		scheduled: true,
 		timezone: "Asia/Manila"
 	})
-	/*cronjob.schedule("0 0 * * *", () => {
+	cronjob.schedule("0 0 1 1 *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
-			if(e) return (`Error [Worship]: ${e}`)
+			if(e) return (`Error [New year]: ${e}`)
 			let i = 0
 			data.forEach(r => {
 				if(self != r.threadID && !json.offcron.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
@@ -134,5 +134,5 @@ module.exports = async (api) => {
 	},{
 		scheduled: true,
 		timezone: "Asia/Manila"
-	})*/
+	})
 }

@@ -1,45 +1,23 @@
-const axios = require("axios")
-const cheerio = require("cheerio")
+
 const fs = require("fs")
 const g = require("./../utils/gender")
 const youtubei = require("youtubei.js")
 
-let search = async () => {
-	let { data } = await axios.get("https://www.billboard.com/lists/best-christmas-songs")
-	let $ = await cheerio.load(data)
-	let html = $("#pmc-lists-front-js-extra")
-	//console.log(JSON.parse(html.html().replace(/\t|\n|var pmcGalleryExports = |;/gi, "")))
-	let json = JSON.parse(html.html().replace(/\t|\n|var pmcGalleryExports = |;/gi, ""))
-	let gallery = json.gallery
-	let r = Math.floor(Math.random() * gallery.length)
-	let d = gallery[gallery.length - 12]
-	while(d.video == undefined){
-		r = Math.floor(Math.random() * gallery.length)
-		d = gallery[r]
-	}
-	let desc = cheerio.load(d.description)
-	let v = cheerio.load(d.video)
-	let video = v("iframe").attr("data-src").split("/")[4].split("?")[0]
-	let source = `https://www.billboard.com/lists/best-christmas-songs/${d.slug}/#!`
-	let js = {
-		title: d.title,
-		description: desc.text(),
-		videoID: video,
-		sc: source
-	}
-	//console.log(`Happy Hollidays!!!\nTitle: ${d.title}\nDescription: ${desc.text()}\nVideo Url: ${video}\nSource: ${source}`)
-	return js
-}
-
 module.exports = async (api, event) => {
-	let data = await search()
-	console.log(data)
+	let songs = [
+		"Aop6YF1Xqqg",
+		"WTCryF1J54Y",
+		"aCMLV3j8J_w",
+		"UDRo5ExFZ8U",
+		"AVNsDQ_CFHc"
+	]
+	let song = songs[Math.floor(Math.random() * songs.length)]
 	let yt = await new youtubei()
-	let v = yt.getDetails(data.videoID)
+	let v = await yt.getDetails(song)
 	//let event = api.getCurrentUserID()
-	let n = `${__dirname}/../temp/${event}_pasko.mp3`
-	let f = fs.createWriteStream(`temp/${event}_pasko.mp3`)
-	let dl = yt.download(data.videoID, {
+	let n = `${__dirname}/../temp/${event}_newyear.mp3`
+	let f = fs.createWriteStream(`temp/${event}_newyear.mp3`)
+	let dl = yt.download(song, {
 		format: "mp4",
 		quality: "tiny",
 		type: "audio",
@@ -49,7 +27,7 @@ module.exports = async (api, event) => {
 	dl.pipe(f)
 	dl.on("end", async () => {
 		let thread = await api.getThreadInfo(event)
-		let m = "Happy Hollidays!!! "
+		let m = "Happy New year!!!\n\n~ Enjoy the last days of vacation."
 		if(thread.isGroup){
 			m += thread.threadName
 		}else{
@@ -57,7 +35,7 @@ module.exports = async (api, event) => {
 			let gender = g(u[event]['firstName'])["eng"]
 			m += `${gender} ${u[event]['name']}`
 		}
-		m += `\nHere's a song entitiled: ${data.title}\n~ ${data.description}\n\nSource: ${data.sc}`
+		m += `\nHere's a song entitiled: ${info.title}`
 		api.sendMessage({
 			body: m,
 			attachment: fs.createReadStream(n).on("end", async () => {
