@@ -23,7 +23,8 @@ let cooldowns = {
 	multimedia: "",
 	theology: "",
 	knowledge: "",
-	dump: ""
+	dump: "",
+	ai: ""
 }
 
 let categories = {
@@ -31,7 +32,8 @@ let categories = {
 	multimedia: "multimedia",
 	theology: "theology",
 	knowledge: "knowledge",
-	dump: "dump"
+	dump: "dump",
+	ai: "ai"
 }
 
 let time = {
@@ -39,7 +41,8 @@ let time = {
 	multimedia: 1.5,
 	theology: 0.5,
 	knowledge: 2,
-	dump: 0
+	dump: 0,
+	ai: 5
 }
 
 let commands = []
@@ -263,10 +266,10 @@ let start = (state) => {
 							})
 						}
 					})
-					if(loop && json.ai == false && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
+					if(loop && json.ai == false && ((json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
 						let cooldown = true
 						openai(api, event)
-						cd(api, event, cooldown, json, 3)
+						cd(api, event, "ai", json)
 					}
 				}else if(body.startsWith(prefix)){
 					intervals[event.senderID] -= 1

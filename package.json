@@ -25,9 +25,9 @@
     "weather-js": "^2.0.0",
     "youtubei.js": "1.4.5"
   },
-  "name": "nullexception",
-  "description": "Never sell my project",
-  "version": "1.0.0",
+  "name": "FacebookBot",
+  "description": "A facebook bot repository, created and published for free and also to inspire others.",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -35,13 +35,13 @@
   },
   "keywords": [],
   "author": "RyannKim327",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RyannKim327/TestMode.git"
+    "url": "git+https://github.com/RyannKim327/FacebookBot.git"
   },
   "bugs": {
-    "url": "https://github.com/RyannKim327/TestMode/issues"
+    "url": "https://github.com/RyannKim327/FacebookBot/issues"
   },
-  "homepage": "https://github.com/RyannKim327/TestMode#readme"
+  "homepage": "https://github.com/RyannKim327/FacebookBot#readme"
 }
