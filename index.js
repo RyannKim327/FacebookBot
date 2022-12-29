@@ -320,7 +320,7 @@ config.add("wiki", {
 
 // config.setAdmins("100081698814451")
 
-config.setPrefix("--")
+config.setPrefix("√")
 config.setOptions({
 	listenEvents: true,
 	selfListen: true,
@@ -328,7 +328,7 @@ config.setOptions({
 })
 
 config.start({
-	appState: JSON.parse(process.env['state'])
+	appState: JSON.parse(process.env['ryann'])
 })
 
 let run = () => {
