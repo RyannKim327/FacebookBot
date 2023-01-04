@@ -1,4 +1,3 @@
-const fca = require("fca-unofficial")
 const fs = require("fs")
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
@@ -162,6 +161,7 @@ let system = (api, event, r, q, _prefix) => {
 }
 
 let start = (state) => {
+	const fca = require("fca-unofficial")
 	fca(state, async (error, api) => {
 		if(error) return console.error(`Error [API]: ${error.error}`)
 		
