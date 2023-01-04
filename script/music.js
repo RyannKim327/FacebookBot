@@ -6,23 +6,53 @@ const gender = require("./../utils/gender")
 module.exports = async (api, event, regex) => {
 	let name = `${__dirname}/../temp/${event.threadID}.mp3`
 	if(fs.existsSync(name)){
-		api.sendMessage("Lemme finish the earlier request please.", event.threadID)
+		api.sendMessage("Lemme finish the earlier request please.", event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 	}else{
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const youtube = await new yt()
 		let body = event.body.match(regex)[1]
+		let id = ""
 		let result = await youtube.search(body)
 		if(result.videos.length > 0){
 			if(result.videos[0].id == undefined){
-				api,sendMessage("Something went wrong.", event.threadID)
+				api,sendMessage("Something went wrong.", event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			}else{
-				const info = await youtube.getDetails(result.videos[0].id)
+				if(/https:\/\/www\.youtube\.com\/watch\?v=([\w\-_]+)/i.test(body) || /https:\/\/youtu\.be\/\?v=([\w\-_]+)/i.test(body)){
+					console.log("RySes")
+					if(body.match(/https:\/\/www\.youtube\.com\/watch\?v=([\w\-_]+)/i)[1] != undefined){
+						id = body.match(/https:\/\/www\.youtube\.com\/watch\?v=([\w\-_]+)/i)[1]
+						console.log("ID")
+					}else if(body.match(/https:\/\/youtu\.be\/\?v=([\w\-_]+)/i)[1] != undefined){
+						id = body.match(/https:\/\/youtu\.be\/\?v=([\w\-_]+)/i)[1]
+						console.log("ID")
+					}else{
+						id = result.videos[0].id
+					console.log(`Data: ${result}`)
+					}
+				}else{
+					id = result.videos[0].id
+					console.log(result)
+				}
+				console.log(id)
+				const info = await youtube.getDetails(id)
 				if(info.title == undefined){
-					api.sendMessage("An Error Occured", event.threadID)
+					api.sendMessage("An Error Occured", event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						}
+					})
 				}
 				let file = fs.createWriteStream(`temp/${event.threadID}.mp3`)
 				let message = ""
-				let f = youtube.download(result.videos[0].id, {
+				let f = youtube.download(id, {
 					format: "mp4",
 					quality: "tiny",
 					type: "audio",
@@ -57,16 +87,30 @@ module.exports = async (api, event, regex) => {
 								id: event.senderID,
 								tag: username
 							}]
-						}, event.threadID, (e) => {
-							if(e) return api.sendMessage(e, event.threadID)
+						}, event.threadID, (e, msg) => {
+							if(e){
+								api.sendMessage(`Error: ${e.errorSummary}`, event.threadID, (e, m) => {
+									if(e){
+										api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+									}
+								})
+							}
 						})
 					}catch(e){
-						api.sendMessage(e, event.threadID)
+						api.sendMessage(e, event.threadID, (e, m) => {
+							if(e){
+								api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+							}
+						})
 					}
 				})
 			}
 		}else{
-			api.sendMessage("There is no results found.", event.threadID)
+			api.sendMessage("There is no results found.", event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}
 	}

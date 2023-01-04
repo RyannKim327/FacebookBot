@@ -25,5 +25,9 @@ module.exports = async (api, event, regex) => {
 			id: userID,
 			tag: name
 		}]
-	}, event.threadID)
+	}, event.threadID, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 }

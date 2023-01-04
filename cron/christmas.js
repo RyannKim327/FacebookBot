@@ -35,7 +35,7 @@ module.exports = async (api, event) => {
 			let gender = g(u[event]['firstName'])["eng"]
 			m += `${gender} ${u[event]['name']}`
 		}
-		m += `\nHere's a song entitiled: ${info.title}`
+		m += `\nHere's a song entitiled: ${v.title}`
 		api.sendMessage({
 			body: m,
 			attachment: fs.createReadStream(n).on("end", async () => {

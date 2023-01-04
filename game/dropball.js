@@ -31,5 +31,9 @@ let drop = (pos) => {
 module.exports = (api, event, regex) => {
 	let num = parseInt(event.body.match(regex)[1] - 1)
 	let str = drop(num)
-	api.sendMessage(str, event.threadID)
+	api.sendMessage(str, event.threadID, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 }

@@ -22,7 +22,11 @@ module.exports = async (api, event) => {
 					id,
 					tag: user[id]['name']
 				}]
-			}, event.threadID)
+			}, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}else if(event.type == "message" && json.off.includes(event.threadID)){
 			let id = event.threadID
 			let thread = await api.getThreadInfo(id)
@@ -37,7 +41,11 @@ module.exports = async (api, event) => {
 			if(thread.isGroup){
 				api.sendMessage({
 					body: `Bot actions are now enabled for ${thread.threadName}`
-				}, event.threadID)
+				}, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			}else{
 				let user = await api.getUserInfo(id)
 				api.sendMessage({
@@ -46,7 +54,11 @@ module.exports = async (api, event) => {
 						id,
 						tag: user[id]['name']
 					}]
-				}, event.threadID)
+				}, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			}
 		}
 	}else if(body == (getPrefix() + "off")){
@@ -60,7 +72,11 @@ module.exports = async (api, event) => {
 					id,
 					tag: user[id]['name']
 				}]
-			}, event.threadID)
+			}, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}else if(event.type == "message" && !json.off.includes(event.threadID)){
 			let id = event.threadID
 			let thread = await api.getThreadInfo(id)
@@ -68,7 +84,11 @@ module.exports = async (api, event) => {
 			if(thread.isGroup){
 				api.sendMessage({
 					body: `Bot actions are now disabled for ${thread.threadName}`
-				}, event.threadID)
+				}, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			}else{
 				let user = await api.getUserInfo(id)
 				api.sendMessage({
@@ -77,7 +97,11 @@ module.exports = async (api, event) => {
 						id,
 						tag: user[id]['name']
 					}]
-				}, event.threadID)
+				}, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			}
 		}
 	}

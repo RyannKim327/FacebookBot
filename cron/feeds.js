@@ -4,7 +4,7 @@ module.exports = (api, admins) => {
 	let data = JSON.parse(fs.readFileSync("data/feedback.json", "utf8"))
 	for(let r = 0; r < data.data.length; r++){
 		admins.forEach(s => {
-			api.sendMessage(data.data[r].msg, s)
+			api.sendMessage(data.data[r].msg, s, (e, m) => {})
 		})
 		data.data[r] = undefined
 	}

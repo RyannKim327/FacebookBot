@@ -23,7 +23,7 @@ module.exports = async (api, event) => {
 			if(s.result.length < 1)
 				msg2 = "There's no text detected to this image."
 			
-			api.sendMessage(msg2, event.threadID, (e) => {
+			api.sendMessage(msg2, event.threadID, (e, m) => {
 				if(fs.existsSync(`${__dirname}/../temp/${msg}.jpg`)){
 					fs.unlink(`${__dirname}/../temp/${msg}.jpg`, (e) => {})
 				}
@@ -31,6 +31,10 @@ module.exports = async (api, event) => {
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		})
 	}else{
-		api.sendMessage("I can't find any image here.", event.messageReply.threadID)
+		api.sendMessage("I can't find any image here.", event.messageReply.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 	}
 }

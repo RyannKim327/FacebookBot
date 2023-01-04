@@ -22,11 +22,20 @@ module.exports = async (api, event, regex) => {
 	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 	let data = await search(body[1])
 	if(data == null){
-		api.sendMessage("An error occured. Please try again later.", event.threadID)
+		api.sendMessage("An error occured. Please try again later.", event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 		api.setMessageReaction("", event.messageID, (e) => {}, true)
 	}else{
+		console.log(data)
 		if(data.did_you_mean != undefined){
-			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID)
+			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}
 		console.log(data)
 		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined && (data.knowledge_panel.description != "N/A" || data.featured_snippet.description != "N/A")){
@@ -83,25 +92,35 @@ module.exports = async (api, event, regex) => {
 										fs.unlink(dir, (e) => {})
 									}
 								})
-							}, event.threadID, (e) => {
-								if(e) return api.sendMessage(e, event.threadID)
+							}, event.threadID, (e, m) => {
+								if(e) return api.sendMessage(e, event.threadID, (e, m) => {})
 							})
 						})
 					})
 				}
 			}
 			if(a.images == undefined){
-				api.sendMessage(sendMsg, event.threadID, (e) => {
-					if(e) return api.sendMessage(e, event.threadID)
+				api.sendMessage(sendMsg, event.threadID, (e, m) => {
+					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						}
+					})
 				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.knowledge_panel.lyrics != undefined){
 			let a = data.knowledge_panel
-			let by = a.type.match(/Song\sby\s([\w\W]+)/)[1]
+			let by = ""
+			if(a.type != undefined)
+				by = a.type.match(/Song\sby\s([\w\W]+)/)[1]
 			let message = `Title: ${a.title} - ${by}\n\n${a.lyrics}`
-			api.sendMessage(message, event.threadID, (e) => {
-				if(e) return api.sendMessage(e, event.threadID)
+			api.sendMessage(message, event.threadID, (e, m) => {
+				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.featured_snippet.title != "N/A" && data.featured_snippet.description != "N/A"){
@@ -110,14 +129,22 @@ module.exports = async (api, event, regex) => {
 			if(a.url != undefined || a.url != "N/A"){
 				message += `\n${a.url}`
 			}
-			api.sendMessage(message, event.threadID, (e) => {
-				if(e) return api.sendMessage(e, event.threadID)
+			api.sendMessage(message, event.threadID, (e, m) => {
+				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.translation != undefined){
 			let a = data.translation
-			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID, (e) => {
-				if(e) return api.sendMessage(e, event.threadID)
+			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID, (e, m) => {
+				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.dictionary != undefined){
@@ -152,26 +179,42 @@ module.exports = async (api, event, regex) => {
 									})
 								}
 							})
-						}, event.threadID, (e) => {
-							if(e) return api.sendMessage(e, event.threadID)
+						}, event.threadID, (e, m) => {
+							if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+								if(e){
+									api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+								}
+							})
 						})
 					})
 				})
 			}else{
-				api.sendMessage(message, event.threadID, (e) => {
-					if(e) return api.sendMessage(e, event.threadID)
+				api.sendMessage(message, event.threadID, (e, m) => {
+					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						}
+					})
 				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.unit_converter != undefined){
 			let a = data.unit_converter
-			api.sendMessage(`Input: ${a.input}\nOutput: ${a.output}\n\nFormula ${a.formula}`, event.threadID, (e) => {
-				if(e) return api.sendMessage(e, event.threadID)
+			api.sendMessage(`Input: ${a.input}\nOutput: ${a.output}\n\nFormula ${a.formula}`, event.threadID, (e, m) => {
+				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.weather != undefined){
 			let a = data.weather
-			api.sendMessage(`Location: ${a.location}\nForecast: ${a.forecast}\nPrecipitation: ${a.precipitation}\nHumidity: ${a.humidity}\nTemperature: ${a.temperature}\nWind speed: ${a.wind}`, event.threadID)
+			api.sendMessage(`Location: ${a.location}\nForecast: ${a.forecast}\nPrecipitation: ${a.precipitation}\nHumidity: ${a.humidity}\nTemperature: ${a.temperature}\nWind speed: ${a.wind}`, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else{
 			if(data.results.length > 0){
@@ -193,11 +236,19 @@ module.exports = async (api, event, regex) => {
 						i++
 					}
 				}
-				api.sendMessage(message, event.threadID, (e) => {
-					if(e) return api.sendMessage(e, event.threadID)
+				api.sendMessage(message, event.threadID, (e, m) => {
+					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						}
+					})
 				})
 			}else{
-				api.sendMessage("There's no results found, might have server error. Please try again later.", event.threadID)
+				api.sendMessage("There's no results found, might have server error. Please try again later.", event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}

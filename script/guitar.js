@@ -19,5 +19,9 @@ let s2 = async (title) => {
 module.exports = async (api, event, regex) => {
 	let x = event.body.match(regex)[1]
 	let y = await s2(x)
-	api.sendMessage(`Title: ${y.title}\nArtist: ${y.artist}\nKey: ${y.key}\n\n${y.chords}`, event.threadID)
+	api.sendMessage(`Title: ${y.title}\nArtist: ${y.artist}\nKey: ${y.key}\n\n${y.chords}`, event.threadID, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 }

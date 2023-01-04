@@ -6,6 +6,10 @@ module.exports = (api, event, regex) => {
 	json.lists.push(data)
 	let lists = json.lists.sort()
 	json.lists = lists
-	api.sendMessage(`New song: ${data} added succesfully.`, event.threadID)
+	api.sendMessage(`New song: ${data} added succesfully.`, event.threadID, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 	fs.writeFileSync("data/songs.json",JSON.stringify(json) ,"utf8")
 }

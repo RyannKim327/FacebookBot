@@ -43,19 +43,35 @@ module.exports = async (api, event, regex) => {
 			let owner = await api.getUserInfo(event.senderID)
 			let name = owner[event.senderID]['name']
 			let result = doFLAMES(name, crush)
-			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID)
+			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}else{
 			let result = doFLAMES(name, crush)
-			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID)
+			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}
 	}else{
 		console.log(name)
 		console.log(crush)
 		if(name != undefined && crush != undefined){
 			let result = doFLAMES(name, crush)
-			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID)
+			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}else{
-			api.sendMessage("Please complete the arguments.", event.threadID)
+			api.sendMessage("Please complete the arguments.", event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}
 	}
 }

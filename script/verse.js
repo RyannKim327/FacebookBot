@@ -25,7 +25,11 @@ module.exports = async (api, event, regex) => {
 	let body = event.body.match(regex)[1]
 	let v = await verse(body)
 	if(v == null){
-		api.sendMessage("Please check your console", event.threadID)
+		api.sendMessage("Please check your console", event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 	}else{
 		let user = await api.getUserInfo(event.senderID)
 		let gender = g(user[event.senderID]['firstName'])['eng']
@@ -60,6 +64,10 @@ module.exports = async (api, event, regex) => {
 				id: event.senderID,
 				tag: user[event.senderID]['name']
 			}]
-		}, event.threadID)
+		}, event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 	}
 }

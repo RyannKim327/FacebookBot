@@ -36,7 +36,7 @@ module.exports = async (api) => {
 								id: r.threadID,
 								tag: user[r.threadID]['name']
 							}]
-						}, r.threadID)
+						}, r.threadID, (e, m) => {})
 					}
 				}
 				sent -= 1
@@ -58,7 +58,7 @@ module.exports = async (api) => {
 					let q = quotes[n]
 					let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
-						api.sendMessage(`A random quotation for ${thread.threadName}.\n\n  ${q.q}\n~${q.a}`, r.threadID)
+						api.sendMessage(`A random quotation for ${thread.threadName}.\n\n  ${q.q}\n~${q.a}`, r.threadID, (e, m) => {})
 					}else{
 						let user = await api.getUserInfo(r.threadID)
 						let gender = g(user[r.threadID]['firstName'])['eng']
@@ -68,7 +68,7 @@ module.exports = async (api) => {
 								id: r.threadID,
 								tag: user[r.threadID]['name']
 							}]
-						}, r.threadID)
+						}, r.threadID, (e, m) => {})
 					}
 				}
 				sent -= 1

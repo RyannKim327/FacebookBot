@@ -5,7 +5,11 @@ module.exports = (api, event) => {
 	for(let i = 0; i < json.data.length; i++){
 		if(json.data[i].toRead){
 			let msg = json.data[i].msg.replace(/\./gi, ". ")
-			api.sendMessage(msg, event.threadID)
+			api.sendMessage(msg, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 			json.data[i].toRead = false
 		}
 	}
