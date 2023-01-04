@@ -50,7 +50,11 @@ module.exports = async (api, event, regex) => {
 		}
 	}
 	fs.writeFileSync("data/gender.json", JSON.stringify(json), "utf8")
-	api.sendMessage("New name registered.", event.threadID)
+	api.sendMessage("New name registered.", event.threadID, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 	
 	let objs = Object.keys(json)
 	let msg = "{\n"
@@ -62,6 +66,9 @@ module.exports = async (api, event, regex) => {
 	msg += "}"
 	
 	let self = await api.getCurrentUserID()
-	api.sendMessage(msg, self)
-	
+	api.sendMessage(msg, self, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 }

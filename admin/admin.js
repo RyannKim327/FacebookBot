@@ -22,5 +22,9 @@ module.exports = (api, event) => {
 			}
 		}
 	})
-	api.sendMessage(m, event.threadID)
+	api.sendMessage(m, event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 }

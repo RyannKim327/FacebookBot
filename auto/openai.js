@@ -22,6 +22,10 @@ module.exports = async (api, event) => {
 	let body = event.body
 	if(body.split(" ").length > 1){
 		let ai = await config(body)
-		api.sendMessage("- " + ai.choices[0].text, event.threadID)
+		api.sendMessage("- " + ai.choices[0].text, event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 	}
 }

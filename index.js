@@ -89,6 +89,16 @@ config.add("pin", {
 	admin: true
 })
 
+config.add("prefix", {
+	title: "Prefix Change",
+	description: "To change the prefix.",
+	commands: [
+		"prefix ([\\W])"
+	],
+	hasArgs: true,
+	admin: true
+})
+
 config.add("toggle", {
 	title: "Toggle Status",
 	description: "For admin use",
@@ -319,17 +329,23 @@ config.add("wiki", {
 })
 
 // config.setAdmins("100081698814451")
-
-config.setPrefix("√")
 config.setOptions({
 	listenEvents: true,
-	selfListen: true,
-	autoMarkRead: true
+	selfListen: true
 })
 
+// s2 -> Ry Ses
+// state -> RySes Malabanan
+
 config.start({
-	appState: JSON.parse(process.env['ryann'])
+	appState: JSON.parse(process.env['s2'])
 })
+
+
+config.start({
+	appState: JSON.parse(process.env['state'])
+})
+
 
 let run = () => {
 	console.log("Run")

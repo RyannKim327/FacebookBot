@@ -63,5 +63,9 @@ module.exports = async (api, event) => {
 		message += i + ". " + r + "\n"
 		i += 1
 	})
-	api.sendMessage(message, event.threadID)
+	api.sendMessage(message, event.threadID, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 }

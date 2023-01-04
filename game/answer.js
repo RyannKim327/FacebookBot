@@ -12,26 +12,42 @@ module.exports = (api, event, regex) => {
 		}
 		if(data == body){
 			json[current_game][score][event.senderID] += 1
-			api.sendMessage("You've got it.", event.threadID)
+			api.sendMessage("You've got it.", event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}else{
 			let score = json[current_game][score][event.senderID]
 			if(json[current_game] == "word"){
 				if(json.word.trials[event.senderID] > 1){
 					json.word.trials[event.senderID] -= 1
 				}else{
-					api.sendMessage(`Wrong answer, it must be ${json.answer[event.senderID]}.`, event.threadID)
+					api.sendMessage(`Wrong answer, it must be ${json.answer[event.senderID]}.`, event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						}
+					})
 					if(json[current_game][score][event.senderID] > 0){
 						json[current_game][score][event.senderID] -= 1
 					}
 				}
 			}else{
-				api.sendMessage(`Wrong answer, it must be ${json.answer[event.senderID]}.`, event.threadID)
+				api.sendMessage(`Wrong answer, it must be ${json.answer[event.senderID]}.`, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
+				})
 				if(json[current_game][score][event.senderID] > 0){
 					json[current_game][score][event.senderID] -= 1
 				}
 			}
 		}
-		api.sendMessage(`Your current score: ${json[current_game][score][event.senderID]}`, event.threadID, event.messageID)
+		api.sendMessage(`Your current score: ${json[current_game][score][event.senderID]}`, event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		}, event.messageID)
 		json.answer[event.senderID] = undefined
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}

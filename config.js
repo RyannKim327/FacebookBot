@@ -11,6 +11,7 @@ const regex = require("./utils/regex")
 const manila = require("manilatimes-scrape")
 const gen = require("./utils/gender")
 
+let autoBot = true
 let invervals = {}
 let calls = []
 let options = {
@@ -61,8 +62,8 @@ let add = (script, data) => {
 let setAdmins = (data) => {
 	admins.push(data)
 }
-let setName = (data) => {
-	name = data
+let setName = (data, id) => {
+	name[id] = data
 }
 let setOptions = (data) => {
 	options = data
@@ -162,7 +163,7 @@ let system = (api, event, r, q, _prefix) => {
 
 let start = (state) => {
 	fca(state, async (error, api) => {
-		if(error) return console.error(`Error [API]: ${error}`)
+		if(error) return console.error(`Error [API]: ${error.error}`)
 		
 		const self = await api.getCurrentUserID()
 		
@@ -172,9 +173,11 @@ let start = (state) => {
 		*/
 		if(options.selfListen)
 			admins.push(self)
-		admins.forEach(id => {
-			api.sendMessage(`Bot service is now activated.`, id)
-		})
+		if(autoBot){
+			admins.forEach(id => {
+				api.sendMessage(`Bot service is now activated.`, id, (e, m) => {})
+			})
+		}
 
 		//let vm = await manila.todayNews()
 		//console.log(vm)
@@ -187,18 +190,27 @@ let start = (state) => {
 		json.cooldown = {}
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 		name = json.name
+		prefix = json.prefix
 
 		interval_()
 
 		fs.rm("./temp", { recursive: true }, (e) => {
 			console.log("Deleted")
 			setTimeout(() => {
-				fs.mkdirSync("./temp")
+				if(!fs.existsSync("./temp")){
+					fs.mkdirSync("./temp")
+				}
 			}, 500)
 		})
 		api.setOptions(options)
-		api.listen(async (error, event) => {
-			if(error) return console.error(`Error [Listen Emitter]: ${error}`)
+		let listen = api.listen(async (error, event) => {
+			if(error){
+				console.error(`Error [Listen Emitter]: ${error}`)
+				autoBot = false
+				api.sendMessage("Bot Auto refresh mode", self)
+				listen.stopListening()
+				start(state)
+			}
 			
 			json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 			if(options.autoMarkRead != undefined){
@@ -227,17 +239,29 @@ let start = (state) => {
 					intervals[event.senderID] = 5
 
 				if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID))
-					api.sendMessage(getPrefix() + "off", event.threadID, event.messageID)
+					api.sendMessage(getPrefix() + "off", event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						}
+					}, event.messageID)
 				
 				if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
 					let thread = await api.getThreadInfo(event.threadID)
 					if(thread.isGroup == false){
-						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID)
+						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
+							if(e){
+								api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+							}
+						})
 						json.busylist.push(event.threadID)
 						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 					}else if(event.mentions != undefined){
 						if(event.mentions[self] != undefined){
-							api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID)
+							api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
+								if(e){
+									api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+								}
+							})
 							json.busylist.push(event.threadID)
 							fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 						}
@@ -251,7 +275,17 @@ let start = (state) => {
 					let firstName = user[event.senderID]['firstName']
 					let gender = gen(firstName)['eng']
 					calls.push(event.senderID)
-					api.sendMessage(`Yes ${gender} ${username}? Would you like to ask something?`, event.threadID)
+					api.sendMessage({
+						body: `Yes ${gender} ${username}? Would you like to ask something?`,
+						mentions: [{
+							id: event.senderID,
+							tag: username
+						}]
+					}, event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						}
+					})
 					// api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 					//api.sendMessage(JSON.stringify(intervals), self)
 				}else if(body_lowercase.startsWith(name_lowercase)){

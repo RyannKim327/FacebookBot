@@ -8,7 +8,11 @@ module.exports = async (api, event) => {
 		json.offcron.push(event.threadID)
 		let thread = await api.getThreadInfo(event.threadID)
 		if(!thread.isGroup || getAdmins().includes(event.senderID)){
-			api.sendMessage("Turned Off Cron Activities.", event.threadID)
+			api.sendMessage("Turned Off Cron Activities.", event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}
 	}
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")

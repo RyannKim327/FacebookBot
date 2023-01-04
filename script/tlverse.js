@@ -13,7 +13,11 @@ module.exports = async (api, event, regex) => {
 		if(e){
 			api.sendMessage({
 				body: "Ang Dating Bibliya 1905:\n\n- Sa sobrang haba kapatid, ay hindi kinaya ni messenger. Ipagpaumanhin."
-			}, event.threadID)
+			}, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}
 	})
 }

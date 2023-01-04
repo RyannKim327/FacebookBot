@@ -4,7 +4,11 @@ const g = require("./../utils/gender")
 module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/pin.json", "utf8"))
 	if(json[event.threadID] == undefined){
-		api.sendMessage("There is no pinned message for this thread.", event.threadID)
+		api.sendMessage("There is no pinned message for this thread.", event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 	}else{
 		let p = json[event.threadID]
 		let user = await api.getUserInfo(p.senderID)
@@ -17,7 +21,11 @@ module.exports = async (api, event, regex) => {
 					id: p.senderID,
 					tag: name
 				}]
-			}, event.threadID)
+			}, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 		}else{
 			let at = p.attachments
 			for(let a = 0; a < at.length; a++){
@@ -36,7 +44,11 @@ module.exports = async (api, event, regex) => {
 								id: p.senderID,
 								tag: name
 							}]
-						}, event.threadID)
+						}, event.threadID, (e, m) => {
+							if(e){
+								api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+							}
+						})
 					})
 				})
 			}

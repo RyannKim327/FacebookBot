@@ -7,5 +7,9 @@ module.exports = (api, event) => {
 	json.lists.forEach(r => {
 		data += "* " + r + "\n"
 	})
-	api.sendMessage(data, event.threadID)
+	api.sendMessage(data, event.threadID, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 }

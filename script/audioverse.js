@@ -26,12 +26,18 @@ module.exports = async (api, event, regex) => {
 							})
 						}
 					})
-				}, event.threadID, (e) => {
-					console.log(e)
+				}, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					}
 				})
 			})
 		})
 	}else{
-		api.sendMessage("Something went wrong.", event.threadID)
+		api.sendMessage("Something went wrong.", event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 	}
 }

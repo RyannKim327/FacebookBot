@@ -44,7 +44,7 @@ module.exports = async (api, event) => {
 										})
 									}
 								})
-							}, event)
+							}, event, (e, m) => {})
 						}else{
 							let user = await api.getUserInfo(event)
 							let gender = g(user[event]['firstName'])["eng"]
@@ -61,7 +61,7 @@ module.exports = async (api, event) => {
 									id: event,
 									tag: user[event]['name']
 								}]
-							}, event)
+							}, event, (e, m) => {})
 						}
 					})
 				}

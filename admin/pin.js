@@ -44,6 +44,10 @@ module.exports = async (api, event) => {
 			}
 		}
 	}
-	api.sendMessage("Pinned message set.", event.threadID)
+	api.sendMessage("Pinned message set.", event.threadID, (e, m) => {
+		if(e){
+			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+		}
+	})
 	fs.writeFileSync("data/pin.json", JSON.stringify(json), "utf8")
 }

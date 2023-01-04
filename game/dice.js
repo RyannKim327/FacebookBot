@@ -25,7 +25,11 @@ module.exports = (api, event) => {
 		let player = Math.floor(Math.random() * dice.length)
 		let player2 = Math.floor(Math.random() * dice.length)
 		
-		api.sendMessage(player_name + ":\n" + dice[player], event.threadID)
+		api.sendMessage(player_name + ":\n" + dice[player], event.threadID, (e, m) => {
+			if(e){
+				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			}
+		})
 		
 		setTimeout(() => {
 			let who = "\n\n"
@@ -36,7 +40,11 @@ module.exports = (api, event) => {
 			}else{
 				who += "It's a tie"
 			}
-			api.sendMessage(player2_name + ":\n" + dice[player2] + who, event.threadID)
+			api.sendMessage(player2_name + ":\n" + dice[player2] + who, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				}
+			})
 			
 		}, 3000)
 	})

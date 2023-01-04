@@ -91,7 +91,7 @@ module.exports = async (api) => {
 					//message += res + "\n\n"
 					message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
 					message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\nRandom Event for today:\n${txt}`
-					api.sendMessage(message, r.threadID)
+					api.sendMessage(message, r.threadID, (e, m) => {})
 
 					/* let rand = Math.floor(Math.random() * n.length)
 					let _news = n[rand].url
@@ -120,7 +120,7 @@ module.exports = async (api) => {
 		scheduled: true,
 		timezone: "Asia/Manila"
 	})
-	cronjob.schedule("0 0 1 1 *", () => {
+	/*cronjob.schedule("17 0 * * *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [New year]: ${e}`)
 			let i = 0
@@ -134,5 +134,5 @@ module.exports = async (api) => {
 	},{
 		scheduled: true,
 		timezone: "Asia/Manila"
-	})
+	})*/
 }
