@@ -11,6 +11,7 @@ const manila = require("manilatimes-scrape")
 const gen = require("./utils/gender")
 
 let autoBot = true
+let bot = []
 let invervals = {}
 let calls = []
 let options = {
@@ -166,7 +167,7 @@ let start = (state) => {
 		if(error) return console.error(`Error [API]: ${error.error}`)
 		
 		const self = await api.getCurrentUserID()
-		
+		bot.push(self)
 		/*let db_read = await read()
 		if(db_read != null)
 			fs.writeFileSync("data/preferences.json", JSON.stringify(db_read), "utf8")
@@ -175,7 +176,8 @@ let start = (state) => {
 			admins.push(self)
 		if(autoBot){
 			admins.forEach(id => {
-				api.sendMessage(`Bot service is now activated.`, id, (e, m) => {})
+				if(bot.includes(id) && bot == self)
+					api.sendMessage(`Bot service is now activated.`, id, (e, m) => {})
 			})
 		}
 
