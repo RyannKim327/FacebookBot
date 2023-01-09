@@ -4,7 +4,7 @@ const fs = require("fs")
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let body = event.body.toLowerCase()
-	if(body == (getPrefix() + "on")){
+	if(body == (getPrefix() + "bot on")){
 		if(event.type == "message_reply" && json.off.includes(event.messageReply.senderID)){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)
@@ -61,7 +61,7 @@ module.exports = async (api, event) => {
 				})
 			}
 		}
-	}else if(body == (getPrefix() + "off")){
+	}else if(body == (getPrefix() + "bot off")){
 		if(event.type == "message_reply" && !json.off.includes(event.messageReply.senderID)){
 			let id = event.messageReply.senderID
 			let user = await api.getUserInfo(id)

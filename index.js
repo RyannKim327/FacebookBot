@@ -66,8 +66,8 @@ config.add("off", {
 	title: "Off/On Bot Feature",
 	description: "Setup by an admin to enable/disable the bot commands in a particular group or person.",
 	commands: [
-		"off",
-		"on"
+		"bot off",
+		"bot on"
 	],
 	type: [
 		"message",
@@ -184,10 +184,8 @@ config.add("cron", {
 	title: "Close Cron Commands.",
 	description: "This is to disable automatic responses from a user.",
 	commands: [
-		"off cron"
-	],
-	hasCooldown: false,
-	affect: true,
+		"offcron"
+	]
 })
 
 config.add("game", {
@@ -196,7 +194,6 @@ config.add("game", {
 	commands: [
 		"game lists"
 	],
-	hasCooldown: false,
 	category: "oneTime"
 })
 
@@ -269,6 +266,18 @@ config.add("pin", {
 	],
 	hasCooldown: false,
 	category: "oneTime"
+})
+
+config.add("ris", {
+	title: "Reverse Image Search",
+	description: "A google feature command for some researches.",
+	commands: [
+		"ris"
+	],
+	type: [
+		"message_reply"
+	],
+	category: "knowledge"
 })
 
 config.add("tlverse", {

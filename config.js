@@ -1,4 +1,6 @@
 const fs = require("fs")
+const cronjob = require("node-cron")
+
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
 const cron_feed = require("./cron/feeds")
@@ -86,15 +88,29 @@ let interval_ = () => {
 	setTimeout(interval_, 90000)
 }
 
+let resetOneTime = () => {
+	cronjob.schedule("0 0 * * *", () => {
+		cooldowns.oneTime = ""
+	}, {
+		scheduled: true,
+		timezone: "Asia/Manila"
+	})
+}
+
 let cd = (api, event, _cats, json) => {
 	if(!admins.includes(event.senderID)){
-		cooldowns[_cats] += `${event.senderID}, `
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-		setTimeout(() => {
-			cooldowns[_cats] = cooldowns[_cats].replace(`${event.senderID}, `, "")
-			api.sendMessage(`Cooldown done [${_cats.toLowerCase()}]`, event.threadID, event.messageID)
-			fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-		}, (1000 * 60) * time[_cats])
+		if(_cats == categories.oneTime){
+			cooldowns[_cats] += `${event.threadID}, `
+			console.log(cooldowns.oneTime)
+		}else{
+			setTimeout(() => {
+				cooldowns[_cats] += `${event.senderID}, `
+				cooldowns[_cats] = cooldowns[_cats].replace(`${event.senderID}, `, "")
+				api.sendMessage(`Cooldown done [${_cats.toLowerCase()}]`, event.threadID, event.messageID)
+				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+			}, (1000 * 60) * time[_cats])
+		}
 	}
 }
 
@@ -123,7 +139,7 @@ let system = (api, event, r, q, _prefix) => {
 	if(r.data.affect != undefined)
 		notAffect = r.data.affect
 	
-	if(!cooldowns[_cats].includes(event.senderID)){
+	if(!cooldowns[_cats].includes(event.senderID) && !cooldowns[_cats].includes(event.threadID)){
 		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || notAffect || admins.includes(event.senderID))){
 			let script
 			if(admin){
@@ -186,6 +202,7 @@ let start = (state) => {
 		
 		await cron(api)
 		await cron_api(api)
+		resetOneTime()
 		//await cron_feed(api, admins)
 		
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
@@ -231,8 +248,7 @@ let start = (state) => {
 
 				if(json.ai && event.type == "message_reply"){
 					if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
-						openai(api, event)	
-						console.log("AI")
+						openai(api, event)
 						loop = false
 					}
 				}
@@ -290,7 +306,7 @@ let start = (state) => {
 					})
 					// api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 					//api.sendMessage(JSON.stringify(intervals), self)
-				}else if(body_lowercase.startsWith(name_lowercase)){
+				}else if(body_lowercase.startsWith(name_lowercase) && body_lowercase != name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
 					intervals[event.senderID] -= 1
 					commands.forEach(r => {
 						if(r.data.queries != undefined){

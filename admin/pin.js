@@ -1,4 +1,6 @@
 const fs = require("fs")
+const http = require("https")
+const anon = require("anonfile-lib")
 const { getPrefix } = require("./../config")
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/pin.json", "utf8"))

@@ -1,3 +1,3 @@
 module.exports = (str) => {
-	return new RegExp(str, "i")
+	return new RegExp("^" + str, "i")
 }

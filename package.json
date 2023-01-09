@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "anonfile-lib": "^1.0.1",
     "axios": "^0.27.2",
     "biblegateway-scrape": "^0.0.3-fixed",
     "body-parser": "^1.20.1",
@@ -16,7 +17,7 @@
     "manilatimes-scrape": "^0.0.1",
     "node-cron": "^3.0.0",
     "openai": "^3.1.0",
-    "pls-img-txt": "^0.0.3-Beta",
+    "pls-img-txt": "^0.0.3",
     "request": "^2.88.2",
     "text-from-image": "^1.1.1",
     "top100bbworship": "^1.0.0",
