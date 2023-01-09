@@ -19,6 +19,7 @@ module.exports = async (api, event) => {
 		"Schemavery",
 		"VanBanLaNhat",
 		"Labs Bible",
+		"Biblegateway",
 		"Zenquotes",
 		"AnimeQuotes",
 		"OpenAI",
@@ -28,7 +29,14 @@ module.exports = async (api, event) => {
 	]
 	let myID = await api.getCurrentUserID()
 	let user = await api.getUserInfo(myID)
-	let message = "Hello I am " + user[myID]['name'] + " you may also call me " + getName() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
+	let myname = () => {
+		if(user[myID]['name'] == getName()){
+			return user[myID]['name']
+		}else{
+			return user[myID]['name'] + " you may also call me " + getName()
+		}
+	}
+	let message = "Hello I am " + myname() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
 	let i = 1
 	message += "List of Commands:\n"
 	commands.forEach(r => {

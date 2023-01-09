@@ -1,0 +1,17 @@
+{
+  "name": "anonfile-lib",
+  "version": "1.0.1",
+  "description": "A anonfile api wrapper",
+  "main": "anonfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "anonfile"
+  ],
+  "author": "Jacub",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}

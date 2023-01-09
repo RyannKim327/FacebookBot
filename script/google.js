@@ -29,7 +29,6 @@ module.exports = async (api, event, regex) => {
 		})
 		api.setMessageReaction("", event.messageID, (e) => {}, true)
 	}else{
-		console.log(data)
 		if(data.did_you_mean != undefined){
 			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID, (e, m) => {
 				if(e){
@@ -37,8 +36,7 @@ module.exports = async (api, event, regex) => {
 				}
 			})
 		}
-		console.log(data)
-		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined && (data.knowledge_panel.description != "N/A" || data.featured_snippet.description != "N/A")){
+		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined){
 			let a = data.knowledge_panel
 			let objs = Object.keys(a)
 			let message = `${a.title}`
@@ -76,7 +74,6 @@ module.exports = async (api, event, regex) => {
 				body: message
 			}
 			if(a.images != undefined){
-				console.log(a.images)
 				let num = 1
 				if(a.images[0].url != undefined){
 					let name = `image_${num}.jpg`

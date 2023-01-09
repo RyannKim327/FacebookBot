@@ -4,7 +4,7 @@ const { getAdmins } = require("./../config")
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	const self = api.getCurrentUserID()
-	if(event.body.includes("off cron")){
+	if(event.body.includes("offcron")){
 		json.offcron.push(event.threadID)
 		let thread = await api.getThreadInfo(event.threadID)
 		if(!thread.isGroup || getAdmins().includes(event.senderID)){

@@ -51,7 +51,7 @@ module.exports = async (api) => {
 		schedule: true,
 		timezone: "Asia/Manila"
 	})
-	cronjob.schedule("0 8 * * *", async () => {
+	cronjob.schedule("0 7 * * *", async () => {
 		let q_data = await quote()
 		let v_data = await verses()
 		let time = await today()
