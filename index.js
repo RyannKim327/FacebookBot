@@ -337,6 +337,9 @@ config.add("wiki", {
 	category: "knowledge"
 })
 
+
+config.setDefaultName("Kim")
+
 // config.setAdmins("100081698814451")
 config.setOptions({
 	listenEvents: true,

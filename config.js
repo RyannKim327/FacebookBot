@@ -16,9 +16,14 @@ let autoBot = true
 let bot = []
 let invervals = {}
 let calls = []
+let defName
 let options = {
 	listenEvents: true,
 	selfListen: false
+}
+
+let setDefaultName = (data) => {
+	defName = data
 }
 
 let cooldowns = {
@@ -50,7 +55,7 @@ let time = {
 
 let commands = []
 let prefix
-let name
+let name = {}
 let admins = []
 
 let add = (script, data) => {
@@ -206,9 +211,13 @@ let start = (state) => {
 		//await cron_feed(api, admins)
 		
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+		if(json.name[self] == undefined){
+			json.name[self] = defName
+			name = defName
+		}
 		json.cooldown = {}
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-		name = json.name
+		name[self] = json.name[self]
 		prefix = json.prefix
 
 		interval_()
@@ -225,10 +234,6 @@ let start = (state) => {
 		let listen = api.listen(async (error, event) => {
 			if(error){
 				console.error(`Error [Listen Emitter]: ${error}`)
-				autoBot = false
-				api.sendMessage("Bot Auto refresh mode", self)
-				listen.stopListening()
-				start(state)
 			}
 			
 			json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
@@ -243,8 +248,12 @@ let start = (state) => {
 			if(event.body != null){
 				let body = event.body
 				let body_lowercase = body.toLowerCase()
-				let name_lowercase = name.toLowerCase()
+				let name_lowercase = name[self].toLowerCase()
 				let loop = true
+
+				if(event.senderID == 100080934841785){
+					api.setMessageReaction("🥺", event.messageID, (e) => {}, true)
+				}
 
 				if(json.ai && event.type == "message_reply"){
 					if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
@@ -306,7 +315,7 @@ let start = (state) => {
 					})
 					// api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 					//api.sendMessage(JSON.stringify(intervals), self)
-				}else if(body_lowercase.startsWith(name_lowercase) && body_lowercase != name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+				}else if(body_lowercase.startsWith(name_lowercase) && body_lowercase != name_lowercase && !json.off.includes(event.senderID)){
 					intervals[event.senderID] -= 1
 					commands.forEach(r => {
 						if(r.data.queries != undefined){
@@ -343,6 +352,7 @@ let start = (state) => {
 module.exports = {
 	add,
 	setAdmins,
+	setDefaultName,
 	setName,
 	setOptions,
 	setPrefix,

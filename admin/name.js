@@ -4,14 +4,15 @@ module.exports = (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let _data = event.body.match(regex)[1].split("")
 	let data = _data[0].toUpperCase()
+	let self = api.getCurrentUserID()
 	_data.shift()
 	data += _data.join("")
-	json.name = data
+	json.name[self] = data
 	api.sendMessage(`New bot name set as ${data}`, event.threadID, (e, m) => {
 		if(e){
 			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
 		}
 	})
-	setName(data)
+	setName(data, self)
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 }
