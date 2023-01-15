@@ -32,6 +32,7 @@ let cooldowns = {
 	theology: "",
 	knowledge: "",
 	dump: "",
+	game: "",
 	ai: ""
 }
 
@@ -41,6 +42,7 @@ let categories = {
 	theology: "theology",
 	knowledge: "knowledge",
 	dump: "dump",
+	game: "game",
 	ai: "ai"
 }
 
@@ -50,6 +52,7 @@ let time = {
 	theology: 0.5,
 	knowledge: 2,
 	dump: 0,
+	game: 0,
 	ai: 5
 }
 
@@ -81,8 +84,8 @@ let setPrefix = (data) => {
 let getAdmins = () => {
 	return admins
 }
-let getName = () => {
-	return name
+let getName = (data) => {
+	return name[data]
 }
 let getPrefix = () => {
 	return prefix
@@ -135,12 +138,13 @@ let system = (api, event, r, q, _prefix) => {
 		cooldown = r.data.hasCooldown
 	if(r.data.hasArgs != undefined)
 		args = r.data.hasArgs
-	if(r.data.game != undefined)
-		game = r.data.game
 	if(r.data.type != undefined)
 		type = r.data.type
-	if(r.data.category != undefined)
+	if(r.data.category != undefined){
 		_cats = r.data.category
+		if(r.data.category == "game")
+			game = true
+	}
 	if(r.data.affect != undefined)
 		notAffect = r.data.affect
 	
