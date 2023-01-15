@@ -29,6 +29,15 @@ config.add("busy", {
 	admin: true
 })
 
+config.add("check", {
+	title: "Bot status Checker",
+	description: "A message reaction program, to check if the bot is still alive or not.",
+	commands: [
+		"check"
+	],
+	admin: true
+})
+
 config.add("feeds", {
 	title: "Application feedback",
 	description: "For feedbacks and error comming from the app.",
@@ -337,6 +346,15 @@ config.add("wiki", {
 	category: "knowledge"
 })
 
+config.add("dropball", {
+	title: "Dropball Game",
+	description: "For test",
+	commands: [
+		"drop ([\\d]+)"
+	],
+	hasArgs: true,
+	category: "game"
+})
 
 config.setDefaultName("Kim")
 

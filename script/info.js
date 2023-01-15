@@ -27,6 +27,16 @@ module.exports = async (api, event) => {
 		"DroidModifs",
 		"And to all developers of the API used for this project."
 	]
+	let q = [
+		"Education is not just a paper or a certificate, but it is a knowledge that you earned with difficulties.",
+		"Sometimes, we know the truth, but we don't accept it.",
+		"Time is precious thing that you will never get back.",
+		"Life is like a song, it has melody that guides you to live.",
+		"Being alone is not the worst thing you may do, if your suroundings fools you.",
+		"Don't be afraid to fail, because failures are knowledge you may get.",
+		"No one can be a best teacher, except life, and the life is God",
+		"Never compare yourself to others, because you're unique."
+	]
 	let myID = await api.getCurrentUserID()
 	let user = await api.getUserInfo(myID)
 	let myname = () => {
@@ -41,14 +51,14 @@ module.exports = async (api, event) => {
 	message += "List of Commands:\n"
 	commands.forEach(r => {
 		let data = r.data
-		if(!data.admin && !data.game){
+		if(!data.admin && data.category != "game"){
 			message += i + ". " + data.title + "\n~ " + data.description + "\n"
 			let j = 1
 			if(data.queries != undefined){
 				message += "~ Queries:\n"
 				data.queries.sort()
 				data.queries.forEach(q => {
-					message += "  " + j + ". " + getName() + ", " + q.replace(/(\(\[\\w\\W\]\+\))/gi, "<data>").replace(/(\(\[\\w\]\+\))/gi, "<data>").replace(/(\\s)/gi, " ") + "\n"
+					message += "  " + j + ". " + getName(myID) + ", " + q.replace(/(\(\[\\w\\W\]\+\))/gi, "<data>").replace(/(\(\[\\w\]\+\))/gi, "<data>").replace(/(\\s)/gi, " ") + "\n"
 					j += 1
 				})
 			}
@@ -71,6 +81,7 @@ module.exports = async (api, event) => {
 		message += i + ". " + r + "\n"
 		i += 1
 	})
+	message += "\n" + q[Math.floor(Math.random() * q.length)]
 	api.sendMessage(message, event.threadID, (e, m) => {
 		if(e){
 			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
