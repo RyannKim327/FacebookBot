@@ -1,6 +1,7 @@
 const fs = require("fs")
 const sc = require("pls-img-txt")
 const request = require("request")
+const react = require("./../utils/react")
 
 module.exports = async (api, event) => {
 	sc.addLanguage(sc.FILIPINO)
@@ -30,7 +31,7 @@ module.exports = async (api, event) => {
 	}else{
 		api.sendMessage("I can't find any image here.", event.messageReply.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 	}

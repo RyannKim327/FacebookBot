@@ -1,5 +1,6 @@
 const axios = require("axios")
 const gender = require("./../utils/gender")
+const react = require("./../utils/react")
 
 let result = async (str) => {
 	let data = await axios.get("https://api-baybayin-transliterator.vercel.app/?text=" + str).then(r => {
@@ -27,7 +28,7 @@ module.exports = async (api, event, regex) => {
 		}]
 	}, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 }

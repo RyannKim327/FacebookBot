@@ -1,6 +1,7 @@
 const { Configuration, OpenAIApi } = require("openai")
 const fs = require("fs")
 const http = require("https")
+const react = require("./../utils/react")
 
 let config = async (str) => {
 	let configurations = new Configuration({
@@ -33,7 +34,7 @@ module.exports = async (api, event, regex) => {
 				})
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 		})

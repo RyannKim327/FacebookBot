@@ -1,5 +1,6 @@
 const axios = require("axios")
 const g = require("./../utils/gender")
+const react = require("./../utils/react")
 
 let verse = async(data) => {
 	if(data == undefined || data == null){
@@ -27,7 +28,7 @@ module.exports = async (api, event, regex) => {
 	if(v == null){
 		api.sendMessage("Please check your console", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 	}else{
@@ -66,7 +67,7 @@ module.exports = async (api, event, regex) => {
 			}]
 		}, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 	}

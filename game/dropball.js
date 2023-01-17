@@ -1,3 +1,5 @@
+const react = require("./../utils/react")
+
 let drop = (pos) => {
 	let str = ""
 	let min = 1
@@ -33,7 +35,7 @@ module.exports = (api, event, regex) => {
 	let str = drop(num)
 	api.sendMessage(str, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 }

@@ -1,4 +1,5 @@
 const fs = require("fs")
+const react = require("./../utils/react")
 
 module.exports = (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/feedback.json", "utf8"))
@@ -7,7 +8,7 @@ module.exports = (api, event) => {
 			let msg = json.data[i].msg.replace(/\./gi, ". ")
 			api.sendMessage(msg, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 			json.data[i].toRead = false

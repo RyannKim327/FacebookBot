@@ -1,4 +1,5 @@
 const { commands, getPrefix } = require("./../config")
+const react = require("./../utils/react")
 
 module.exports = (api, event) => {
 	let message = ""
@@ -9,7 +10,7 @@ module.exports = (api, event) => {
 		let show = true
 		if(data.show != undefined)
 			show = data.show
-		if(!data.admin && show && data.game && data.game != undefined){
+		if(!data.admin && show && data.category == "game"){
 			message += i + ". " + data.title + "\n~ " + data.description + "\n"
 			let j = 1
 			data.commands.sort()
@@ -23,7 +24,7 @@ module.exports = (api, event) => {
 	}
 	api.sendMessage(message, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 }

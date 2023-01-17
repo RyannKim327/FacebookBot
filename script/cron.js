@@ -1,5 +1,6 @@
 const fs = require("fs")
 const { getAdmins } = require("./../config")
+const react = require("./../utils/react")
 
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
@@ -10,7 +11,7 @@ module.exports = async (api, event) => {
 		if(!thread.isGroup || getAdmins().includes(event.senderID)){
 			api.sendMessage("Turned Off Cron Activities.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 		}

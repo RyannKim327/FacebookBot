@@ -1,4 +1,5 @@
 const tug = require("ultimate-guitar")
+const react = require("./../utils/react")
 
 let s1 = async (title) => {
 	let data = await tug.firstData(title).then(r => {
@@ -21,7 +22,7 @@ module.exports = async (api, event, regex) => {
 	let y = await s2(x)
 	api.sendMessage(`Title: ${y.title}\nArtist: ${y.artist}\nKey: ${y.key}\n\n${y.chords}`, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 }

@@ -1,4 +1,5 @@
 const fs = require("fs")
+const react = require("./../utils/react")
 
 module.exports = (api, event, regex) => {
 	let body = event.body.match(regex)[1]
@@ -7,48 +8,51 @@ module.exports = (api, event, regex) => {
 		api.sendMessage("Please play a game first.", event.threadID)
 	}else{
 		let data = json.answer[event.senderID]
+		let score = json[json.current_game[event.senderID]]['score'][event.senderID]
 		if(score == undefined){
-			json[current_game][score][event.senderID] = 0
+			json[json.current_game[event.senderID]]['score'][event.senderID] = 0
 		}
-		if(data == body){
-			json[current_game][score][event.senderID] += 1
+		if(data.includes(body)){
+			json[json.current_game[event.senderID]]['score'][event.senderID]  += 1
 			api.sendMessage("You've got it.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 		}else{
-			let score = json[current_game][score][event.senderID]
-			if(json[current_game] == "word"){
+			let score = json[json.current_game[event.senderID]]['score'][event.senderID]
+			if(json.current_game[event.senderID] == "word"){
 				if(json.word.trials[event.senderID] > 1){
 					json.word.trials[event.senderID] -= 1
 				}else{
 					api.sendMessage(`Wrong answer, it must be ${json.answer[event.senderID]}.`, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 						}
 					})
-					if(json[current_game][score][event.senderID] > 0){
-						json[current_game][score][event.senderID] -= 1
+					if(json[json.current_game[event.senderID]]['score'][event.senderID]  > 0){
+						json[json.current_game[event.senderID]]['score'][event.senderID]  -= 1
 					}
 				}
 			}else{
 				api.sendMessage(`Wrong answer, it must be ${json.answer[event.senderID]}.`, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
 				})
-				if(json[current_game][score][event.senderID] > 0){
-					json[current_game][score][event.senderID] -= 1
+				if(json[json.current_game[event.senderID]]['score'][event.senderID] > 0){
+					json[json.current_game[event.senderID]]['score'][event.senderID] -= 1
 				}
 			}
 		}
-		api.sendMessage(`Your current score: ${json[current_game][score][event.senderID]}`, event.threadID, (e, m) => {
+		api.sendMessage(`Your current score: ${json[json.current_game[event.senderID]]['score'][event.senderID]}`, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		}, event.messageID)
 		json.answer[event.senderID] = undefined
+		json.ingame[event.senderID] = undefined
+		json.current_game[event.senderID] = undefined
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")
 	}
 }

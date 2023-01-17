@@ -1,4 +1,5 @@
 const fs = require("fs")
+const react = require("./../utils/react")
 
 module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/gender.json", "utf8"))
@@ -52,7 +53,7 @@ module.exports = async (api, event, regex) => {
 	fs.writeFileSync("data/gender.json", JSON.stringify(json), "utf8")
 	api.sendMessage("New name registered.", event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 	
@@ -68,7 +69,7 @@ module.exports = async (api, event, regex) => {
 	let self = await api.getCurrentUserID()
 	api.sendMessage(msg, self, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 }

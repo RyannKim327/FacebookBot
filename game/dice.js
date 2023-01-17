@@ -1,3 +1,5 @@
+const react = require("./../utils/react")
+
 module.exports = (api, event) => {
 	const b = "⚫"
 	const w = "⬜"
@@ -27,7 +29,7 @@ module.exports = (api, event) => {
 		
 		api.sendMessage(player_name + ":\n" + dice[player], event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 		
@@ -42,7 +44,7 @@ module.exports = (api, event) => {
 			}
 			api.sendMessage(player2_name + ":\n" + dice[player2] + who, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 			

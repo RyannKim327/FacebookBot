@@ -1,6 +1,7 @@
 const a = require("biblegateway-scrape")
 const fs = require("fs")
 const http = require("https")
+const react = require("./../utils/react")
 
 module.exports = async (api, event, regex) => {
 	let data = event.body.match(regex)[1]
@@ -28,7 +29,7 @@ module.exports = async (api, event, regex) => {
 					})
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
 				})
 			})
@@ -36,7 +37,7 @@ module.exports = async (api, event, regex) => {
 	}else{
 		api.sendMessage("Something went wrong.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 	}

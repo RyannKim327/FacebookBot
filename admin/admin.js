@@ -1,4 +1,5 @@
 const { getPrefix, commands } = require("./../config")
+const react = require("./../utils/react")
 
 module.exports = (api, event) => {
 	let m = ""
@@ -24,7 +25,7 @@ module.exports = (api, event) => {
 	})
 	api.sendMessage(m, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 }

@@ -40,7 +40,7 @@ module.exports = async (api) => {
 		schedule: true,
 		timezone: "Asia/Manila"
 	})
-	cronjob.schedule("0 7 * * *", async () => {
+	cronjob.schedule("40 7 * * *", async () => {
 		let q_data = await quote()
 		let time = await today()
 		let date = new Date()
@@ -51,19 +51,19 @@ module.exports = async (api) => {
 			year += 1
 		}
 		let tlb = await gateway.dailyVerse(gateway.version.TAG_ANG_DATING_BIBLIYA_1905, [year, month, day])
-		let n = await manila.todayNews()
 		api.getThreadList(20, null, ['INBOX'], async (e, data) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
 			let i = 0
 			data.forEach(async (r) => {
 				if(self != r.threadID && !json.offcron.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
 					let message = "Bible verse of the day:\n"
-					let randomNews = n[Math.floor(Math.randon() * n.length)]
-					let article = await manila.article(randomNews.url)
+					// let news = await manila.todayNews()
+					// let randomNews = news[Math.floor(Math.random() * news.length)]
+					// let article = await manila.article(randomNews.url)
 					//message += res + "\n\n"
 					message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
 					message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\n`
-					message += `Daily News [Beta]:\n${article.title} - ${article.author}\n- ${article.date}\n\n${article.body.join("\n")}`
+					// message += `Daily News [Beta]:\n${article.title} - ${article.author}\n- ${article.date}\n\n${article.body.join("\n")}`
 					
 					api.sendMessage(message, r.threadID, (e, m) => {})
 
