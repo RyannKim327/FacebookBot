@@ -1,5 +1,6 @@
 const yt = require("youtubei.js")
 const fs = require("fs")
+const react = require("./../utils/react")
 
 const gender = require("./../utils/gender")
 
@@ -8,7 +9,7 @@ module.exports = async (api, event, regex) => {
 	if(fs.existsSync(name)){
 		api.sendMessage("Lemme finish the earlier request please.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 	}else{
@@ -66,7 +67,7 @@ module.exports = async (api, event, regex) => {
 					}, event.threadID, (e, m) => {
 						if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 							if(e){
-								api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 							}
 						})
 					})
@@ -75,7 +76,7 @@ module.exports = async (api, event, regex) => {
 		}else{
 			api.sendMessage("There is no results found.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)

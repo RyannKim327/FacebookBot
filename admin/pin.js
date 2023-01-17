@@ -2,6 +2,8 @@ const fs = require("fs")
 const http = require("https")
 const anon = require("anonfile-lib")
 const { getPrefix } = require("./../config")
+const react = require("./../utils/react")
+
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/pin.json", "utf8"))
 	if(event.body == (getPrefix() + "clearpin")){
@@ -48,7 +50,7 @@ module.exports = async (api, event) => {
 	}
 	api.sendMessage("Pinned message set.", event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 	fs.writeFileSync("data/pin.json", JSON.stringify(json), "utf8")

@@ -1,4 +1,5 @@
 const { Configuration, OpenAIApi } = require("openai")
+const react = require("./../utils/react")
 
 let config = async (str) => {
 	let configurations = new Configuration({
@@ -24,7 +25,7 @@ module.exports = async (api, event) => {
 		let ai = await config(body)
 		api.sendMessage("- " + ai.choices[0].text, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 	}

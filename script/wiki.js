@@ -1,6 +1,7 @@
 const axios = require("axios")
 const fs = require("fs")
 const http = require("https")
+const react = require("./../utils/react")
 
 let wiki = async (q) => {
 	let result = await axios.get("https://en.wikipedia.org/api/rest_v1/page/summary/" + q).then(r => {
@@ -18,13 +19,13 @@ module.exports = async (api, event, regex) => {
 	if(data == undefined || data == null){
 		api.sendMessage("An error occured", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 	}else if(data.title == undefined || data.title == "N/A"){
 		api.sendMessage("Document was not found.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
 		})
 	}else{
@@ -32,7 +33,7 @@ module.exports = async (api, event, regex) => {
 		if(data.originalimage == undefined){
 			api.sendMessage(message, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 		}else{
@@ -55,7 +56,7 @@ module.exports = async (api, event, regex) => {
 							}
 							api.sendMessage(message, event.threadID, (e, m) => {
 								if(e){
-									api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+									api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 								}
 							})
 						}

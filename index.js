@@ -356,6 +356,25 @@ config.add("dropball", {
 	category: "game"
 })
 
+config.add("bugtong", {
+	title: "Pinoy Riddles",
+	description: "A filipino based riddles",
+	commands: [
+		"bugtong"
+	],
+	category: "game"
+})
+
+config.add("answer", {
+	title: "Answer bot games",
+	description: "Test Mode",
+	commands: [
+		"answer ([\\w\\W]+)"
+	],
+	hasArgs: true,
+	category: "game"
+})
+
 config.setDefaultName("Kim")
 
 // config.setAdmins("100081698814451")
@@ -365,15 +384,15 @@ config.setOptions({
 })
 
 // s2 -> Ry Ses
-// state -> RySes Malabanan
+/* state -> RySes Malabanan
 
 config.start({
 	appState: JSON.parse(process.env['s2'])
 })
-
+*/
 
 config.start({
-	appState: JSON.parse(process.env['state'])
+	appState: JSON.parse(process.env['ryann'])
 })
 
 
@@ -381,5 +400,4 @@ let run = () => {
 	console.log("Run")
 	setTimeout(run, (1000 * 60) * 60)
 }
-run()
 server()

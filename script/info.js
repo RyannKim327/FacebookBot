@@ -1,4 +1,5 @@
 const { commands, getPrefix, getName } = require("./../config")
+const react = require("./../utils/react")
 
 module.exports = async (api, event) => {
 	let creds = [
@@ -84,7 +85,7 @@ module.exports = async (api, event) => {
 	message += "\n" + q[Math.floor(Math.random() * q.length)]
 	api.sendMessage(message, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 }

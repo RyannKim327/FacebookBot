@@ -1,4 +1,5 @@
 const fs = require("fs")
+const react = require("./../utils/react")
 
 module.exports = (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/songs.json", "utf8"))
@@ -8,8 +9,8 @@ module.exports = (api, event, regex) => {
 	json.lists = lists
 	api.sendMessage(`New song: ${data} added succesfully.`, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
-	fs.writeFileSync("data/songs.json",JSON.stringify(json) ,"utf8")
+	fs.writeFileSync("data/songs.json", JSON.stringify(json) ,"utf8")
 }

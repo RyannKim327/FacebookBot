@@ -1,5 +1,7 @@
 const fs = require("fs")
 const { getPrefix, setPrefix } = require("./../config")
+const react = require("./../utils/react")
+
 module.exports = (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let _data = event.body.match(regex)[1]
@@ -7,7 +9,7 @@ module.exports = (api, event, regex) => {
 	json.prefix = data
 	api.sendMessage(`Bot prefix changed from ${getPrefix()} to ${data}`, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 	setPrefix(data)

@@ -1,3 +1,5 @@
+const react = require("./../utils/react")
+
 const doFLAMES = (name1, name2) => {
     let flames = 'FLAMES';
     let arrFlames = flames.split('');
@@ -45,14 +47,14 @@ module.exports = async (api, event, regex) => {
 			let result = doFLAMES(name, crush)
 			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 		}else{
 			let result = doFLAMES(name, crush)
 			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 		}
@@ -63,13 +65,13 @@ module.exports = async (api, event, regex) => {
 			let result = doFLAMES(name, crush)
 			api.sendMessage(`The FLAMES result of ${name} and ${crush} is ${result}.`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 		}else{
 			api.sendMessage("Please complete the arguments.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
 			})
 		}

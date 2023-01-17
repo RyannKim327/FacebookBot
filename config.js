@@ -11,6 +11,7 @@ const bw = require("./utils/badwords")
 const regex = require("./utils/regex")
 const manila = require("manilatimes-scrape")
 const gen = require("./utils/gender")
+const react = require("./utils/react")
 
 let autoBot = true
 let bot = []
@@ -112,8 +113,8 @@ let cd = (api, event, _cats, json) => {
 			cooldowns[_cats] += `${event.threadID}, `
 			console.log(cooldowns.oneTime)
 		}else{
+			cooldowns[_cats] += `${event.senderID}, `
 			setTimeout(() => {
-				cooldowns[_cats] += `${event.senderID}, `
 				cooldowns[_cats] = cooldowns[_cats].replace(`${event.senderID}, `, "")
 				api.sendMessage(`Cooldown done [${_cats.toLowerCase()}]`, event.threadID, event.messageID)
 				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
@@ -147,7 +148,6 @@ let system = (api, event, r, q, _prefix) => {
 	}
 	if(r.data.affect != undefined)
 		notAffect = r.data.affect
-	
 	if(!cooldowns[_cats].includes(event.senderID) && !cooldowns[_cats].includes(event.threadID)){
 		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || notAffect || admins.includes(event.senderID))){
 			let script
@@ -182,7 +182,7 @@ let system = (api, event, r, q, _prefix) => {
 			return true
 		}
 	}else{
-		return false
+		return true
 	}
 }
 
@@ -217,7 +217,7 @@ let start = (state) => {
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		if(json.name[self] == undefined){
 			json.name[self] = defName
-			name = defName
+			name[self] = defName
 		}
 		json.cooldown = {}
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
@@ -268,20 +268,22 @@ let start = (state) => {
 				
 				if(intervals[event.senderID] == undefined)
 					intervals[event.senderID] = 5
-
-				if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID))
-					api.sendMessage(getPrefix() + "off", event.threadID, (e, m) => {
+				if(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name[self].toLowerCase())){
+					intervals[event.senderID] -= 1
+				}
+				if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name[self].toLowerCase()))){
+					api.sendMessage(getPrefix() + "bot off", event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 						}
 					}, event.messageID)
-				
+				}
 				if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
 					let thread = await api.getThreadInfo(event.threadID)
 					if(thread.isGroup == false){
 						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
 							if(e){
-								api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 							}
 						})
 						json.busylist.push(event.threadID)
@@ -290,7 +292,7 @@ let start = (state) => {
 						if(event.mentions[self] != undefined){
 							api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
 								if(e){
-									api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+									api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 								}
 							})
 							json.busylist.push(event.threadID)
@@ -300,7 +302,6 @@ let start = (state) => {
 				}
 				
 				if(body_lowercase == name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
-					intervals[event.senderID] -= 1
 					let user = await api.getUserInfo(event.senderID)
 					let username = user[event.senderID]['name']
 					let firstName = user[event.senderID]['firstName']
@@ -314,13 +315,12 @@ let start = (state) => {
 						}]
 					}, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 						}
 					})
 					// api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
 					//api.sendMessage(JSON.stringify(intervals), self)
 				}else if(body_lowercase.startsWith(name_lowercase) && body_lowercase != name_lowercase && !json.off.includes(event.senderID)){
-					intervals[event.senderID] -= 1
 					commands.forEach(r => {
 						if(r.data.queries != undefined){
 							r.data.queries.forEach(q => {
@@ -337,7 +337,6 @@ let start = (state) => {
 						cd(api, event, "ai", json)
 					}
 				}else if(body.startsWith(prefix)){
-					intervals[event.senderID] -= 1
 					commands.forEach(r => {
 						if(r.data.commands != undefined){
 							r.data.commands.forEach(q => {

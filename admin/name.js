@@ -1,5 +1,7 @@
 const fs = require("fs")
 const { setName } = require("./../config")
+const react = require("./../utils/react")
+
 module.exports = (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let _data = event.body.match(regex)[1].split("")
@@ -10,7 +12,7 @@ module.exports = (api, event, regex) => {
 	json.name[self] = data
 	api.sendMessage(`New bot name set as ${data}`, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction("✨", event.messageID, (e) => {}, true)
+			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
 	setName(data, self)
