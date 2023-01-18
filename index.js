@@ -267,6 +267,17 @@ config.add("music", {
 	category: "multimedia"
 })
 
+config.add("news", {
+	title: "Manila Times News",
+	description: "A daily news update requests from manila times.",
+	commands: [
+		"news ([\\w\\W]+)",
+		"news"
+	],
+	hasArgs: true,
+	category: "news"
+})
+
 config.add("pin", {
 	title: "Show pinned message",
 	description: "Showing the current pinned message",

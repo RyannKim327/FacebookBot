@@ -1,29 +1,37 @@
-const axios = require("axios")
-const http = require("https")
+const { getPrefix } = require("./../config")
+const mt = require("manilatimes-scrape")
 const react = require("./../utils/react")
 
-let getDate = () => {
-	Let date = new Date()
-	let d = new Date(date.toLocaleString('en-US', {
-		timezone: "Asia/Manila"
-	}))
-	return new Date(date.getTime() - (date.getTime() - d.getTime()))
-}
-
-let news = async () => {
-	let time = getDate()
-	let { data } = await axios.get(`https://newsapi.org/v2/everything?q=tesla&from=${time.getFullYear()}-${(time.getMonth() + 1)}-${(time.getDate() - 1)}&sortBy=publishedAt&apiKey=${process.env['news']}`)
-	return data
-}
-
-module.exports = async (api, event) => {
-	let _new = await news()
-	let articles = _new.articles
-	let random = Math.floor(Math.random() * articles.length)
-	let n = articles[random]
-	if(n.urlToImage == null){
-		api.sendMessage({
-			body: `Title: ${n.title}\n`
-		}, event.threadID)
+module.exports = async (api, event, regex) => {
+	if(event.body.match(regex)[1] == undefined){
+		mt.todayNews().then(today => {
+			let message = `Please copy the link of the news article and message it like this: ${getPrefix()}news <url here>\n\nArticle Lists`
+			for(let r in today){
+				message += `Title: ${today[r].title}\nURL: ${today[r].url}\n\n`
+			}
+			console.log(today)
+			api.sendMessage(message, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				}
+			})
+		}).catch(e => {
+			console.error(e)
+		})
+	}else{
+		try{
+			let news = await mt.article(event.body.match(regex)[1])
+			api.sendMessage(`Title: ${news.title}\n- ${news.author}\n[${news.date}]\n\n${news.body.join("\n\n")}`, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				}
+			})
+		}catch(e){
+			api.sendMessage(`There's an error happens.`, event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				}
+			})
+		}
 	}
 }

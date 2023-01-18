@@ -9,7 +9,6 @@ const openai = require("./auto/openai")
 const bw = require("./utils/badwords")
 //const { read } = require("./utils/database")
 const regex = require("./utils/regex")
-const manila = require("manilatimes-scrape")
 const gen = require("./utils/gender")
 const react = require("./utils/react")
 
@@ -34,7 +33,8 @@ let cooldowns = {
 	knowledge: "",
 	dump: "",
 	game: "",
-	ai: ""
+	ai: "",
+	news: ""
 }
 
 let categories = {
@@ -44,7 +44,8 @@ let categories = {
 	knowledge: "knowledge",
 	dump: "dump",
 	game: "game",
-	ai: "ai"
+	ai: "ai",
+	news: "news"
 }
 
 let time = {
@@ -54,7 +55,8 @@ let time = {
 	knowledge: 2,
 	dump: 0,
 	game: 0,
-	ai: 5
+	ai: 5,
+	news: 0.25
 }
 
 let commands = []
