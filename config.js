@@ -15,7 +15,7 @@ const react = require("./utils/react")
 let autoBot = true
 let bot = []
 let invervals = {}
-let calls = []
+let calls = ""
 let defName
 let options = {
 	listenEvents: true,
@@ -96,7 +96,7 @@ let getPrefix = () => {
 
 let interval_ = () => {
 	intervals = {}
-	setTimeout(interval_, 90000)
+	setTimeout(interval_, ((60 * 1000) * 5))
 }
 
 let resetOneTime = () => {
@@ -118,7 +118,9 @@ let cd = (api, event, _cats, json) => {
 			cooldowns[_cats] += `${event.senderID}, `
 			setTimeout(() => {
 				cooldowns[_cats] = cooldowns[_cats].replace(`${event.senderID}, `, "")
-				api.sendMessage(`Cooldown done [${_cats.toLowerCase()}]`, event.threadID, event.messageID)
+				if(_cats.toLowerCase() != "dump"){
+					api.sendMessage(`Cooldown done [${_cats.toLowerCase()}]`, event.threadID, event.messageID)
+				}
 				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 			}, (1000 * 60) * time[_cats])
 		}
@@ -153,33 +155,35 @@ let system = (api, event, r, q, _prefix) => {
 	if(!cooldowns[_cats].includes(event.senderID) && !cooldowns[_cats].includes(event.threadID)){
 		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || notAffect || admins.includes(event.senderID))){
 			let script
-			if(admin){
-				script = require("./admin/" + r.script)
-				if(admins.includes(event.senderID)){
+			api.sendTypingIndicator(event.threadID, (e) => {
+				if(admin){
+					script = require("./admin/" + r.script)
+					if(admins.includes(event.senderID)){
+						if(args){
+							script(api, event, reg)
+						}else{
+							script(api, event)
+						}
+					}
+				}else if(game){
+					script = require("./game/" + r.script)
 					if(args){
 						script(api, event, reg)
 					}else{
 						script(api, event)
 					}
-				}
-			}else if(game){
-				script = require("./game/" + r.script)
-				if(args){
-					script(api, event, reg)
 				}else{
-					script(api, event)
+					script = require("./script/" + r.script)
+					if(args){
+						cd(api, event, _cats, json)
+						script(api, event, reg)
+					}else{
+						cd(api, event, _cats, json)
+						script(api, event)
+					}
 				}
-			}else{
-				script = require("./script/" + r.script)
-				if(args){
-					cd(api, event, _cats, json)
-					script(api, event, reg)
-				}else{
-					cd(api, event, _cats, json)
-					script(api, event)
-				}
-			}
-			return false
+				return false
+			})
 		}else{
 			return true
 		}
@@ -308,7 +312,7 @@ let start = (state) => {
 					let username = user[event.senderID]['name']
 					let firstName = user[event.senderID]['firstName']
 					let gender = gen(firstName)['eng']
-					calls.push(event.senderID)
+					calls += event.senderID + ", "
 					api.sendMessage({
 						body: `Yes ${gender} ${username}? Would you like to ask something?`,
 						mentions: [{
@@ -320,17 +324,22 @@ let start = (state) => {
 							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 						}
 					})
-					// api.sendMessage("I'm still alive. Something you wanna ask for?", event.threadID)
-					//api.sendMessage(JSON.stringify(intervals), self)
+					setTimeout(() => {
+						calls = calls.replace(event.senderID + ", ", "")
+					}, ((60 * 1000) * 60))
 				}else if(body_lowercase.startsWith(name_lowercase) && body_lowercase != name_lowercase && !json.off.includes(event.senderID)){
 					commands.forEach(r => {
 						if(r.data.queries != undefined){
-							r.data.queries.forEach(q => {
+							let que = r.data.queries
+							for(let s in que){
+								let q = que[s]
 								if(loop){
-									let _prefix = name + ", "
+									let _prefix = name[self] + ", "
 									loop = system(api, event, r, q, _prefix)
+									if(!loop)
+										break
 								}
-							})
+							}
 						}
 					})
 					if(loop && json.ai == false && ((json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
@@ -341,11 +350,15 @@ let start = (state) => {
 				}else if(body.startsWith(prefix)){
 					commands.forEach(r => {
 						if(r.data.commands != undefined){
-							r.data.commands.forEach(q => {
+							let cmds = r.data.commands
+							for(let s in cmds){
+								let q = cmds[s]
 								if(loop){
 									loop = system(api, event, r, q, prefix)
+									if(!loop)
+										break
 								}
-							})
+							}
 						}
 					})
 				}
