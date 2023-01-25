@@ -5,10 +5,10 @@ const react = require("./../utils/react")
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	const self = api.getCurrentUserID()
-	if(event.body.includes("offcron")){
-		json.offcron.push(event.threadID)
+	if(event.body.includes("offcron") && !json.offcron.includes(event.threadID)){
 		let thread = await api.getThreadInfo(event.threadID)
-		if(!thread.isGroup || getAdmins().includes(event.senderID)){
+		if((event.threadID == event.senderID) || getAdmins().includes(event.senderID)){
+			json.offcron.push(event.threadID)
 			api.sendMessage("Turned Off Cron Activities.", event.threadID, (e, m) => {
 				if(e){
 					api.setMessageReaction(react(), event.messageID, (e) => {}, true)

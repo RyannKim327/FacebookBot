@@ -3,6 +3,7 @@ const cronjob = require("node-cron")
 const fs = require("fs")
 const gateway = require("biblegateway-scrape")
 const manila = require("manilatimes-scrape")
+const g = require("./../utils/gender")
 
 let date = require("./../utils/date")
 
@@ -56,22 +57,26 @@ module.exports = async (api) => {
 			let i = 0
 			data.forEach(async (r) => {
 				if(self != r.threadID && !json.offcron.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
-					let message = "Bible verse of the day:\n"
-					// let news = await manila.todayNews()
-					// let randomNews = news[Math.floor(Math.random() * news.length)]
-					// let article = await manila.article(randomNews.url)
-					//message += res + "\n\n"
-					message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
-					message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\n`
-					// message += `Daily News [Beta]:\n${article.title} - ${article.author}\n- ${article.date}\n\n${article.body.join("\n")}`
-					
-					api.sendMessage(message, r.threadID, (e, m) => {})
-
-					/* let rand = Math.floor(Math.random() * n.length)
-					let _news = n[rand].url
-					let art = await a.article(_news)
-					api.sendMessage(`Daily News (Source: ManilaTimes):\n\n${art.title}\nBy: ${art.author}\n- ${art.date}\n\n${art.body[0]}`, event.threadID)
-					*/
+					let thread = await api.getThreadInfo(r.threadID)
+					if(thread.isGroup){
+						let message = `Good day ${thread.threadName}!!!\nBible verse of the day:\n`
+						message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
+						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\n`
+						api.sendMessage(message, r.threadID, (e, m) => {})
+					}else{
+						let user = await api.getUserInfo(r.threadID)
+						let gender = g(user[r.threadID]['firstName'])['eng']
+						let message = `Good day ${gender} ${user[r.threadID]['name']}!!!\nBible verse of the day:\n`
+						message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
+						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\n`
+						api.sendMessage({
+							body: message,
+							mentions: [{
+								id: r.threadID,
+								tag: user[r.threadID]['name']
+							}]
+						}, r.threadID, (e, m) => {})
+					}
 					i += 1
 				}
 			})

@@ -41,10 +41,10 @@ module.exports = async (api, event) => {
 	let myID = await api.getCurrentUserID()
 	let user = await api.getUserInfo(myID)
 	let myname = () => {
-		if(user[myID]['name'] == getName()){
+		if(user[myID]['name'] == getName(myID)){
 			return user[myID]['name']
 		}else{
-			return user[myID]['name'] + " you may also call me " + getName()
+			return user[myID]['name'] + " you may also call me " + getName(myID)
 		}
 	}
 	let message = "Hello I am " + myname() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"

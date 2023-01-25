@@ -1,6 +1,6 @@
 const fs = require("fs")
 const http = require("https")
-const anon = require("anonfile-lib")
+// const anon = require("anonfile-lib")
 const { getPrefix } = require("./../config")
 const react = require("./../utils/react")
 
