@@ -1,10 +1,14 @@
 const express = require("express")
 const fs = require("fs")
 const parser = require("body-parser")
+
+const { setPrefix } = require("./config")
+
 const app = express()
 const enc = parser.urlencoded({extended: false})
 
 module.exports = () => {
+	const PORT = 5000 | 3000 | process.env.PORT | 7000
 	app.use(express.static("public"))
 	app.get("/", (req, res) => {
 		res.sendFile(__dirname + "/index.html")
@@ -39,7 +43,56 @@ module.exports = () => {
 			}
 		}
 	})
-	app.listen(3000, () => {
-		console.log("Listening to default port")
+	app.get("/config", (req, res) => {
+		if(req.query.code == undefined){
+			res.send(JSON.stringify({"message": "Error"}))
+		}else{
+			if(req.query.code == process.env.code){
+				let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+				let status = json.status
+				let busy = json.busy
+				let ai = json.ai
+				let prefix = json.prefix
+				let _json = {
+					status,
+					busy,
+					ai,
+					prefix
+				}
+				res.send(JSON.stringify(_json))
+			}else{
+				res.send(JSON.stringify({message: "Error"}))
+			}
+		}
+	})
+	app.post("/mod", enc, (req, res) => {
+		let code = req.body.code
+		if(code == undefined){
+			return res.send(JSON.stringify({message: "Error"}))
+		}
+		if(code != process.env.code){
+			return res.send(JSON.stringify({message: "Error"}))
+		}
+		let key = req.body.key
+		let data = req.body.data
+		if(key == "status" || key == "busy" || key == "ai"){
+			if(data == "true"){
+				data = true
+			}else if(data == "false"){
+				data = false
+			}
+		}
+		switch(key){
+			case "prefix":
+				setPrefix(data)
+			break
+		}
+		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+		json[key] = data
+		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+		res.send(`Data for ${key} is now updated.`)
+	})
+	app.listen(PORT, () => {
+		console.log("Listening to default port " + PORT)
 	})
 }
