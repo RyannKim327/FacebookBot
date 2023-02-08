@@ -1,5 +1,6 @@
 const fs = require("fs")
 const cronjob = require("node-cron")
+const execSync = require("child_process").execSync
 
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
@@ -244,6 +245,10 @@ let start = (state) => {
 		let listen = api.listen(async (error, event) => {
 			if(error){
 				console.error(`Error [Listen Emitter]: ${error}`)
+				const o = execSync("npx nodemon index.js", {
+					encoding: "utf-8"
+				})
+				console.log(`Restart: ${o}`)
 			}
 			
 			json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))

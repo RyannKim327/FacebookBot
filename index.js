@@ -252,6 +252,16 @@ config.add("imgtxt", {
 	category: "multimedia"
 })
 
+config.add("lexi", {
+	title: "Lexica Art",
+	description: "Test mode image generator",
+	commands: [
+		"lexi ([\\w\\W]+)"
+	],
+	hasArgs: true,
+	category: "multimedia"
+})
+
 config.add("music", {
 	title: "YouTube Music Command",
 	description: "A music command which gives you a youtube music based results",
