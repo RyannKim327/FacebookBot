@@ -118,6 +118,19 @@ config.add("toggle", {
 	admin: true
 })
 
+config.add("unsent", {
+	title: "Unsent Messgae",
+	description: "Unsent a message by only and admin can do",
+	commands: [
+		"unsent",
+		"unsend"
+	],
+	admin: true,
+	type: [
+		"message_reply"
+	]
+})
+
 config.add("updates", {
 	title: "Application Updates",
 	description: "An updater of app",
