@@ -99,6 +99,27 @@ module.exports = async (api) => {
 		scheduled: true,
 		timezone: "Asia/Manila"
 	})
+	cronjob.schedule("14 14 14 2 *", () => {
+		api.getThreadList(20, null, ['INBOX'], (e, data) => {
+			if(e) return (`Error [Worship]: ${e}`)
+			let i = 0
+			data.forEach(r => {
+				if(self != r.threadID && !json.offcron.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
+					api.sendMessage({
+						body: "Ako na lang ang babati ng happy valentines, sa mga di ba nababati jan\n\nHappy Valentines po",
+						attachment: fs.createReadStream(`${__dirname}/../valen.gif`)
+					}, r.threadID, (e, m) => {
+						if(e){
+							console.log("Hayst")
+						}
+					})
+				}
+			})
+		})
+	},{
+		scheduled: true,
+		timezone: "Asia/Manila"
+	})
 	/*cronjob.schedule("17 0 * * *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [New year]: ${e}`)
