@@ -44,7 +44,7 @@ module.exports = async (api, event) => {
 		if(user[myID]['name'] == getName(myID)){
 			return user[myID]['name']
 		}else{
-			return user[myID]['name'] + " you may also call me " + getName(myID)
+			return user[myID]['name'] + " you may also call me " + getName()
 		}
 	}
 	let message = "Hello I am " + myname() + " your friendly facebook bot. Here are my commands that you may used to execute if you want to use my service.\n\n"
