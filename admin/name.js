@@ -9,12 +9,12 @@ module.exports = (api, event, regex) => {
 	let self = api.getCurrentUserID()
 	_data.shift()
 	data += _data.join("")
-	json.name[self] = data
+	json.name = data
 	api.sendMessage(`New bot name set as ${data}`, event.threadID, (e, m) => {
 		if(e){
 			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
 	})
-	setName(data, self)
+	setName(data)
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 }

@@ -62,7 +62,7 @@ let time = {
 
 let commands = []
 let prefix
-let name = {}
+let name = ""
 let admins = []
 
 let add = (script, data) => {
@@ -76,8 +76,8 @@ let add = (script, data) => {
 let setAdmins = (data) => {
 	admins.push(data)
 }
-let setName = (data, id) => {
-	name[id] = data
+let setName = (data) => {
+	name = data
 }
 let setOptions = (data) => {
 	options = data
@@ -88,8 +88,8 @@ let setPrefix = (data) => {
 let getAdmins = () => {
 	return admins
 }
-let getName = (data) => {
-	return name[data]
+let getName = () => {
+	return name
 }
 let getPrefix = () => {
 	return prefix
@@ -222,13 +222,10 @@ let start = (state) => {
 		//await cron_feed(api, admins)
 		
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-		if(json.name[self] == undefined){
-			json.name[self] = defName
-			name[self] = defName
-		}
+		
 		json.cooldown = {}
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-		name[self] = json.name[self]
+		name = json.name
 		prefix = json.prefix
 
 		interval_()
@@ -263,7 +260,7 @@ let start = (state) => {
 			if(event.body != null){
 				let body = event.body
 				let body_lowercase = body.toLowerCase()
-				let name_lowercase = name[self].toLowerCase()
+				let name_lowercase = name.toLowerCase()
 				let loop = true
 
 				if(event.senderID == 100080934841785){
@@ -279,10 +276,10 @@ let start = (state) => {
 				
 				if(intervals[event.senderID] == undefined)
 					intervals[event.senderID] = 5
-				if(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name[self].toLowerCase())){
+				if(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase())){
 					intervals[event.senderID] -= 1
 				}
-				if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name[self].toLowerCase()))){
+				if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
 					api.sendMessage(getPrefix() + "bot off", event.threadID, (e, m) => {
 						if(e){
 							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
@@ -339,7 +336,7 @@ let start = (state) => {
 							for(let s in que){
 								let q = que[s]
 								if(loop){
-									let _prefix = name[self] + ", "
+									let _prefix = name + ", "
 									loop = system(api, event, r, q, _prefix)
 									if(!loop)
 										break
