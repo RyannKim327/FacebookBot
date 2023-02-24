@@ -11,10 +11,12 @@ const bw = require("./utils/badwords")
 //const { read } = require("./utils/database")
 const regex = require("./utils/regex")
 const gen = require("./utils/gender")
+const unsent = require("./utils/unsent")
 const react = require("./utils/react")
 
 let autoBot = true
 let bot = []
+let msgLists = {}
 let invervals = {}
 let calls = ""
 let defName
@@ -25,6 +27,10 @@ let options = {
 
 let setDefaultName = (data) => {
 	defName = data
+}
+
+let getMsgs = () => {
+	return msgLists
 }
 
 let cooldowns = {
@@ -256,13 +262,29 @@ let start = (state) => {
 			}
 
 			//join(api, event)
-			
+			if(msgLists[event.threadID] == undefined){
+				msgLists[event.threadID] = {"":""}
+			}
+			if(event.body != null){
+				api.getThreadHistory(event.threadID, 999, undefined, (error, data) => {
+					if(error) return console.error(`Error [Unsent]: ${error}`)
+					for(let infos in data){
+						try{
+							let info = data[infos]
+							if(msgLists[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply")){
+								msgLists[event.threadID][event.messageID] = event
+							}
+						}catch(e){}
+					}
+				})
+				unsent(api, event, msgLists)
+			}
 			if(event.body != null){
 				let body = event.body
 				let body_lowercase = body.toLowerCase()
 				let name_lowercase = name.toLowerCase()
 				let loop = true
-
+				
 				if(event.senderID == 100080934841785){
 					api.setMessageReaction("🥺", event.messageID, (e) => {}, true)
 				}
@@ -381,6 +403,7 @@ module.exports = {
 	categories,
 	commands,
 	cooldowns,
+	getMsgs,
 	time,
 	getAdmins,
 	getName,
