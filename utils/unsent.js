@@ -5,21 +5,22 @@ module.exports = async (api, event, msgLists) => {
 	//if(event.type == "message" || event.type == "message_unsend" && event.senderID == self){
 	//	console.log(event)
 	//}
+	let onMonitor = ["100018362431224", "5572548646186754", "4780024218775309"]
 	if(msgLists[event.threadID] != undefined){
 		if(msgLists[event.threadID][event.messageID] != undefined){
 			let lists = msgLists[event.threadID][event.messageID]
 			if(event.type == "message_unsend"){
 					console.log(lists)
 			}
-			if(event.type == "message_unsend"){
+			if(event.type == "message_unsend" && onMonitor.includes(event.threadID)){
 				let { body, attachments, threadID, senderID } = lists
 				let content = "Unsent message:\n"
 				let thread = await api.getThreadInfo(threadID)
 				let user = await api.getUserInfo(senderID)
 				if(thread.isGroup){
-					content += `From: ${thread.threadName}\nBy:${user[senderID]['name']}\n\nContent:`
+					content += `From: ${thread.threadName}\nBy: ${user[senderID]['name']}\n\nContent:`
 				}else{
-					content += `From: A private convo\nBy:${user[senderID]['name']}\n\nContent:`
+					content += `From: A private convo\nBy: ${user[senderID]['name']}\n\nContent:`
 				}
 				content += (body == '') ? " " : "\n" + body
 				if(attachments.length > 0){

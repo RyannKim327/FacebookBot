@@ -277,8 +277,8 @@ let start = (state) => {
 						}catch(e){}
 					}
 				})
-				unsent(api, event, msgLists)
 			}
+			unsent(api, event, msgLists)
 			if(event.body != null){
 				let body = event.body
 				let body_lowercase = body.toLowerCase()
