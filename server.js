@@ -1,8 +1,9 @@
 const express = require("express")
 const fs = require("fs")
 const parser = require("body-parser")
+const execSync = require("child_process").execSync
 
-const { setPrefix } = require("./config")
+const { setName, setPrefix } = require("./config")
 
 const app = express()
 const enc = parser.urlencoded({extended: false})
@@ -53,11 +54,13 @@ module.exports = () => {
 				let busy = json.busy
 				let ai = json.ai
 				let prefix = json.prefix
+				let name = json.name
 				let _json = {
 					status,
 					busy,
 					ai,
-					prefix
+					prefix,
+					name
 				}
 				res.send(JSON.stringify(_json))
 			}else{
@@ -86,11 +89,24 @@ module.exports = () => {
 			case "prefix":
 				setPrefix(data)
 			break
+			case "name":
+				setName(data)
+			break
 		}
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		json[key] = data
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 		res.send(`Data for ${key} is now updated.`)
+	})
+	app.get("/refresh", (req, res) => {
+		if(req.query.key != "ref"){
+			return res.send("Error")
+		}else{
+			process.exit(0)
+			setTimeout(() => {
+				res.send("Hi")
+			}, 1000)
+		}
 	})
 	app.listen(PORT, () => {
 		console.log("Listening to default port " + PORT)

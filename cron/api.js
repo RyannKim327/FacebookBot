@@ -21,7 +21,7 @@ module.exports = async (api) => {
 		api.getThreadList(20, null, ['INBOX'], async (error, data) => {
 			let sent = 7
 			data.forEach(async (r) => {
-				if(r.threadID != self && !json.offcron.includes(r.threadID) && !json.saga.includes(r.threadID) && sent > 0){
+				if(r.threadID != self && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID) && sent > 0){
 					let n = Math.floor(Math.random() * quotes.length)
 					let q = quotes[n]
 					let thread = await api.getThreadInfo(r.threadID)
