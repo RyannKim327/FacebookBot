@@ -266,7 +266,7 @@ let start = (state) => {
 				msgLists[event.threadID] = {"":""}
 			}
 			if(event.body != null){
-				api.getThreadHistory(event.threadID, 999, undefined, (error, data) => {
+				api.getThreadHistory(event.threadID, 100, undefined, (error, data) => {
 					if(error) return console.error(`Error [Unsent]: ${error}`)
 					for(let infos in data){
 						try{
@@ -310,7 +310,7 @@ let start = (state) => {
 				}
 				if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
 					let thread = await api.getThreadInfo(event.threadID)
-					if(thread.isGroup == false){
+					if(event.threadID == event.senderID){
 						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
 							if(e){
 								api.setMessageReaction(react(), event.messageID, (e) => {}, true)

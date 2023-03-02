@@ -203,14 +203,6 @@ config.add("baybayin", {
 	category: "knowledge"
 })
 
-config.add("cron", {
-	title: "Close Cron Commands.",
-	description: "This is to disable automatic responses from a user.",
-	commands: [
-		"offcron"
-	]
-})
-
 config.add("game", {
 	title: "Game lists",
 	description: "Still ongoing, soon to be initialized.",
@@ -324,6 +316,16 @@ config.add("ris", {
 	category: "knowledge"
 })
 
+config.add("subs", {
+	title: "Subscribe to cron",
+	description: "Is is a way for you to subscribe and get daily cron updates from the bot.",
+	commands: [
+		"subscribe",
+		"unsubscribe"
+	],
+	category: "oneTime"
+})
+
 config.add("tlverse", {
 	title: "Tagalog verse Test",
 	description: "Tagalog bible verses",
@@ -389,6 +391,19 @@ config.add("dropball", {
 	],
 	hasArgs: true,
 	category: "game"
+})
+
+config.add("dice", {
+	title: "Dice Roll",
+	description: "Rolling a die",
+	commands: [
+		"dice"
+	],
+	category: "game",
+	type: [
+		"message",
+		"message_reply"
+	]
 })
 
 config.add("bugtong", {

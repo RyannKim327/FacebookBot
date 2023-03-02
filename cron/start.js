@@ -41,7 +41,7 @@ module.exports = async (api) => {
 		schedule: true,
 		timezone: "Asia/Manila"
 	})
-	cronjob.schedule("40 7 * * *", async () => {
+	cronjob.schedule("30 7 * * *", async () => {
 		let q_data = await quote()
 		let time = await today()
 		let date = new Date()
@@ -56,7 +56,7 @@ module.exports = async (api) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
 			let i = 0
 			data.forEach(async (r) => {
-				if(self != r.threadID && !json.offcron.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
 					let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
 						let message = `Good day ${thread.threadName}!!!\nBible verse of the day:\n`
@@ -90,29 +90,8 @@ module.exports = async (api) => {
 			if(e) return (`Error [Worship]: ${e}`)
 			let i = 0
 			data.forEach(r => {
-				if(self != r.threadID && !json.offcron.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
 					music(api, r.threadID)
-				}
-			})
-		})
-	},{
-		scheduled: true,
-		timezone: "Asia/Manila"
-	})
-	cronjob.schedule("14 14 14 2 *", () => {
-		api.getThreadList(20, null, ['INBOX'], (e, data) => {
-			if(e) return (`Error [Worship]: ${e}`)
-			let i = 0
-			data.forEach(r => {
-				if(self != r.threadID && !json.offcron.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
-					api.sendMessage({
-						body: "Ako na lang ang babati ng happy valentines, sa mga di ba nababati jan\n\nHappy Valentines po",
-						attachment: fs.createReadStream(`${__dirname}/../valen.gif`)
-					}, r.threadID, (e, m) => {
-						if(e){
-							console.log("Hayst")
-						}
-					})
 				}
 			})
 		})

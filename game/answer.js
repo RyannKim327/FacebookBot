@@ -35,7 +35,11 @@ module.exports = (api, event, regex) => {
 					}
 				}
 			}else{
-				api.sendMessage(`Wrong answer, it must be ${json.answer[event.senderID]}.`, event.threadID, (e, m) => {
+				let ans = `Wrong answer, it must be ${json.answer[event.senderID]}.`
+				if(json.current_game[event.senderID] == "bugtong"){
+					ans = "The answer for this category is hidden."
+				}
+				api.sendMessage(ans, event.threadID, (e, m) => {
 					if(e){
 						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
