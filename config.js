@@ -1,6 +1,7 @@
 const fs = require("fs")
 const cronjob = require("node-cron")
 const execSync = require("child_process").execSync
+const axios = require("axios")
 
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
@@ -24,6 +25,8 @@ let options = {
 	listenEvents: true,
 	selfListen: false
 }
+
+let refreshed = true
 
 let setDefaultName = (data) => {
 	defName = data
@@ -199,6 +202,150 @@ let system = (api, event, r, q, _prefix) => {
 	}
 }
 
+let doListen = async (api) => {
+	const self = await api.getCurrentUserID()
+	return api.listen(async (error, event) => {
+		if(error){
+			console.error(`Error [Listen Emitter]: ${error}`)
+			const o = execSync("npx nodemon index.js", {
+				encoding: "utf-8"
+			})
+			console.log(`Restart: ${o}`)
+		}
+		
+		json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+		if(options.autoMarkRead != undefined){
+			if(options.autoMarkRead){
+				await api.markAsReadAll()
+			}
+		}
+		//join(api, event)
+		if(msgLists[event.threadID] == undefined){
+			msgLists[event.threadID] = {"":""}
+		}
+		if(event.body != null){
+			api.getThreadHistory(event.threadID, 100, undefined, (error, data) => {
+				if(error) return console.error(`Error [Unsent]: ${error}`)
+				for(let infos in data){
+					try{
+						let info = data[infos]
+						if(msgLists[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply")){
+							msgLists[event.threadID][event.messageID] = event
+						}
+					}catch(e){}
+				}
+			})
+		}
+		unsent(api, event, msgLists)
+		if(event.body != null){
+			let body = event.body
+			let body_lowercase = body.toLowerCase()
+			let name_lowercase = name.toLowerCase()
+			let loop = true
+			
+			if(event.senderID == 100080934841785){
+				api.setMessageReaction("🥺", event.messageID, (e) => {}, true)
+			}
+			if(json.ai && event.type == "message_reply"){
+				if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
+					openai(api, event)
+					loop = false
+				}
+			}
+			
+			if(intervals[event.senderID] == undefined)
+				intervals[event.senderID] = 5
+			if(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase())){
+				intervals[event.senderID] -= 1
+			}
+			if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
+				api.sendMessage(getPrefix() + "bot off", event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					}
+				}, event.messageID)
+			}
+			if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
+				let thread = await api.getThreadInfo(event.threadID)
+				if(event.threadID == event.senderID){
+					api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						}
+					})
+					json.busylist.push(event.threadID)
+					fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+				}else if(event.mentions != undefined){
+					if(event.mentions[self] != undefined){
+						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
+							if(e){
+								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+							}
+						})
+						json.busylist.push(event.threadID)
+						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+					}
+				}
+			}
+			
+			if(body_lowercase == name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+				let user = await api.getUserInfo(event.senderID)
+				let username = user[event.senderID]['name']
+				let firstName = user[event.senderID]['firstName']
+				let gender = gen(firstName)['eng']
+				calls += event.senderID + ", "
+				api.sendMessage({
+					body: `Yes ${gender} ${username}? Would you like to ask something?`,
+					mentions: [{
+						id: event.senderID,
+						tag: username
+					}]
+				}, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					}
+				})
+				setTimeout(() => {
+					calls = calls.replace(event.senderID + ", ", "")
+				}, ((60 * 1000) * 60))
+			}else if(body_lowercase.startsWith(name_lowercase) && body_lowercase != name_lowercase && !json.off.includes(event.senderID)){
+				commands.forEach(r => {
+					if(r.data.queries != undefined){
+						let que = r.data.queries
+						for(let s in que){
+							let q = que[s]
+							if(loop){
+								let _prefix = name + ", "
+								loop = system(api, event, r, q, _prefix)
+								if(!loop)
+									break
+							}
+						}
+					}
+				})
+				if(loop && json.ai == false && ((json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
+					let cooldown = true
+					openai(api, event)
+					cd(api, event, "ai", json)
+				}
+			}else if(body.startsWith(prefix)){
+				commands.forEach(r => {
+					if(r.data.commands != undefined){
+						let cmds = r.data.commands
+						for(let s in cmds){
+							let q = cmds[s]
+							if(loop){
+								loop = system(api, event, r, q, prefix)
+								if(!loop)
+									break
+							}
+						}
+					}
+				})
+			}
+		}
+	})
+}
 let start = (state) => {
 	const fca = require("fca-unofficial")
 	fca(state, async (error, api) => {
@@ -210,20 +357,28 @@ let start = (state) => {
 		if(db_read != null)
 			fs.writeFileSync("data/preferences.json", JSON.stringify(db_read), "utf8")
 		*/
+		let getData = Math.floor(Math.random() * 100)
 		if(options.selfListen)
 			admins.push(self)
-		if(autoBot){
+		if(autoBot && (getData % 5) == 0){
 			admins.forEach(id => {
 				if(bot.includes(id) && bot == self)
 					api.sendMessage(`Bot service is now activated.`, id, (e, m) => {})
 			})
 		}
 
+		setInterval(() => {
+			axios.get("https://mywebsite.mpoprevii.repl.co")
+		}, ((1000 * 60) * 60))
+
 		//let vm = await manila.todayNews()
 		//console.log(vm)
-		
-		await cron(api)
-		await cron_api(api)
+
+		if(refreshed){
+			await cron(api)
+			await cron_api(api)
+			refreshed = false
+		}
 		resetOneTime()
 		//await cron_feed(api, admins)
 		
@@ -245,149 +400,10 @@ let start = (state) => {
 			}, 500)
 		})
 		api.setOptions(options)
-		let listen = api.listen(async (error, event) => {
-			if(error){
-				console.error(`Error [Listen Emitter]: ${error}`)
-				const o = execSync("npx nodemon index.js", {
-					encoding: "utf-8"
-				})
-				console.log(`Restart: ${o}`)
-			}
-			
-			json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-			if(options.autoMarkRead != undefined){
-				if(options.autoMarkRead){
-					await api.markAsReadAll()
-				}
-			}
-
-			//join(api, event)
-			if(msgLists[event.threadID] == undefined){
-				msgLists[event.threadID] = {"":""}
-			}
-			if(event.body != null){
-				api.getThreadHistory(event.threadID, 100, undefined, (error, data) => {
-					if(error) return console.error(`Error [Unsent]: ${error}`)
-					for(let infos in data){
-						try{
-							let info = data[infos]
-							if(msgLists[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply")){
-								msgLists[event.threadID][event.messageID] = event
-							}
-						}catch(e){}
-					}
-				})
-			}
-			unsent(api, event, msgLists)
-			if(event.body != null){
-				let body = event.body
-				let body_lowercase = body.toLowerCase()
-				let name_lowercase = name.toLowerCase()
-				let loop = true
-				
-				if(event.senderID == 100080934841785){
-					api.setMessageReaction("🥺", event.messageID, (e) => {}, true)
-				}
-
-				if(json.ai && event.type == "message_reply"){
-					if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
-						openai(api, event)
-						loop = false
-					}
-				}
-				
-				if(intervals[event.senderID] == undefined)
-					intervals[event.senderID] = 5
-				if(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase())){
-					intervals[event.senderID] -= 1
-				}
-				if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
-					api.sendMessage(getPrefix() + "bot off", event.threadID, (e, m) => {
-						if(e){
-							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
-						}
-					}, event.messageID)
-				}
-				if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
-					let thread = await api.getThreadInfo(event.threadID)
-					if(event.threadID == event.senderID){
-						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
-							if(e){
-								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
-							}
-						})
-						json.busylist.push(event.threadID)
-						fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-					}else if(event.mentions != undefined){
-						if(event.mentions[self] != undefined){
-							api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
-								if(e){
-									api.setMessageReaction(react(), event.messageID, (e) => {}, true)
-								}
-							})
-							json.busylist.push(event.threadID)
-							fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-						}
-					}
-				}
-				
-				if(body_lowercase == name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
-					let user = await api.getUserInfo(event.senderID)
-					let username = user[event.senderID]['name']
-					let firstName = user[event.senderID]['firstName']
-					let gender = gen(firstName)['eng']
-					calls += event.senderID + ", "
-					api.sendMessage({
-						body: `Yes ${gender} ${username}? Would you like to ask something?`,
-						mentions: [{
-							id: event.senderID,
-							tag: username
-						}]
-					}, event.threadID, (e, m) => {
-						if(e){
-							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
-						}
-					})
-					setTimeout(() => {
-						calls = calls.replace(event.senderID + ", ", "")
-					}, ((60 * 1000) * 60))
-				}else if(body_lowercase.startsWith(name_lowercase) && body_lowercase != name_lowercase && !json.off.includes(event.senderID)){
-					commands.forEach(r => {
-						if(r.data.queries != undefined){
-							let que = r.data.queries
-							for(let s in que){
-								let q = que[s]
-								if(loop){
-									let _prefix = name + ", "
-									loop = system(api, event, r, q, _prefix)
-									if(!loop)
-										break
-								}
-							}
-						}
-					})
-					if(loop && json.ai == false && ((json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
-						let cooldown = true
-						openai(api, event)
-						cd(api, event, "ai", json)
-					}
-				}else if(body.startsWith(prefix)){
-					commands.forEach(r => {
-						if(r.data.commands != undefined){
-							let cmds = r.data.commands
-							for(let s in cmds){
-								let q = cmds[s]
-								if(loop){
-									loop = system(api, event, r, q, prefix)
-									if(!loop)
-										break
-								}
-							}
-						}
-					})
-				}
-			}
-		})
+		let listener = doListen(api)
+		setInterval(() => {
+			console.log("Test")
+		}, ((1000 * 30)))
 	})
 }
 												  

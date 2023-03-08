@@ -294,6 +294,16 @@ config.add("news", {
 	category: "news"
 })
 
+config.add("pdf", {
+	title: "PDF Downloader",
+	description: "Powered by PDF Drive",
+	commands: [
+		"pdf ([\\w\\W]+)"
+	],
+	hasArgs: true,
+	category: "knowledge"
+})
+		
 config.add("pin", {
 	title: "Show pinned message",
 	description: "Showing the current pinned message",

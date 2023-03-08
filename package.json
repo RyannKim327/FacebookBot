@@ -16,6 +16,7 @@
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.20",
     "openai": "^3.1.0",
+    "pdfdrive-ebook-scraper": "^2.0.0",
     "pls-img-txt": "^0.0.3",
     "request": "^2.88.2",
     "top100bbworship": "^1.0.0",
@@ -42,6 +43,5 @@
   "bugs": {
     "url": "https://github.com/RyannKim327/FacebookBot/issues"
   },
-  "homepage": "https://github.com/RyannKim327/FacebookBot#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/RyannKim327/FacebookBot#readme"
 }
