@@ -5,7 +5,7 @@ module.exports = async (api, event, msgLists) => {
 	//if(event.type == "message" || event.type == "message_unsend" && event.senderID == self){
 	//	console.log(event)
 	//}
-	let onMonitor = ["100018362431224", "5572548646186754", "4780024218775309", "5500055473411242"]
+	let onMonitor = ["100018362431224", "5572548646186754", "4780024218775309", "5500055473411242", "5893956287308812", "5424954817625723"]
 	if(msgLists[event.threadID] != undefined){
 		if(msgLists[event.threadID][event.messageID] != undefined){
 			let lists = msgLists[event.threadID][event.messageID]
