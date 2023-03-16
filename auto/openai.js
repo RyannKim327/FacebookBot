@@ -23,11 +23,13 @@ let config = async (str) => {
 		top_p: 0.3,
 		frequency_penalty: 0.5,
 		presence_penalty: 0.0,
-		user: "Kim",
+		user: "Nix",
 		messages: [{
 			role: "user",
 			content: str
 		}]
+	}).catch(error => {
+		return error.message
 	})
 	return data
 }
@@ -35,15 +37,23 @@ let config = async (str) => {
 module.exports = async (api, event) => {
 	let body = event.body
 	if(body.split(" ").length > 1){
-		let ai = await config(body)
-		let msg = ai.choices[0].message.content.shift("\n")
-		while(msg[0] == ""){
-			msg.shift()
-		}
-		api.sendMessage("⠀" + msg.join("\n"), event.threadID, (e, m) => {
-			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+		try{
+			let ai = await config(body)
+			let msg = ai.choices[0].message.content.split("\n")
+			while(msg[0] == ""){
+				msg.shift()
 			}
-		})
+			api.sendMessage("⠀" + msg.join("\n"), event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				}
+			})
+		}catch(e){
+			api.sendMessage("Something went wrong", event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				}
+			})
+		}
 	}
 }
