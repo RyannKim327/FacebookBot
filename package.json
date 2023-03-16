@@ -15,7 +15,7 @@
     "manilatimes-scrape": "^0.0.1",
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.20",
-    "openai": "^3.1.0",
+    "openai": "^3.2.1",
     "pdfdrive-ebook-scraper": "^2.0.0",
     "pls-img-txt": "^0.0.3",
     "request": "^2.88.2",

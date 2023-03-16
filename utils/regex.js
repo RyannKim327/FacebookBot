@@ -1,3 +1,4 @@
 module.exports = (str) => {
-	return new RegExp("^" + str, "i")
+	let s = str.replace("/", "\\/")
+	return new RegExp("^" + s, "i")
 }

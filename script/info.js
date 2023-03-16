@@ -36,7 +36,17 @@ module.exports = async (api, event) => {
 		"Being alone is not the worst thing you may do, if your suroundings fools you.",
 		"Don't be afraid to fail, because failures are knowledge you may get.",
 		"No one can be a best teacher, except life, and the life is God",
-		"Never compare yourself to others, because you're unique."
+		"Never compare yourself to others, because you're unique.",
+		"Happiness is just an illusion of reality.",
+		"It's better to be alone that to be with others.",
+		"Faith, what a beautiful word. A word that motivates someone to live.",
+		"Why there are bunch of songs for broken, even there are lot of people who are like a person but no love.",
+		"Love is different with like. Never tell to someone that you love him/her, even you're just liked him/her.",
+		"Love is a beautiful word, that ruins your life.",
+		"Smile, there are lots of problem but smiling helps you to feel better.",
+		"Never tell to someone who am I, instead introduce to them who am I by sharing what I'm telling to you.",
+		"My right hand is not good as what you think.",
+		"Hold your breath for a second, and think, it is good enough for me to live where I didn't belong in."
 	]
 	let myID = await api.getCurrentUserID()
 	let user = await api.getUserInfo(myID)
