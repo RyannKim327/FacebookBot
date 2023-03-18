@@ -27,6 +27,7 @@ let config = async (name, str) => {
 		description: "An Artificial Inteligence program from OpenAI, which implemented and developed as a Facebook Bot Virtual Assistant by MPOP Reverse II.",
 		powered_by: "OpenAI",
 		developed_by: "MPOP Reverse II",
+		programmingSkillLevel: "newbie",
 		prefix: json_data.prefix,
 		ai_prefix: json_data.name
 	}
@@ -55,18 +56,36 @@ let c2 = async (name, str) => {
 	let data = ""
 	let json_data = JSON.parse(fs.readFileSync("data/preferences.json"))
 	let aboutSelf = {
-		first_name: "Ryann Kim",
-		middle_name: "Malabanan",
-		surname: "Sesgundo",
-		nickname: json_data.name,
+		name:{
+			first_name: "Ryann Kim",
+			middle_name: "Malabanan",
+			surname: "Sesgundo",
+			nickname: json_data.name,
+			otherNames: [
+				"MPOP Reverse II",
+				"RySes",
+				'RyannKim327'
+			],
+		},
 		description: "An Artificial Inteligence program from OpenAI, which implemented and developed as a Facebook Virtual Assistant by MPOP Reverse II.",
 		powered_by: "OpenAI",
 		developed_by: "MPOP Reverse II",
 		prefix: json_data.prefix,
-		ai_prefix: json_data.name
+		ai_prefix: json_data.name,
+		helpCommand: `${json_data.prefix}help`
 	}
 	let dev = {
-		who: "Ryann Kim Malabanan Sesgundo",
+		who: {
+			firstname: "Ryann Kim",
+			middlename: "Malabanan",
+			surname: "Sesgundo",
+			nickname: "Kim",
+			otherNames: [
+				"MPOP",
+				"RySes",
+				"RyannKim327"
+			]
+		},
 		birthDay: "July 30 2005",
 		gender: "Male",
 		isStudent: true,
@@ -77,8 +96,40 @@ let c2 = async (name, str) => {
 			college: "Dalubhasaan ng Lungsod ng Lucena"
 		},
 		currentlyStudy: "college",
+		programming: {
+			started: 2016,
+			firstLanguages: "Python, HTML[Markup Language], Markdown",
+			learningInProcess: [
+				"Java and XML for Android Development",
+				"Java for Desktop GUI and Consoles",
+				"Python for Data Analytics, GUI and Machine Learning",
+				"HTML, CSS, Javascript for frontend development",
+				"NodeJS and JSON, as backend development",
+				"PHP and MySQL for backend development",
+				"C# for console [Unity Game Development Soon]"
+			],
+			skillLevel: "Newbie"
+		},
 		facebook: "https://facebook.com/MPOP.ph",
-		github: "https://github.com/RyannKim327"
+		github: "https://github.com/RyannKim327",
+		linkedin: "https://linkedin.com/in/RyannKim327",
+		replit: "https://replit.com/@RyannKim327"
+	}
+	let what = {
+		mpop: {
+			name: "MPOP",
+			acronym: "Master Piece of Paper",
+			foundedYear: "2016",
+			foundedBy: "Ryann Kim Sesgndo",
+			isHuman: true,
+			history: {
+				originalName: "MPOP Modifiers Group",
+				year: 2016,
+				newName: "MPOP Reverse II",
+				renameYear: "2019"
+			},
+			moreInfo: "came from a line from one of my teacher in MAPeH that to create a \"Master Piece\" in a \"Piece of Paper\". The teacher named Joewel Anareta."
+		}
 	}
 	let mentors = {
 		mentors: [{
@@ -96,7 +147,17 @@ let c2 = async (name, str) => {
 		},{
 			name: "Earl Shine Sawir",
 			about: "Sya ung nagturo sa paggawa ng bot"
-		}]
+		},{
+			name: "John Roy Lapida Calimlim",
+			about: "Tinuruan nya ko from android development hanggang sa ilang NodeJS definitions"
+		},{
+			name: "John Jeremy Antigou",
+			about: "Isa sa mga nagpausong muli ng Facebook Bot"
+		},{
+			name: "Salvador",
+			about: "Mamaw to. mentor ng lahat di lang ako"
+		}],
+		descriptions: "Mentors are not the member of MPOP Reverse II, instead MPOP Reverse II is a screen name or developer name of Ryann Kim Sesgundo"
 	}
 	let infos = {
 		model: "gpt-3.5-turbo",
@@ -115,6 +176,9 @@ let c2 = async (name, str) => {
 		},{
 			role: "system",
 			content: JSON.stringify(mentors)
+		},{
+			role: "system",
+			content: JSON.stringify(what)
 		},{
 			role: "user",
 			content: str
