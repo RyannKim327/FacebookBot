@@ -128,7 +128,7 @@ let c2 = async (name, str) => {
 				newName: "MPOP Reverse II",
 				renameYear: "2019"
 			},
-			moreInfo: "came from a line from one of my teacher in MAPeH that to create a \"Master Piece\" in a \"Piece of Paper\". The teacher named Joewel Anareta."
+			moreInfo: "came from a line from one of my teacher in MAPeH that to create a \"Master Piece\" in a \"Piece of Paper\". The teacher named Joewel Anareta. At first, it was a group of modders, but later on, used as a name of Ryann Kim Sesgundo for himself."
 		}
 	}
 	let mentors = {
