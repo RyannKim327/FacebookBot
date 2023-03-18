@@ -65,6 +65,39 @@ let c2 = async (name, str) => {
 		prefix: json_data.prefix,
 		ai_prefix: json_data.name
 	}
+	let dev = {
+		who: "Ryann Kim Malabanan Sesgundo",
+		birthDay: "July 30 2005",
+		gender: "Male",
+		isStudent: true,
+		school: {
+			elementary: "Bataan Elementary School",
+			highschool: "Calubcub 1.0 National Highschool",
+			senios_highschool: "AMA Computer Colleges",
+			college: "Dalubhasaan ng Lungsod ng Lucena"
+		},
+		currentlyStudy: "college",
+		facebook: "https://facebook.com/MPOP.ph",
+		github: "https://github.com/RyannKim327"
+	}
+	let mentors = {
+		mentors: [{
+			name: "Eljohn Mago",
+			about: "Mamaw po sa development ito"
+		},{
+			name: "John Paul Caigas",
+			about: "Ito naman ung nagturo sa akin na mag host ng bot, at sya ung source kung paano gumawa ng NPM package na itinuro kay Lester Navarra"
+		},{
+			name: "Lester Navarra",
+			about: "Sya ung nagturo sa akin ng pag publish ng project as NPM. At nagturo patungkol sa webscraping sa NodeJS."
+		},{
+			name: "Mark Kevin Manalo",
+			about: "Sya ung nagbigay ng code ng openai 3.5"
+		},{
+			name: "Earl Shine Sawir",
+			about: "Sya ung nagturo sa paggawa ng bot"
+		}]
+	}
 	let infos = {
 		model: "gpt-3.5-turbo",
 		temperature: 0.5,
@@ -76,6 +109,12 @@ let c2 = async (name, str) => {
 		messages: [{
 			role: "system",
 			content: JSON.stringify(aboutSelf) //"you're an artificial inteligence program from openai, which implemented as a virtual facebook ai assistant. Your name is Ryann Kim Sesgundo, but they may call you Kim and developed under the name and developed by MPOP Reverse II. Your prefix is / and the AI prefix is Kim"
+		},{
+			role: "system",
+			content: JSON.stringify(dev)
+		},{
+			role: "system",
+			content: JSON.stringify(mentors)
 		},{
 			role: "user",
 			content: str
