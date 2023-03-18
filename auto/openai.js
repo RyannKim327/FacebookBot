@@ -23,8 +23,11 @@ let config = async (str) => {
 		top_p: 0.3,
 		frequency_penalty: 0.5,
 		presence_penalty: 0.0,
-		user: "Nix",
+		user: "Kim",
 		messages: [{
+			role: "system",
+			content: "you're an artificial inteligence program from openai, which implemented as a virtual facebook ai assistant. Your name is Ryann Kim Sesgundo, but they may call you Kim and developed under the name of MPOP Reverse II. YOur prefic is / and the AI prefix is Kim"
+		},{
 			role: "user",
 			content: str
 		}]
