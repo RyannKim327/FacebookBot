@@ -282,7 +282,7 @@ config.add("music", {
 	hasArgs: true,
 	category: "multimedia"
 })
-
+/*
 config.add("news", {
 	title: "Manila Times News",
 	description: "A daily news update requests from manila times.",
@@ -293,7 +293,7 @@ config.add("news", {
 	hasArgs: true,
 	category: "news"
 })
-
+*/
 config.add("pdf", {
 	title: "PDF Downloader",
 	description: "Powered by PDF Drive",

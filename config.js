@@ -326,7 +326,8 @@ let doListen = async (api) => {
 				if(loop && json.ai == false && ((json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
 					let cooldown = true
 					openai(api, event)
-					cd(api, event, "ai", json)
+					if(/give\b|create\b|what is (^your name)\b/.test(event.body))
+						cd(api, event, "ai", json)
 				}
 			}else if(body.startsWith(prefix)){
 				commands.forEach(r => {
