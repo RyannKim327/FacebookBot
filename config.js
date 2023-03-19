@@ -268,7 +268,7 @@ let doListen = async (api) => {
 			if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
 				let thread = await api.getThreadInfo(event.threadID)
 				if(event.threadID == event.senderID){
-					api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
+					api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
 						if(e){
 							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 						}
@@ -277,7 +277,7 @@ let doListen = async (api) => {
 					fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 				}else if(event.mentions != undefined){
 					if(event.mentions[self] != undefined){
-						api.sendMessage("The account owner is now busy, please wait for a moment.", event.threadID, (e, m) => {
+						api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
 							if(e){
 								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 							}
