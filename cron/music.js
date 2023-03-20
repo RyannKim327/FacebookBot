@@ -1,18 +1,20 @@
 const fs = require("fs")
 const top100 = require("top100bbworship")
 const youtubei = require("youtubei.js")
+const afk2 = require("./../utils/afk")
 const g = require("./../utils/gender")
 
 module.exports = async (api, event) => {
 	let name = `${__dirname}/../temp/${event}_worship.mp3`
 	let top = await top100()
 	let json = JSON.parse(fs.readFileSync("data/songs.json", "utf8"))
+	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(!fs.existsSync(name)){
 		let yt = await new youtubei()
 		let dom = Math.floor(Math.random() * 100)
 		let songs = json.lists
 		let song = songs[Math.floor(Math.random() * songs.length)]
-		if((dom % 2) == 0){
+		if((dom % 5) == 0){
 			songs = top
 			let afk = songs[Math.floor(Math.random() * songs.length)]
 			song = afk.title + " " + afk.artist
@@ -44,7 +46,9 @@ module.exports = async (api, event) => {
 										})
 									}
 								})
-							}, event, (e, m) => {})
+							}, event, (e, m) => {
+								afk2(api, json2)
+							})
 						}else{
 							let user = await api.getUserInfo(event)
 							let gender = g(user[event]['firstName'])["eng"]
@@ -61,12 +65,13 @@ module.exports = async (api, event) => {
 									id: event,
 									tag: user[event]['name']
 								}]
-							}, event, (e, m) => {})
+							}, event, (e, m) => {
+								afk2(api, json2)
+							})
 						}
 					})
 				}
 			}
 		}
 	}
-	
 }

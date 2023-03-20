@@ -1,7 +1,10 @@
 const http = require("https")
 const fs = require("fs")
+
+const afk = require("./afk")
 module.exports = async (api, event, msgLists) => {
 	const self = await api.getCurrentUserID()
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	//if(event.type == "message" || event.type == "message_unsend" && event.senderID == self){
 	//	console.log(event)
 	//}
@@ -49,14 +52,18 @@ module.exports = async (api, event, msgLists) => {
 											fs.unlink(`${__dirname}/../temp/unsent_${event.messageID}${type}`, (e) => {})
 										}
 									})
-								}, api.getCurrentUserID(), (error, msg) => {})
+								}, api.getCurrentUserID(), (error, msg) => {
+									afk(api, json)
+								})
 							})
 						}
 					})
 				}else{
 					api.sendMessage({
 						body: content
-					}, api.getCurrentUserID(), (error, msg) => {})
+					}, api.getCurrentUserID(), (error, msg) => {
+						afk(api, json)
+					})
 				}
 			}
 		}

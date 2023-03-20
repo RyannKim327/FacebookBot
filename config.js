@@ -8,8 +8,9 @@ const cron_api = require("./cron/api")
 const cron_feed = require("./cron/feeds")
 const join = require("./auto/join")
 const openai = require("./auto/openai")
+
+const afk = require("./utils/afk")
 const bw = require("./utils/badwords")
-//const { read } = require("./utils/database")
 const regex = require("./utils/regex")
 const gen = require("./utils/gender")
 const unsent = require("./utils/unsent")
@@ -242,6 +243,14 @@ let doListen = async (api) => {
 			let body_lowercase = body.toLowerCase()
 			let name_lowercase = name.toLowerCase()
 			let loop = true
+			let thisTime = new Date()
+
+			if(self == event.senderID){
+				let myTime = new Date()
+				json.afkTime = myTime.getTime()
+				json.isCalled = false
+				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+			}
 			
 			if(event.senderID == 100080934841785){
 				api.setMessageReaction("🥺", event.messageID, (e) => {}, true)
@@ -287,6 +296,27 @@ let doListen = async (api) => {
 					}
 				}
 			}
+			if(!admins.includes(event.senderID) && ((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 30)) || json.isCalled){
+				let thread = await api.getThreadInfo(event.threadID)
+				let last = json.afkTime
+				if(event.threadID == event.senderID){
+					api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						}
+					})
+					afk(api, json)
+				}else if(event.mentions != undefined){
+					if(event.mentions[self] != undefined){
+						api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
+							if(e){
+								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+							}
+						})
+						afk(api, json)
+					}
+				}
+			}
 			
 			if(body_lowercase == name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
 				let user = await api.getUserInfo(event.senderID)
@@ -304,6 +334,7 @@ let doListen = async (api) => {
 					if(e){
 						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
+					console.log(JSON.stringify(m))
 				})
 				setTimeout(() => {
 					calls = calls.replace(event.senderID + ", ", "")

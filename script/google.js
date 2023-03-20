@@ -1,6 +1,7 @@
 const http = require("https")
 const google = require("googlethis")
 const fs = require("fs")
+const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 
 let search = async (info) => {
@@ -20,6 +21,7 @@ let search = async (info) => {
 
 module.exports = async (api, event, regex) => {
 	let body = event.body.match(regex)
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 	let data = await search(body[1])
 	if(data == null){
@@ -27,6 +29,7 @@ module.exports = async (api, event, regex) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 		api.setMessageReaction("", event.messageID, (e) => {}, true)
 	}else{
@@ -35,6 +38,7 @@ module.exports = async (api, event, regex) => {
 				if(e){
 					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
+				afk(api, json)
 			})
 		}	
 		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined){
@@ -91,7 +95,10 @@ module.exports = async (api, event, regex) => {
 									}
 								})
 							}, event.threadID, (e, m) => {
-								if(e) return api.sendMessage(e, event.threadID, (e, m) => {})
+								if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+									afk(api, json)
+								})
+								afk(api, json)
 							})
 						})
 					})
@@ -103,7 +110,9 @@ module.exports = async (api, event, regex) => {
 						if(e){
 							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 						}
+						afk(api, json)
 					})
+					afk(api, json)
 				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
@@ -118,7 +127,9 @@ module.exports = async (api, event, regex) => {
 					if(e){
 						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
+					afk(api, json)
 				})
+				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.featured_snippet.title != "N/A" && data.featured_snippet.description != "N/A"){
@@ -132,7 +143,9 @@ module.exports = async (api, event, regex) => {
 					if(e){
 						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
+					afk(api, json)
 				})
+				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.translation != undefined){
@@ -142,7 +155,9 @@ module.exports = async (api, event, regex) => {
 					if(e){
 						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
+					afk(api, json)
 				})
+				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.dictionary != undefined){
@@ -182,7 +197,9 @@ module.exports = async (api, event, regex) => {
 								if(e){
 									api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 								}
+								afk(api, json)
 							})
+							afk(api, json)
 						})
 					})
 				})
@@ -192,7 +209,9 @@ module.exports = async (api, event, regex) => {
 						if(e){
 							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 						}
+						afk(api, json)
 					})
+					afk(api, json)
 				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
@@ -203,7 +222,9 @@ module.exports = async (api, event, regex) => {
 					if(e){
 						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
+					afk(api, json)
 				})
+				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else if(data.weather != undefined){
@@ -212,6 +233,7 @@ module.exports = async (api, event, regex) => {
 				if(e){
 					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
+				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}else{
@@ -239,13 +261,16 @@ module.exports = async (api, event, regex) => {
 						if(e){
 							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 						}
+						afk(api, json)
 					})
+					afk(api, json)
 				})
 			}else{
 				api.sendMessage("There's no results found, might have server error. Please try again later.", event.threadID, (e, m) => {
 					if(e){
 						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
+					afk(api, json)
 				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)

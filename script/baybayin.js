@@ -1,4 +1,6 @@
 const axios = require("axios")
+const fs = require("fs")
+const afk = require("./../utils/afk")
 const gender = require("./../utils/gender")
 const react = require("./../utils/react")
 
@@ -20,6 +22,7 @@ module.exports = async (api, event, regex) => {
 	let name = user[userID].name
 	let fname = user[userID].firstName
 	let g = gender(fname)['eng']
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	api.sendMessage({
 		body: `The text "${_regex[1]}" in baybayin ${g} ${name} is "${data.baybay}".`,
 		mentions: [{
@@ -30,5 +33,6 @@ module.exports = async (api, event, regex) => {
 		if(e){
 			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
+		afk(api, json)
 	})
 }

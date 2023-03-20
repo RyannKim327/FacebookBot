@@ -1,6 +1,7 @@
 const axios = require("axios")
 const fs = require("fs")
 const request = require("request")
+const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 
 let search = async (_data) => {
@@ -13,6 +14,7 @@ module.exports = async (api, event, regex) => {
 	let s = await search(data)
 	let img = s.images[Math.floor(Math.random() * s.images.length)]
 	let file = fs.createWriteStream(`temp/${event.senderID}.jpg`)
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	console.log(img)
 	let r = request.get(img.src)
 	r.pipe(file)
@@ -28,6 +30,7 @@ module.exports = async (api, event, regex) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 	})
 }

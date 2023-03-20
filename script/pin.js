@@ -1,15 +1,18 @@
 const fs = require("fs")
 const http = require("https")
+const afk = require("./../utils/afk")
 const g = require("./../utils/gender")
 const react = require("./../utils/react")
 
 module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/pin.json", "utf8"))
+	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(json[event.threadID] == undefined){
 		api.sendMessage("There is no pinned message for this thread.", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json2)
 		})
 	}else{
 		let p = json[event.threadID]
@@ -27,6 +30,7 @@ module.exports = async (api, event, regex) => {
 				if(e){
 					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
+				afk(api, json2)
 			})
 		}else{
 			let at = p.attachments
@@ -50,11 +54,11 @@ module.exports = async (api, event, regex) => {
 							if(e){
 								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 							}
+							afk(api, json2)
 						})
 					})
 				})
 			}
-			
 		}
 	}
 }

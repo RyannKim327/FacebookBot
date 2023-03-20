@@ -1,8 +1,11 @@
+const fs = require("fs")
+const afk = require("./../utils/afk")
 const { commands, getPrefix } = require("./../config")
 const react = require("./../utils/react")
 
 module.exports = (api, event) => {
 	let message = ""
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	message += "Game Commands:\n"
 	i = 1
 	for(let r = 0; r < commands.length; r++) {
@@ -26,5 +29,6 @@ module.exports = (api, event) => {
 		if(e){
 			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
+		afk(api, json)
 	})
 }

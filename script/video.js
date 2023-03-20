@@ -1,16 +1,19 @@
 const yt = require("youtubei.js")
 const fs = require("fs")
-const react = require("./../utils/react")
 
+const afk = require("./../utils/afk")
+const react = require("./../utils/react")
 const gender = require("./../utils/gender")
 
 module.exports = async (api, event, regex) => {
 	let name = `${__dirname}/../temp/${event.threadID}.mp4`
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(fs.existsSync(name)){
 		api.sendMessage("Lemme finish the earlier request please.", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 	}else{
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
@@ -19,11 +22,15 @@ module.exports = async (api, event, regex) => {
 		let result = await youtube.search(body)
 		if(result.videos.length > 0){
 			if(result.videos[0].id == undefined){
-				api,sendMessage("Something went wrong.", event.threadID, (e, m) => {})
+				api,sendMessage("Something went wrong.", event.threadID, (e, m) => {
+					afk(api, json)
+				})
 			}else{
 				const info = await youtube.getDetails(result.videos[0].id)
 				if(info.title == undefined){
-					api.sendMessage("An Error Occured", event.threadID, (e, m) => {})
+					api.sendMessage("An Error Occured", event.threadID, (e, m) => {
+						afk(api, json)
+					})
 				}
 				let file = fs.createWriteStream(`temp/${event.threadID}.mp4`)
 				let message = ""
@@ -69,7 +76,9 @@ module.exports = async (api, event, regex) => {
 							if(e){
 								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 							}
+							afk(api, json)
 						})
+						afk(api, json)
 					})
 				})
 			}
@@ -78,6 +87,7 @@ module.exports = async (api, event, regex) => {
 				if(e){
 					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
+				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}

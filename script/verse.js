@@ -1,4 +1,6 @@
 const axios = require("axios")
+const fs = require("fs")
+const afk = require("./../utils/afk")
 const g = require("./../utils/gender")
 const react = require("./../utils/react")
 
@@ -24,12 +26,14 @@ let verse = async(data) => {
 
 module.exports = async (api, event, regex) => {
 	let body = event.body.match(regex)[1]
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let v = await verse(body)
 	if(v == null){
 		api.sendMessage("Please check your console", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 	}else{
 		let user = await api.getUserInfo(event.senderID)
@@ -69,6 +73,7 @@ module.exports = async (api, event, regex) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 	}
 }

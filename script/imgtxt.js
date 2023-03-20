@@ -1,15 +1,22 @@
 const fs = require("fs")
 const sc = require("pls-img-txt")
 const request = require("request")
+const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 
 module.exports = async (api, event) => {
 	sc.addLanguage(sc.FILIPINO)
 	sc.addLanguage(sc.TAGALOG)
 	let a = event.messageReply.attachments
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(a.length > 0){
 		if(a[0].type != "photo")
-			return api.sendMessage("I can't find any image here.", event.messageReply.threadID)
+			return api.sendMessage("I can't find any image here.", event.messageReply.threadID, (err, m) => {
+				if(e){
+					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				}
+				afk(api, json)
+			})
 		let msg = event.messageID.replace(/\./gi, "")
 		let file = fs.createWriteStream(`temp/${msg}.jpg`)
 		let r = request(a[0].url)
@@ -25,6 +32,7 @@ module.exports = async (api, event) => {
 				if(fs.existsSync(`${__dirname}/../temp/${msg}.jpg`)){
 					fs.unlink(`${__dirname}/../temp/${msg}.jpg`, (e) => {})
 				}
+				afk(api, json)
 			}, event.messageReply.messageID)
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		})
@@ -33,6 +41,7 @@ module.exports = async (api, event) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 	}
 }

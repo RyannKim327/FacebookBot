@@ -3,8 +3,11 @@ const fs = require("fs")
 const http = require("https")
 const react = require("./../utils/react")
 
+const afk = require("./../utils/afk")
+
 module.exports = async (api, event, regex) => {
 	let data = event.body.match(regex)[1]
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let b = await a.audio(data, a.audio_ver.KJV_DRAMATIZED)
 	let c = await a.verse(data, a.version.ENG_KJV_21)
 	let d = ""
@@ -31,6 +34,7 @@ module.exports = async (api, event, regex) => {
 					if(e){
 						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 					}
+					afk(api, json)
 				})
 			})
 		})
@@ -39,6 +43,7 @@ module.exports = async (api, event, regex) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 	}
 }

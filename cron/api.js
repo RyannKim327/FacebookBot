@@ -2,6 +2,7 @@ const axios = require("axios")
 const fs = require("fs")
 const http = require("https")
 const cron = require("node-cron")
+const afk = require("./../utils/afk")
 const g = require("./../utils/gender")
 
 let quote = async () => {
@@ -52,7 +53,9 @@ module.exports = async (api) => {
 											fs.unlink(`${__dirname}/../temp/${r.threadID}_quotes.jpg`, (e) => {})
 										}
 									})
-								}, r.threadID, (e, m) => {})
+								}, r.threadID, (e, m) => {
+									afk(api, json)
+								})
 							}else{
 								let user = await api.getUserInfo(r.threadID)
 								let gender = g(user[r.threadID]['firstName'])['eng']
@@ -67,7 +70,9 @@ module.exports = async (api) => {
 											fs.unlink(`${__dirname}/../temp/${r.threadID}_quotes.jpg`, (e) => {})
 										}
 									})
-								}, r.threadID, (e, m) => {})
+								}, r.threadID, (e, m) => {
+									afk(api, json)
+								})
 							}
 						})
 					})

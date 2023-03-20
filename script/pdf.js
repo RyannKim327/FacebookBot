@@ -2,6 +2,7 @@ const fs = require("fs")
 const http = require("https")
 const request = require("request")
 const pdf = require("pdfdrive-ebook-scraper")
+const afk = require("./../utils/afk")
 
 module.exports = async (api, event, regex) => {
 	let data = event.body.match(regex)[1]
@@ -9,6 +10,7 @@ module.exports = async (api, event, regex) => {
 	let dlBook = await pdf.getEbook(ebook[0].ebookUrl)
 	let file = fs.createWriteStream(`temp/${data}.pdf`)
 	let req = await request(dlBook.dlUrl)
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	req.pipe(file)
 	file.on("finish", async () => {
 		api.sendMessage({
@@ -20,6 +22,7 @@ module.exports = async (api, event, regex) => {
 			})
 		}, event.threadID, (error, msg) => {
 			if(error) console.error(`Error [PDF]: ${error}`)
+			afk(api, json)
 		})
 	})
 	/*http.get(dlBook.dlUrl, (r) => {

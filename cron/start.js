@@ -3,6 +3,8 @@ const cronjob = require("node-cron")
 const fs = require("fs")
 const gateway = require("biblegateway-scrape")
 const manila = require("manilatimes-scrape")
+
+const afk = require("./../utils/afk")
 const g = require("./../utils/gender")
 
 let date = require("./../utils/date")
@@ -62,7 +64,9 @@ module.exports = async (api) => {
 						let message = `Good day ${thread.threadName}!!!\nBible verse of the day:\n`
 						message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
 						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\n`
-						api.sendMessage(message, r.threadID, (e, m) => {})
+						api.sendMessage(message, r.threadID, (e, m) => {
+							afk(api, json)
+						})
 					}else{
 						let user = await api.getUserInfo(r.threadID)
 						let gender = g(user[r.threadID]['firstName'])['eng']
@@ -75,7 +79,9 @@ module.exports = async (api) => {
 								id: r.threadID,
 								tag: user[r.threadID]['name']
 							}]
-						}, r.threadID, (e, m) => {})
+						}, r.threadID, (e, m) => {
+							afk(api, json)
+						})
 					}
 					i += 1
 				}

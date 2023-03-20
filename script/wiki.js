@@ -1,6 +1,7 @@
 const axios = require("axios")
 const fs = require("fs")
 const http = require("https")
+const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 
 let wiki = async (q) => {
@@ -16,17 +17,20 @@ let wiki = async (q) => {
 module.exports = async (api, event, regex) => {
 	let body = event.body.match(regex)[1]
 	let data = await wiki(body)
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(data == undefined || data == null){
 		api.sendMessage("An error occured", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 	}else if(data.title == undefined || data.title == "N/A"){
 		api.sendMessage("Document was not found.", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 			}
+			afk(api, json)
 		})
 	}else{
 		let message = `Title ${data.title}\n~ ${data.description}\n    ${data.extract}\nSource: Wikipedia (${data.content_urls.mobile.page})`
@@ -35,6 +39,7 @@ module.exports = async (api, event, regex) => {
 				if(e){
 					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
+				afk(api, json)
 			})
 		}else{
 			let file = fs.createWriteStream("temp/" + body.replace(/\s/gi, "_") + ".jpg")
@@ -58,8 +63,10 @@ module.exports = async (api, event, regex) => {
 								if(e){
 									api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 								}
+								afk(api, json)
 							})
 						}
+						afk(api, json)
 					})
 				})
 			})

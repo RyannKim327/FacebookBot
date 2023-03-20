@@ -1,6 +1,7 @@
 const { Configuration, OpenAIApi } = require("openai")
 const fs = require("fs")
 const fetch = require("node-fetch")
+const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 
 let config = async (name, str) => {
@@ -203,6 +204,7 @@ let c2 = async (name, str) => {
 
 module.exports = async (api, event) => {
 	let body = event.body
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let username = await api.getUserInfo(api.getCurrentUserID())
 	if(body.split(" ").length > 1){
 		try{
@@ -215,6 +217,7 @@ module.exports = async (api, event) => {
 				if(e){
 					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
+				afk(api, json)
 			})
 		}catch(e){
 			console.log(e)
@@ -222,6 +225,7 @@ module.exports = async (api, event) => {
 				if(e){
 					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 				}
+				afk(api, json)
 			})
 		}
 	}

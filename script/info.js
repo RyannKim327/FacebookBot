@@ -1,3 +1,5 @@
+const fs = require("fs")
+const afk = require("./../utils/afk")
 const { commands, getPrefix, getName } = require("./../config")
 const react = require("./../utils/react")
 
@@ -50,6 +52,7 @@ module.exports = async (api, event) => {
 	]
 	let myID = await api.getCurrentUserID()
 	let user = await api.getUserInfo(myID)
+	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let myname = () => {
 		if(user[myID]['name'] == getName(myID)){
 			return user[myID]['name']
@@ -97,5 +100,6 @@ module.exports = async (api, event) => {
 		if(e){
 			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
 		}
+		afk(api, json)
 	})
 }
