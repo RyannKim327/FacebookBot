@@ -22,6 +22,7 @@ let msgLists = {}
 let invervals = {}
 let calls = ""
 let defName
+let afkCalls = {}
 let options = {
 	listenEvents: true,
 	selfListen: false
@@ -296,7 +297,7 @@ let doListen = async (api) => {
 					}
 				}
 			}
-			if(!admins.includes(event.senderID) && ((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 30)) || json.isCalled){
+			if(!admins.includes(event.senderID) && afkCalls[event.threadID] == undefined && ((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 10)) || json.isCalled){
 				let thread = await api.getThreadInfo(event.threadID)
 				let last = json.afkTime
 				if(event.threadID == event.senderID){
@@ -316,6 +317,10 @@ let doListen = async (api) => {
 						afk(api, json)
 					}
 				}
+				afkCalls[event.threadID] = "0"
+				setTimeout(() => {
+					afkCalls[event.threadID] = undefined
+				}, ((1000 * 60) * 60))
 			}
 			
 			if(body_lowercase == name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
@@ -354,7 +359,7 @@ let doListen = async (api) => {
 						}
 					}
 				})
-				if(loop && json.ai == false && ((json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined) || admins.includes(event.senderID))){
+				if(loop && json.ai == false && (admins.includes(event.senderID) || (json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined))){
 					let cooldown = true
 					openai(api, event)
 					if(/give\b|create\b|what is (^your name)\b/.test(event.body))
