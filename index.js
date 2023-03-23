@@ -203,6 +203,20 @@ config.add("baybayin", {
 	category: "knowledge"
 })
 
+config.add("fb", {
+	title: "Facebook Information Profiling",
+	description: "A command that gives you the basics information of the account owner, according to its facebook profile",
+	commands: [
+		"fb ([\\w\\W]+)"
+	],
+	hasArgs: true,
+	type: [
+		"message",
+		"message_reply"
+	],
+	category: "dump"
+})
+
 config.add("game", {
 	title: "Game lists",
 	description: "Still ongoing, soon to be initialized.",

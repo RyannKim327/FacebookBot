@@ -19,7 +19,7 @@ module.exports = async (api, event, regex) => {
 				body: "Ang Dating Bibliya 1905:\n\n- Sa sobrang haba kapatid, ay hindi kinaya ni messenger. Ipagpaumanhin."
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})

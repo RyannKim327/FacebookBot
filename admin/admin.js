@@ -25,7 +25,7 @@ module.exports = (api, event) => {
 	})
 	api.sendMessage(m, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 		})
 }

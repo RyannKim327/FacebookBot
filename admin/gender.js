@@ -24,7 +24,7 @@ module.exports = async (api, event, regex) => {
 	fs.writeFileSync("data/gender.json", JSON.stringify(json), "utf8")
 	api.sendMessage("New name registered.", event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+			api.setMessageReaction(react, event.messageID, (e) => {}, true)
 		}
 	})
 }

@@ -16,7 +16,7 @@ module.exports = (api, event, regex) => {
 			json[json.current_game[event.senderID]]['score'][event.senderID]  += 1
 			api.sendMessage("You've got it.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}else{
@@ -27,7 +27,7 @@ module.exports = (api, event, regex) => {
 				}else{
 					api.sendMessage(`Wrong answer, it must be ${json.answer[event.senderID]}.`, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+							api.setMessageReaction(react, event.messageID, (e) => {}, true)
 						}
 					})
 					if(json[json.current_game[event.senderID]]['score'][event.senderID]  > 0){
@@ -41,7 +41,7 @@ module.exports = (api, event, regex) => {
 				}
 				api.sendMessage(ans, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 				})
 				if(json[json.current_game[event.senderID]]['score'][event.senderID] > 0){
@@ -51,7 +51,7 @@ module.exports = (api, event, regex) => {
 		}
 		api.sendMessage(`Your current score: ${json[json.current_game[event.senderID]]['score'][event.senderID]}`, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 		}, event.messageID)
 		json.answer[event.senderID] = undefined

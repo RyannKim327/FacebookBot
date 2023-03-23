@@ -26,7 +26,7 @@ module.exports = async (api, event) => {
 			json.subscribe = subs(event.threadID, data)
 			api.sendMessage(`The thread ${thread.threadName} is now subscribed to the cron features.`, event.threadID, (error, msg) => {
 				if(error){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}else if(event.threadID == event.senderID){
@@ -34,7 +34,7 @@ module.exports = async (api, event) => {
 			let user = await api.getUserInfo(event.threadID)
 			api.sendMessage(`You are now subscribed to the cron features ${user[event.threadID]['name']}. To unsubscribe, kindly message ${prefix}unsubscribe`, event.threadID, (error, msg) => {
 				if(error){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}
@@ -48,7 +48,7 @@ module.exports = async (api, event) => {
 			json.subscribe = unsubs(event.threadID, data)
 			api.sendMessage(`The thread ${thread.threadName} is now unsubscribed to the cron features.`, event.threadID, (error, msg) => {
 				if(error){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}else if(event.threadID == event.senderID){
@@ -56,7 +56,7 @@ module.exports = async (api, event) => {
 			let user = await api.getUserInfo(event.threadID)
 			api.sendMessage(`You are now unsubscribed to the cron feature.  ${user[event.threadID]['name']}`, event.threadID, (error, msg) => {
 				if(error){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}

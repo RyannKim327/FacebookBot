@@ -10,7 +10,7 @@ module.exports = async (api, event, regex) => {
 	if(json[event.threadID] == undefined){
 		api.sendMessage("There is no pinned message for this thread.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json2)
 		})
@@ -28,7 +28,7 @@ module.exports = async (api, event, regex) => {
 				}]
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json2)
 			})
@@ -52,7 +52,7 @@ module.exports = async (api, event, regex) => {
 							}]
 						}, event.threadID, (e, m) => {
 							if(e){
-								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+								api.setMessageReaction(react, event.messageID, (e) => {}, true)
 							}
 							afk(api, json2)
 						})

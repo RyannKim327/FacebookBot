@@ -21,14 +21,14 @@ module.exports = async (api, event, regex) => {
 	if(data == undefined || data == null){
 		api.sendMessage("An error occured", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})
 	}else if(data.title == undefined || data.title == "N/A"){
 		api.sendMessage("Document was not found.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})
@@ -37,7 +37,7 @@ module.exports = async (api, event, regex) => {
 		if(data.originalimage == undefined){
 			api.sendMessage(message, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
@@ -61,7 +61,7 @@ module.exports = async (api, event, regex) => {
 							}
 							api.sendMessage(message, event.threadID, (e, m) => {
 								if(e){
-									api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+									api.setMessageReaction(react, event.messageID, (e) => {}, true)
 								}
 								afk(api, json)
 							})

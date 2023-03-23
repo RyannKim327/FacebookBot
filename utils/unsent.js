@@ -5,9 +5,6 @@ const afk = require("./afk")
 module.exports = async (api, event, msgLists) => {
 	const self = await api.getCurrentUserID()
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	//if(event.type == "message" || event.type == "message_unsend" && event.senderID == self){
-	//	console.log(event)
-	//}
 	let onMonitor = ["100018362431224", "5572548646186754", "4780024218775309", "5500055473411242", "5893956287308812", "5424954817625723", "3527050254067351", "4650249085041633"]
 	if(msgLists[event.threadID] != undefined){
 		if(msgLists[event.threadID][event.messageID] != undefined){
@@ -16,14 +13,15 @@ module.exports = async (api, event, msgLists) => {
 					console.log(lists)
 			}
 			if(event.type == "message_unsend" && onMonitor.includes(event.threadID)){
-				let { body, attachments, threadID, senderID } = lists
+				let { body, attachments, threadID, timestamp, senderID } = lists
 				let content = "Unsent message:\n"
 				let thread = await api.getThreadInfo(threadID)
 				let user = await api.getUserInfo(senderID)
 				if(thread.isGroup){
 					content += `From: ${thread.threadName}\nBy: ${user[senderID]['name']}\n\nContent:`
 				}else{
-					content += `From: A private convo\nBy: ${user[senderID]['name']}\n\nContent:`
+					let usrThread = await api.getUserInfo(event.threadID)
+					content += `From: A private convo of ${usrThread[event.threadID]['name']}\nBy: ${user[senderID]['name']}\n\nContent:`
 				}
 				content += (body == '') ? " " : "\n" + body
 				if(attachments.length > 0){

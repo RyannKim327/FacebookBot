@@ -3,6 +3,7 @@ const http = require("https")
 const request = require("request")
 const pdf = require("pdfdrive-ebook-scraper")
 const afk = require("./../utils/afk")
+const react = require("./../utils/react")
 
 module.exports = async (api, event, regex) => {
 	let data = event.body.match(regex)[1]
@@ -21,23 +22,16 @@ module.exports = async (api, event, regex) => {
 				}
 			})
 		}, event.threadID, (error, msg) => {
-			if(error) console.error(`Error [PDF]: ${error}`)
+			if(error){
+				console.error(`Error [PDF]: ${error}`)
+				api.sendMessage(`Error [PDF]: ${error.errorSummary}`, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					}
+					afk(api, json)
+				})
+			}
 			afk(api, json)
 		})
 	})
-	/*http.get(dlBook.dlUrl, (r) => {
-		r.pipe(file)
-		file.on("finish", async () => {
-			api.sendMessage({
-				body: `Here's your requests ${dlBook.ebookName}`,
-				attachment: fs.createReadStream(`${__dirname}/../temp/${data}.pdf`).on("end", async () => {
-					if(fs.existsSync(`${__dirname}/../temp/${data}.pdf`)){
-						fs.unlink(`${__dirname}/../temp/${data}.pdf`, (e) => {})
-					}
-				})
-			}, event.threadID, (error, msg) => {
-				if(error) console.error(`Error [PDF]: ${error}`)
-			})
-		})
-	})*/
 }

@@ -7,13 +7,13 @@ module.exports = async (api, event) => {
 	if(json.status){
 		api.sendMessage("Bot service for non vip users is now active.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 		})
 	}else{
 		api.sendMessage("Bot service for non vip users is now deactivated.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 		})
 	}

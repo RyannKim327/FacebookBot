@@ -13,7 +13,7 @@ module.exports = async (api, event) => {
 		if(a[0].type != "photo")
 			return api.sendMessage("I can't find any image here.", event.messageReply.threadID, (err, m) => {
 				if(e){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
@@ -39,7 +39,7 @@ module.exports = async (api, event) => {
 	}else{
 		api.sendMessage("I can't find any image here.", event.messageReply.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})

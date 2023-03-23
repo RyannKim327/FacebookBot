@@ -5,8 +5,6 @@ const axios = require("axios")
 
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
-const cron_feed = require("./cron/feeds")
-const join = require("./auto/join")
 const openai = require("./auto/openai")
 
 const afk = require("./utils/afk")
@@ -19,7 +17,7 @@ const react = require("./utils/react")
 let autoBot = true
 let bot = []
 let msgLists = {}
-let invervals = {}
+let intervals = {}
 let calls = ""
 let defName
 let afkCalls = {}
@@ -131,7 +129,7 @@ let cd = (api, event, _cats, json) => {
 			setTimeout(() => {
 				cooldowns[_cats] = cooldowns[_cats].replace(`${event.senderID}, `, "")
 				if(_cats.toLowerCase() != "dump"){
-					api.sendMessage(`Cooldown done [${_cats.toLowerCase()}]`, event.threadID, event.messageID)
+					api.sendMessage(`Cooldown done『 ${_cats.toLowerCase()} 』`, event.threadID, event.messageID)
 				}
 				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 			}, (1000 * 60) * time[_cats])
@@ -141,7 +139,6 @@ let cd = (api, event, _cats, json) => {
 
 let system = (api, event, r, q, _prefix) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	let cooldown = true
 	let admin = false
 	let args = false
 	let game = false
@@ -168,6 +165,8 @@ let system = (api, event, r, q, _prefix) => {
 		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || notAffect || admins.includes(event.senderID))){
 			let script
 			api.sendTypingIndicator(event.threadID, (e) => {
+				if(e) console.error(`Error [Typing Indicator]: ${e}`)
+
 				if(admin){
 					script = require("./admin/" + r.script)
 					if(admins.includes(event.senderID)){
@@ -221,7 +220,6 @@ let doListen = async (api) => {
 				await api.markAsReadAll()
 			}
 		}
-		//join(api, event)
 		if(msgLists[event.threadID] == undefined){
 			msgLists[event.threadID] = {"":""}
 		}
@@ -271,16 +269,15 @@ let doListen = async (api) => {
 			if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
 				api.sendMessage(getPrefix() + "bot off", event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 				}, event.messageID)
 			}
 			if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
-				let thread = await api.getThreadInfo(event.threadID)
 				if(event.threadID == event.senderID){
 					api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+							api.setMessageReaction(react, event.messageID, (e) => {}, true)
 						}
 					})
 					json.busylist.push(event.threadID)
@@ -289,7 +286,7 @@ let doListen = async (api) => {
 					if(event.mentions[self] != undefined){
 						api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
 							if(e){
-								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+								api.setMessageReaction(react, event.messageID, (e) => {}, true)
 							}
 						})
 						json.busylist.push(event.threadID)
@@ -298,23 +295,25 @@ let doListen = async (api) => {
 				}
 			}
 			if(!admins.includes(event.senderID) && afkCalls[event.threadID] == undefined && ((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 10)) || json.isCalled){
-				let thread = await api.getThreadInfo(event.threadID)
-				let last = json.afkTime
+				let msg = "The account owner is currently away from keyboard, please wait for a moment."
+				if((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 60)){
+					msg = "The account owner is still out of reach, kindly wait for a moment, or until he saw your message. Thank you\n\~Auto response."
+				}
 				if(event.threadID == event.senderID){
-					api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
+					api.sendMessage(msg, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+							api.setMessageReaction(react, event.messageID, (e) => {}, true)
 						}
+						afk(api, json)
 					})
-					afk(api, json)
 				}else if(event.mentions != undefined){
 					if(event.mentions[self] != undefined){
-						api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
+						api.sendMessage(msg, event.threadID, (e, m) => {
 							if(e){
-								api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+								api.setMessageReaction(react, event.messageID, (e) => {}, true)
 							}
+							afk(api, json)
 						})
-						afk(api, json)
 					}
 				}
 				afkCalls[event.threadID] = "0"
@@ -337,9 +336,9 @@ let doListen = async (api) => {
 					}]
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
-					console.log(JSON.stringify(m))
+					afk(api, json)
 				})
 				setTimeout(() => {
 					calls = calls.replace(event.senderID + ", ", "")
@@ -360,7 +359,6 @@ let doListen = async (api) => {
 					}
 				})
 				if(loop && json.ai == false && (admins.includes(event.senderID) || (json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined))){
-					let cooldown = true
 					openai(api, event)
 					if(/give\b|create\b|what is (^your name)\b/.test(event.body))
 						cd(api, event, "ai", json)
@@ -389,18 +387,18 @@ let start = (state) => {
 		if(error) return console.error(`Error [API]: ${error.error}`)
 		
 		const self = await api.getCurrentUserID()
+		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		bot.push(self)
-		/*let db_read = await read()
-		if(db_read != null)
-			fs.writeFileSync("data/preferences.json", JSON.stringify(db_read), "utf8")
-		*/
+
 		let getData = Math.floor(Math.random() * 100)
 		if(options.selfListen)
 			admins.push(self)
 		if(autoBot && (getData % 5) == 0){
 			admins.forEach(id => {
 				if(bot.includes(id) && bot == self)
-					api.sendMessage(`Bot service is now activated.`, id, (e, m) => {})
+					api.sendMessage(`Bot service is now activated.`, id, (e, m) => {
+						afk(api, json)
+					})
 			})
 		}
 
@@ -408,18 +406,12 @@ let start = (state) => {
 			axios.get("https://mywebsite.mpoprevii.repl.co")
 		}, ((1000 * 60) * 60))
 
-		//let vm = await manila.todayNews()
-		//console.log(vm)
-
 		if(refreshed){
 			await cron(api)
 			await cron_api(api)
 			refreshed = false
 		}
 		resetOneTime()
-		//await cron_feed(api, admins)
-		
-		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		
 		json.cooldown = {}
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")

@@ -9,10 +9,10 @@ const app = express()
 const enc = parser.urlencoded({extended: false})
 
 module.exports = () => {
-	const PORT = 5000 | 3000 | process.env.PORT | 7000
+	const PORT = process.env.PORT || 5000 || 3000 || 7000
 	app.use(express.static("public"))
 	app.get("/", (req, res) => {
-		res.sendFile(__dirname + "/index.html")
+		res.send("There is always a reason, why we develop this things, it is not just for fun, or for educational purposes, but it is for us to develop a thing that may help us to escape in this kind of life problem, which people or a normal people won't understand")
 	})
 	app.post("/feed", enc, (req, res) => {
 		let json = JSON.parse(fs.readFileSync("data/feedback.json", "utf8"))

@@ -27,7 +27,7 @@ module.exports = async (api, event, regex) => {
 	if(data == null){
 		api.sendMessage("An error occured. Please try again later.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})
@@ -36,7 +36,7 @@ module.exports = async (api, event, regex) => {
 		if(data.did_you_mean != undefined){
 			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
@@ -108,7 +108,7 @@ module.exports = async (api, event, regex) => {
 				api.sendMessage(sendMsg, event.threadID, (e, m) => {
 					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+							api.setMessageReaction(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json)
 					})
@@ -125,7 +125,7 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage(message, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
@@ -141,7 +141,7 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage(message, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
@@ -153,7 +153,7 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
@@ -195,7 +195,7 @@ module.exports = async (api, event, regex) => {
 						}, event.threadID, (e, m) => {
 							if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 								if(e){
-									api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+									api.setMessageReaction(react, event.messageID, (e) => {}, true)
 								}
 								afk(api, json)
 							})
@@ -207,7 +207,7 @@ module.exports = async (api, event, regex) => {
 				api.sendMessage(message, event.threadID, (e, m) => {
 					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+							api.setMessageReaction(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json)
 					})
@@ -220,7 +220,7 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage(`Input: ${a.input}\nOutput: ${a.output}\n\nFormula ${a.formula}`, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
@@ -231,7 +231,7 @@ module.exports = async (api, event, regex) => {
 			let a = data.weather
 			api.sendMessage(`Location: ${a.location}\nForecast: ${a.forecast}\nPrecipitation: ${a.precipitation}\nHumidity: ${a.humidity}\nTemperature: ${a.temperature}\nWind speed: ${a.wind}`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
@@ -259,7 +259,7 @@ module.exports = async (api, event, regex) => {
 				api.sendMessage(message, event.threadID, (e, m) => {
 					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+							api.setMessageReaction(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json)
 					})
@@ -268,7 +268,7 @@ module.exports = async (api, event, regex) => {
 			}else{
 				api.sendMessage("There's no results found, might have server error. Please try again later.", event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})

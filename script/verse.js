@@ -31,7 +31,7 @@ module.exports = async (api, event, regex) => {
 	if(v == null){
 		api.sendMessage("Please check your console", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})
@@ -71,7 +71,7 @@ module.exports = async (api, event, regex) => {
 			}]
 		}, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react(), event.messageID, (e) => {}, true)
+				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})
