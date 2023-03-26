@@ -33,7 +33,8 @@ config.add("check", {
 	title: "Bot status Checker",
 	description: "A message reaction program, to check if the bot is still alive or not.",
 	commands: [
-		"check"
+		"check",
+		"silent"
 	],
 	admin: true
 })
@@ -402,6 +403,16 @@ config.add("wiki", {
 	commands: [
 		"wiki search ([\\w\\W]+)$",
 		"wiki ([\\w\\W]+)$"
+	],
+	hasArgs: true,
+	category: "knowledge"
+})
+
+config.add("word", {
+	title: "Wiki Dictionary",
+	definition: "A wiki based result word informations",
+	commands: [
+		"word ([\\w]+)$"
 	],
 	hasArgs: true,
 	category: "knowledge"

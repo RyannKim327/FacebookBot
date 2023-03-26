@@ -223,18 +223,10 @@ let doListen = async (api) => {
 		if(msgLists[event.threadID] == undefined){
 			msgLists[event.threadID] = {"":""}
 		}
-		if(event.body != null){
-			api.getThreadHistory(event.threadID, 100, undefined, (error, data) => {
-				if(error) return console.error(`Error [Unsent]: ${error}`)
-				for(let infos in data){
-					try{
-						let info = data[infos]
-						if(msgLists[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply")){
-							msgLists[event.threadID][event.messageID] = event
-						}
-					}catch(e){}
-				}
-			})
+		if(event.messageID != undefined){
+			if(msgLists[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply")){
+				msgLists[event.threadID][event.messageID] = event
+			}
 		}
 		unsent(api, event, msgLists)
 		if(event.body != null){
