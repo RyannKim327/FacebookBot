@@ -395,7 +395,7 @@ let start = (state) => {
 		let getData = Math.floor(Math.random() * 100)
 		if(options.selfListen)
 			admins.push(self)
-		if(autoBot && (getData % 5) == 0){
+		if(autoBot && (getData % 10) == 0){
 			admins.forEach(id => {
 				if(bot.includes(id) && bot == self)
 					api.sendMessage(`Bot service is now activated.`, id, (e, m) => {

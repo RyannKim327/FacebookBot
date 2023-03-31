@@ -1,6 +1,7 @@
 const fs = require("fs")
 const a = require("biblegateway-scrape")
 const afk = require("./../utils/afk")
+const g = require("./../utils/gender")
 const react = require("./../utils/react")
 
 module.exports = async (api, event, regex) => {
@@ -25,6 +26,7 @@ module.exports = async (api, event, regex) => {
 		"kjv": "KING JAMES VERSION",
 		"nlt": "NEW LIVING TRANSLATION"
 	}
+	let tag = ["1905", "1978", "2001", "snd"]
 	let version = a.version.TAG_ANG_DATING_BIBLIYA_1905
 	let verse = reg[1]
 	let ver = "1905"
@@ -33,11 +35,14 @@ module.exports = async (api, event, regex) => {
 		verse = reg[2]
 		ver = reg[1]
 	}
+	let lang = tag.includes(ver) ? "tag" : "eng"
 	let data = await a.verse(verse, version)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	let book = ""
+	let user = await api.getUserInfo(event.senderID)
+	let gender = g(user[event.senderID]['firstName'])[lang]
+	let book = (lang == "tag") ? `Ito ang talata sa bibliya na iyong hinihiling ${gender} ${user[event.senderID]['name']} mula sa ${lists_version[ver]}:` : `Here's the bible verse you've requested ${gender} ${user[event.senderID]['name']} from ${lists_version[ver]}:`
 	for(let i in data){
-		book += `${data[i].book}\n${data[i].verse}`
+		book += `\n${data[i].book}\n${data[i].verse}`
 	}
 	if(book == ""){
 		api.sendMessage("Kindly check the spelling of your request verse.", event.threadID, (e, m) => {
@@ -48,7 +53,11 @@ module.exports = async (api, event, regex) => {
 		})
 	}else{
 		api.sendMessage({
-			body:  `${lists_version[ver]}:\n\n${book} `
+			body:  `${book}`,
+			mentions: [{
+				id: event.senderID,
+				tag: user[event.senderID]['name']
+			}]
 		}, event.threadID, (e) => {
 			if(e){
 				api.sendMessage({

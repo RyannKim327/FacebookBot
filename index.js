@@ -351,7 +351,7 @@ config.add("subs", {
 	category: "oneTime"
 })
 
-config.add("tlverse", {
+config.add("biblegateway", {
 	title: "Bible verse ",
 	description: "Bible verses powered by biblegateway",
 	commands: [
