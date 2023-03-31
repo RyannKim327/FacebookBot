@@ -352,27 +352,11 @@ config.add("subs", {
 })
 
 config.add("tlverse", {
-	title: "Tagalog verse Test",
-	description: "Tagalog bible verses",
+	title: "Bible verse ",
+	description: "Bible verses powered by biblegateway",
 	commands: [
-		"tlverse ([\\w\\W]+)"
-	],
-	hasArgs: true,
-	hasCooldown: false,
-	category: "theology"
-})
-
-config.add("verse", {
-	title: "Bible verse",
-	description: "May share an specific bible verse requested by a user, or send a random verse given by the server.",
-	queries: [
-		"may I have a random bible verse please",
-		"what is ([\\w\\W]+) in the bible",
-		"may I have ([\\w\\W]+) in the bible please"
-	],
-	commands: [
-		"verse$",
-		"verse ([\\w\\W]+)$"
+		"verse (1905|1978|2001|snd|niv|esv|kjv|nlt) ([\\w\\s:;-]+)",
+		"verse ([\\w\\s:;-]+)"
 	],
 	hasArgs: true,
 	hasCooldown: false,

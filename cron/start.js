@@ -34,7 +34,6 @@ let quote = async () => {
 }
 
 module.exports = async (api) => {
-	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let self = await api.getCurrentUserID()
 	cronjob.schedule("0 0 * * *", () => {
 		json.busylist = []
@@ -44,6 +43,7 @@ module.exports = async (api) => {
 		timezone: "Asia/Manila"
 	})
 	cronjob.schedule("30 7 * * *", async () => {
+		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		let q_data = await quote()
 		let time = await today()
 		let date = new Date()

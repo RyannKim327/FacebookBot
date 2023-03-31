@@ -4,7 +4,7 @@ const fetch = require("node-fetch")
 const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 
-let config = async (name, str) => {
+let config = async (name, str, sender) => {
 	let configurations = new Configuration({
 		"apiKey": process.env['openai']
 	})
@@ -53,7 +53,7 @@ let config = async (name, str) => {
 	return data
 }
 
-let c2 = async (name, str) => {
+let c2 = async (name, str, sender) => {
 	let data = ""
 	let json_data = JSON.parse(fs.readFileSync("data/preferences.json"))
 	let aboutSelf = {
@@ -134,7 +134,7 @@ let c2 = async (name, str) => {
 	}
 	let mentors = {
 		mentors: [{
-			name: "Eljohn Mago",
+			name: "Eljohn Gonzales Mago",
 			about: "Mamaw po sa development ito"
 		},{
 			name: "John Paul Caigas",
@@ -170,16 +170,29 @@ let c2 = async (name, str) => {
 		user: "Kim",
 		messages: [{
 			role: "system",
-			content: JSON.stringify(aboutSelf) //"you're an artificial inteligence program from openai, which implemented as a virtual facebook ai assistant. Your name is Ryann Kim Sesgundo, but they may call you Kim and developed under the name and developed by MPOP Reverse II. Your prefix is / and the AI prefix is Kim"
+			content: JSON.stringify({
+				personalInfo: aboutSelf
+			}) //"you're an artificial inteligence program from openai, which implemented as a virtual facebook ai assistant. Your name is Ryann Kim Sesgundo, but they may call you Kim and developed under the name and developed by MPOP Reverse II. Your prefix is / and the AI prefix is Kim"
 		},{
 			role: "system",
-			content: JSON.stringify(dev)
+			content: JSON.stringify({
+				developerInfo: dev
+			})
 		},{
 			role: "system",
-			content: JSON.stringify(mentors)
+			content: JSON.stringify({
+				mentors: mentors
+			})
 		},{
 			role: "system",
-			content: JSON.stringify(what)
+			content: JSON.stringify({
+				about: what
+			})
+		},{
+			role: "system",
+			content: JSON.stringify({
+				i_am: sender
+			})
 		},{
 			role: "user",
 			content: str
@@ -206,9 +219,12 @@ module.exports = async (api, event) => {
 	let body = event.body
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let username = await api.getUserInfo(api.getCurrentUserID())
+	let sendee = await api.getUserInfo(event.senderID)
+	let sender = sendee[event.senderID].name
+	api.setMessageReaction("🤔", event.messageID, (e) => {}, true)
 	if(body.split(" ").length > 1){
 		try{
-			let ai = await c2(username[api.getCurrentUserID()].fullName, body)
+			let ai = await c2(username[api.getCurrentUserID()].name, body, sender)
 			let msg = ai.choices[0].message.content.split("\n")
 			while(msg[0] == ""){
 				msg.shift()
@@ -216,6 +232,8 @@ module.exports = async (api, event) => {
 			api.sendMessage("⠀" + msg.join("\n"), event.threadID, (e, m) => {
 				if(e){
 					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				}else{
+					api.setMessageReaction("", event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
@@ -224,6 +242,8 @@ module.exports = async (api, event) => {
 			api.sendMessage("Something went wrong", event.threadID, (e, m) => {
 				if(e){
 					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				}else{
+					api.setMessageReaction("", event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})

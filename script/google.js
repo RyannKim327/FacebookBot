@@ -24,6 +24,7 @@ module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 	let data = await search(body[1])
+	console.log(data)
 	if(data == null){
 		api.sendMessage("An error occured. Please try again later.", event.threadID, (e, m) => {
 			if(e){

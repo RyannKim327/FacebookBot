@@ -259,15 +259,25 @@ let doListen = async (api) => {
 				intervals[event.senderID] -= 1
 			}
 			if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
-				api.sendMessage(getPrefix() + "bot off", event.threadID, (e, m) => {
+				let id = event.senderID
+				let user = await api.getUserInfo(id)
+				json.off.push(id)
+				api.sendMessage({
+					body: `Bot actions are now disabled for ${user[id]['name']}`,
+					mentions: [{
+						id,
+						tag: user[id]['name']
+					}]
+				}, event.threadID, (e, m) => {
 					if(e){
 						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
-				}, event.messageID)
+				})
+				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 			}
 			if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
 				if(event.threadID == event.senderID){
-					api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
+					api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
 						if(e){
 							api.setMessageReaction(react, event.messageID, (e) => {}, true)
 						}
@@ -276,7 +286,7 @@ let doListen = async (api) => {
 					fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 				}else if(event.mentions != undefined){
 					if(event.mentions[self] != undefined){
-						api.sendMessage("The account owner is currently away from keyboard, please wait for a moment.", event.threadID, (e, m) => {
+						api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
 							if(e){
 								api.setMessageReaction(react, event.messageID, (e) => {}, true)
 							}
@@ -286,9 +296,9 @@ let doListen = async (api) => {
 					}
 				}
 			}
-			if(!admins.includes(event.senderID) && afkCalls[event.threadID] == undefined && ((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 10)) || json.isCalled){
+			if(!admins.includes(event.senderID) && afkCalls[event.threadID] == undefined && ((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 60)) || json.isCalled){
 				let msg = "The account owner is currently away from keyboard, please wait for a moment."
-				if((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 60)){
+				if((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 60) * 5){
 					msg = "The account owner is still out of reach, kindly wait for a moment, or until he saw your message. Thank you\n\~Auto response."
 				}
 				if(event.threadID == event.senderID){
