@@ -2,7 +2,6 @@ const axios = require("axios")
 const cronjob = require("node-cron")
 const fs = require("fs")
 const gateway = require("biblegateway-scrape")
-const manila = require("manilatimes-scrape")
 
 const afk = require("./../utils/afk")
 const g = require("./../utils/gender")

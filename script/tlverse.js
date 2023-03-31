@@ -7,9 +7,9 @@ module.exports = async (api, event, regex) => {
 	let reg = event.body.match(regex)
 	let lists = {
 		"1905": a.version.TAG_ANG_DATING_BIBLIYA_1905,
-		"1978": a.version.TAG_ANG_BIBLIIA_1978,
-		"2001": a.version.TAG_ANG_BIBLIIA_2001,
-		"2001": a.version.TAG_ANG_SALITA_NG_DIYOS,
+		"1978": a.version.TAG_ANG_BIBLIA_1978,
+		"2001": a.version.TAG_ANG_BIBLIA_2001,
+		"snd": a.version.TAG_ANG_SALITA_NG_DIYOS,
 		"niv": a.version.ENG_NEW_INTERNATIONAL_VERSION,
 		"esv": a.version.ENG_ENLISH_STANDARD_VERSION,
 		"kjv": a.version.ENG_KING_JAMES_VERSION,
@@ -19,7 +19,7 @@ module.exports = async (api, event, regex) => {
 		"1905": "ANG DATING BIBLIYA 1905",
 		"1978": "ANG BIBLIA 1978",
 		"2001": "ANG BIBLIA 2001",
-		"2001": "ANG SALITA NG DIYOS",
+		"snd": "ANG SALITA NG DIYOS",
 		"niv": "NEW INTERNATIONAL VERSION",
 		"esv": "ENGLISH STANDARD VERSION",
 		"kjv": "KING JAMES VERSION",
