@@ -107,6 +107,12 @@ let c2 = async (name, str, sender) => {
 		},{
 			name: "Salvador",
 			about: "Mamaw to. mentor ng lahat di lang ako"
+		},{
+			name: "Mart Anthony Salazar",
+			about: "A student who helped me to understand more about NodeJS"
+		},{
+			name: "Jovanny De Leon",
+			about: "A student with professional skills in programming."
 		}],
 		descriptions: "Mentors are not the member of MPOP Reverse II, instead MPOP Reverse II is a screen name or developer name of Ryann Kim Sesgundo"
 	}
