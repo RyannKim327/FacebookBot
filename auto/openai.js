@@ -4,55 +4,6 @@ const fetch = require("node-fetch")
 const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 
-let config = async (name, str, sender) => {
-	let configurations = new Configuration({
-		"apiKey": process.env['openai']
-	})
-	let json_data = JSON.parse(fs.readFileSync("data/preferences.json"))
-	let openai = new OpenAIApi(configurations)
-	/*let { data } = await openai.createCompletion({
-		prompt: str,
-		model: "text-davinci-003",
-		temperature: 0.5,
-		max_tokens: 4000,
-		top_p: 0.3,
-		frequency_penalty: 0.5,
-		presence_penalty: 0.0,
-		user: "Kim"
-	})*/
-	let aboutSelf = {
-		first_name: "Ryann Kim",
-		middle_name: "Malabanan",
-		surname: "Sesgundo",
-		nickname: json_data.name,
-		description: "An Artificial Inteligence program from OpenAI, which implemented and developed as a Facebook Bot Virtual Assistant by MPOP Reverse II.",
-		powered_by: "OpenAI",
-		developed_by: "MPOP Reverse II",
-		programmingSkillLevel: "newbie",
-		prefix: json_data.prefix,
-		ai_prefix: json_data.name
-	}
-	let { data } = await openai.createChatCompletion({
-		model: "gpt-3.5-turbo",
-		temperature: 0.5,
-		max_tokens: 3000,
-		top_p: 0.3,
-		frequency_penalty: 0.5,
-		presence_penalty: 0.0,
-		user: "Kim",
-		messages: [{
-			role: "system",
-			content: JSON.stringify(aboutSelf) //"you're an artificial inteligence program from openai, which implemented as a virtual facebook ai assistant. Your name is Ryann Kim Sesgundo, but they may call you Kim and developed under the name and developed by MPOP Reverse II. Your prefix is / and the AI prefix is Kim"
-		},{
-			role: "user",
-			content: str
-		}]
-	}).catch(error => {
-		return error.message
-	})
-	return data
-}
-
 let c2 = async (name, str, sender) => {
 	let data = ""
 	let json_data = JSON.parse(fs.readFileSync("data/preferences.json"))
@@ -160,6 +111,12 @@ let c2 = async (name, str, sender) => {
 		}],
 		descriptions: "Mentors are not the member of MPOP Reverse II, instead MPOP Reverse II is a screen name or developer name of Ryann Kim Sesgundo"
 	}
+	let finalized = {
+		aboutSelf,
+		aboutDeveloper: dev,
+		myMentors: mentors,
+		aboutMPOP: what
+	}
 	let infos = {
 		model: "gpt-3.5-turbo",
 		temperature: 0.5,
@@ -170,24 +127,7 @@ let c2 = async (name, str, sender) => {
 		user: "Kim",
 		messages: [{
 			role: "system",
-			content: JSON.stringify({
-				personalInfo: aboutSelf
-			}) //"you're an artificial inteligence program from openai, which implemented as a virtual facebook ai assistant. Your name is Ryann Kim Sesgundo, but they may call you Kim and developed under the name and developed by MPOP Reverse II. Your prefix is / and the AI prefix is Kim"
-		},{
-			role: "system",
-			content: JSON.stringify({
-				developerInfo: dev
-			})
-		},{
-			role: "system",
-			content: JSON.stringify({
-				mentors: mentors
-			})
-		},{
-			role: "system",
-			content: JSON.stringify({
-				about: what
-			})
+			content: JSON.stringify(finalized)
 		},{
 			role: "system",
 			content: JSON.stringify({
