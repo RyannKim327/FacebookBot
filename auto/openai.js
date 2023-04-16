@@ -225,6 +225,7 @@ module.exports = async (api, event) => {
 	if(body.split(" ").length > 1){
 		try{
 			let ai = await c2(username[api.getCurrentUserID()].name, body, sender)
+			console.log(JSON.stringify(ai))
 			let msg = ai.choices[0].message.content.split("\n")
 			while(msg[0] == ""){
 				msg.shift()

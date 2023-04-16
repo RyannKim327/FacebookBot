@@ -1,6 +1,6 @@
 const fs = require("fs")
 const tug = require("ultimate-guitar")
-const afk = require("afk")
+const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 
 let s1 = async (title) => {

@@ -1,6 +1,5 @@
 const fs = require("fs")
 const request = require("request")
-const tool = require("fb-tools")
 
 module.exports = async (api, event, regex) => {
 	let message = ""
@@ -22,7 +21,6 @@ module.exports = async (api, event, regex) => {
 					default:
 						gender = "Custom"
 				}
-				let id = await tool.findUid(d.profileUrl)
 				let file = fs.createWriteStream("dp.jpg")
 				message += "Name: " + d.name + "\n"
 				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
@@ -31,7 +29,7 @@ module.exports = async (api, event, regex) => {
 				message += "Facebook ID: " + event.messageReply.senderID + "\n"
 				message += "Gender: " + gender + "\n"
 				message += "Profile Link: " + d.profileUrl
-				let r = request(encodeURI(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
+				let r = request(encodeURI(`https://graph.facebook.com/${event.messageReply.senderID}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
 				r.pipe(file)
 				file.on("close", () => {
 					api.sendMessage({
@@ -64,7 +62,6 @@ module.exports = async (api, event, regex) => {
 						default:
 							gender = "Custom"
 					}
-					let id = await tool.findUid(d.profileUrl)
 					let file = fs.createWriteStream("dp.jpg")
 					message += "Name: " + d.name + "\n"
 					if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
@@ -73,7 +70,7 @@ module.exports = async (api, event, regex) => {
 					message += "Facebook ID: " + mention + "\n"
 					message += "Gender: " + gender + "\n"
 					message += "Profile Link: " + d.profileUrl
-					let r = request(encodeURI(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
+					let r = request(encodeURI(`https://graph.facebook.com/${mention}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
 					r.pipe(file)
 					file.on("close", () => {
 						api.sendMessage({
@@ -104,7 +101,6 @@ module.exports = async (api, event, regex) => {
 							default:
 								gender = "Custom"
 						}
-						let id = await tool.findUid(d.profileUrl)
 						let file = fs.createWriteStream("dp.jpg")
 						message += "Name: " + d.name + "\n"
 						if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
@@ -113,7 +109,7 @@ module.exports = async (api, event, regex) => {
 						message += "Facebook ID: " + info[1] + "\n"
 						message += "Gender: " + gender + "\n"
 						message += "Profile Link: " + d.profileUrl
-						let r = request(encodeURI(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
+						let r = request(encodeURI(`https://graph.facebook.com/${info[1]}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
 						r.pipe(file)
 						file.on("close", () => {
 							api.sendMessage({
@@ -131,8 +127,12 @@ module.exports = async (api, event, regex) => {
 						console.log(err)
 						api.sendMessage("Error occured, either not found, deleted or deactivated", event.threadID, event.messageID)
 					}else{
-						api.getUserInfo(obj[0].userID, async (err, data) => {
-							let d = data[obj[0].userID]
+						let iter = 0
+						while(obj[iter].type != "user"){
+							iter++
+						}
+						api.getUserInfo(obj[iter].userID, async (err, data) => {
+							let d = data[obj[iter].userID]
 							let gender = ""
 							switch(d.gender){
 								case 1:
@@ -144,16 +144,15 @@ module.exports = async (api, event, regex) => {
 								default:
 									gender = "Custom"
 							}
-							let id = await tool.findUid(d.profileUrl)
 							let file = fs.createWriteStream("dp.jpg")
 							message += "Name: " + d.name + "\n"
 							if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 								message += "Username: " + d.vanity + "\n"	
 							}
-							message += "Facebook ID: " + obj[0].userID + "\n"
+							message += "Facebook ID: " + obj[iter].userID + "\n"
 							message += "Gender: " + gender + "\n"
 							message += "Profile Link: " + d.profileUrl
-							let r = request(encodeURI(`https://graph.facebook.com/${id}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
+							let r = request(encodeURI(`https://graph.facebook.com/${obj[iter].userID}/picture?height=720&width=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`))
 							r.pipe(file)
 							file.on("close", () => {
 								api.sendMessage({
