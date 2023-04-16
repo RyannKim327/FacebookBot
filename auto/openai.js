@@ -1,4 +1,3 @@
-const { Configuration, OpenAIApi } = require("openai")
 const fs = require("fs")
 const fetch = require("node-fetch")
 const afk = require("./../utils/afk")
