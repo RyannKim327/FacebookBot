@@ -207,10 +207,7 @@ let doListen = async (api) => {
 	const self = await api.getCurrentUserID()
 	return api.listen(async (error, event) => {
 		if(error){
-			console.error(`Error [Listen Emitter]: ${error}`)
-			const o = execSync("npx nodemon index.js", {
-				encoding: "utf-8"
-			})
+			console.error(`Error [Listen Emitter]: ${JSON.stringify(error)}`)
 			console.log(`Restart: ${o}`)
 		}
 		
@@ -431,6 +428,7 @@ let start = (state) => {
 			}, 500)
 		})
 		api.setOptions(options)
+
 		let listener = doListen(api)
 		setInterval(() => {
 			console.log("Test")

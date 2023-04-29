@@ -1,6 +1,9 @@
 const config = require("./config")
 const server = require("./server")
 
+const dot = require("dotenv")
+dot.config({path: __dirname + "/.env"})
+
 config.add("admin", {
 	title: "Admin commands",
 	description: "Lists of all admin commandments.",

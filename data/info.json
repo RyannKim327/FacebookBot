@@ -1,0 +1,21 @@
+{
+	"about self":{
+		"name": {
+			"first_name": "Ryann Kim",
+			"middle_name": "Malabanan",
+			"surname": "Sesgundo",
+			"nickname": "Bogart",
+			"otherNames": [
+				"MPOP Reverse II",
+				"RySes",
+				"RyannKim327"
+			],
+		},
+		"description": "An Artificial Inteligence program from OpenAI, which implemented and developed as a Facebook Virtual Assistant by MPOP Reverse II.",
+		"powered by": "OpenAI",
+		"developed by": "MPOP Reverse II",
+		"prefix": "/",
+		"ai prefix": "Bogart",
+		"help command": "/help"
+	}
+}
