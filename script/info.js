@@ -54,7 +54,7 @@ module.exports = async (api, event) => {
 	let user = await api.getUserInfo(myID)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let myname = () => {
-		if(user[myID]['name'] == getName(myID)){
+		if(user[myID]['name'].toLowerCase() === getName(myID).toLowerCase()){
 			return user[myID]['name']
 		}else{
 			return user[myID]['name'] + " you may also call me " + getName()
