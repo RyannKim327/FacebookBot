@@ -13,6 +13,7 @@ const regex = require("./utils/regex")
 const gen = require("./utils/gender")
 const unsent = require("./utils/unsent")
 const react = require("./utils/react")
+const api = require("./cron/api")
 
 let autoBot = true
 let bot = []
@@ -25,6 +26,8 @@ let options = {
 	listenEvents: true,
 	selfListen: false
 }
+let trialCard = {}
+let lastMessage = ""
 
 let refreshed = true
 
@@ -238,18 +241,32 @@ let doListen = async (api) => {
 				json.afkTime = myTime.getTime()
 				json.isCalled = false
 				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+			}else{
+				lastMessage = event.senderID
 			}
-			
+
 			if(event.senderID == 100080934841785){
 				api.setMessageReaction("🥺", event.messageID, (e) => {}, true)
 			}
+
 			if(json.ai && event.type == "message_reply"){
 				if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
 					openai(api, event)
 					loop = false
 				}
 			}
+
+			if(lastMessage.includes(event.senderID) && event.senderID != self && trialCard[event.senderID] != undefined && event.type == "message" && !(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
+				openai(api, event)
+			}
 			
+			if(body.toLowerCase().includes("stop") && body.toLowerCase().includes(name.toLowerCase())){
+				trialCard[event.senderID] = undefined
+				return api.sendMessage("Auto AI messages are closed, to reactivate, kindly wait for an hour.", event.threadID, (e, m) => {
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				})
+			}
+
 			if(intervals[event.senderID] == undefined)
 				intervals[event.senderID] = 5
 			if(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase())){
@@ -320,13 +337,19 @@ let doListen = async (api) => {
 					afkCalls[event.threadID] = undefined
 				}, ((1000 * 60) * 60))
 			}
-			
+
 			if(body_lowercase == name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
 				let user = await api.getUserInfo(event.senderID)
 				let username = user[event.senderID]['name']
 				let firstName = user[event.senderID]['firstName']
 				let gender = gen(firstName)['eng']
 				calls += event.senderID + ", "
+				trialCard[event.senderID] = "0"
+				setTimeout(() => {
+					if(trialCard[event.senderID] != undefined){
+						trialCard[event.senderID] = undefined
+					}
+				}, ((60 * 1000) * 30))
 				api.sendMessage({
 					body: `Yes ${gender} ${username}? Would you like to ask something?`,
 					mentions: [{
