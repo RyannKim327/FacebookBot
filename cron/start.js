@@ -8,9 +8,6 @@ const g = require("./../utils/gender")
 
 let date = require("./../utils/date")
 
-const music = require("./music")
-const pasko = require("./christmas")
-
 let today = async () => {
 	let time = date("Asia/Manila")
 	let result = await axios.get(`https://today.zenquotes.io/api/${time.getMonth() + 1}/${time.getDay()}`).then(r => {
@@ -96,7 +93,7 @@ module.exports = async (api) => {
 			let i = 0
 			data.forEach(r => {
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
-					music(api, r.threadID)
+					// music(api, r.threadID)
 				}
 			})
 		})
