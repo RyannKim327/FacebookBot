@@ -1,5 +1,6 @@
-const yt = require("youtubei.js")
+const { download, search, getVideoInfo } = require("youtube-s-dl")
 const fs = require("fs")
+const http = require("https")
 
 const afk = require("./../utils/afk")
 const react = require("./../utils/react")
@@ -17,79 +18,64 @@ module.exports = async (api, event, regex) => {
 		})
 	}else{
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
-		const youtube = await new yt()
 		let body = event.body.match(regex)[1]
-		let result = await youtube.search(body)
-		if(result.videos.length > 0){
-			if(result.videos[0].id == undefined){
-				api,sendMessage("Something went wrong.", event.threadID, (e, m) => {
+		let result = await search(body)
+		let vid = result[0]
+		try{
+			let stream = await download(vid.videoId)
+			let file = fs.createWriteStream(`temp/${event.threadID}.mp4`)
+			let user = await api.getUserInfo(event.senderID)
+			let g = gender(user[event.senderID]['firstName'])['eng']
+			let reqBy = `${g} ${user[event.senderID]['name']}`
+			if(stream == null){
+				api.sendMessage(`There's an error on the server`, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					}
 					afk(api, json)
 				})
-			}else{
-				const info = await youtube.getDetails(result.videos[0].id)
-				if(info.title == undefined){
-					api.sendMessage("An Error Occured", event.threadID, (e, m) => {
-						afk(api, json)
-					})
+				if(fs.existsSync(name)){
+					fs.unlink(name, (e) => {})
 				}
-				let file = fs.createWriteStream(`temp/${event.threadID}.mp4`)
-				let message = ""
-				let f = youtube.download(result.videos[0].id, {
-					format: "mp4",
-					quality: "480p",
-					type: "videoandaudio",
-					bitrate: "2500",
-					audioQuality: "highest",
-					loudnessDB: "20",
-					audioBitrate: "550",
-					fps: "30"
-				})
-				f.pipe(file)
-				f.on("start", () => {
-					api.setMessageReaction("⌛", event.messageID, (e) => {}, true)
-				})
-				f.on("proccess", (info) => {
-					api.setMessageReaction("⏳", event.messageID, (err) => {}, true)
-				})
-				f.on("end", async () => {
-					let user = await api.getUserInfo(event.senderID)
-					let username = user[event.senderID]['name']
-					let firstName = user[event.senderID]['firstName']
-					let g = gender(firstName)['eng']
-					message += `Here's your request ${g} ${username}. A video entitled ${info.title}, uploaded by ${info.metadata.channel_name} on a platform called youtube.`
-					api.sendMessage({
-						body: message,
-						attachment: fs.createReadStream(name).on("end", async () => {
-							if(fs.existsSync(name)){
-								fs.unlink(name, (e) => {
-									if(e) return console.error(`Error [Youtube Music]: ${e}`)
-									api.setMessageReaction("", event.messageID, (e) => {}, true)
-								})
-							}
-						}),
-						mentions: [{
-							id: event.senderID,
-							tag: username
-						}]
-					}, event.threadID, (e, m) => {
-						if(e) return api.sendMessage(e, event.threadID, (e, m) => {
+			}else{
+				http.get(stream, r => {
+					r.pipe(file).on("finish", () => {
+						api.sendMessage({
+							body: `Here's your requests ${reqBy}\nTitle: ${vid.title}\nUploaded by: ${vid.uploaderName}`,
+							attachment: fs.createReadStream(name).on("end", () => {
+								if(fs.existsSync(name)){
+									fs.unlink(name, (e) => {})
+								}
+							}),
+							mentions: [{
+								id: event.senderID,
+								tag: reqBy
+							}]
+						}, event.threadID, (e, m) => {
 							if(e){
-								api.setMessageReaction(react, event.messageID, (e) => {}, true)
+								api.sendMessage(e, event.threadID, (e, m) => {
+									if(e){
+										api.setMessageReaction(react, event.messageID, (e) => {}, true)
+									}
+									afk(api, json)
+								})
 							}
 							afk(api, json)
 						})
-						afk(api, json)
 					})
 				})
 			}
-		}else{
-			api.sendMessage("There is no results found.", event.threadID, (e, m) => {
+		}catch(e){
+			console.error(e)
+			api.sendMessage("Something went wrong", event.threadID, (e, m) => {
 				if(e){
 					api.setMessageReaction(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			if(fs.existsSync(name)){
+				fs.unlink(name, (e) => {})
+			}
 		}
 	}
 }

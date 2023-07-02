@@ -297,18 +297,18 @@ config.add("music", {
 	hasArgs: true,
 	category: "multimedia"
 })
-/*
-config.add("news", {
-	title: "Manila Times News",
-	description: "A daily news update requests from manila times.",
-	commands: [
-		"news ([\\w\\W]+)",
-		"news"
-	],
-	hasArgs: true,
-	category: "news"
-})
-*/
+
+// config.add("news", {
+// 	title: "Manila Times News",
+// 	description: "A daily news update requests from manila times.",
+// 	commands: [
+// 		"news ([\\w\\W]+)",
+// 		"news"
+// 	],
+// 	hasArgs: true,
+// 	category: "news"
+// })
+
 config.add("pdf", {
 	title: "PDF Downloader",
 	description: "Powered by PDF Drive",
@@ -365,7 +365,7 @@ config.add("biblegateway", {
 
 config.add("video", {
 	title: "Youtube Video Command",
-	description: "This will send the top search result video from youtube platform.",
+	description: "This will send the top search result video from youtube platform. Sometimes, this feature has error, due to the limit of facebook messenger that can only sent upto 25mb.",
 	queries: [
 		"play the video ([\\w\\W]+) please",
 		"please play the video ([\\w\\W]+)"

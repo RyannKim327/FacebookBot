@@ -27,32 +27,44 @@ module.exports = async (api, event, regex) => {
 			let user = await api.getUserInfo(event.senderID)
 			let g = gender(user[event.senderID]['firstName'])['eng']
 			let reqBy = `${g} ${user[event.senderID]['name']}`
-			http.get(stream, r => {
-				r.pipe(file).on("finish", () => {
-					api.sendMessage({
-						body: `Here's your requests ${reqBy}\nTitle: ${vid.title}\nUploaded by: ${vid.uploaderName}`,
-						attachment: fs.createReadStream(name).on("end", () => {
-							if(fs.existsSync(name)){
-								fs.unlink(name, (e) => {})
-							}
-						}),
-						mentions: [{
-							id: event.senderID,
-							tag: reqBy
-						}]
-					}, event.threadID, (e, m) => {
-						if(e){
-							api.sendMessage(e, event.threadID, (e, m) => {
-								if(e){
-									api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			if(stream == null){
+				api.sendMessage(`There's an error on the seerver`, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					}
+					afk(api, json)
+				})
+				if(fs.existsSync(name)){
+					fs.unlink(name, (e) => {})
+				}
+			}else{
+				http.get(stream, r => {
+					r.pipe(file).on("finish", () => {
+						api.sendMessage({
+							body: `Here's your requests ${reqBy}\nTitle: ${vid.title}\nUploaded by: ${vid.uploaderName}`,
+							attachment: fs.createReadStream(name).on("end", () => {
+								if(fs.existsSync(name)){
+									fs.unlink(name, (e) => {})
 								}
-								afk(api, json)
-							})
-						}
-						afk(api, json)
+							}),
+							mentions: [{
+								id: event.senderID,
+								tag: reqBy
+							}]
+						}, event.threadID, (e, m) => {
+							if(e){
+								api.sendMessage(e, event.threadID, (e, m) => {
+									if(e){
+										api.setMessageReaction(react, event.messageID, (e) => {}, true)
+									}
+									afk(api, json)
+								})
+							}
+							afk(api, json)
+						})
 					})
 				})
-			})
+			}
 		}catch(e){
 			console.error(e)
 			api.sendMessage("Something went wrong", event.threadID, (e, m) => {
