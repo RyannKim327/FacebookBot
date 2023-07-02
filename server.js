@@ -1,6 +1,7 @@
 const express = require("express")
 const fs = require("fs")
 const parser = require("body-parser")
+const path = require("path")
 
 const { setName, setPrefix } = require("./config")
 
@@ -10,8 +11,9 @@ const enc = parser.urlencoded({extended: false})
 module.exports = () => {
 	const PORT = process.env.PORT || 3000 || 5000 || 7000
 	app.use(express.static("public"))
+	app.use("", express.static(path.join(`${__dirname}/`)))
 	app.get("/", (req, res) => {
-		res.send("There is always a reason, why we develop this things, it is not just for fun, or for educational purposes, but it is for us to develop a thing that may help us to escape in this kind of life problem, which people or a normal people won't understand")
+		res.send(`${__dirname}/index.html`)
 	})
 	app.post("/feed", enc, (req, res) => {
 		let json = JSON.parse(fs.readFileSync("data/feedback.json", "utf8"))

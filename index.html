@@ -1,149 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Welcome to MPOP Reverse II</title>
-		<style type="text/css">
+		<title>Welcome to my Website</title>
+		<style>
 			*{
 				margin: 0;
 				padding: 0;
-				border: 0;
-				box-sizing: 0;
-			}
-			:root{
-				--background: #131320;
-				--color: #ffffff;
-				--height: 550px;
-				--b: #4729b6;
-				--r: #eb5959;
+				box-sizing: border-box;
+				user-select: none;
+				outline: none;
 			}
 			body{
-				background-color: var(--background);
-				color: var(--color);
-				overflow-x: hidden;
+				background-color: #aaaaaa;
 			}
-			._0x0{
+			div.base{
 				display: flex;
-				flex: auto;
+				flex-direction: row;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-items: center;
+				padding: 2em;
+			}
+			div.base > img{
+				height: 75vh;
+			}
+			div.base > div{
+				display: flex;
 				flex-direction: column;
-				position: absolute;
-				left: 25%;
-				right: 25%;
-				top: 15%;
-				text-align: center;
-				box-shadow: 3px 3px 5px var(--b),
-				-3px -3px 5px var(--r);
-				border-radius: 10px;
-				padding: 10px;
-				z-index: 1;
-				background-color: rgba(13, 13, 20, 0.7);
-				animation: _0x1 0.75s linear infinite;
+				width: 50%;
 			}
-			._0x1{
-				border-radius: 50%;
-				box-shadow: 3px 3px 5px #000000,
-				-1px -1px 3px #dedede;
-				position: absolute;
-				top: -100px;
-				animation: _0x0 8s linear infinite;
+			div.base > div > div{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				padding: 1em;
 			}
-			#_0x0{
-				text-align: justify;
-				font-family: 'Courier New', Courier, monospace;
+			div.base > div > div > nav > ul{
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				list-style: none;
 			}
-			#_0x1{
-				display: none;
-				margin: 5px;
-				border-radius: 10px;
-				padding: 5px;
-				background-color: transparent;
-				border: 1px #000000 solid;
-				color: var(--color);
-				font-family: Georgia, 'Times New Roman', Times, serif;
+			div.base > div > div > nav > ul > li{
+				cursor: pointer;
 			}
-			@keyframes _0x0{
-				from{
-					opacity: 1;
-					top: -100px
-				}to{
-					opacity: 0;
-					top: var(--height);
+			div.base > div > div > nav > ul > li:hover{
+				border-bottom: 1px #131320 solid;
+			}
+			div.base > div > div > nav > ul > li:nth-child(even){
+				margin: 0 .5em;
+			}
+			div.base > div > blockquote{
+				background-color: #aaaaaa;
+				padding: 1em;
+				box-shadow: 3px 3px 10px #131320,
+				-5px -5px 10px #ffffff;
+				border-radius: .5em;
+			}
+			@media only screen and (max-width:1000px){
+				div.base > img{
+					height: 50vh;
+					align-self: center;
+					justify-self: center;
 				}
-			}
-			@keyframes _0x1 {
-				0%{
-					box-shadow: 3px 3px 1px var(--b),
-					-3px -3px 1px var(--r);
-				}25%{
-					box-shadow: -3px 3px 1px var(--b),
-					3px -3px 1px var(--r);
-				}50%{
-					box-shadow: -3px -3px 1px var(--b),
-					3px 3px 1px var(--r);
-				}75%{
-					box-shadow: 3px -3px 1px var(--b),
-					-3px 3px 1px var(--r);
-				}100%{
-					box-shadow: 3px 3px 1px var(--b),
-					-3px -3px 1px var(--r);
+				div.base > div{
+					display: flex;
+					flex-direction: column;
+					width: 100%;
 				}
 			}
 		</style>
 	</head>
 	<body>
-		<div class="_0x0">
-			<label id="_0x0">&emsp;</label>
-			<button id="_0x1">Proceed now</button>
+		<div class="base">
+			<img src="logo.png" alt="bot logo">
+			<div>
+				<div>
+					<h3 id="title">Who is RySes?</h3>
+					<nav>
+						<ul>
+							<li id="index">Index</li>
+							<li id="dev">Developer</li>
+						</ul>
+					</nav>
+				</div>
+				<blockquote id="bq">
+					&emsp;RySes is a Facebook bot wherein he might help you to release some stress, you may share your problems to him, as he is a GPT based chat bot. He also has the different functionalities such as bible verses powered by bible gateway.
+					If you want to message him kindly click <a href="https://m.me/mrryses01" target="_blank">this link</a>.
+				</blockquote>
+			</div>
 		</div>
 	</body>
-	<script type="text/javascript">
-		let _3x0 = () => {
-			for(let _2x0 = 0; _2x0 < 75; _2x0++){
-				let _0x0 = document.createElement("span")
-				const _0x1 = "0123456789abcdef"
-				let _0x2 = "#"
-				for(let _1x0 = 0; _1x0 < 6; _1x0++){
-					_0x2 += _0x1[Math.floor(Math.random() * _0x1.length)]
-				}
-				_0x0.classList.add("_0x1")
-				_0x0.style.backgroundColor = _0x2
-				_0x0.style.padding = ((Math.random() * 10) + 10)+ "px"
-				_0x0.style.left = ((Math.random() * window.innerWidth)) + "px"
-				_0x0.style.animationDelay = Math.random() * 25 + "s"
-				_0x0.style.animationDuration = ((Math.random() * 5) + 5) + "s"
-				if((Math.floor(Math.random() * 10) % 2) == 0){
-					_0x0.style.zIndex = 2
-				}else{
-					_0x0.style.zIndex = 0
-				}
-				document.body.appendChild(_0x0)
-			}
+	<script>
+		const $ = (id) => {
+			return document.querySelector(id)
 		}
-		let _0x0 = "\nGreetings!!! I am Ryann Kim Malabanan Sesgundo, a first year student of Dalubhasaan ng Lungsod ng Lucena. I'm just a simple programmer, with love and passion on my works. I'm doing my projects from scratch, until I created a full or total version with features of it. I'm currently work with NodeJS, and still trying to learn some ReactJS, develop applications with java and using HTML, CSS, and basic JavaScript for some web based programs. I was started year 2016 in learning programming, mostly HTML and Python, and learning xml and smali in 2017 to 2018, and Java, particularly android development in year 2019. I try to build my knowledge and enhance my skills from year 2020 to 2022, where I try to learn different programming languages such as, C++ and C#. I'm currently using NodeJS, as backend, a server side for some of my applications with some auto update features. I'm not yet totally good at other languages, since I only learned its fundamentals, also in Procedural Programming. I try to help too thru online teaching, where I can enhance my knowledge and practice my stock knowledges too."
-		let _0x1 = 0
-		let _3x1 = () => {
-			if(_0x1 < _0x0.length){
-				document.getElementById("_0x0").textContent += _0x0[_0x1]
-				_0x1++
-				if(_0x0[_0x1 - 1] == "."){
-					setTimeout(_3x1, 500)
-				}else if(_0x0[_0x1 - 1] == ","){
-					setTimeout(_3x1, 250)
-				}else{
-					setTimeout(_3x1, 75)
-				}
-			}else{
-				setTimeout(() => {
-					document.getElementById("_0x1").style.display = "inline"
-					document.getElementById("_0x1").addEventListener("click", () => {
-						location.href = "/home"
-					})
-				}, 6000)
-			}
+		const q = $("#bq")
+		const t = $("#title")
+		$("#index").onclick = () => {
+			t.textContent = "Who is RySes?"
+			q.innerHTML = "&emsp;RySes is a Facebook bot wherein he might help you to release some stress, you may share your problems to him, as he is a GPT based chat bot. He also has the different functionalities such as bible verses powered by bible gateway. If you want to message him kindly click <a href='https://m.me/mrryses01' target='_blank'>this link</a>."
 		}
-		_3x0()
-		_3x1()
+		$("#dev").onclick = () => {
+			t.textContent = "Who is the developer behind this?"
+			q.innerHTML = "&emsp;RySes was developed by Ryann Kim Sesgundo, a student of Dalubhasaan ng Lungsod ng Lucena, currently taking Bachelor of Science in Information Technology. As a student, a loving brother of the family, he was trying to be one of the most influencial student and be an inspiration to others, as how he was being inspired by his mentors."
+		}
+
 	</script>
 </html>
