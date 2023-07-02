@@ -24,22 +24,22 @@ module.exports = async (api) => {
 			let sent = 7
 			data.forEach(async (r) => {
 				if(r.threadID != self && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID) && sent > 0){
-					/*let n = Math.floor(Math.random() * quotes.length)
-					let q = quotes[n]
-					let thread = await api.getThreadInfo(r.threadID)
-					if(thread.isGroup){
-						api.sendMessage(`A random quotation for ${thread.threadName}.\n\n  ${q.q}\n~${q.a}`, r.threadID, (e, m) => {})
-					}else{
-						let user = await api.getUserInfo(r.threadID)
-						let gender = g(user[r.threadID]['firstName'])['eng']
-						api.sendMessage({
-							body: `A random quotation for you ${gender} ${user[r.threadID]['name']}.\n\n  ${q.q}\n~${q.a}`,
-							mentions: [{
-								id: r.threadID,
-								tag: user[r.threadID]['name']
-							}]
-						}, r.threadID, (e, m) => {})
-					}*/
+					// let n = Math.floor(Math.random() * quotes.length)
+					// let q = quotes[n]
+					// let thread = await api.getThreadInfo(r.threadID)
+					// if(thread.isGroup){
+					// 	api.sendMessage(`A random quotation for ${thread.threadName}.\n\n  ${q.q}\n~${q.a}`, r.threadID, (e, m) => {})
+					// }else{
+					// 	let user = await api.getUserInfo(r.threadID)
+					// 	let gender = g(user[r.threadID]['firstName'])['eng']
+					// 	api.sendMessage({
+					// 		body: `A random quotation for you ${gender} ${user[r.threadID]['name']}.\n\n  ${q.q}\n~${q.a}`,
+					// 		mentions: [{
+					// 			id: r.threadID,
+					// 			tag: user[r.threadID]['name']
+					// 		}]
+					// 	}, r.threadID, (e, m) => {})
+					// }
 					let file = fs.createWriteStream(`temp/${r.threadID}_quotes.jpg`)
 					let thread = await api.getThreadInfo(r.threadID)
 					http.get("https://zenquotes.io/api/image", async (rq) => {

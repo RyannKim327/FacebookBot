@@ -1,5 +1,4 @@
 const fs = require("fs")
-const http = require("https")
 const request = require("request")
 const pdf = require("pdfdrive-ebook-scraper")
 const afk = require("./../utils/afk")

@@ -20,7 +20,6 @@ module.exports = (api, event, regex) => {
 				}
 			})
 		}else{
-			let score = json[json.current_game[event.senderID]]['score'][event.senderID]
 			if(json.current_game[event.senderID] == "word"){
 				if(json.word.trials[event.senderID] > 1){
 					json.word.trials[event.senderID] -= 1

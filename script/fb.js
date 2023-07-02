@@ -79,7 +79,7 @@ module.exports = async (api, event, regex) => {
 								fs.unlink(__dirname + "/../dp.jpg", (err) => {})
 							})
 						}, event.threadID, event.messageID)
-					})//api.sendMessage(message, event.threadID, event.messageID)
+					})
 				}
 			})
 		}else{

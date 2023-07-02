@@ -1,4 +1,4 @@
-const { download, search, getVideoInfo } = require("youtube-s-dl")
+const { download, search } = require("youtube-s-dl")
 const fs = require("fs")
 
 const afk = require("./../utils/afk")
@@ -58,6 +58,9 @@ module.exports = async (api, event, regex) => {
 				}
 				afk(api, json)
 			})
+			if(fs.existsSync(name)){
+				fs.unlink(name, (e) => {})
+			}
 		}
 	}
 }

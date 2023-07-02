@@ -1,7 +1,6 @@
 const express = require("express")
 const fs = require("fs")
 const parser = require("body-parser")
-const execSync = require("child_process").execSync
 
 const { setName, setPrefix } = require("./config")
 

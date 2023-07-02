@@ -1,6 +1,4 @@
 const fs = require("fs")
-const http = require("https")
-// const anon = require("anonfile-lib")
 const { getPrefix } = require("./../config")
 const react = require("./../utils/react")
 
@@ -13,7 +11,6 @@ module.exports = async (api, event) => {
 		let msg = event.messageReply
 		if(json[event.threadID] == undefined)
 			json[event.threadID] = {}
-		let p = json[event.threadID]
 		json[event.threadID].senderID = msg.senderID
 		json[event.threadID].body = msg.body
 		if(msg.attachments != undefined){

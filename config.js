@@ -1,6 +1,5 @@
 const fs = require("fs")
 const cronjob = require("node-cron")
-const execSync = require("child_process").execSync
 const axios = require("axios")
 
 const cron = require("./cron/start")
@@ -28,17 +27,7 @@ let options = {
 }
 let trialCard = {}
 let lastMessage = ""
-
 let refreshed = true
-
-let setDefaultName = (data) => {
-	defName = data
-}
-
-let getMsgs = () => {
-	return msgLists
-}
-
 let cooldowns = {
 	oneTime: "",
 	multimedia: "",
@@ -77,6 +66,12 @@ let prefix
 let name = ""
 let admins = []
 
+let setDefaultName = (data) => {
+	defName = data
+}
+let getMsgs = () => {
+	return msgLists
+}
 let add = (script, data) => {
 	if(script != "" && data.title != ""){
 		commands.push({
@@ -85,7 +80,7 @@ let add = (script, data) => {
 		})
 	}
 }
-let setAdmins = (data) => {
+let addAdmins = (data) => {
 	admins.push(data)
 }
 let setName = (data) => {
@@ -258,12 +253,15 @@ let doListen = async (api) => {
 
 			if(lastMessage.includes(event.senderID) && event.senderID != self && trialCard[event.senderID] != undefined && event.type == "message" && !(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
 				openai(api, event)
+				afk(api, json)
 			}
 			
 			if(body.toLowerCase().includes("stop") && body.toLowerCase().includes(name.toLowerCase())){
 				trialCard[event.senderID] = undefined
 				return api.sendMessage("Auto AI messages are closed, to reactivate, kindly wait for an hour.", event.threadID, (e, m) => {
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					if(e){
+						ifapi.setMessageReaction(react, event.messageID, (e) => {}, true)
+					}
 				})
 			}
 
@@ -415,14 +413,14 @@ let start = (state) => {
 		let getData = Math.floor(Math.random() * 100)
 		if(options.selfListen)
 			admins.push(self)
-		/*if(autoBot && (getData % 10) == 0){
-			admins.forEach(id => {
-				if(bot.includes(id) && bot == self)
-					api.sendMessage(`Bot service is now activated.`, id, (e, m) => {
-						afk(api, json)
-					})
-			})
-		}*/
+		// if(autoBot && (getData % 10) == 0){
+		// 	admins.forEach(id => {
+		// 		if(bot.includes(id) && bot == self)
+		// 			api.sendMessage(`Bot service is now activated.`, id, (e, m) => {
+		// 				afk(api, json)
+		// 			})
+		// 	})
+		// }
 
 		setInterval(() => {
 			axios.get("https://facebookbot.mpoprevii.repl.co")
@@ -461,7 +459,7 @@ let start = (state) => {
 												  
 module.exports = {
 	add,
-	setAdmins,
+	addAdmins,
 	setDefaultName,
 	setName,
 	setOptions,

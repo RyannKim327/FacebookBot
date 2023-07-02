@@ -1,7 +1,7 @@
 {
     "name": "facebookbot",
     "description": "A facebook bot repository, created and published for free and also to inspire others.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "index.js",
     "dependencies": {
         "axios": "^0.27.2",

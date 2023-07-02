@@ -1,7 +1,6 @@
 const fs = require("fs")
 const config = require("./../config")
 const g = require("./../utils/gender")
-const youtube = require("youtubei.js")
 
 module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
@@ -34,20 +33,20 @@ module.exports = async (api, event) => {
 				}
 				api.sendMessage(message, event.threadID)
 			break
-			case "log:unsubscribe":/*
-				if(thread.isGroup){
-					let self = await api.getCurrentUserID()
-					let id = event.logMessageData.leftParticipantFbId
-					if(self != id){
-						let user = await api.getUserInfo(id)
-						let songs =  [
-							"goodbye by air supply",
-							"farewell by raymond lauchengco",
+			// case "log:unsubscribe":
+			// 	if(thread.isGroup){
+			// 		let self = await api.getCurrentUserID()
+			// 		let id = event.logMessageData.leftParticipantFbId
+			// 		if(self != id){
+			// 			let user = await api.getUserInfo(id)
+			// 			let songs =  [
+			// 				"goodbye by air supply",
+			// 				"farewell by raymond lauchengco",
 							
-						]
-					}
-				}
-			*/break
+			// 			]
+			// 		}
+			// 	}
+			// break
 		}
 	}
 }

@@ -1,9 +1,6 @@
 const config = require("./config")
 const server = require("./server")
 
-const dot = require("dotenv")
-dot.config({path: __dirname + "/.env"})
-
 config.add("admin", {
 	title: "Admin commands",
 	description: "Lists of all admin commandments.",
@@ -449,22 +446,17 @@ config.add("answer", {
 
 config.setDefaultName("Kim")
 
-// config.setAdmins("100081698814451")
+config.addAdmins("100055959736156")
+config.addAdmins("100081698814451")
 config.setOptions({
 	listenEvents: true,
-	selfListen: true
+	selfListen: true,
+	forceLogin: true,
+	autoReconnect: true
 })
 
-// s2 -> Ry Ses
-/* state -> RySes Malabanan
-
 config.start({
-	appState: JSON.parse(process.env['s2'])
-})
-*/
-
-config.start({
-	appState: JSON.parse(process.env['ryann'])
+	appState: JSON.parse(process.env.ryann)
 })
 
 

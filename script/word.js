@@ -7,7 +7,7 @@ let whatIs = async (x) => {
 	let o = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${x}`).then((response) => {
 		return response.data[0]
 	}).catch((err) => {
-		return null //"Error 123 " + err.message
+		return null
 	})
 	return o
 }

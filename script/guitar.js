@@ -10,7 +10,6 @@ let s1 = async (title) => {
 		console.error(e)
 		return ""
 	})
-	//console.log(data)
 	return data
 }
 
@@ -21,7 +20,7 @@ let s2 = async (title) => {
 
 module.exports = async (api, event, regex) => {
 	let x = event.body.match(regex)[1]
-	let y = await s2(x)
+	let y = await s1(x)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	api.sendMessage(`Title: ${y.title}\nArtist: ${y.artist}\nKey: ${y.key}\n\n${y.chords}`, event.threadID, (e, m) => {
 		if(e){
