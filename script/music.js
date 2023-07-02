@@ -1,5 +1,6 @@
-const { download, search } = require("youtube-s-dl")
+const { download, search, getVideoInfo } = require("youtube-s-dl")
 const fs = require("fs")
+const http = require("https")
 
 const afk = require("./../utils/afk")
 const react = require("./../utils/react")
@@ -26,30 +27,32 @@ module.exports = async (api, event, regex) => {
 			let user = await api.getUserInfo(event.senderID)
 			let g = gender(user[event.senderID]['firstName'])['eng']
 			let reqBy = `${g} ${user[event.senderID]['name']}`
-			stream.pipe(file).on("finish", () => {
-				api.sendMessage({
-					body: `Here's your requests ${reqBy}\nTitle: ${vid.title}\nUploaded by: ${vid.uploaderName}`,
-					attachment: fs.createReadStream(name).on("end", () => {
-						if(fs.existsSync(name)){
-							fs.unlink(name, (e) => {})
-						}
-					}),
-					mentions: [{
-						id: event.senderID,
-						tag: reqBy
-					}]
-				}, event.threadID, (e, m) => {
-					if(e){
-						api.sendMessage(e, event.threadID, (e, m) => {
-							if(e){
-								api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			http.get(stream, r => {
+				r.pipe(file).on("finish", () => {
+					api.sendMessage({
+						body: `Here's your requests ${reqBy}\nTitle: ${vid.title}\nUploaded by: ${vid.uploaderName}`,
+						attachment: fs.createReadStream(name).on("end", () => {
+							if(fs.existsSync(name)){
+								fs.unlink(name, (e) => {})
 							}
-							afk(api, json)
-						})
-					}
-					afk(api, json)
+						}),
+						mentions: [{
+							id: event.senderID,
+							tag: reqBy
+						}]
+					}, event.threadID, (e, m) => {
+						if(e){
+							api.sendMessage(e, event.threadID, (e, m) => {
+								if(e){
+									api.setMessageReaction(react, event.messageID, (e) => {}, true)
+								}
+								afk(api, json)
+							})
+						}
+						afk(api, json)
+					})
 				})
-			}).on("close", () => {})
+			})
 		}catch(e){
 			console.error(e)
 			api.sendMessage("Something went wrong", event.threadID, (e, m) => {
