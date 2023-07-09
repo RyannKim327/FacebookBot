@@ -204,6 +204,16 @@ config.add("baybayin", {
 	category: "knowledge"
 })
 
+config.add("beshy", {
+	title: "Beshifier Command",
+	description: "Bakit nga naman malungkot",
+	commands: [
+		"beshy ([\\w\\W]+)"
+	],
+	hasArgs: true,
+	category: "multimedia"
+})
+
 config.add("fb", {
 	title: "Facebook Information Profiling",
 	description: "A command that gives you the basics information of the account owner, according to its facebook profile",
