@@ -14,7 +14,11 @@ module.exports = async (api, event, regex) => {
 		"niv": a.version.ENG_NEW_INTERNATIONAL_VERSION,
 		"esv": a.version.ENG_ENLISH_STANDARD_VERSION,
 		"kjv": a.version.ENG_KING_JAMES_VERSION,
-		"nlt": a.version.ENG_NEW_LIVING_TRANSLATION
+		"nlt": a.version.ENG_NEW_LIVING_TRANSLATION,
+		"b1905": a.version.BAYBAYIN_ANG_DATING_BIBLIYA_1905,
+		"b1978": a.version.BAYBAYIN_ANG_BIBLIA_1978,
+		"b2001": a.version.BAYBAYIN_ANG_BIBLIA_2001,
+		"bsnd": a.version.BAYBAYIN_ANG_SALITA_NG_DIYOS
 	}
 	let lists_version = {
 		"1905": "ANG DATING BIBLIYA 1905",
@@ -24,9 +28,14 @@ module.exports = async (api, event, regex) => {
 		"niv": "NEW INTERNATIONAL VERSION",
 		"esv": "ENGLISH STANDARD VERSION",
 		"kjv": "KING JAMES VERSION",
-		"nlt": "NEW LIVING TRANSLATION"
+		"nlt": "NEW LIVING TRANSLATION",
+		"b1905": "ANG DATING BIBLIYA 1905 (Baybayin)",
+		"b1978": "ANG BIBLIA 1978 (Baybayin)",
+		"b2001": "ANG BIBLIA 2001 (Baybayin)",
+		"bsnd": "ANG SALITA NG DIYOS (Baybayin)"
 	}
 	let tag = ["1905", "1978", "2001", "snd"]
+	let baybay = ["b1905", "b1978", "b2001", "bsnd"]
 	let version = a.version.TAG_ANG_DATING_BIBLIYA_1905
 	let verse = reg[1]
 	let ver = "1905"
@@ -58,7 +67,7 @@ module.exports = async (api, event, regex) => {
 				id: event.senderID,
 				tag: user[event.senderID]['name']
 			}]
-		}, event.threadID, (e) => {
+		}, event.threadID, (e, m) => {
 			if(e){
 				api.sendMessage({
 					body: "Error:\n\n- The text are too much long, so that messenger declined to send the verse"
