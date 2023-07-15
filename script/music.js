@@ -41,6 +41,7 @@ module.exports = async (api, event, regex) => {
 				}
 			}else{
 				http.get(stream, r => {
+					api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 					r.pipe(file).on("finish", () => {
 						api.sendMessage({
 							body: `Here's your requests ${reqBy}\nTitle: ${vid.title}\nUploaded by: ${vid.uploaderName}`,
