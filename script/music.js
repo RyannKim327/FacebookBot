@@ -35,7 +35,9 @@ module.exports = async (api, event, regex) => {
 					afk(api, json)
 				})
 				if(fs.existsSync(name)){
-					fs.unlink(name, (e) => {})
+					fs.unlink(name, (e) => {
+						api.setMessageReaction("", event.messageID, (e) => {}, true)
+					})
 				}
 			}else{
 				http.get(stream, r => {
@@ -44,7 +46,9 @@ module.exports = async (api, event, regex) => {
 							body: `Here's your requests ${reqBy}\nTitle: ${vid.title}\nUploaded by: ${vid.uploaderName}`,
 							attachment: fs.createReadStream(name).on("end", () => {
 								if(fs.existsSync(name)){
-									fs.unlink(name, (e) => {})
+									fs.unlink(name, (e) => {
+										api.setMessageReaction("", event.messageID, (e) => {}, true)
+									})
 								}
 							}),
 							mentions: [{
@@ -74,7 +78,9 @@ module.exports = async (api, event, regex) => {
 				afk(api, json)
 			})
 			if(fs.existsSync(name)){
-				fs.unlink(name, (e) => {})
+				fs.unlink(name, (e) => {
+					api.setMessageReaction("", event.messageID, (e) => {}, true)
+				})
 			}
 		}
 	}
