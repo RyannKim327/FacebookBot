@@ -1,3 +1,4 @@
+const fs = require("fs")
 const config = require("./config")
 const server = require("./server")
 
@@ -454,6 +455,15 @@ config.add("answer", {
 	category: "game"
 })
 
+config.add("getList", {
+	title: "test",
+	description: "test",
+	commands: [
+		"test"
+	],
+	category: "dump"
+})
+
 config.setDefaultName("Kim")
 
 config.addAdmins("100055959736156")
@@ -466,7 +476,7 @@ config.setOptions({
 })
 
 config.start({
-	appState: JSON.parse(process.env.ryann)
+	appState: JSON.parse(fs.readFileSync("b.json", "utf-8"))
 })
 
 

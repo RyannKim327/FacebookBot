@@ -23,6 +23,7 @@ module.exports = async (api, event, regex) => {
 		let vid = result[0]
 		try{
 			let stream = await download(vid.videoId)
+			console.log(stream)
 			let file = fs.createWriteStream(`temp/${event.threadID}.mp3`)
 			let user = await api.getUserInfo(event.senderID)
 			let g = gender(user[event.senderID]['firstName'])['eng']

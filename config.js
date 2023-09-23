@@ -206,7 +206,7 @@ let doListen = async (api) => {
 	return api.listen(async (error, event) => {
 		if(error){
 			console.error(`Error [Listen Emitter]: ${JSON.stringify(error)}`)
-			console.log(`Restart: ${o}`)
+			console.log(`Restart:`)
 		}
 		
 		json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
