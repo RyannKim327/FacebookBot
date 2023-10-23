@@ -1,4 +1,5 @@
 const fs = require("fs")
+const { getAdmins } = require("./../config")
 const react = require("./../utils/react")
 
 let subs = (id, data) => {
@@ -22,7 +23,7 @@ module.exports = async (api, event) => {
 		for(let i in thread.adminIDs){
 			ids.push(thread.adminIDs[i].id)
 		}
-		if(thread.isGroup && (ids.includes(event.senderID) || event.senderID == api.getCurrentUserID())){
+		if(thread.isGroup && (ids.includes(event.senderID) || getAdmins().includes(event.senderID) || event.senderID == api.getCurrentUserID())){
 			json.subscribe = subs(event.threadID, data)
 			api.sendMessage(`The thread ${thread.threadName} is now subscribed to the cron features.`, event.threadID, (error, msg) => {
 				if(error){
@@ -44,7 +45,7 @@ module.exports = async (api, event) => {
 		for(let i in thread.adminIDs){
 			ids.push(thread.adminIDs[i].id)
 		}
-		if(thread.isGroup && (ids.includes(event.senderID) || event.senderID == api.getCurrentUserID())){
+		if(thread.isGroup && ((ids.includes(event.senderID) || getAdmins().includes(event.senderID)) || event.senderID == api.getCurrentUserID())){
 			json.subscribe = unsubs(event.threadID, data)
 			api.sendMessage(`The thread ${thread.threadName} is now unsubscribed to the cron features.`, event.threadID, (error, msg) => {
 				if(error){
