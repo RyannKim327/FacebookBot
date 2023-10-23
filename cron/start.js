@@ -38,9 +38,10 @@ module.exports = async (api) => {
 		schedule: true,
 		timezone: "Asia/Manila"
 	})
-	cronjob.schedule("30 7 * * *", async () => {
+	cronjob.schedule("0 8 * * *", async () => {
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		let q_data = await quote()
+		const mpopq = JSON.parse(fs.readFileSync("data/quotes.json", "utf-8"))['quotes']
 		let time = await today()
 		let date = new Date()
 		let year = date.getFullYear()
@@ -54,30 +55,35 @@ module.exports = async (api) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
 			let i = 0
 			data.forEach(async (r) => {
+				let timer = Math.floor(Math.random() * 60000)
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
 					let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
 						let message = `Good day ${thread.threadName}!!!\nBible verse of the day:\n`
 						message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
-						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\n`
-						api.sendMessage(message, r.threadID, (e, m) => {
-							afk(api, json)
-						})
+						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}`
+						setTimeout(() => {
+							api.sendMessage(message, r.threadID, (e, m) => {
+								afk(api, json)
+							})
+						}, timer)
 					}else{
 						let user = await api.getUserInfo(r.threadID)
 						let gender = g(user[r.threadID]['firstName'])['eng']
 						let message = `Good day ${gender} ${user[r.threadID]['name']}!!!\nBible verse of the day:\n`
 						message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
-						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}\n\n`
-						api.sendMessage({
-							body: message,
-							mentions: [{
-								id: r.threadID,
-								tag: user[r.threadID]['name']
-							}]
-						}, r.threadID, (e, m) => {
-							afk(api, json)
-						})
+						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}`
+						setTimeout(() => {
+							api.sendMessage({
+								body: message,
+								mentions: [{
+									id: r.threadID,
+									tag: user[r.threadID]['name']
+								}]
+							}, r.threadID, (e, m) => {
+								afk(api, json)
+							})
+						}, timer)
 					}
 					i += 1
 				}
