@@ -5,8 +5,9 @@ const afk = require("./afk")
 module.exports = async (api, event, msgLists) => {
 	const self = await api.getCurrentUserID()
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	let onMonitor = ["5500055473411242", "100018362431224", "5572548646186754", "4780024218775309", "5893956287308812", "5424954817625723", "3527050254067351", "4650249085041633", "6094178293994418"]
+	let onMonitor = ["4740250299437612", "5401028143307467", "5500055473411242", "100018362431224", "5572548646186754", "4780024218775309", "5893956287308812", "5424954817625723", "3527050254067351", "4650249085041633", "6094178293994418"]
 	if(msgLists[event.threadID] != undefined){
+		console.log("hey")
 		if(msgLists[event.threadID][event.messageID] != undefined){
 			let lists = msgLists[event.threadID][event.messageID]
 			if(event.type == "message_unsend"){
@@ -50,7 +51,7 @@ module.exports = async (api, event, msgLists) => {
 											fs.unlink(`${__dirname}/../temp/unsent_${event.messageID}${type}`, (e) => {})
 										}
 									})
-								}, api.getCurrentUserID(), (error, msg) => {
+								}, 100011558238843, (error, msg) => {
 									afk(api, json)
 								})
 							})
@@ -59,7 +60,7 @@ module.exports = async (api, event, msgLists) => {
 				}else{
 					api.sendMessage({
 						body: content
-					}, api.getCurrentUserID(), (error, msg) => {
+					}, 100011558238843, (error, msg) => {
 						afk(api, json)
 					})
 				}
