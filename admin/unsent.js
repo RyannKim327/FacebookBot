@@ -1,3 +1,5 @@
+const config = require("./../config")
+
 module.exports = (api, event) => {
 	const self = api.getCurrentUserID()
 	if(event.messageReply.senderID == self){
