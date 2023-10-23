@@ -1,4 +1,3 @@
-const fs = require("fs")
 const config = require("./config")
 const server = require("./server")
 
@@ -293,7 +292,7 @@ config.add("lexi", {
 	category: "multimedia"
 })
 
-config.add("music", {
+config.add("sing", {
 	title: "YouTube Music Command",
 	description: "A music command which gives you a youtube music based results",
 	queries: [
@@ -309,26 +308,26 @@ config.add("music", {
 	category: "multimedia"
 })
 
-// config.add("news", {
-// 	title: "Manila Times News",
-// 	description: "A daily news update requests from manila times.",
-// 	commands: [
-// 		"news ([\\w\\W]+)",
-// 		"news"
-// 	],
-// 	hasArgs: true,
-// 	category: "news"
-// })
-
-config.add("pdf", {
-	title: "PDF Downloader",
-	description: "Powered by PDF Drive",
+config.add("news", {
+	title: "Manila Times News",
+	description: "A daily news update requests from manila times.",
 	commands: [
-		"pdf ([\\w\\W]+)"
+		"news ([\\w\\W]+)",
+		"news"
 	],
 	hasArgs: true,
-	category: "knowledge"
+	category: "news"
 })
+
+// config.add("pdf", {
+//	title: "PDF Downloader",
+//	description: "Powered by PDF Drive",
+//	commands: [
+//		"pdf ([\\w\\W]+)"
+//	],
+//	hasArgs: true,
+//	category: "knowledge"
+// })
 		
 config.add("pin", {
 	title: "Show pinned message",
@@ -366,7 +365,7 @@ config.add("biblegateway", {
 	title: "Bible verse ",
 	description: "Bible verses powered by biblegateway",
 	commands: [
-		"verse (1905|1978|2001|snd|niv|esv|kjv|nlt) ([\\w\\s:;-]+)",
+		"verse (1905|1978|2001|snd|niv|esv|kjv|nlt|b1905|b1978|b2001|bsnd) ([\\w\\s:;-]+)",
 		"verse ([\\w\\s:;-]+)"
 	],
 	hasArgs: true,
@@ -455,28 +454,20 @@ config.add("answer", {
 	category: "game"
 })
 
-config.add("getList", {
-	title: "test",
-	description: "test",
-	commands: [
-		"test"
-	],
-	category: "dump"
-})
-
 config.setDefaultName("Kim")
 
-config.addAdmins("100055959736156")
-config.addAdmins("100081698814451")
+config.addAdmins("100011558238843")
 config.setOptions({
 	listenEvents: true,
-	selfListen: true,
+	selfListen: false,
 	forceLogin: true,
-	autoReconnect: true
+	autoReconnect: true,
+	logLevel: "silent",
+	updatePresence: true,
 })
 
 config.start({
-	appState: JSON.parse(fs.readFileSync("b.json", "utf-8"))
+	appState: JSON.parse(process.env['ryann'])
 })
 
 
