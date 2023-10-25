@@ -244,7 +244,7 @@ let doListen = async (api) => {
 				api.setMessageReaction("🥺", event.messageID, (e) => {}, true)
 			}
 
-			if(json.ai && event.type == "message_reply" && ){
+			if(json.ai && event.type == "message_reply"){
 				if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
 					openai(api, event)
 					loop = false
