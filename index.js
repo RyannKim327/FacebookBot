@@ -180,7 +180,9 @@ config.add("info", {
 })
 
 config.add("help", {
-	title: ""
+	title: "Help",
+	description: "None",
+	
 })
 
 config.add("audioverse", {
