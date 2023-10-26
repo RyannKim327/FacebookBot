@@ -28,36 +28,31 @@ module.exports = async (api, event, regex) => {
 			quality: "lowest"
 		})
 		const info = await ytdl.getInfo(url)
-		if(music.content[0].duration <= ((20 * 60) * 1000)){
-			api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
-			let user = await api.getUserInfo(event.senderID)
-			let g = gender(user[event.senderID]['firstName'])['eng']
-			let reqBy = `${g} ${user[event.senderID]['name']}`
-			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
-				api.sendMessage({
-					body: `Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}`,
-					mentions:[{
-						id: event.senderID,
-						tag: user[event.senderID]['name']
-					}],
-					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
-						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
-							fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
-								if(err){
-									console.log(err)
-								}
-								api.setMessageReaction("", event.messageID, (e) => {}, true)
-								console.log("Done")
-							})
-						}
-					})
-				}, event.threadID)
-				api.setMessageReaction("", event.messageID, (e) => {}, true)
-			})
-		}else{
-			api.sendMessage("It's too long", event.threadID)
+		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
+		let user = await api.getUserInfo(event.senderID)
+		let g = gender(user[event.senderID]['firstName'])['eng']
+		let reqBy = `${g} ${user[event.senderID]['name']}`
+		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+			api.sendMessage({
+				body: `Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}`,
+				mentions:[{
+					id: event.senderID,
+					tag: user[event.senderID]['name']
+				}],
+				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+						fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
+							if(err){
+								console.log(err)
+							}
+							api.setMessageReaction("", event.messageID, (e) => {}, true)
+							console.log("Done")
+						})
+					}
+				})
+			}, event.threadID)
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
-		}
+		})
 	}catch(err){
 		console.log(err)
 		api.sendMessage("Error: " + err, event.threadID, event.messageID)
