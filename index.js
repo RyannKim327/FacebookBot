@@ -446,7 +446,7 @@ config.add("bugtong", {
 
 config.add("answer", {
 	title: "Answer bot games",
-	description: "This is the way for you to answer some question from facehook bot",
+	description: "This is the way for you to answer some question from facebook bot.",
 	commands: [
 		"answer ([\\w\\W]+)"
 	],
