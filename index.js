@@ -182,7 +182,9 @@ config.add("info", {
 config.add("help", {
 	title: "Help",
 	description: "None",
-	
+	commands: [
+		
+	]
 })
 
 config.add("audioverse", {
