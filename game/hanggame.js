@@ -10,5 +10,5 @@ async function getWord(){
 module.exports = async (api, event, regex) => {
 	const word = await getWord()
 	const data = event.body.match(regex)
-	const json = JSON.parse(fs.readFileSync(""))
+	const json = JSON.parse(fs.readFileSync("data/games"))
 }
