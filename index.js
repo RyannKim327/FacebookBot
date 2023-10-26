@@ -237,17 +237,17 @@ config.add("game", {
 	category: "oneTime"
 })
 
-config.add("genimg", {
-	title: "Image Generator",
-	description: "Beta test",
-	queries: [
-		"create an image of ([\\w\\W]+)",
-		"generate an image of ([\\w\\W]+)",
-		"generate an image that ([\\w\\W]+)"
-	],
-	hasArgs: true,
-	category: "multimedia"
-})
+// config.add("genimg", {
+// 	title: "Image Generator",
+// 	description: "Beta test",
+// 	queries: [
+// 		"create an image of ([\\w\\W]+)",
+// 		"generate an image of ([\\w\\W]+)",
+// 		"generate an image that ([\\w\\W]+)"
+// 	],
+// 	hasArgs: true,
+// 	category: "multimedia"
+// })
 
 config.add("google", {
 	title: "Google Search Engine",
