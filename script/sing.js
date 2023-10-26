@@ -52,7 +52,8 @@ module.exports = async (api, event, regex) => {
 				})
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.sendMessage(e.message, event.threadID, (e, m) => {\
+					api.sendMessage(e.message, event.threadID, (e, m) => {
+						afk()
 					})
 				}
 			})
