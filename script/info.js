@@ -58,7 +58,7 @@ module.exports = async (api, event) => {
 		if(user[myID]['name'].toLowerCase().includes("bot")){
 			usn.replace(/bot/gi, "")
 		}
-		if(usn === getName(myID).toLowerCase()){
+		if(usn.replace(/s/) === getName(myID).toLowerCase()){
 			return user[myID]['name']
 		}else{
 			return user[myID]['name'] + " you may also call me " + getName()
