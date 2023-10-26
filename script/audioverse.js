@@ -9,7 +9,7 @@ module.exports = async (api, event, regex) => {
 	let data = event.body.match(regex)[1]
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let b = await a.audio(data, a.audio_ver.KJV_DRAMATIZED)
-	let c = await a.verse(data, a.version.)
+	let c = await a.verse(data, a.version.ENG_KING_JAMES_VERSION)
 	let d = ""
 	for(let i in c){
 		d += `${c[i].book}\n${c[i].verse}`
