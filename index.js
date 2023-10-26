@@ -179,6 +179,10 @@ config.add("info", {
 	category: "oneTime"
 })
 
+config.add("help", {
+	title: ""
+})
+
 config.add("audioverse", {
 	title: "Audio Verse",
 	description: "An audio version of a whole chapter in the bible",
