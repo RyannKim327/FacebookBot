@@ -455,6 +455,8 @@ config.add("answer", {
 })
 
 config.addAdmins("100011558238843")
+config.addAdmins("100081698814451")
+
 config.setOptions({
 	listenEvents: true,
 	selfListen: false,
