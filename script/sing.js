@@ -7,6 +7,7 @@ const ffmpeg = require('@ffmpeg-installer/ffmpeg')
 const ffmpegs = require('fluent-ffmpeg')
 ffmpegs.setFfmpegPath(ffmpeg.path)
 
+const afk = require("./../utils/afk")
 const gender = require("./../utils/gender")
 
 module.exports = async (api, event, regex) => {
