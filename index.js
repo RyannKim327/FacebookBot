@@ -182,7 +182,8 @@ config.add("help", {
 	title: "Help",
 	description: "None",
 	commands: [
-		"a"
+		"audio verse",
+		""
 	]
 })
 
