@@ -54,11 +54,11 @@ module.exports = async (api, event) => {
 	let user = await api.getUserInfo(myID)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let myname = () => {
+	let usn = user[myID]['name']
+		if(user[myID]['name'].toLowerCase().includes("bot")){
+			usn.replace(/bot/gi, "")
+		}
 		if(user[myID]['name'].toLowerCase() === getName(myID).toLowerCase()){
-			let usn = user[myID]['name']
-			if(user[myID]['name'].toLowerCase().includes("bot")){
-				usn.replace(/bot/gi, "")
-			}
 			return user[myID]['name']
 		}else{
 			return user[myID]['name'] + " you may also call me " + getName()
