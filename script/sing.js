@@ -13,7 +13,7 @@ const gender = require("./../utils/gender")
 module.exports = async (api, event, regex) => {
 	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
 		return api.sendMessage("Your request is still in progress, please wait for a moment", event.threadID, (e, m) => {
-			api.setMessageReaction("")
+			api.setMessageReaction()
 		})
 	}
 	try{
