@@ -175,7 +175,6 @@ config.add("info", {
 		"how",
 		"tut"
 	],
-	hasCooldown: false,
 	category: "oneTime"
 })
 
@@ -183,7 +182,7 @@ config.add("help", {
 	title: "Help",
 	description: "None",
 	commands: [
-		
+
 	]
 })
 

@@ -146,8 +146,6 @@ let system = (api, event, r, q, _prefix) => {
 	let notAffect = false
 	if(r.data.admin != undefined)
 		admin = r.data.admin
-	if(r.data.hasCooldown != undefined)
-		cooldown = r.data.hasCooldown
 	if(r.data.hasArgs != undefined)
 		args = r.data.hasArgs
 	if(r.data.type != undefined)
