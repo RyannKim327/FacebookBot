@@ -52,7 +52,8 @@ module.exports = async (api, event, regex) => {
 				})
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.sendMessage("The audio file can't be uploaded to facebook due to the")
+					api.sendMessage(e.message, event.threadID, (e, m) => {\
+					})
 				}
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
