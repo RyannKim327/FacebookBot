@@ -12,6 +12,7 @@ const gender = require("./../utils/gender")
 
 module.exports = async (api, event, regex) => {
 	try{
+		const json = JSON.parse(fs.read)
 		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
