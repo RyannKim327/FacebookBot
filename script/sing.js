@@ -50,7 +50,11 @@ module.exports = async (api, event, regex) => {
 						})
 					}
 				})
-			}, event.threadID)
+			}, event.threadID, (e, m) => {
+				if(e){
+					api.sendMessage("")
+				}
+			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		})
 	}catch(err){
