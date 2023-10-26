@@ -454,8 +454,6 @@ config.add("answer", {
 	category: "game"
 })
 
-config.setDefaultName("Kim")
-
 config.addAdmins("100011558238843")
 config.setOptions({
 	listenEvents: true,
