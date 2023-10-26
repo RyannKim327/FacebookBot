@@ -1,4 +1,5 @@
 const { commands } = require("./../config")
-module.exports = (api, event) => {
 
+module.exports = (api, event) => {
+	
 }
