@@ -12,7 +12,8 @@
 		}
 	},
 	"hang":{
-		"trials"
+		"trials": {},
+		"scores": {}
 	},
 	"word": {
 		"score": {
