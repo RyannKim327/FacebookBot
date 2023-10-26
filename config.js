@@ -432,8 +432,7 @@ let start = (state) => {
 			refreshed = false
 		}
 		resetOneTime()
-		
-		json.cooldown = {}
+
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 		name = json.name
 		prefix = json.prefix
