@@ -11,6 +11,9 @@ const afk = require("./../utils/afk")
 const gender = require("./../utils/gender")
 
 module.exports = async (api, event, regex) => {
+	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+		return api.sendMessage("Your ")
+	}
 	try{
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
 		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
