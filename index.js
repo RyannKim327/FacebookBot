@@ -182,7 +182,7 @@ config.add("help", {
 	title: "Help",
 	description: "None",
 	commands: [
-
+		"a"
 	]
 })
 
@@ -192,7 +192,6 @@ config.add("audioverse", {
 	commands: [
 		"audio verse ([\\w\\W]+)"
 	],
-	hasCooldown: false,
 	hasArgs: true,
 	category: "theology"
 })
@@ -342,7 +341,6 @@ config.add("pin", {
 	commands: [
 		"pin"
 	],
-	hasCooldown: false,
 	category: "oneTime"
 })
 
@@ -376,7 +374,6 @@ config.add("biblegateway", {
 		"verse ([\\w\\s:;-]+)"
 	],
 	hasArgs: true,
-	hasCooldown: false,
 	category: "theology"
 })
 
