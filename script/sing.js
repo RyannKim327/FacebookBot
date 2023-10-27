@@ -10,6 +10,7 @@ ffmpegs.setFfmpegPath(ffmpeg.path)
 const afk = require("./../utils/afk")
 const gender = require("./../utils/gender")
 const react =  require("./../utils/react")
+const font = require("./../utils/font")
 
 module.exports = async (api, event, regex) => {
 	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
