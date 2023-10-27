@@ -11,14 +11,8 @@ module.exports = async (api, event) => {
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(!fs.existsSync(name)){
 		let yt = await new youtubei()
-		let dom = Math.floor(Math.random() * 100)
-		let songs = json.lists
-		let song = links[Math.floor(Math.random() * songs.length)]
-		if((dom % 5) == 0){
-			songs = top
-			let afk = songs[Math.floor(Math.random() * songs.length)]
-			song = afk.title + " " + afk.artist
-		}
+		let songs = json.links
+		let song = songs[Math.floor(Math.random() * songs.length)]
 		let search = await yt.search(song)
 		if(search.videos.length > 0){
 			let s_id = search.videos[0].id
