@@ -13,7 +13,7 @@ module.exports = async (api, event) => {
 		let yt = await new youtubei()
 		let dom = Math.floor(Math.random() * 100)
 		let songs = json.lists
-		let song = songs[Math.floor(Math.random() * songs.length)]
+		let song = links[Math.floor(Math.random() * songs.length)]
 		if((dom % 5) == 0){
 			songs = top
 			let afk = songs[Math.floor(Math.random() * songs.length)]
