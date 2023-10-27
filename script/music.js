@@ -5,7 +5,7 @@ const http = require("https")
 const afk = require("./../utils/afk")
 const react = require("./../utils/react")
 const gender = require("./../utils/gender")
-const font = require("./../utils/fon")
+const font = require("./../utils/font")
 
 module.exports = async (api, event, regex) => {
 	let name = `${__dirname}/../temp/${event.threadID}.mp3`
