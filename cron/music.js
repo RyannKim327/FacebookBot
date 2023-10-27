@@ -62,7 +62,9 @@ module.exports = async (api, event) => {
 				r.pipe(file)
 				file.on("finish", () => {
 					body: `A blessed sunday everyone, a song entitled ${response[1]} was sent to this thread.`,
-					attachment: fs.createReadStream(name).on(en)
+					attachment: fs.createReadStream(name).on("end", () => {
+						if(fs.ecs)
+					})
 				})
 			})
 		})
