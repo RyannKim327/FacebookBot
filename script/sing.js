@@ -42,13 +42,13 @@ module.exports = async (api, event, regex) => {
 		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
-		let reqBy = `${g} ${user[event.senderID]['name']}`
+		let reqBy = `${g} ${font(user[event.senderID]['name'])}`
 		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 			api.sendMessage({
 				body: `Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}`,
 				mentions:[{
 					id: event.senderID,
-					tag: user[event.senderID]['name']
+					tag: font(user[event.senderID]['name'])
 				}],
 				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
