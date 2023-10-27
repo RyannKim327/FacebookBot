@@ -54,6 +54,6 @@ module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/songs.json", "utf8"))
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(!fs.existsSync(name)){
-
+		
 	}
 }
