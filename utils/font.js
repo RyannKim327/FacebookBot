@@ -4,7 +4,10 @@ module.exports = (word) => {
 	let res = ""
 	for(let i = 0; i < word.length; i++){
 		for(let j = 0; j < alpha.length; j++){
-			if()
+			if(alpha[j] == word[i]){
+				
+				break
+			}
 		}
 	}
 }
