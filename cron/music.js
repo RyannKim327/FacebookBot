@@ -1,6 +1,5 @@
+const axios = require("axios")
 const fs = require("fs")
-const top100 = require("top100bbworship")
-const youtubei = require("youtubei.js")
 const afk2 = require("./../utils/afk")
 const g = require("./../utils/gender")
 
