@@ -48,7 +48,7 @@ module.exports = async (api, event, regex) => {
 				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 				mentions:[{
 					id: event.senderID,
-					tag: (user[event.senderID]['name']
+					tag: user[event.senderID]['name']
 				}],
 				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
