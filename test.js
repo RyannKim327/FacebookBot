@@ -1,3 +1,3 @@
 const font = require("./utils/font")
 
-console.log(font("Hello"))
+console.log(font("Hello world"))
