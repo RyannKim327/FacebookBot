@@ -50,7 +50,7 @@ module.exports = async (api) => {
 		if(day == 1 && month == 1){
 			year += 1
 		}
-		let tlb = await gateway.dailyVerse(gateway.version.TAG_ANG_DATING_BIBLIYA_1905, [year, month, day])
+		let tlb = await gateway.dailyVerse(gateway.version.ENG_KING_JAMES_VERSION, [year, month, day])
 		api.getThreadList(20, null, ['INBOX'], async (e, data) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
 			let i = 0
