@@ -55,6 +55,6 @@ module.exports = async (api, event) => {
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	if(!fs.existsSync(name)){
 		let file = fs.createWriteStream(`temp/${event}_worship.mp3`)
-		
+		http.get()
 	}
 }
