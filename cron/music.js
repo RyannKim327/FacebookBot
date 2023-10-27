@@ -67,7 +67,7 @@ module.exports = async (api, event) => {
 							if(fs.existsSync(name)){
 								fs.unlink(name)
 							}
-							
+						})
 					})
 				})
 			})
