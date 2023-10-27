@@ -35,7 +35,6 @@ async function dl(x){
 	let s = fetch(x)
 	let r = await s.then((response) => {
 		let slist = response
-		console.log(slist)
 		if(slist.t < 1500){
 			let d_u = conv(slist.vid, slist.token, slist.timeExpires).then((response) => {
 				return [response, slist.title, slist.a]
