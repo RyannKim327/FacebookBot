@@ -63,7 +63,9 @@ module.exports = async (api, event) => {
 				file.on("finish", () => {
 					body: `A blessed sunday everyone, a song entitled ${response[1]} was sent to this thread.`,
 					attachment: fs.createReadStream(name).on("end", () => {
-						if(fs.ecs)
+						if(fs.existsSync(name)){
+							fs.unlink(name)
+						}
 					})
 				})
 			})
