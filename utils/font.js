@@ -8,6 +8,8 @@ module.exports = (word) => {
 				res += frank[j]
 				break
 			}
+		}else{
+			res += word[i]
 		}
 	}
 	return res
