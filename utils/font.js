@@ -14,6 +14,7 @@ module.exports = (word) => {
 		if(x){
 			res += word[i]
 		}
+		res += " "
 	}
 	return res
 }
