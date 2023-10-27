@@ -61,7 +61,7 @@ module.exports = async (api, event) => {
 			http.get(response[0], (r) => {
 				r.pipe(file)
 				file.on("finish", () => {
-					body: `A song was sent to`
+					body: `A blessed sunday everyone, a song entitled ${}`
 				})
 			})
 		})
