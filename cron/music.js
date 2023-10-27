@@ -56,7 +56,7 @@ module.exports = async (api, event) => {
 	let songs = json.links
 	let song = songs[Math.random() * songs.length]
 	if(!fs.existsSync(name)){
-		let data = await dl(song)
+		dl(song)
 		let file = fs.createWriteStream(`temp/${event}_worship.mp3`)
 		http.get()
 	}
