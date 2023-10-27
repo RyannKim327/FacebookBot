@@ -66,8 +66,8 @@ module.exports = async (api, event) => {
 							if(fs.existsSync(name)){
 								fs.unlink(name, (e) => {})
 							}
-						}, event, (e, m) => {})
-					})
+						})
+					}, event, (e, m) => {})
 				})
 			})
 		})
