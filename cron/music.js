@@ -3,6 +3,8 @@ const fs = require("fs")
 const afk2 = require("./../utils/afk")
 const g = require("./../utils/gender")
 
+
+
 module.exports = async (api, event) => {
 	let name = `${__dirname}/../temp/${event}_worship.mp3`
 	let top = await top100()
