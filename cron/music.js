@@ -53,6 +53,8 @@ module.exports = async (api, event) => {
 	let name = `${__dirname}/../temp/${event}_worship.mp3`
 	let json = JSON.parse(fs.readFileSync("data/songs.json", "utf8"))
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+	let songs = json.links
+	let song = songs[Math.random() * ]
 	if(!fs.existsSync(name)){
 		let data = dl()
 		let file = fs.createWriteStream(`temp/${event}_worship.mp3`)
