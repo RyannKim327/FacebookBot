@@ -3,6 +3,20 @@ const fs = require("fs")
 const afk2 = require("./../utils/afk")
 const g = require("./../utils/gender")
 
+async function conv(v, t, e) {
+	const headers = {
+		'Content-Type': 'application/x-www-form-urlencoded',
+		'X-Requested-Key': 'de0cfuirtgf67a'
+	}
+	results = await axios.post("https://backend.svcenter.xyz/api/convert-by-45fc4be8916916ba3b8d61dd6e0d6994", "v_id=" + v + "&ftype=mp3&fquality=128&token=" + t + "&timeExpire=" + e + "&client=yt5s.com", {
+		headers: headers
+	}).then((response) => {
+		return response.data.d_url
+	}).catch((error) => {
+		return error.message
+	})
+	return results
+}
 
 
 module.exports = async (api, event) => {
