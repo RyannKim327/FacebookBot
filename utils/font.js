@@ -14,7 +14,7 @@ module.exports = (word) => {
 		if(x){
 			res += word[i]
 		}
-		if(word[i].isUpperCase()){
+		if(wordword[i].toUpperCase()){
 			res += " "
 		}
 	}
