@@ -3,12 +3,14 @@ module.exports = (word) => {
 	const alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmopqrstuvwxyz"
 	let res = ""
 	for(let i = 0; i < word.length; i++){
+		let x = true
 		for(let j = 0; j < alpha.length; j++){
 			if(alpha[j] == word[i]){
 				res += frank[j]
 				break
 			}
-		}else{
+		}
+		if(x){
 			res += word[i]
 		}
 	}
