@@ -5,9 +5,10 @@ module.exports = (word) => {
 	for(let i = 0; i < word.length; i++){
 		for(let j = 0; j < alpha.length; j++){
 			if(alpha[j] == word[i]){
-				
+				res += frank[j]
 				break
 			}
 		}
 	}
+	return res
 }
