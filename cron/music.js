@@ -61,11 +61,13 @@ module.exports = async (api, event) => {
 			http.get(response[0], (r) => {
 				r.pipe(file)
 				file.on("finish", () => {
-					body: `A blessed sunday everyone, a song entitled ${response[1]} was sent to this thread.`,
-					attachment: fs.createReadStream(name).on("end", () => {
-						if(fs.existsSync(name)){
-							fs.unlink(name)
-						}
+					api.sendMessage({
+						body: `A blessed sunday everyone, a song entitled ${response[1]} was sent to this thread.`,
+						attachment: fs.createReadStream(name).on("end", () => {
+							if(fs.existsSync(name)){
+								fs.unlink(name)
+							}
+							
 					})
 				})
 			})
