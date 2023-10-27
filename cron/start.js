@@ -99,7 +99,7 @@ module.exports = async (api) => {
 			let i = 0
 			data.forEach(r => {
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
-					// music(api, r.threadID)
+					music(api, r.threadID)
 				}
 			})
 		})
