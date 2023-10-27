@@ -58,7 +58,9 @@ module.exports = async (api, event) => {
 	if(!fs.existsSync(name)){
 		dl(song).then(response => {
 			let file = fs.createWriteStream(`temp/${event}_worship.mp3`)
-			http.get(response[0])
+			http.get(response[0], (r) => {
+				
+			})
 		})
 	}
 }
