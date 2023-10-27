@@ -6,7 +6,7 @@ const gateway = require("biblegateway-scrape")
 const afk = require("./../utils/afk")
 const g = require("./../utils/gender")
 let date = require("./../utils/date")
-
+const music = require("./music")
 
 let today = async () => {
 	let time = date("Asia/Manila")
