@@ -17,6 +17,35 @@ async function conv(v, t, e) {
 	})
 	return results
 }
+async function fetch(query) {
+	const headers = {
+		'Content-Type': 'application/x-www-form-urlencoded'
+	}
+	results = await axios.post("https://yt5s.com/api/ajaxSearch", "q=" + query + "&vt=mp3", {
+		headers: headers
+	}).then((response) => {
+		return response.data
+	}).catch((error) => {
+		return error.message
+	});
+	return results
+} 
+async function dl(x){
+	let s = fetch(x)
+	let r = await s.then((response) => {
+		let slist = response
+		console.log(slist)
+		if(slist.t < 1500){
+			let d_u = conv(slist.vid, slist.token, slist.timeExpires).then((response) => {
+				return [response, slist.title, slist.a]
+			})
+			return d_u
+		}else{
+			return "There's an error"
+		}
+	})
+	return r
+}
 
 
 module.exports = async (api, event) => {
