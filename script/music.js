@@ -28,7 +28,7 @@ module.exports = async (api, event, regex) => {
 			let file = fs.createWriteStream(`temp/${event.threadID}.mp3`)
 			let user = await api.getUserInfo(event.senderID)
 			let g = gender(user[event.senderID]['firstName'])['eng']
-			let reqBy = `${g} ${user[event.senderID]['name']}`
+			let reqBy = `${g} ${font(user[event.senderID]['name'])}`
 			if(stream == null){
 				api.sendMessage(`There's an error on the seerver`, event.threadID, (e, m) => {
 					if(e){
