@@ -1,6 +1,6 @@
 {
 	"lists": [
-		"https://www.youtube.com/watch?v=DXDGE_lRI0E",
+		"10000 reasons",
 		"A Thousand Hallelujahs",
 		"Alive Hillsong Young and Free",
 		"Beautiful Savior Planetshakers",
@@ -42,5 +42,9 @@
 		"What a Beautiful Name Hillsong",
 		"Who You Say I Am Hillsong",
 		"Worthy Elevation Worship"
+	],
+	"links": [
+		"https://www.youtube.com/watch?v=DXDGE_lRI0E",
+		""
 	]
 }
