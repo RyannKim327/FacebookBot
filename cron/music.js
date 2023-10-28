@@ -21,7 +21,7 @@ module.exports = async (api, event) => {
 	let song = songs[Math.floor(Math.random()) * songs.length]
 	if(!fs.existsSync(name)){
 		try{
-			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
+			const file = fs.createWriteStream(`temp/${event}_worship.mp3`)
 			const data = song
 			await yt.initalize()
 			const music = await yt.search(data.replace(/[^\w\s]/gi, ''))
@@ -37,16 +37,12 @@ module.exports = async (api, event) => {
 				quality: "lowest"
 			})
 			const info = await ytdl.getInfo(url)
-			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
 				api.sendMessage({
 					body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
-					mentions:[{
-						id: event.senderID,
-						tag: user[event.senderID]['name']
-					}],
-					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
-						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
-							fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
+					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
+						if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
+							fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
 								if(err){
 									console.log(err)
 								}
@@ -54,7 +50,7 @@ module.exports = async (api, event) => {
 							})
 						}
 					})
-				}, event.threadID, (e, m) => {
+				}, event, (e, m) => {
 					if(e){
 						afk(api, json2)
 					}
