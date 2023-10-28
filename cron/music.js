@@ -53,7 +53,6 @@ module.exports = async (api, event) => {
 								if(err){
 									console.log(err)
 								}
-								api.setMessageReaction("", event.messageID, (e) => {}, true)
 								console.log("Done")
 							})
 						}
