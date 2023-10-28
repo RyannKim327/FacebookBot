@@ -6,8 +6,11 @@ const ytdl = require('ytdl-core');
 const ffmpeg = require('@ffmpeg-installer/ffmpeg')
 const ffmpegs = require('fluent-ffmpeg')
 ffmpegs.setFfmpegPath(ffmpeg.path)
-const afk2 = require("./../utils/afk")
-const g = require("./../utils/gender")
+
+const afk = require("./../utils/afk")
+const gender = require("./../utils/gender")
+const react =  require("./../utils/react")
+const font = require("./../utils/font")
 
 
 module.exports = async (api, event) => {
