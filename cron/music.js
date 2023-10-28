@@ -60,9 +60,7 @@ module.exports = async (api, event) => {
 					})
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.sendMessage(e.message, event.threadID, (e, m) => {
-							afk(api, json)
-						})
+						afk(api, json2)
 					}
 				})
 			})
