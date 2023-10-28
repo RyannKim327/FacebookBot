@@ -14,12 +14,12 @@ module.exports = async (api, event) => {
 	let name = `${__dirname}/../temp/${event}_worship.mp3`
 	let json = JSON.parse(fs.readFileSync("data/songs.json", "utf8"))
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	let songs = json.links
+	let songs = json.lists
 	let song = songs[Math.floor(Math.random()) * songs.length]
 	if(!fs.existsSync(name)){
 		try{
 			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
-			const data = event.body.match(regex)[1]
+			const data = song
 			await yt.initalize()
 			const music = await yt.search(data.replace(/[^\w\s]/gi, ''))
 			if(music.content.length <= 0){
