@@ -18,9 +18,7 @@ module.exports = async (api, event) => {
 	let song = songs[Math.floor(Math.random()) * songs.length]
 	if(!fs.existsSync(name)){
 		try{
-			const json = JSON.parse(fs.readFileSync("data/preferences.json"))
 			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
-			api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 			const data = event.body.match(regex)[1]
 			await yt.initalize()
 			const music = await yt.search(data.replace(/[^\w\s]/gi, ''))
@@ -36,9 +34,6 @@ module.exports = async (api, event) => {
 				quality: "lowest"
 			})
 			const info = await ytdl.getInfo(url)
-			let user = await api.getUserInfo(event.senderID)
-			let g = gender(user[event.senderID]['firstName'])['eng']
-			let reqBy = `${g} ${user[event.senderID]['name']}`
 			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 				api.sendMessage({
 					body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
