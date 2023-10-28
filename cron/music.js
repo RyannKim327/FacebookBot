@@ -1,6 +1,11 @@
 const axios = require("axios")
 const fs = require("fs")
-const http = require("https")
+const YoutubeMusicApi = require('youtube-music-api')
+const yt = new YoutubeMusicApi()
+const ytdl = require('ytdl-core');
+const ffmpeg = require('@ffmpeg-installer/ffmpeg')
+const ffmpegs = require('fluent-ffmpeg')
+ffmpegs.setFfmpegPath(ffmpeg.path)
 const afk2 = require("./../utils/afk")
 const g = require("./../utils/gender")
 
