@@ -65,12 +65,9 @@ module.exports = async (api, event) => {
 						})
 					}
 				})
-				api.setMessageReaction("", event.messageID, (e) => {}, true)
 			})
 		}catch(err){
 			console.log(err)
-			api.sendMessage("Error: " + err, event.threadID, event.messageID)
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		}
 	}
 }
