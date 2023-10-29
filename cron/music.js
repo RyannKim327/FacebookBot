@@ -36,6 +36,7 @@ module.exports = async (api, event) => {
 				quality: "lowest"
 			})
 			const info = await ytdl.getInfo(url)
+			const 
 			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
 				api.sendMessage({
 					body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
