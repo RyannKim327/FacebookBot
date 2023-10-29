@@ -46,40 +46,43 @@ module.exports = async (api, event, regex) => {
 	}
 	let lang = tag.includes(ver) ? "tag" : "eng"
 	try{
-	let data = await a.verse(verse, version)
-	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	let user = await api.getUserInfo(event.senderID)
-	let gender = g(user[event.senderID]['firstName'])[lang]
-	let book = (lang == "tag") ? `Ito ang talata sa bibliya na iyong hinihiling ${gender} ${user[event.senderID]['name']} mula sa ${lists_version[ver]}:` : `Here's the bible verse you've requested ${gender} ${user[event.senderID]['name']} from ${lists_version[ver]}:`
-	for(let i in data){
-		book += `\n${data[i].book}\n${data[i].verse}`
-	}
-	if(book == ""){
-		api.sendMessage("Kindly check the spelling of your request verse.", event.threadID, (e, m) => {
-			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
-			}
-			afk(api, json)
-		})
-	}else{
-		api.sendMessage({
-			body:  `${book}`,
-			mentions: [{
-				id: event.senderID,
-				tag: user[event.senderID]['name']
-			}]
-		}, event.threadID, (e, m) => {
-			if(e){
-				api.sendMessage({
-					body: "Error:\n\n- The text are too much long, so that messenger declined to send the verse"
-				}, event.threadID, (e, m) => {
-					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
-					}
-					afk(api, json)
-				})
-			}
-			afk(api, json)
-		})
+		let data = await a.verse(verse, version)
+		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+		let user = await api.getUserInfo(event.senderID)
+		let gender = g(user[event.senderID]['firstName'])[lang]
+		let book = (lang == "tag") ? `Ito ang talata sa bibliya na iyong hinihiling ${gender} ${user[event.senderID]['name']} mula sa ${lists_version[ver]}:` : `Here's the bible verse you've requested ${gender} ${user[event.senderID]['name']} from ${lists_version[ver]}:`
+		for(let i in data){
+			book += `\n${data[i].book}\n${data[i].verse}`
+		}
+		if(book == ""){
+			api.sendMessage("Kindly check the spelling of your request verse.", event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				}
+				afk(api, json)
+			})
+		}else{
+			api.sendMessage({
+				body:  `${book}`,
+				mentions: [{
+					id: event.senderID,
+					tag: user[event.senderID]['name']
+				}]
+			}, event.threadID, (e, m) => {
+				if(e){
+					api.sendMessage({
+						body: "Error:\n\n- The text are too much long, so that messenger declined to send the verse"
+					}, event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						}
+						afk(api, json)
+					})
+				}
+				afk(api, json)
+			})
+		}
+	}catch(e){
+		api.sendMessage(e.messgae)
 	}
 }
