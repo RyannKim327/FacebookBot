@@ -83,6 +83,6 @@ module.exports = async (api, event, regex) => {
 			})
 		}
 	}catch(e){
-		api.sendMessage(e.messgae)
+		api.sendMessage(e.message, event.threadID, (e, m) => {})
 	}
 }
