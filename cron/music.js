@@ -36,10 +36,10 @@ module.exports = async (api, event) => {
 				quality: "lowest"
 			})
 			const info = await ytdl.getInfo(url)
-			const 
+			const thread = await api.getThreadInfo(event)
 			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
 				api.sendMessage({
-					body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+					body: `Here's a random worship song sent to ${}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
 							fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
