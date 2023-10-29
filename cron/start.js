@@ -50,6 +50,10 @@ module.exports = async (api) => {
 			year += 1
 		}
 		let tlb = await gateway.dailyVerse(gateway.version.ENG_KING_JAMES_VERSION, [year, month, day])
+		let book = ""
+		for(let i in tlb){
+			book += `\n${data[i].book}\n${data[i].verse}`
+		}
 		api.getThreadList(20, null, ['INBOX'], async (e, data) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
 			let i = 0
@@ -59,7 +63,7 @@ module.exports = async (api) => {
 					let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
 						let message = `Good day ${thread.threadName}!!!\nBible verse of the day:\n`
-						message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
+						message += book + "\n\n"
 						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}`
 						setTimeout(() => {
 							api.sendMessage(message, r.threadID, (e, m) => {
@@ -70,7 +74,7 @@ module.exports = async (api) => {
 						let user = await api.getUserInfo(r.threadID)
 						let gender = g(user[r.threadID]['firstName'])['eng']
 						let message = `Good day ${gender} ${user[r.threadID]['name']}!!!\nBible verse of the day:\n`
-						message += tlb[0].book + "\n" + tlb[0].verse + "\n\n"
+						message += book + "\n\n"
 						message += `Quotation of the day from ${q_data.a}\n~ ${q_data.q}`
 						setTimeout(() => {
 							api.sendMessage({
