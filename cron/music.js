@@ -12,7 +12,6 @@ const gender = require("./../utils/gender")
 const react =  require("./../utils/react")
 const font = require("./../utils/font")
 
-
 module.exports = async (api, event) => {
 	let name = `${__dirname}/../temp/${event}_worship.mp3`
 	let json = JSON.parse(fs.readFileSync("data/songs.json", "utf8"))
