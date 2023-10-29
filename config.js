@@ -222,7 +222,7 @@ let doListen = async (api) => {
 			}
 		}
 		unsent(api, event, msgLists)
-		if(event.body != null){
+		if(event.body != null && json.status){
 			let body = event.body
 			let body_lowercase = body.toLowerCase()
 			let name_lowercase = name.toLowerCase()
