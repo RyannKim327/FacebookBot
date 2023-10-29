@@ -17,7 +17,7 @@ module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/songs.json", "utf8"))
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let songs = json.lists
-	let song = songs[Math.floor(Math.random() * songs.length]
+	let song = songs[Math.floor(Math.random() * songs.length)]
 	if(!fs.existsSync(name)){
 		try{
 			const file = fs.createWriteStream(`temp/${event}_worship.mp3`)
