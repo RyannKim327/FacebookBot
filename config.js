@@ -447,10 +447,8 @@ let start = (state) => {
 		})
 		api.setOptions(options)
 
-		let listener = doListen(api)
-		setInterval(() => {
-			console.log("Test")
-		}, ((1000 * 30)))
+		let listener = await doListen(api)
+		
 	})
 }
 												  
