@@ -45,6 +45,7 @@ module.exports = async (api, event, regex) => {
 		ver = reg[1]
 	}
 	let lang = tag.includes(ver) ? "tag" : "eng"
+	try{
 	let data = await a.verse(verse, version)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let user = await api.getUserInfo(event.senderID)
