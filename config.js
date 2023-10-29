@@ -448,7 +448,7 @@ let start = (state) => {
 		api.setOptions(options)
 
 		let listener = await doListen(api)
-		
+		console.log(listener)
 	})
 }
 												  
