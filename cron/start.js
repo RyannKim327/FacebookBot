@@ -41,7 +41,6 @@ module.exports = async (api) => {
 	cronjob.schedule("30 7 * * *", async () => {
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		let q_data = await quote()
-		const mpopq = JSON.parse(fs.readFileSync("data/quotes.json", "utf-8"))['quotes']
 		let time = await today()
 		let date = new Date()
 		let year = date.getFullYear()
