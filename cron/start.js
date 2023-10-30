@@ -49,18 +49,19 @@ module.exports = async (api) => {
 		if(day == 1 && month == 1){
 			year += 1
 		}
-		let tlb = await gateway.dailyVerse(gateway.version.ENG_KING_JAMES_VERSION, [year, month, day])
+		let tlb1 = await gateway.dailyVerse(gateway.version.ENG_NEW_LIVING_TRANSLATION, [year, month, day])
+		let tlb = await gateway.verse(tlb1[0].book, gateway.version.ENG_KING_JAMES_VERSION)
 		let book = ""
+		console.log(tlb)
 		for(let i in tlb){
-			book += `\n${data[i].book}\n${data[i].verse}`
+			book += `\n${tlb[i].book}\n${tlb[i].verse}`
 		}
 		api.getThreadList(20, null, ['INBOX'], async (e, data) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
 			let i = 0
 			data.forEach(async (r) => {
 				let timer = Math.floor(Math.random() * 60000)
-				//if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
-				if(self == r.threadID){
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
 				let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
 						let message = `Good day ${thread.threadName}!!!\nBible verse of the day:\n`
