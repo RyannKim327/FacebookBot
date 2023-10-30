@@ -59,8 +59,9 @@ module.exports = async (api) => {
 			let i = 0
 			data.forEach(async (r) => {
 				let timer = Math.floor(Math.random() * 60000)
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
-					let thread = await api.getThreadInfo(r.threadID)
+				//if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
+				if(self == r.threadID){
+				let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
 						let message = `Good day ${thread.threadName}!!!\nBible verse of the day:\n`
 						message += book + "\n\n"
