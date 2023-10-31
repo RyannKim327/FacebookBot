@@ -1,81 +1,99 @@
-const { download, search, getVideoInfo } = require("youtube-s-dl")
+const axios = require("axios")
 const fs = require("fs")
-const http = require("https")
+const YoutubeMusicApi = require('youtube-music-api')
+const yt = new YoutubeMusicApi()
+const ytdl = require('ytdl-core');
+const ffmpeg = require('@ffmpeg-installer/ffmpeg')
+const ffmpegs = require('fluent-ffmpeg')
+ffmpegs.setFfmpegPath(ffmpeg.path)
 
-const afk = require("./../utils/afk")
-const react = require("./../utils/react")
-const gender = require("./../utils/gender")
+const afk = require("../utils/afk")
+const gender = require("../utils/gender")
+const react =  require("../utils/react")
+const font = require("../utils/font")
 
 module.exports = async (api, event, regex) => {
-	let name = `${__dirname}/../temp/${event.threadID}.mp4`
-	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	if(fs.existsSync(name)){
-		api.sendMessage("Lemme finish the earlier request please.", event.threadID, (e, m) => {
+	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+		return api.sendMessage("Your request is still in progress, please wait for a moment", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
-			afk(api, json)
-		})
-	}else{
+		}, event.messageID)
+	}
+	try{
+		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
+		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
-		let body = event.body.match(regex)[1]
-		let result = await search(body)
-		let vid = result[0]
-		try{
-			let stream = await download(vid.videoId)
-			let file = fs.createWriteStream(`temp/${event.threadID}.mp4`)
-			let user = await api.getUserInfo(event.senderID)
-			let g = gender(user[event.senderID]['firstName'])['eng']
-			let reqBy = `${g} ${user[event.senderID]['name']}`
-			if(stream == null){
-				api.sendMessage(`There's an error on the server`, event.threadID, (e, m) => {
-					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+		const data = event.body.match(regex)[1]
+		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9-_]{11}$)/
+		const yt_2 = /youtu.be\/([a-zA-Z0-9-_]+)/
+		let music = {}
+		if(yt_1.test(data)){
+			music = {
+				"content": [
+					{
+						"videoId": data.match(yt_1)[1]
 					}
-					afk(api, json)
-				})
-				if(fs.existsSync(name)){
-					fs.unlink(name, (e) => {})
-				}
-			}else{
-				http.get(stream, r => {
-					r.pipe(file).on("finish", () => {
-						api.sendMessage({
-							body: `Here's your requests ${reqBy}\nTitle: ${vid.title}\nUploaded by: ${vid.uploaderName}`,
-							attachment: fs.createReadStream(name).on("end", () => {
-								if(fs.existsSync(name)){
-									fs.unlink(name, (e) => {})
-								}
-							}),
-							mentions: [{
-								id: event.senderID,
-								tag: reqBy
-							}]
-						}, event.threadID, (e, m) => {
-							if(e){
-								api.sendMessage(e, event.threadID, (e, m) => {
-									if(e){
-										api.setMessageReaction(react, event.messageID, (e) => {}, true)
-									}
-									afk(api, json)
-								})
-							}
-							afk(api, json)
-						})
-					})
-				})
+				]
 			}
-		}catch(e){
-			console.error(e)
-			api.sendMessage("Something went wrong", event.threadID, (e, m) => {
-				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+		}else if(yt_2.test(data)){
+			music = {
+				"content": [
+					{
+						"videoId": data.match(yt_2)[1].split("?")[0]
+					}
+				]
+			}
+		}else{
+			await yt.initalize()
+			music = await yt.search(data.replace(/[^\w\s]/gi, ''))
+			if(music.content.length <= 0){
+				throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
+			}else{
+				if(music.content[0].videoId == undefined){
+					throw new Error(`${data.replace(/[^\w\s]/gi, '')} is not found on youtube music. Try to add the singer, maybe I can find it.`)
 				}
-				afk(api, json)
-			})
-			if(fs.existsSync(name)){
-				fs.unlink(name, (e) => {})
 			}
 		}
+		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
+		const strm = ytdl(url, {
+			quality: "lowest"
+		})
+		const info = await ytdl.getInfo(url)
+		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
+		let user = await api.getUserInfo(event.senderID)
+		let g = gender(user[event.senderID]['firstName'])['eng']
+		let reqBy = `${g} ${user[event.senderID]['name']}`
+		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+			api.sendMessage({
+				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+				mentions:[{
+					id: event.senderID,
+					tag: user[event.senderID]['name']
+				}],
+				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+						fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
+							if(err){
+								console.log(err)
+							}
+							api.setMessageReaction("", event.messageID, (e) => {}, true)
+							console.log("Done")
+						})
+					}
+				})
+			}, event.threadID, (e, m) => {
+				if(e){
+					api.sendMessage(e.message, event.threadID, (e, m) => {
+						afk(api, json)
+					})
+				}
+			})
+			api.setMessageReaction("", event.messageID, (e) => {}, true)
+		})
+	}catch(err){
+		console.log(err)
+		api.sendMessage("Error: " + err, event.threadID, event.messageID)
+		api.setMessageReaction("", event.messageID, (e) => {}, true)
 	}
 }
