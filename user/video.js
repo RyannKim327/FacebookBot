@@ -95,5 +95,14 @@ module.exports = async (api, event, regex) => {
 		console.log(err)
 		api.sendMessage("Error: " + err, event.threadID, event.messageID)
 		api.setMessageReaction("", event.messageID, (e) => {}, true)
+		if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`)){
+			fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`, (err) => {
+				if(err){
+					console.log(err)
+				}
+				api.setMessageReaction("", event.messageID, (e) => {}, true)
+				console.log("Done")
+			})
+		}
 	}
 }
