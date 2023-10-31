@@ -32,7 +32,7 @@ module.exports = async (api, event, regex) => {
 			music = {
 				"content": [
 					{
-						"videoId": data.match(yt_1)
+						"videoId": data.match(yt_1)[1]
 					}
 				]
 			}
@@ -40,7 +40,7 @@ module.exports = async (api, event, regex) => {
 			music = {
 				"content": [
 					{
-						"videoId": data.match(yt_2).split("?")[0]
+						"videoId": data.match(yt_2)[1].split("?")[0]
 					}
 				]
 			}
