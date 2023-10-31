@@ -40,7 +40,7 @@ module.exports = async (api, event, regex) => {
 		}else{
 			const music = {
 				"content": [
-					"videoId"
+					"videoId": data.math(yt_1)
 				]
 			}
 		}
