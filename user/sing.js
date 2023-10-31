@@ -25,10 +25,10 @@ module.exports = async (api, event, regex) => {
 		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
-		const yt_1 = /youtube.com\/watch\?v=([\w\S]+)/
+		const yt_1 = /youtube.com\/watch\?v=([\w\S_]+)/
 		const yt_2 = /youtu.be\/([\w\S]+)/
 		await yt.initalize()
-		const music = await yt.search(data.replace(/[^\w\s]/gi, ''))
+		const music = await yt.search(data.replace(/[^\w\s_]/gi, ''))
 		if(music.content.length <= 0){
 			throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
 		}else{
