@@ -38,7 +38,11 @@ module.exports = async (api, event, regex) => {
 				}
 			}
 		}else{
-			
+			const music = {
+				"content": [
+					"videoId"
+				]
+			}
 		}
 		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
 		const strm = ytdl(url, {
