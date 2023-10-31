@@ -39,7 +39,7 @@ module.exports = async (api, event, regex) => {
 			const music = {
 				"content": [
 					{
-						"videoId": data.match(yt_2)
+						"videoId": data.match(yt_2).split("?")[0]
 					}
 				]
 			}
