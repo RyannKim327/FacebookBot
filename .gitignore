@@ -1,6 +1,3 @@
-.autogit
 node_modules/*
 *.traineddata
 .env
-.nix
-.replit

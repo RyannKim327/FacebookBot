@@ -326,7 +326,7 @@ config.add("news", {
 //	hasArgs: true,
 //	category: "knowledge"
 // })
-		
+
 config.add("pin", {
 	title: "Show pinned message",
 	description: "Showing the current pinned message",

@@ -15,5 +15,5 @@ module.exports = (word) => {
 			res += word[i]
 		}
 	}
-	return res
+	return word
 }

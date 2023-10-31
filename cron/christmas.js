@@ -1,3 +1,4 @@
+
 const fs = require("fs")
 const g = require("./../utils/gender")
 const youtubei = require("youtubei.js")
@@ -13,6 +14,7 @@ module.exports = async (api, event) => {
 	let song = songs[Math.floor(Math.random() * songs.length)]
 	let yt = await new youtubei()
 	let v = await yt.getDetails(song)
+	//let event = api.getCurrentUserID()
 	let n = `${__dirname}/../temp/${event}_newyear.mp3`
 	let f = fs.createWriteStream(`temp/${event}_newyear.mp3`)
 	let dl = yt.download(song, {

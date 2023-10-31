@@ -7,8 +7,13 @@ const react = require("./../utils/react")
 module.exports = async (api, event, regex) => {
 	let data = event.body.match(regex)[1]
 	let ebook = await pdf.findEbook(data)
+	console.log(ebook)
 	let dlBook = await pdf.getEbook(ebook[0].ebookUrl)
+	console.log(dlBook)
 	let file = fs.createWriteStream(`temp/${data}.pdf`)
+	if(dlBook.dlUrl == undefined){
+		return api.sendMessage("Error sya prii", event.threadID)
+	}
 	let req = await request(dlBook.dlUrl)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	req.pipe(file)

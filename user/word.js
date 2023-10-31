@@ -7,7 +7,7 @@ let whatIs = async (x) => {
 	let o = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${x}`).then((response) => {
 		return response.data[0]
 	}).catch((err) => {
-		return null
+		return null //"Error 123 " + err.message
 	})
 	return o
 }
@@ -117,7 +117,7 @@ module.exports = async (api, event, regex) => {
 	}
 	if(info.license.name)
 		msg += `License: ${info.license.name}`
-	api.sendMessage(msg, event.threadID, (e, m) => {
+		api.sendMessage(msg, event.threadID, (e, m) => {
 		if(e){
 			api.setMessageReaction(react, event.messageID, (e) => {}, true)
 		}

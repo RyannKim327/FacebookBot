@@ -52,7 +52,7 @@ let categories = {
 
 let time = {
 	oneTime: 0,
-	multimedia: 1.5,
+	multimedia: 3,
 	theology: 0.5,
 	knowledge: 2,
 	dump: 0,
@@ -206,7 +206,7 @@ let doListen = async (api) => {
 			console.error(`Error [Listen Emitter]: ${JSON.stringify(error)}`)
 			console.log(`Restart:`)
 		}
-		
+
 		json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		if(options.autoMarkRead != undefined){
 			if(options.autoMarkRead){
@@ -253,7 +253,7 @@ let doListen = async (api) => {
 				// openai(api, event)
 				afk(api, json)
 			}
-			
+
 			if(body.toLowerCase().includes("stop") && body.toLowerCase().includes(name.toLowerCase())){
 				trialCard[event.senderID] = undefined
 				return api.sendMessage("Auto AI messages are closed, to reactivate, kindly wait for an hour.", event.threadID, (e, m) => {
@@ -399,12 +399,12 @@ let doListen = async (api) => {
 		}
 	})
 }
- 
+
 let start = (state) => {
 	const fca = require("fca-unofficial")
 	fca(state, async (error, api) => {
 		if(error) return console.error(`Error [API]: ${error.error}`)
-		
+
 		const self = await api.getCurrentUserID()
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		bot.push(self)
@@ -453,7 +453,7 @@ let start = (state) => {
 		console.log(listener)
 	})
 }
-												  
+
 module.exports = {
 	add,
 	addAdmins,

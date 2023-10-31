@@ -1,7 +1,7 @@
 const fs = require("fs")
-const afk = require("../utils/afk")
-const { commands, getPrefix } = require("../config")
-const react = require("../utils/react")
+const afk = require("./../utils/afk")
+const { commands, getPrefix } = require("./../config")
+const react = require("./../utils/react")
 
 module.exports = (api, event) => {
 	let message = ""

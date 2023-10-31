@@ -23,56 +23,45 @@ module.exports = async (api) => {
 		api.getThreadList(20, null, ['INBOX'], async (error, data) => {
 			let sent = 7
 			data.forEach(async (r) => {
+				let timer = Math.floor(Math.random() * 60000)
 				if(r.threadID != self && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID) && sent > 0){
-					// let n = Math.floor(Math.random() * quotes.length)
-					// let q = quotes[n]
-					// let thread = await api.getThreadInfo(r.threadID)
-					// if(thread.isGroup){
-					// 	api.sendMessage(`A random quotation for ${thread.threadName}.\n\n  ${q.q}\n~${q.a}`, r.threadID, (e, m) => {})
-					// }else{
-					// 	let user = await api.getUserInfo(r.threadID)
-					// 	let gender = g(user[r.threadID]['firstName'])['eng']
-					// 	api.sendMessage({
-					// 		body: `A random quotation for you ${gender} ${user[r.threadID]['name']}.\n\n  ${q.q}\n~${q.a}`,
-					// 		mentions: [{
-					// 			id: r.threadID,
-					// 			tag: user[r.threadID]['name']
-					// 		}]
-					// 	}, r.threadID, (e, m) => {})
-					// }
 					let file = fs.createWriteStream(`temp/${r.threadID}_quotes.jpg`)
 					let thread = await api.getThreadInfo(r.threadID)
 					http.get("https://zenquotes.io/api/image", async (rq) => {
 						rq.pipe(file)
 						file.on("finish", async () => {
 							if(thread.isGroup){
-								api.sendMessage({
-									body: `A random quotation for ${thread.threadName}.`,
-									attachment: fs.createReadStream(`${__dirname}/../temp/${r.threadID}_quotes.jpg`).on("end", () => {
-										if(fs.existsSync(`${__dirname}/../temp/${r.threadID}_quotes.jpg`)){
-											fs.unlink(`${__dirname}/../temp/${r.threadID}_quotes.jpg`, (e) => {})
-										}
+								setTimeout(() => {
+									api.sendMessage({
+										body: `A random quotation for ${thread.threadName}.`,
+										attachment: fs.createReadStream(`${__dirname}/../temp/${r.threadID}_quotes.jpg`).on("end", () => {
+											if(fs.existsSync(`${__dirname}/../temp/${r.threadID}_quotes.jpg`)){
+												fs.unlink(`${__dirname}/../temp/${r.threadID}_quotes.jpg`, (e) => {})
+											}
+										})
+									}, r.threadID, (e, m) => {
+										afk(api, json)
 									})
-								}, r.threadID, (e, m) => {
-									afk(api, json)
-								})
+								}, timer)
 							}else{
 								let user = await api.getUserInfo(r.threadID)
 								let gender = g(user[r.threadID]['firstName'])['eng']
-								api.sendMessage({
-									body: `A random quotation for you ${gender} ${user[r.threadID]['name']}.`,
-									mentions: [{
-										id: r.threadID,
-										tag: user[r.threadID]['name']
-									}],
-									attachment: fs.createReadStream(`${__dirname}/../temp/${r.threadID}_quotes.jpg`).on("end", () => {
-										if(fs.existsSync(`${__dirname}/../temp/${r.threadID}_quotes.jpg`)){
-											fs.unlink(`${__dirname}/../temp/${r.threadID}_quotes.jpg`, (e) => {})
-										}
+								setTimeout(() => {
+									api.sendMessage({
+										body: `A random quotation for you ${gender} ${user[r.threadID]['name']}.`,
+										mentions: [{
+											id: r.threadID,
+											tag: user[r.threadID]['name']
+										}],
+										attachment: fs.createReadStream(`${__dirname}/../temp/${r.threadID}_quotes.jpg`).on("end", () => {
+											if(fs.existsSync(`${__dirname}/../temp/${r.threadID}_quotes.jpg`)){
+												fs.unlink(`${__dirname}/../temp/${r.threadID}_quotes.jpg`, (e) => {})
+											}
+										})
+									}, r.threadID, (e, m) => {
+										afk(api, json)
 									})
-								}, r.threadID, (e, m) => {
-									afk(api, json)
-								})
+								}, timer)
 							}
 						})
 					})
