@@ -369,19 +369,19 @@ config.add("biblegateway", {
 	category: "theology"
 })
 
-// config.add("video", {
-// 	title: "Youtube Video Command",
-// 	description: "This will send the top search result video from youtube platform. Sometimes, this feature has error, due to the limit of facebook messenger that can only sent upto 25mb.",
-// 	queries: [
-// 		"play the video ([\\w\\W]+) please",
-// 		"please play the video ([\\w\\W]+)"
-// 	],
-// 	commands: [
-// 		"video ([\\w\\W]+)$"
-// 	],
-// 	hasArgs: true,
-// 	category: "multimedia"
-// })
+config.add("video", {
+	title: "Youtube Video Command",
+	description: "This will send the top search result video from youtube platform. Sometimes, this feature has error, due to the limit of facebook messenger that can only sent upto 25mb.",
+	queries: [
+		"play the video ([\\w\\W]+) please",
+		"please play the video ([\\w\\W]+)"
+	],
+	commands: [
+		"video ([\\w\\W]+)$"
+	],
+	hasArgs: true,
+	category: "multimedia"
+})
 
 config.add("wiki", {
 	title: "Wikipedia Search",
