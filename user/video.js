@@ -13,7 +13,7 @@ const react =  require("../utils/react")
 const font = require("../utils/font")
 
 module.exports = async (api, event, regex) => {
-	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`)){
 		return api.sendMessage("Your request is still in progress, please wait for a moment", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReaction(react, event.messageID, (e) => {}, true)
@@ -22,7 +22,7 @@ module.exports = async (api, event, regex) => {
 	}
 	try{
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
-		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
+		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp4`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
 		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9-_]{11}$)/
@@ -64,16 +64,16 @@ module.exports = async (api, event, regex) => {
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
-		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`).on("end", async () => {
 			api.sendMessage({
 				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 				mentions:[{
 					id: event.senderID,
 					tag: user[event.senderID]['name']
 				}],
-				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
-					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
-						fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
+				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`).on("end", async () => {
+					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`)){
+						fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`, (err) => {
 							if(err){
 								console.log(err)
 							}
