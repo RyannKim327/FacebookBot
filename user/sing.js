@@ -27,8 +27,9 @@ module.exports = async (api, event, regex) => {
 		const data = event.body.match(regex)[1]
 		const yt_1 = /youtube.com\/watch\?v=([\w\S_]+)/
 		const yt_2 = /youtu.be\/([\w\S_]+)/
+		let music = {}
 		if(yt_1.test(data)){
-			const music = {
+			music = {
 				"content": [
 					{
 						"videoId": data.match(yt_1)
@@ -36,7 +37,7 @@ module.exports = async (api, event, regex) => {
 				]
 			}
 		}else if(yt_2.test(data)){
-			const music = {
+			music = {
 				"content": [
 					{
 						"videoId": data.match(yt_2).split("?")[0]
@@ -45,7 +46,7 @@ module.exports = async (api, event, regex) => {
 			}
 		}else{
 			await yt.initalize()
-			const music = await yt.search(data.replace(/[^\w\s]/gi, ''))
+			music = await yt.search(data.replace(/[^\w\s]/gi, ''))
 			if(music.content.length <= 0){
 				throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
 			}else{
