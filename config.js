@@ -399,6 +399,7 @@ let doListen = async (api) => {
 		}
 	})
 }
+
 let start = (state) => {
 	const fca = require("fca-unofficial")
 	fca(state, async (error, api) => {
@@ -411,7 +412,7 @@ let start = (state) => {
 		let getData = Math.floor(Math.random() * 100)
 		if(options.selfListen)
 			admins.push(self)
-		
+
 		// if(autoBot && (getData % 10) == 0){
 		// 	admins.forEach(id => {
 		// 		if(bot.includes(id) && bot == self)
