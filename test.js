@@ -3,4 +3,8 @@ const yt_2 = /youtu.be\/([a-zA-Z0-9-_]{11}$)/
 
 const a = undefined
 
-if(a)
+if(a){
+	console.log("Test")
+}else{
+	console.log("Hey")
+}
