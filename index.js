@@ -290,7 +290,7 @@ config.add("lexi", {
 	category: "multimedia"
 })
 
-config.add("sing", {
+config.add("music", {
 	title: "YouTube Music Command",
 	description: "A music command which gives you a youtube music based results",
 	queries: [
