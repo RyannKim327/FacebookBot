@@ -28,6 +28,18 @@ module.exports = async (api, event, regex) => {
 		const yt_1 = /youtube.com\/watch\?v=([\w\S_]+)/
 		const yt_2 = /youtu.be\/([\w\S_]+)/
 		if(yt_1.test(data)){
+			const music = {
+				"content": [
+					"videoId": data.math(yt_1)
+				]
+			}
+		}else if(yt_2.test(data)){
+			const music = {
+				"content": [
+					"videoId": data.math(yt_2)
+				]
+			}
+		}else{
 			await yt.initalize()
 			const music = await yt.search(data.replace(/[^\w\s]/gi, ''))
 			if(music.content.length <= 0){
@@ -37,14 +49,6 @@ module.exports = async (api, event, regex) => {
 					throw new Error(`${data.replace(/[^\w\s]/gi, '')} is not found on youtube music. Try to add the singer, maybe I can find it.`)
 				}
 			}
-		}else if(yt_2.test(data)){
-			const music = {
-				"content": [
-					"videoId": data.math(yt_1)
-				]
-			}
-		}else{
-			
 		}
 		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
 		const strm = ytdl(url, {
