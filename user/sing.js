@@ -31,13 +31,16 @@ module.exports = async (api, event, regex) => {
 			const music = {
 				"content": [
 					{
-					"videoId": data.match(yt_1)
+						"videoId": data.match(yt_1)
+					}
 				]
 			}
 		}else if(yt_2.test(data)){
 			const music = {
 				"content": [
-					"videoId": data.match(yt_2)
+					{
+						"videoId": data.match(yt_2)
+					}
 				]
 			}
 		}else{
