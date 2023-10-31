@@ -25,8 +25,8 @@ module.exports = async (api, event, regex) => {
 		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp4`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
-		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9-_]{11}$)/
-		const yt_2 = /youtu.be\/([a-zA-Z0-9-_]+)/
+		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/
+		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]+)/
 		let music = {}
 		if(yt_1.test(data)){
 			music = {
