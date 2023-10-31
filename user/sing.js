@@ -26,7 +26,7 @@ module.exports = async (api, event, regex) => {
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
 		const yt_1 = /youtube.com\/watch\?v=([\w\S]+)/
-		const yt_2 = /youtu.be\/([]+)/
+		const yt_2 = /youtu.be\/([\w\S]+)/
 		await yt.initalize()
 		const music = await yt.search(data.replace(/[^\w\s]/gi, ''))
 		if(music.content.length <= 0){
