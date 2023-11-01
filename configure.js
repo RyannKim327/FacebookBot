@@ -26,6 +26,7 @@ const insert = (file) => {
 	}
 }
 
+const start = ()
 
 module.exports = {
 	insert
