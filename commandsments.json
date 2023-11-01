@@ -1,7 +1,7 @@
 [
 	{
 		"title": "Admin Helpdesk",
-		
+		"description": ""
 	},{
 		"title": "Helpdesk",
 		"description": "This will print all the commands which is available on the bot.",
