@@ -6,6 +6,7 @@ const fs = require("fs")
 const jobs = require("./cron/start")
 const cron_api = require("./config/api")
 const openai = require("./auto/openai")
+const unsent = require("./utils/unsent")
 
 let admins = []
 let commands = []
@@ -49,9 +50,12 @@ const doListen = async (api) => {
 		}
 
 		if(antiUnsent[event.threadID][event.messageID]){
-			if(antiUnsent[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply"))
+			if(antiUnsent[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply")){
+				antiUnsent[event.threadID][event.messageID] = event
+			}
 		}
-		
+
+		unsent(api, event)
 
 	})
 }
