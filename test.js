@@ -16,9 +16,9 @@ const c = [
 for(let i in c){
 	const d = c[i]
 	for(let j in d.c){
-			if(j == "world"){
-				return console.log("test")
-			}
+		if(d.c[j] == "world"){
+			return console.log("test")
 		}
+	}
 }
 
