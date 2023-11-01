@@ -30,6 +30,8 @@
 		"permission": "user",
 		"script": "baybay"
 	},{
-		"title": "Beshiefier"
+		"title": "Beshiefier Command",
+		"description": "A dummy command just for fun",
+		"command": "beshy ([\\w\\W]+)"
 	}
 ]
