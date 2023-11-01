@@ -1,2 +1,2 @@
 language = "nodejs"
-run = "nodemon index"
+run = "npm start
