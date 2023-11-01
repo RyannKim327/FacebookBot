@@ -59,7 +59,9 @@ const doListen = async (api) => {
 
 		unsent(api, event, antiUnsent)
 
-		if(event.body != null && (pref.status || admins.includes(event.senderID) ||))
+		if(event.body != null && (pref.status || admins.includes(event.senderID))){
+			
+		}
 
 	})
 }
