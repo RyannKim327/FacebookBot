@@ -112,4 +112,5 @@ module.exports = () => {
 	app.listen(PORT, () => {
 		console.log("Listening to default port " + PORT)
 	})
+
 }
