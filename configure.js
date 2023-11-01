@@ -6,6 +6,7 @@ const jobs = require("./cron/start")
 const cron_api = require("./config/api")
 const openai = require("./auto/openai")
 const { type } = require("os")
+const { stat } = require("fs")
 
 let commands = []
 let options = {
@@ -29,7 +30,11 @@ const insert = (file) => {
 
 const start = (state) => {
 	if(typeof(state) != "object"){
-		return console.error(`This is not a JSON type`)
+		try{
+			state = JSON.parse(state)
+		}catch(e){
+			
+		}
 	}
 }
 
