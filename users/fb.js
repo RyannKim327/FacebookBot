@@ -35,7 +35,7 @@ module.exports = async (api, event, regex) => {
 					api.sendMessage({
 						body: message,
 						attachment: fs.createReadStream(__dirname + "/../temp/dp.jpg").on("end", async () => {
-							fs.unlink(__dirname + "/../dp.jpg", (err) => {})
+							fs.unlink(__dirname + "/../temp/dp.jpg", (err) => {})
 						})
 					}, event.threadID, event.messageID)
 				})
@@ -76,7 +76,7 @@ module.exports = async (api, event, regex) => {
 						api.sendMessage({
 							body: message,
 							attachment: fs.createReadStream(__dirname + "/../temp/dp.jpg").on("end", async () => {
-								fs.unlink(__dirname + "/../dp.jpg", (err) => {})
+								fs.unlink(__dirname + "/../temp/dp.jpg", (err) => {})
 							})
 						}, event.threadID, event.messageID)
 					})//api.sendMessage(message, event.threadID, event.messageID)
