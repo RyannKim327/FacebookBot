@@ -61,7 +61,9 @@ const doListen = async (api) => {
 
 		if(event.body != null && (pref.status || admins.includes(event.senderID))){
 			
-			
+			for(let c = 0; c < commands.length; c++){
+				const co,
+			}
 			if(body.startsWith(pref.prefix)){
 
 			}
