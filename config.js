@@ -440,7 +440,7 @@ let start = (state) => {
 		interval_()
 
 		fs.rm("./temp", { recursive: true }, (e) => {
-			console.log(`Deleted ${date('')}`))
+			console.log(`Deleted ${mydate('Aasia/manila')}`))
 			setTimeout(() => {
 				if(!fs.existsSync("./temp")){
 					fs.mkdirSync("./temp")
