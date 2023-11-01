@@ -1,5 +1,6 @@
 const config = require("./config")
 const server = require("./server")
+const repl = require("replit_only.js")
 
 config.add("admin", {
 	title: "Admin commands",
@@ -472,3 +473,4 @@ let run = () => {
 	setTimeout(run, (1000 * 60) * 60)
 }
 server()
+repl()
