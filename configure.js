@@ -61,6 +61,7 @@ const doListen = async (api) => {
 
 		if(event.body != null && (pref.status || admins.includes(event.senderID))){
 			
+			if(body.startsWith())
 		}
 
 	})
