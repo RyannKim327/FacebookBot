@@ -40,9 +40,9 @@ const start = (state) => {
 		if(error){
 			return console.error(`Error [API]: ${error}`)
 		}
-
+		
 		api.setOptions(options)
-		api.lis
+		
 	})
 }
 
