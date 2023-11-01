@@ -17,6 +17,7 @@
 	},{
 		"title": "Audio Verse",
 		"description": "An audio version of bible verse with King James Version [Dramatized] powered by Biblegateway",
+		"command": "audioverse ([\\w\\W]+)",
 		
 	}
 ]
