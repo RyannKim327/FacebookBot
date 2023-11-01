@@ -14,7 +14,7 @@ const c = [
 ]
 
 c.forEach(i => {
-	if(i == "world"){
+	if(i.c == "world"){
 		return console.log("test")
 	}
 })
