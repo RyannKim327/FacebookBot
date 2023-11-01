@@ -12,5 +12,7 @@ const insert = (file) => {
 	if(typeof(file) != "object"){
 		file = JSON.parse(file)
 	}
-	for(let)
+	for(let c = 0; c < file.length; c++){
+		let command = 
+	}
 }
