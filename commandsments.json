@@ -19,7 +19,7 @@
 		"description": "An audio version of bible verse with King James Version [Dramatized] powered by Biblegateway",
 		"command": "audioverse ([\\w\\W]+)",
 		"type": "user",
-		"permission": "user"
+		"permission": "user",
 		"category": "theology",
 		"script": "audioverse"
 	},{
@@ -27,6 +27,7 @@
 		"description": "A command which may help you to transfer alphabet to baybayin",
 		"command": "baybay ([\\w\\W]+)",
 		"type": "user",
-		"permission": "user"
+		"permission": "user",
+		"script": "baybay"
 	}
 ]
