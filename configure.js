@@ -38,8 +38,11 @@ const start = (state) => {
 	}
 	fca(state, (error, api) => {
 		if(error){
-			return console.error()
+			return console.error(`Error [API]: ${error}`)
 		}
+
+		api.setOptions(options)
+		api.lis
 	})
 }
 
