@@ -3,6 +3,8 @@
 		"title": "Helpdesk",
 		"description": "This will print all the commands which is available on the bot.",
 		"command": "help",
-		"type"
+		"type": "user",
+		"permission": "user",
+		"category": "one"
 	}
 ]
