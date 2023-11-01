@@ -112,7 +112,12 @@ config.add("prefix", {
 })
 
 config.add("refresh", {
-	title
+	title: "Refresh Server",
+	description: "This is just to refresh the server remotely",
+	commands: [
+		"rs"
+	],
+	admin: true
 })
 
 config.add("toggle", {
