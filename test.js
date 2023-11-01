@@ -4,7 +4,11 @@ const yt_2 = /youtu.be\/([a-zA-Z0-9-_]{11}$)/
 const c = [
 	{
 		c: [
-			"hello"
+			"hello", "world"
+		]
+	},{
+		c: [
+			"hi", "world"
 		]
 	}
 ]
