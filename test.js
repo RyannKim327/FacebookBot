@@ -14,13 +14,4 @@ const c = [
 ]
 
 const a = (next) => {
-	for(let i in c){
-		const d = c[i]
-		for(let j in d.c){
-			if(d.c[j] != "world"){
-				next()
-			}
-		}
-	}
-	console.log("test")
 }
