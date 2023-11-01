@@ -38,7 +38,9 @@ const doListen = async (api) => {
 			return console.error(`Error [Events]: ${error.message}`)
 		}
 
-		
+		if(options.autoMarkRead){
+			await api.ma
+		}
 	})
 }
 
