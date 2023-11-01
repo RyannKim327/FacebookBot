@@ -69,8 +69,8 @@ const doListen = async (api) => {
 					if(command.permission == "user"){
 						const script = require(`./${command.type}/${command.script}`)
 						if(reg.test(event.body)){
-							if(command.command.includes())
-							return script()
+							if(command.command.includes("(") && command.command.includes(")"))
+							return script(api, event, )
 						}
 					}
 				}
