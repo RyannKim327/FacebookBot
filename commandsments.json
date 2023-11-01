@@ -4,8 +4,7 @@
 		"description": "This will print all the commands which is available only for admin",
 		"command": "admin",
 		"type": "admin",
-		"permission": "admin",
-		ca
+		"permission": "admin"
 	},{
 		"title": "Helpdesk",
 		"description": "This will print all the commands which is available on the bot.",
@@ -13,5 +12,7 @@
 		"type": "user",
 		"permission": "user",
 		"category": "once"
+	},{
+
 	}
 ]
