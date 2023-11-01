@@ -18,7 +18,9 @@ let options = {
 	updatePresence: true,
 }
 
-const addAdmin()
+const addAdmin = (ID) => {
+	admins.push(ID)
+} 
 
 const insert = (file) => {
 	if(typeof(file) != "object"){
