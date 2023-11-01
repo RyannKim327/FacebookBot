@@ -111,15 +111,6 @@ config.add("prefix", {
 	admin: true
 })
 
-config.add("refresh", {
-	title: "Refresh Server",
-	description: "This is just to refresh the server remotely",
-	commands: [
-		"rs"
-	],
-	admin: true
-})
-
 config.add("toggle", {
 	title: "Toggle Status",
 	description: "For admin use",
