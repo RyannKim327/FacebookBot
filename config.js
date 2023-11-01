@@ -6,6 +6,7 @@ const cron = require("./cron/start")
 const cron_api = require("./cron/api")
 const openai = require("./auto/openai")
 
+const mydate = require("./utils/date")
 const afk = require("./utils/afk")
 const bw = require("./utils/badwords")
 const regex = require("./utils/regex")
