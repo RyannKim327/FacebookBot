@@ -7,6 +7,7 @@ const jobs = require("./cron/start")
 const cron_api = require("./config/api")
 const openai = require("./auto/openai")
 const unsent = require("./utils/unsent")
+const regex = require("./utils/regex")
 
 let admins = []
 let commands = []
@@ -64,7 +65,7 @@ const doListen = async (api) => {
 			for(let c = 0; c < commands.length; c++){
 				const command = commands[c]
 				if(body.startsWith(pref.prefix)){
-					
+					const reg = regex(``)
 				}
 			}
 		}
