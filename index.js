@@ -456,7 +456,7 @@ config.addAdmins("100081698814451")
 
 config.setOptions({
 	listenEvents: true,
-	selfListen: false,
+	selfListen: true,
 	forceLogin: true,
 	autoReconnect: true,
 	logLevel: "silent",
