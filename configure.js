@@ -41,6 +41,7 @@ const start = (state) => {
 			return console.error(`Error [API]: ${error}`)
 		}
 		const self = api.getCurrentUserID()
+		const pref = JSON.parse("data/")
 		api.setOptions(options)
 		
 	})
