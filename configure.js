@@ -41,7 +41,7 @@ const start = (state) => {
 			return console.error(`Error [API]: ${error}`)
 		}
 		const self = api.getCurrentUserID()
-		const pref = JSON.parse("data/")
+		const pref = JSON.parse(fs.readFileSync("data/preferences.json", "utf-8"))
 		api.setOptions(options)
 		
 	})
