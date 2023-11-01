@@ -3,3 +3,4 @@ node_modules/*
 *.traineddata
 .env
 replit_only.js
+temp/*
