@@ -66,10 +66,12 @@ const doListen = async (api) => {
 				const command = commands[c]
 				if(body.startsWith(pref.prefix)){
 					const reg = regex(`${command.command}`)
-					const reg2 = regex(`${event.body}`)
 					if(command.permission == "user"){
 						const script = require(`./${command.type}/${command.script}`)
-						if(reg.test())
+						if(reg.test(event.body)){
+							if(command.command.includes())
+							return script()
+						}
 					}
 				}
 			}
