@@ -24,6 +24,6 @@
 	},{
 		"title": "Baybayin Transliterator",
 		"description": "A command which may help you to transfer alphabet to baybayin",
-		"command"
+		"command": "baybay ([\\w\\W]+)"
 	}
 ]
