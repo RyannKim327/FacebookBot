@@ -22,4 +22,5 @@ const a = (next) => {
 			}
 		}
 	}
+	console.log("test")
 }
