@@ -49,7 +49,7 @@ const doListen = async (api) => {
 		}
 
 		if(antiUnsent[event.threadID][event.messageID]){
-			
+			if(antiUnsent[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply"))
 		}
 		
 
