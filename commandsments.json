@@ -23,6 +23,7 @@
 		"script": "audioverse"
 	},{
 		"title": "Baybayin Transliterator",
-		"description": ""
+		"description": "A command which may help you to transfer alphabet to baybayin",
+		"command"
 	}
 ]
