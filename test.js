@@ -12,3 +12,7 @@ const c = [
 		]
 	}
 ]
+
+c.forEach(i => {
+	if
+})
