@@ -15,6 +15,7 @@
 		"category": "once",
 		"script": "help"
 	},{
-		"title": "Audio Verse"
+		"title": "Audio Verse",
+		"description": "An audio version of bible verse with"
 	}
 ]
