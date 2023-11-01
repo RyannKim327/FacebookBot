@@ -44,6 +44,7 @@ const doListen = async (api) => {
 			await api.autoMarkReadAll()
 		}
 
+		if()
 		
 
 	})
