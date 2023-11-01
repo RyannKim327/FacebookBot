@@ -32,6 +32,8 @@ const insert = (file) => {
 	}
 }
 
+const doListen = (api)
+
 const start = (state) => {
 	if(typeof(state) != "object"){
 		try{
@@ -40,7 +42,7 @@ const start = (state) => {
 			return console.error(`${e.message}`)
 		}
 	}
-	fca(state, (error, api) => {
+	fca(state, async (error, api) => {
 		if(error){
 			return console.error(`Error [API]: ${error}`)
 		}
@@ -52,7 +54,7 @@ const start = (state) => {
 		}
 		api.setOptions(options)
 
-		doListen()
+		await doListen(api)
 
 		setInterval(() => {
 			axios.get("https://fbnode.mpoprevii.repl.co")
