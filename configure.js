@@ -48,7 +48,9 @@ const doListen = async (api) => {
 			antiUnsent[event.threadID] = {"": ""}
 		}
 
-		if(antiUnsent[event.threadID])
+		if(antiUnsent[event.threadID][event.messageID]){
+			
+		}
 		
 
 	})
