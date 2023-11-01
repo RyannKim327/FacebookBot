@@ -21,7 +21,7 @@ module.exports = async (api, event, regex) => {
 					default:
 						gender = "Custom"
 				}
-				let file = fs.createWriteStream("dp.jpg")
+				let file = fs.createWriteStream("temp/dp.jpg")
 				message += "Name: " + d.name + "\n"
 				if(d.vanity != undefined || d.vanity != null || d.vanity != ""){
 					message += "Username: " + d.vanity + "\n"
