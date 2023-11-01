@@ -65,11 +65,11 @@ const doListen = async (api) => {
 			for(let c = 0; c < commands.length; c++){
 				const command = commands[c]
 				if(body.startsWith(pref.prefix)){
-					const reg = regex(`${event.body}`)
-					const reg2 = regex(`${command.command}`)
+					const reg = regex(`${command.command}`)
+					const reg2 = regex(`${event.body}`)
 					if(command.permission == "user"){
 						const script = require(`./${command.type}/${command.script}`)
-						if()
+						if(reg.test())
 					}
 				}
 			}
