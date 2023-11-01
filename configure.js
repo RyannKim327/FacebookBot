@@ -41,6 +41,8 @@ const doListen = async (api) => {
 			return console.error(`Error [Events]: ${error.message}`)
 		}
 
+
+		
 		if(options.autoMarkRead){
 			await api.autoMarkReadAll()
 		}
@@ -55,7 +57,9 @@ const doListen = async (api) => {
 			}
 		}
 
-		unsent(api, event)
+		unsent(api, event, antiUnsent)
+
+		if(event.body != null && pref)
 
 	})
 }
