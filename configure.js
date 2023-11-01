@@ -60,8 +60,11 @@ const start = (state) => {
 		fs.rm("./temp", {recursive: true}, (e) => {
 			console.log(`Remove temp folder: Done`)
 			setTimeout(() => {
-				
-			})
+				if(!fs.existsSync("./temp")){
+					console.log(`Retrieving temp folder: Done`)
+					fs.mkdirSync("./temp")
+				}
+			}, 500)
 		})
 
 		api.setOptions(options)
