@@ -1,3 +1,5 @@
 *.json
 temp
 data
+configure.js
+test.js
