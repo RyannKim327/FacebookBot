@@ -32,6 +32,9 @@
 	},{
 		"title": "Beshiefier Command",
 		"description": "A dummy command just for fun",
-		"command": "beshy ([\\w\\W]+)"
+		"command": "beshy ([\\w\\W]+)",
+		"type": "user",
+		"permission": "user",
+		"script": "beshy"
 	}
 ]
