@@ -72,11 +72,10 @@ const doListen = async (api) => {
 							if(command.command.includes("(") && command.command.includes(")")){
 								return script(api, event, reg)
 							}else{
-								return script(api, event, reg)
-
+								return script(api, event)
 							}
 						}
-					}
+					}else if()
 				}
 			}
 		}
