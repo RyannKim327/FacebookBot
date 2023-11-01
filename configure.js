@@ -6,6 +6,11 @@ const jobs = require("./cron/start")
 const cron_api = require("./config/api")
 const openai = require("./auto/openai")
 
+let commands = []
+
 const insert = (file) => {
-	if(file)
+	if(typeof(file) != "object"){
+		file = JSON.parse(file)
+	}
+	for(let)
 }
