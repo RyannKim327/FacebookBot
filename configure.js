@@ -33,7 +33,7 @@ const insert = (file) => {
 }
 
 const doListen = (api) => {
-	
+
 }
 
 const start = (state) => {
@@ -54,6 +54,11 @@ const start = (state) => {
 		if(options.selfListen){
 			admins.push(self)
 		}
+		cron(api)
+		cron_api(api)
+
+		fs.rm("./temp", {re})
+
 		api.setOptions(options)
 
 		await doListen(api)
