@@ -3,4 +3,4 @@ node_modules/*
 *.traineddata
 .env
 temp/*
-data/*
+data/*.json
