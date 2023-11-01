@@ -14,7 +14,9 @@ const c = [
 ]
 
 c.forEach(i => {
-	if(i.c == "world"){
-		return console.log("test")
-	}
+	i.c.forEach(j =>{
+		if(j == "world"){
+			return console.log("test")
+		}
+	})
 })
