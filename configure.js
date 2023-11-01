@@ -35,8 +35,10 @@ const insert = (file) => {
 const doListen = async (api) => {
 	return api.listen(async (error, event) => {
 		if(error){
-			return console.error(`Error [Events]: {}`)
+			return console.error(`Error [Events]: ${error.message}`)
 		}
+
+		
 	})
 }
 
@@ -50,7 +52,7 @@ const start = (state) => {
 	}
 	fca(state, async (error, api) => {
 		if(error){
-			return console.error(`Error [API]: ${error}`)
+			return console.error(`Error [API]: ${error.message}`)
 		}
 		const self = api.getCurrentUserID()
 		const pref = JSON.parse(fs.readFileSync("data/preferences.json", "utf-8"))
