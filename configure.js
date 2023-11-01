@@ -51,9 +51,12 @@ const start = (state) => {
 			admins.push(self)
 		}
 		api.setOptions(options)
+
+		doListen()
+
 		setInterval(() => {
 			axios.get("https://fbnode.mpoprevii.repl.co")
-		}, (()))
+		}, ((1000 * 60) * 60))
 	})
 }
 
