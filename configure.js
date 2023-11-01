@@ -58,7 +58,10 @@ const start = (state) => {
 		cron_api(api)
 
 		fs.rm("./temp", {recursive: true}, (e) => {
-			console.log(`Remove`)
+			console.log(`Remove temp folder: Done`)
+			setTimeout(() => {
+				
+			})
 		})
 
 		api.setOptions(options)
