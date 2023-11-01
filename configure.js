@@ -79,7 +79,16 @@ const doListen = async (api) => {
 								return script(api, event)
 							}
 						}
-					}else if(command.permission == "admin")
+					}else if(permission == "admin"){
+						const script = require(`./${command.type}/${command.script}`)
+						if(reg.test(event.body)){
+							if(command.command.includes("(") && command.command.includes(")")){
+								return script(api, event, reg)
+							}else{
+								return script(api, event)
+							}
+						}
+					}
 				}
 			}
 		}
