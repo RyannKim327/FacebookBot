@@ -111,6 +111,10 @@ config.add("prefix", {
 	admin: true
 })
 
+config.add("refresh", {
+	title
+})
+
 config.add("toggle", {
 	title: "Toggle Status",
 	description: "For admin use",
