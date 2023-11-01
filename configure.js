@@ -40,7 +40,7 @@ const start = (state) => {
 		if(error){
 			return console.error(`Error [API]: ${error}`)
 		}
-		
+		const self = api.getCurrentUserID()
 		api.setOptions(options)
 		
 	})
