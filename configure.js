@@ -32,7 +32,9 @@ const insert = (file) => {
 	}
 }
 
-const doListen = (api)
+const doListen = (api) => {
+	
+}
 
 const start = (state) => {
 	if(typeof(state) != "object"){
