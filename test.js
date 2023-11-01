@@ -14,10 +14,11 @@ const c = [
 ]
 
 for(let i in c){
-	c[i].c.forEach(j =>{
-		if(j == "world"){
-			return console.log("test")
+	const d = c[i]
+	for(let j in d.c){
+			if(j == "world"){
+				return console.log("test")
+			}
 		}
-	})
 }
 
