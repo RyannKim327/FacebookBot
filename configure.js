@@ -65,7 +65,7 @@ const doListen = async (api) => {
 			for(let c = 0; c < commands.length; c++){
 				const command = commands[c]
 				if(body.startsWith(pref.prefix)){
-					const reg = regex(`${pref}`)
+					const reg = regex(`${pref}${}`)
 				}
 			}
 		}
