@@ -16,4 +16,6 @@ const c = [
 
 const a = JSON.parse(fs.readFileSync("x.json", "utf-8"))
 
-
+for(let c in a){
+	console.log(a[c])
+}
