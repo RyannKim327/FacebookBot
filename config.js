@@ -180,7 +180,7 @@ let system = (api, event, r, q, _prefix) => {
 						script(api, event)
 					}
 				}else{
-					script = require("./user/" + r.script)
+					script = require("./users/" + r.script)
 					if(args){
 						cd(api, event, _cats, json)
 						script(api, event, reg)
