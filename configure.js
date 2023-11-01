@@ -6,8 +6,7 @@ const fs = require("fs")
 const jobs = require("./cron/start")
 const cron_api = require("./config/api")
 const openai = require("./auto/openai")
-const { type } = require("os")
-const { stat } = require("fs")
+
 
 let commands = []
 let options = {
@@ -44,7 +43,9 @@ const start = (state) => {
 		const self = api.getCurrentUserID()
 		const pref = JSON.parse(fs.readFileSync("data/preferences.json", "utf-8"))
 		
-		if 
+		if(options.selfListen){
+
+		}
 		api.setOptions(options)
 		
 	})
