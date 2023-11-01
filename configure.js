@@ -7,7 +7,7 @@ const jobs = require("./cron/start")
 const cron_api = require("./config/api")
 const openai = require("./auto/openai")
 
-
+let admins = []
 let commands = []
 let options = {
 	listenEvents: true,
@@ -17,6 +17,8 @@ let options = {
 	logLevel: "silent",
 	updatePresence: true,
 }
+
+const addAdmin()
 
 const insert = (file) => {
 	if(typeof(file) != "object"){
@@ -44,7 +46,7 @@ const start = (state) => {
 		const pref = JSON.parse(fs.readFileSync("data/preferences.json", "utf-8"))
 		
 		if(options.selfListen){
-
+			admins.push(self)
 		}
 		api.setOptions(options)
 		
