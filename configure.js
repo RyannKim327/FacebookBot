@@ -68,7 +68,7 @@ const doListen = async (api) => {
 					const reg = regex(`${event.body}`)
 					const reg2 = regex(`${command.command}`)
 					if(command.type == "user"){
-						// test
+						
 					}
 				}
 			}
