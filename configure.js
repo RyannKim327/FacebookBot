@@ -44,9 +44,11 @@ const doListen = async (api) => {
 			await api.autoMarkReadAll()
 		}
 
-		if(antiUnsent[event.threadID][event.messageID] == undefined){
-			antiUnsent[event.threadID]
+		if(antiUnsent[event.threadID] == undefined){
+			antiUnsent[event.threadID] = {"": ""}
 		}
+
+		if(antiUnsent[event.threadID])
 		
 
 	})
