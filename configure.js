@@ -9,7 +9,11 @@ const openai = require("./auto/openai")
 let commands = []
 let options = {
 	listenEvents: true,
-	selfListen: false
+	selfListen: false,
+	forceLogin: true,
+	autoReconnect: true,
+	logLevel: "silent",
+	updatePresence: true,
 }
 
 const insert = (file) => {
