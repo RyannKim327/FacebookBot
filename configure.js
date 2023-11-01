@@ -41,8 +41,8 @@ const doListen = async (api) => {
 			return console.error(`Error [Events]: ${error.message}`)
 		}
 
+		let pref = JSON.parse(fs.readFileSync("data/preferences", "utf-8"))
 
-		
 		if(options.autoMarkRead){
 			await api.autoMarkReadAll()
 		}
@@ -59,7 +59,7 @@ const doListen = async (api) => {
 
 		unsent(api, event, antiUnsent)
 
-		if(event.body != null && pref)
+		if(event.body != null && (pref.))
 
 	})
 }
