@@ -19,6 +19,10 @@
 		"description": "An audio version of bible verse with King James Version [Dramatized] powered by Biblegateway",
 		"command": "audioverse ([\\w\\W]+)",
 		"type": "user",
-		"category": "theology"
+		"category": "theology",
+		"script": "audioverse"
+	},{
+		"title": "Baybayin Transliterator",
+		"description": ""
 	}
 ]
