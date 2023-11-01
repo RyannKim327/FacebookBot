@@ -68,7 +68,8 @@ const doListen = async (api) => {
 					const reg = regex(`${event.body}`)
 					const reg2 = regex(`${command.command}`)
 					if(command.permission == "user"){
-						const script = require(`./${command.type}/`)
+						const script = require(`./${command.type}/${command.script}`)
+						
 					}
 				}
 			}
