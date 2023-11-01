@@ -33,9 +33,10 @@ const start = (state) => {
 		try{
 			state = JSON.parse(state)
 		}catch(e){
-			
+			return console.error(`${e.message}`)
 		}
 	}
+	fca(state)
 }
 
 module.exports = {
