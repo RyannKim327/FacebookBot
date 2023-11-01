@@ -7,6 +7,10 @@ const cron_api = require("./config/api")
 const openai = require("./auto/openai")
 
 let commands = []
+let options = {
+	listenEvents: true,
+	selfListen: false
+}
 
 const insert = (file) => {
 	if(typeof(file) != "object"){
@@ -17,7 +21,6 @@ const insert = (file) => {
 		commands.push(command)
 	}
 }
-
 
 
 module.exports = {
