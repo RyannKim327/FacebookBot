@@ -13,6 +13,7 @@ const insert = (file) => {
 		file = JSON.parse(file)
 	}
 	for(let c = 0; c < file.length; c++){
-		let command = 
+		let command = file[c]
+		commands.ap
 	}
 }
