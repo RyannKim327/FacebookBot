@@ -378,7 +378,7 @@ config.add("video", {
 		"please play the video ([\\w\\W]+)"
 	],
 	commands: [
-		"video ([\\w\\W]+)$"
+		"video ([\\w\\W]+)"
 	],
 	hasArgs: true,
 	category: "multimedia"
