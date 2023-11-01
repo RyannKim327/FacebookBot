@@ -33,7 +33,7 @@ const insert = (file) => {
 }
 
 const doListen = (api) => {
-
+	api.listen()
 }
 
 const start = (state) => {
