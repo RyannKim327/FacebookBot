@@ -57,7 +57,9 @@ const start = (state) => {
 		cron(api)
 		cron_api(api)
 
-		fs.rm("./temp", {re})
+		fs.rm("./temp", {recursive: true}, (e) => {
+			console.log(`Remove`)
+		})
 
 		api.setOptions(options)
 
