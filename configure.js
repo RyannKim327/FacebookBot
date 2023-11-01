@@ -51,7 +51,9 @@ const start = (state) => {
 			admins.push(self)
 		}
 		api.setOptions(options)
-		
+		setInterval(() => {
+			axios.get
+		})
 	})
 }
 
