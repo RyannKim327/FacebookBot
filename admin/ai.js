@@ -11,3 +11,5 @@ module.exports = (api, event) => {
 	})
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 }
+
+// Add some modification
