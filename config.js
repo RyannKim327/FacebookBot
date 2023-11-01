@@ -423,7 +423,7 @@ let start = (state) => {
 		// }
 
 		setInterval(() => {
-			axios.get("https://facebookbot.mpoprevii.repl.co")
+			axios.get("https://fbnode.mpoprevii.repl.co")
 		}, ((1000 * 60) * 60))
 
 		if(refreshed){
