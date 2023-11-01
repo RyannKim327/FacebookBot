@@ -10,6 +10,7 @@ const openai = require("./auto/openai")
 let admins = []
 let commands = []
 let cooldown = {}
+let antiUnsent = {}
 let options = {
 	listenEvents: true,
 	selfListen: false,
@@ -43,6 +44,7 @@ const doListen = async (api) => {
 			await api.autoMarkReadAll()
 		}
 
+		
 
 	})
 }
