@@ -16,4 +16,4 @@ const c = [
 
 const a = JSON.parse(fs.readFileSync("x.json", "utf-8"))
 
-console.log(a)
+
