@@ -67,7 +67,7 @@ const doListen = async (api) => {
 				if(body.startsWith(pref.prefix)){
 					const reg = regex(`${event.body}`)
 					const reg2 = regex(`${command.command}`)
-					
+					if(command.type == "user")
 				}
 			}
 		}
