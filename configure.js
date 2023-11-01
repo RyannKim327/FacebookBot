@@ -32,8 +32,12 @@ const insert = (file) => {
 	}
 }
 
-const doListen = (api) => {
-	api.listen()
+const doListen = async (api) => {
+	return api.listen(async (error, event) => {
+		if(error){
+			return console.error(`Error [Events]: {}`)
+		}
+	})
 }
 
 const start = (state) => {
