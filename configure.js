@@ -1,6 +1,7 @@
 const fca = require("fca-unofficial")
 const cron = require("node-cron")
 const axios = require("axios")
+const fs = require("fs")
 
 const jobs = require("./cron/start")
 const cron_api = require("./config/api")
@@ -42,6 +43,8 @@ const start = (state) => {
 		}
 		const self = api.getCurrentUserID()
 		const pref = JSON.parse(fs.readFileSync("data/preferences.json", "utf-8"))
+		
+		if 
 		api.setOptions(options)
 		
 	})
