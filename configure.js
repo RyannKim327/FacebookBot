@@ -5,6 +5,7 @@ const axios = require("axios")
 const jobs = require("./cron/start")
 const cron_api = require("./config/api")
 const openai = require("./auto/openai")
+const { type } = require("os")
 
 let commands = []
 let options = {
@@ -26,7 +27,11 @@ const insert = (file) => {
 	}
 }
 
-const start = ()
+const start = (state) => {
+	if(typeof(state) != "object"){
+		return console.error(`This is not a JSON type`)
+	}
+}
 
 module.exports = {
 	insert
