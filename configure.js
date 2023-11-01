@@ -14,6 +14,12 @@ const insert = (file) => {
 	}
 	for(let c = 0; c < file.length; c++){
 		let command = file[c]
-		commands.ap
+		commands.push(command)
 	}
+}
+
+
+
+module.exports = {
+	insert
 }
