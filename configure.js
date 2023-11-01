@@ -6,4 +6,6 @@ const jobs = require("./cron/start")
 const cron_api = require("./config/api")
 const openai = require("./auto/openai")
 
-const import = () => {}
+const insert = (file) => {
+	if(file)
+}
