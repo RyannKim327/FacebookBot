@@ -36,7 +36,11 @@ const start = (state) => {
 			return console.error(`${e.message}`)
 		}
 	}
-	fca(state)
+	fca(state, (error, api) => {
+		if(error){
+			return console.error()
+		}
+	})
 }
 
 module.exports = {
