@@ -61,6 +61,7 @@ module.exports = async (api) => {
 			let i = 0
 			data.forEach(async (r) => {
 				let timer = Math.floor(Math.random() * 60000)
+				console.log(timer)
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
 				let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
