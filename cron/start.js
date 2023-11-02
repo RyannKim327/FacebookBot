@@ -38,7 +38,11 @@ module.exports = async (api) => {
 		schedule: true,
 		timezone: "Asia/Manila"
 	})
+<<<<<<< HEAD
 	cronjob.schedule("37 8 * * *", async () => {
+=======
+	cronjob.schedule("40 8 * * *", async () => {
+>>>>>>> 174af28791644eecbc458f6a0ebf9c9cce6cbb2f
 		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		let q_data = await quote()
 		let time = await today()
