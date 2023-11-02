@@ -52,7 +52,6 @@ module.exports = async (api) => {
 		let tlb1 = await gateway.dailyVerse(gateway.version.ENG_NEW_LIVING_TRANSLATION, [year, month, day])
 		let tlb = await gateway.verse(tlb1[0].book, gateway.version.ENG_KING_JAMES_VERSION)
 		let book = ""
-		console.log(tlb)
 		for(let i in tlb){
 			book += `\n${tlb[i].book}\n${tlb[i].verse}`
 		}
@@ -61,7 +60,6 @@ module.exports = async (api) => {
 			let i = 0
 			data.forEach(async (r) => {
 				let timer = Math.floor(Math.random() * 60000)
-				console.log(timer)
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
 				let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
