@@ -472,5 +472,7 @@ module.exports = {
 	time,
 	getAdmins,
 	getName,
-	getPrefix
+	getPrefix,
+
+	vips
 }
