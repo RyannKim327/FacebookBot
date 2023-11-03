@@ -85,7 +85,10 @@ let add = (script, data) => {
 let addAdmins = (data) => {
 	admins.push(data)
 }
-let AddVip 
+let addVip = (id) => {
+	vips +=  `${id}, `
+}
+let removeVip
 let setName = (data) => {
 	name = data
 }
