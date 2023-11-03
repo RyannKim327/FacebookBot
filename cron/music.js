@@ -22,17 +22,7 @@ module.exports = async (api, event) => {
 	if(!fs.existsSync(name)){
 		try{
 			const file = fs.createWriteStream(`temp/${event}_worship.mp3`)
-			const data = song
-			await yt.initalize()
-			const music = await yt.search(data.replace(/[^\w\s]/gi, ''))
-			if(music.content.length <= 0){
-				throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
-			}else{
-				if(music.content[0].videoId == undefined){
-					throw new Error(`${data.replace(/[^\w\s]/gi, '')} is not found on youtube music. Try to add the singer, maybe I can find it.`)
-				}
-			}
-			const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
+			const url = `https://www.youtube.com/watch?v=${song}`
 			const strm = ytdl(url, {
 				quality: "lowest"
 			})
