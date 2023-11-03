@@ -1,4 +1,4 @@
-const { vips } = require("./../config")
+let { vips } = require("./../config")
 
 let checker = (id) => {
 	return vips.includes(id)
