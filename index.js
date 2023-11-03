@@ -143,6 +143,11 @@ config.add("updates", {
 	hasArgs: true
 })
 
+config.add("worship_cron", {
+	title: "Worship Song Cron test",
+	description: ""
+})
+
 // config.add("worship", {
 // 	title: "New Worship song",
 // 	description: "Add new worship song playlist.",
