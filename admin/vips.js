@@ -14,7 +14,7 @@ module.exports = (api, event) => {
 			setTimeout(() => {
 				api.sendMessage("Expired na yung 1 hr free trial.", event.threadID, (e, m) => {}, event.messageReply.messageID)
 				vips.replace(event.messageReply.senderID, "")
-			}, ((1000 * 60) * 60))
+			}, ((1000 * 60)))
 		}
 	}
 }
