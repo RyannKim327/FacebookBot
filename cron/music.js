@@ -47,6 +47,7 @@ module.exports = async (api, event) => {
 					})
 				}else{
 					let user = await api.getUserInfo(event)
+					console.log(user[event])
 					let name = `${gender(user[event]['firstName']['eng'])} ${user[event]['name']}`
 					api.sendMessage({
 						body: `Here's a random worship song sent to you ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
