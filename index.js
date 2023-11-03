@@ -152,7 +152,7 @@ config.add("worship_cron", {
 	admin: true
 })
 
-config.add("vip", {	
+config.add("vips", {	
 	title: "Worship Song Cron test",
 	description: "Test",
 	commands: [
