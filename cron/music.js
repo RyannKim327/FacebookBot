@@ -19,7 +19,7 @@ module.exports = async (api, event) => {
 	let songs = json.links
 	let song = songs[Math.floor(Math.random() * songs.length)]
 	if(!fs.existsSync(name)){
-		let thread = await 
+		let thread = await api.getThreadInfo(event)
 		try{
 			const file = fs.createWriteStream(`temp/${event}_worship.mp3`)
 			const url = `https://www.youtube.com/watch?v=${song}`
@@ -28,24 +28,41 @@ module.exports = async (api, event) => {
 			})
 			const info = await ytdl.getInfo(url)
 			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
-				
-				api.sendMessage({
-					body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
-					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
-						if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
-							fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
-								if(err){
-									console.log(err)
-								}
-								console.log("Done")
-							})
+				if(thread.isGroup){
+					api.sendMessage({
+						body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
+							if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
+								fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
+									if(err){
+										console.log(err)
+									}
+									console.log("Done")
+								})
+							}
+						})
+					}, event, (e, m) => {
+						if(e){
+							afk(api, json2)
 						}
 					})
-				}, event, (e, m) => {
-					if(e){
-						afk(api, json2)
-					}
-				})
+					api.sendMessage({
+						body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
+							if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
+								fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
+									if(err){
+										console.log(err)
+									}
+									console.log("Done")
+								})
+							}
+						})
+					}, event, (e, m) => {
+						if(e){
+							afk(api, json2)
+						}
+					})
 			})
 		}catch(err){
 			console.log(err)
