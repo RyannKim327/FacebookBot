@@ -30,7 +30,7 @@ module.exports = async (api, event) => {
 			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
 				if(thread.isGroup){
 					api.sendMessage({
-						body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+						body: `Here's a random worship song sent to ${}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
 							if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
 								fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
@@ -46,6 +46,7 @@ module.exports = async (api, event) => {
 							afk(api, json2)
 						}
 					})
+				}else{
 					api.sendMessage({
 						body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
@@ -63,6 +64,7 @@ module.exports = async (api, event) => {
 							afk(api, json2)
 						}
 					})
+				}
 			})
 		}catch(err){
 			console.log(err)
