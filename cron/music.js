@@ -47,7 +47,8 @@ module.exports = async (api, event) => {
 					})
 				}else{
 					let user = await api.getUserInfo(event)
-					let name = `${gender(user[event]['firstName']['eng'])} ${user[event]['name']}`
+					const g = 
+					let name = `${g} ${user[event]['name']}`
 					api.sendMessage({
 						body: `Here's a random worship song sent to you ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
