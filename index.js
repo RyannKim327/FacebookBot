@@ -155,11 +155,11 @@ config.add("worship_cron", {
 	]
 })
 
-config.add("worship_cron", {
+config.add("vip", {
 	title: "Worship Song Cron test",
 	description: "Test",
 	commands: [
-		"worship cron"
+		"vip"
 	],
 	admin: true
 })
