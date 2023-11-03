@@ -149,7 +149,10 @@ config.add("worship_cron", {
 	commands: [
 		"worship cron"
 	],
-	admin: true
+	admin: true,
+	type: [
+		"message_reply"
+	]
 })
 
 config.add("worship_cron", {
