@@ -149,10 +149,7 @@ config.add("worship_cron", {
 	commands: [
 		"worship cron"
 	],
-	admin: true,
-	type: [
-		"message_reply"
-	]
+	admin: true
 })
 
 config.add("vip", {
@@ -161,7 +158,10 @@ config.add("vip", {
 	commands: [
 		"vip"
 	],
-	admin: true
+	admin: true,
+	type: [
+		"message_reply"
+	]
 })
 
 // config.add("worship", {
