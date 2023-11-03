@@ -5,7 +5,7 @@ let checker = (id) => {
 }
 
 module.exports = (api, event) => {
-	console.log(vips)
+	console.log(checkVip())
 	if(event.type == "message_reply"){
 		if(checker(event.messageReply.senderID)){
 			api.sendMessage("User is already a VIP member", event.threadID, (e, m) => {})
