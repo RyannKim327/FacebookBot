@@ -19,9 +19,3 @@ const a = JSON.parse(fs.readFileSync("x.json", "utf-8"))
 for(let c in a){
 	console.log(a[c])
 }
-
-"R R R         y    y"
-"R        R        y y"
-"R R R               y"
-"R      R             y"
-"R       R            y"
