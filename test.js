@@ -22,6 +22,6 @@ for(let c in a){
 
 "R R R"
 "R        R"
-"R"
-"R"
-"R"
+"R R R"
+"R     R"
+"R       R"
