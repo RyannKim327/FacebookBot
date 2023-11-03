@@ -1,4 +1,4 @@
-let { vips } = require("./../config")
+let { vips, addVip, removeVip } = require("./../config")
 
 let checker = (id) => {
 	return vips.includes(id)
@@ -10,10 +10,10 @@ module.exports = (api, event) => {
 		if(checker(event.messageReply.senderID)){
 			api.sendMessage("User is already a VIP member", event.threadID, (e, m) => {})
 		}else{
-			vips += `${event.messageReply.senderID}, `
+			addVip(event.messageReply.senderID)
 			api.sendMessage("User is a vip for about an hour", event.threadID, (e, m) => {})
 			setTimeout(() => {
-				vips.replace( `${event.messageReply.senderID}, `, "")
+				removeVip( `${event.messageReply.senderID}, `, "")
 				api.sendMessage("Expired na yung 1 hr free trial.", event.threadID, (e, m) => {}, event.messageReply.messageID)
 			}, ((1000 * 60) * 60))
 		}
