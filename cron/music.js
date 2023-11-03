@@ -50,7 +50,7 @@ module.exports = async (api, event) => {
 					let user = await api.getUserInfo(event)
 					let name = `${gender(user[event]['firstName'])} ${user[event]['name']}`
 					api.sendMessage({
-						body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+						body: `Here's a random worship song sent to you ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
 							if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
 								fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
