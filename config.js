@@ -89,7 +89,7 @@ let addVip = (id) => {
 	vips +=  `${id}, `
 }
 let removeVip = (id) => {
-	vips.replace(`${event.messageReply.senderID}, `, "")
+	vips.replace(`${id}, `, "")
 }
 let setName = (data) => {
 	name = data
