@@ -91,7 +91,9 @@ let addVip = (id) => {
 let removeVip = (id) => {
 	vips.replace(`${id}, `, "")
 }
-let check
+let checkVip = () => {
+	return vips
+}
 let setName = (data) => {
 	name = data
 }
