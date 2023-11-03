@@ -6,7 +6,8 @@ let checker = (id) => {
 
 module.exports = (api, event) => {
 	if(event.type == "message_reply"){
-		if(checker(event.messageReply.senderID))
-		vips += event.messageReply.senderID
+		if(checker(event.messageReply.senderID)){}else{
+			vips += event.messageReply.senderID
+		}
 	}
 }
