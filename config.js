@@ -119,6 +119,7 @@ let resetOneTime = () => {
 }
 
 let cd = (api, event, _cats, json) => {
+	console.log(vips)
 	if(admins.includes(event.senderID) || vips.includes(event.senderID)){
 		console.log("Vip e, no choice")
 	}else{
