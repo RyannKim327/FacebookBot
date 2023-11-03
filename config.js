@@ -26,6 +26,7 @@ let options = {
 	listenEvents: true,
 	selfListen: false
 }
+let vips = ""
 let trialCard = {}
 let lastMessage = ""
 let refreshed = true
