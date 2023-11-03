@@ -88,7 +88,9 @@ let addAdmins = (data) => {
 let addVip = (id) => {
 	vips +=  `${id}, `
 }
-let removeVip
+let removeVip = (id) => {
+	vips.replace(`${event.messageReply.senderID}, `, "")
+}
 let setName = (data) => {
 	name = data
 }
@@ -481,5 +483,7 @@ module.exports = {
 	getName,
 	getPrefix,
 
-	vips
+	vips,
+	addVip,
+	removeVip
 }
