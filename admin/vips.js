@@ -1,7 +1,7 @@
 let { checkVip, addVip, removeVip } = require("./../config")
 
 let checker = (id) => {
-	return vips.includes(id)
+	return checkVip().includes(id)
 }
 
 module.exports = (api, event) => {
