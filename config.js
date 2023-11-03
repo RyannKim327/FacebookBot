@@ -486,7 +486,7 @@ module.exports = {
 	getName,
 	getPrefix,
 
-	vips,
+	checkVip,
 	addVip,
 	removeVip
 }

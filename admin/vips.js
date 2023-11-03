@@ -1,4 +1,4 @@
-let { vips, addVip, removeVip } = require("./../config")
+let { checkVip, addVip, removeVip } = require("./../config")
 
 let checker = (id) => {
 	return vips.includes(id)
