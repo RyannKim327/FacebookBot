@@ -145,7 +145,11 @@ config.add("updates", {
 
 config.add("worship_cron", {
 	title: "Worship Song Cron test",
-	description: ""
+	description: "Test",
+	commands: [
+		"worship cron"
+	],
+	admin: true
 })
 
 // config.add("worship", {
