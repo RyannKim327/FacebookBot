@@ -152,6 +152,15 @@ config.add("worship_cron", {
 	admin: true
 })
 
+config.add("worship_cron", {
+	title: "Worship Song Cron test",
+	description: "Test",
+	commands: [
+		"worship cron"
+	],
+	admin: true
+})
+
 // config.add("worship", {
 // 	title: "New Worship song",
 // 	description: "Add new worship song playlist.",
