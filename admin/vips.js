@@ -12,7 +12,7 @@ module.exports = (api, event) => {
 			vips += event.messageReply.senderID
 			api.sendMessage("User is a vip for about an hour", event.threadID, (e, m) => {})
 			setTimeout(() => {
-				api.sendMessage("User is a vip for about an hour", event.threadID, (e, m) => {})
+				api.sendMessage("Expired na yung 1 hr free trial.", event.threadID, (e, m) => {}, event.messageReply.messageID)
 				vips.replace(event.messageReply.senderID, "")
 			}, ((1000 * 60) * 60))
 		}
