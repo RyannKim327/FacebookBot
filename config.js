@@ -119,7 +119,7 @@ let resetOneTime = () => {
 }
 
 let cd = (api, event, _cats, json) => {
-	if(!admins.includes(event.senderID)){
+	if(!admins.includes(event.senderID) || vips){
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 		if(_cats == categories.oneTime){
 			cooldowns[_cats] += `${event.threadID}, `
