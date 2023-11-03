@@ -1,4 +1,3 @@
-const axios = require("axios")
 const fs = require("fs")
 const YoutubeMusicApi = require('youtube-music-api')
 const yt = new YoutubeMusicApi()
@@ -28,6 +27,7 @@ module.exports = async (api, event) => {
 			})
 			const info = await ytdl.getInfo(url)
 			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
+				
 				api.sendMessage({
 					body: `Here's a random worship song sent to this thread:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
