@@ -1,5 +1,5 @@
 const worship = require("./../cron/music")
 
 module.exports = async (api, event) => {
-	worship()
+	worship(api, event.theadID)
 }
