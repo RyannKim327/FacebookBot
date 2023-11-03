@@ -19,8 +19,8 @@ module.exports = async (api, event) => {
 	let songs = json.links
 	let song = songs[Math.floor(Math.random() * songs.length)]
 	if(!fs.existsSync(name)){
-		let thread = await api.getThreadInfo(event)
 		try{
+			let thread = await api.getThreadInfo(event)
 			const file = fs.createWriteStream(`temp/${event}_worship.mp3`)
 			const url = `https://www.youtube.com/watch?v=${song}`
 			const strm = ytdl(url, {
