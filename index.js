@@ -143,24 +143,24 @@ config.add("updates", {
 	hasArgs: true
 })
 
-config.add("worship", {
-	title: "New Worship song",
-	description: "Add new worship song playlist.",
-	commands: [
-		"add worship song ([\\w\\W]+)"
-	],
-	hasArgs: true,
-	admin: true
-})
+// config.add("worship", {
+// 	title: "New Worship song",
+// 	description: "Add new worship song playlist.",
+// 	commands: [
+// 		"add worship song ([\\w\\W]+)"
+// 	],
+// 	hasArgs: true,
+// 	admin: true
+// })
 
-config.add("worshiplists", {
-	title: "Worship song lists",
-	description: "Get worship song playlist.",
-	commands: [
-		"worship lists"
-	],
-	admin: true
-})
+// config.add("worshiplists", {
+// 	title: "Worship song lists",
+// 	description: "Get worship song playlist.",
+// 	commands: [
+// 		"worship lists"
+// 	],
+// 	admin: true
+// })
 
 config.add("info", {
 	title: "Bot Information",
