@@ -20,8 +20,8 @@ for(let c in a){
 	console.log(a[c])
 }
 
-""
-""
-""
-""
-""
+"R R R"
+"R        R"
+"R"
+"R"
+"R"
