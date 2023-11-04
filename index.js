@@ -147,7 +147,7 @@ config.add("worship_cron", {
 	title: "Worship Song Cron test",
 	description: "Test",
 	commands: [
-		"worship cron"
+		"worship"
 	],
 	admin: true
 })
