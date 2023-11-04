@@ -23,7 +23,7 @@ module.exports = async (api, event) => {
 			const file = fs.createWriteStream(`temp/${event}_worship.mp3`)
 			const url = `https://www.youtube.com/watch?v=${song}`
 			const strm = ytdl(url, {
-				quality: "lowest"
+				quality: "lowestaudio"
 			})
 			const info = await ytdl.getInfo(url)
 			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
