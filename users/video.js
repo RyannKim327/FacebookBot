@@ -57,7 +57,7 @@ module.exports = async (api, event, regex) => {
 		}
 		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
 		const strm = ytdl(url, {
-			quality: "lowest"
+			quality: "lowestvideo"
 		})
 		const info = await ytdl.getInfo(url)
 		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
