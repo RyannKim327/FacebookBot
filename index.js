@@ -282,6 +282,9 @@ config.add("baybayin", {
 		"baybay ([\\w\\W]+)",
 		"baybayin ([\\w\\W]+)"
 	],
+	hints: [
+		"baybay <phrase>"
+	],
 	hasArgs: true,
 	category: "knowledge"
 })
