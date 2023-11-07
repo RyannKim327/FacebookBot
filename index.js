@@ -587,7 +587,7 @@ config.add("dice", {
 		"dice"
 	],
 	hints: [
-		"dice"
+		"dice [message and reply]"
 	],
 	category: "game",
 	type: [
@@ -601,6 +601,9 @@ config.add("bugtong", {
 	description: "A filipino based riddles",
 	commands: [
 		"bugtong"
+	],
+	hints: [
+		""
 	],
 	category: "game"
 })
