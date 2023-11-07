@@ -75,7 +75,8 @@ config.add("gender", {
 		"gender ([\\w\\s]+) as ([\\w]+)"
 	],
 	hints: [
-		"admin"
+		"gender <user> to <female|male>",
+		"gender "
 	],
 	admin: true,
 	hasArgs: true,
