@@ -560,9 +560,8 @@ config.add("word", {
 	commands: [
 		"word ([\\w]+)$"
 	],
-	
 	hints: [
-		"video <title from youtube>"
+		"word <word>"
 	],
 	hasArgs: true,
 	category: "knowledge"
@@ -573,6 +572,9 @@ config.add("dropball", {
 	description: "For test",
 	commands: [
 		"drop ([\\d]+)"
+	],
+	hints: [
+		"drop <title from youtube>"
 	],
 	hasArgs: true,
 	category: "game"
