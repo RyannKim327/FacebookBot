@@ -397,6 +397,9 @@ config.add("lexi", {
 	commands: [
 		"lexi ([\\w\\W]+)"
 	],
+	hints: [
+		"lexi <query>"
+	],
 	hasArgs: true,
 	category: "multimedia"
 })
@@ -412,6 +415,12 @@ config.add("music", {
 		"music ([\\w\\W]+)",
 		"sing ([\\w\\W]+)",
 		"play ([\\w\\W]+)"
+	],
+	hints: [
+		"music ([\\w\\W]+)",
+		"sing ([\\w\\W]+)",
+		"play ([\\w\\W]+)"
+		"admin"
 	],
 	hasArgs: true,
 	category: "multimedia"
