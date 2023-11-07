@@ -40,11 +40,8 @@ module.exports = async (api, event, regex) => {
 		"deviceId": ""
 	}).then(res => {
 		let js = res.data
-		js['msg'] = message
-		js['username'] = username
-		js['user-agent'] = agent
 		console.log(js)
-		api.sendMessage(`NGL Sent:\nUsername: ${user}\nMessage: ${message}`, event.threadID, (e, m) => {
+		api.sendMessage(`NGL Sent:\nUsername: ${username}\nMessage: ${message}`, event.threadID, (e, m) => {
 			if(e){
 				console.error(e.message)
 			}
