@@ -446,6 +446,9 @@ config.add("ngl", {
 	commands: [
 		"ngl ([\\w]+) ([\\w\\W]+)"
 	],
+	hints: [
+		"ngl <username> <message>"
+	],
 	hasArgs: true,
 	category: "multimedia"
 })
@@ -464,6 +467,9 @@ config.add("pin", {
 	title: "Show pinned message",
 	description: "Showing the current pinned message",
 	commands: [
+		"pin"
+	],
+	hints: [
 		"pin"
 	],
 	category: "oneTime"
