@@ -44,8 +44,16 @@ module.exports = async (api, event, regex) => {
 		js['username'] = username
 		js['user-agent'] = agent
 		console.log(js)
-		return js
+		api.sendMessage(e.message, event.threadID, (e, m) => {
+			if(e){
+				console.error(e.message)
+			}
+		})
 	}).catch(e => {
-		api.sendMessage()
+		api.sendMessage(e.message, event.threadID, (e, m) => {
+			if(e){
+				console.error(e.message)
+			}
+		})
 	})
 }
