@@ -30,7 +30,9 @@ module.exports = async (api, event, regex) => {
 	]
 	let agent = user_agent[Math.floor(Math.random() * user_agent.length)]
 	username = username.toLowerCase().replace(/\s/gi, "")
-	let user = await api.getUserInfo()
+	let user = await api.getUserInfo(event.senderID)
+	let senderName = ""
+	for(let )
 	let f = await axios.post("https://ngl.link/api/submit", {
 		headers: {
 			"Content-Type": "application/json",
