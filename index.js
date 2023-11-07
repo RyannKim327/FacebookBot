@@ -34,7 +34,8 @@ config.add("busy", {
 		"clearbusy"
 	],
 	hints: [
-		"admin"
+		"busy",
+		"clearbusy"
 	],
 	admin: true
 })
@@ -45,6 +46,10 @@ config.add("check", {
 	commands: [
 		"check",
 		"silent"
+	],
+	
+	hints: [
+		"admin"
 	],
 	admin: true
 })
