@@ -255,7 +255,6 @@ config.add("info", {
 		"intro",
 		"how",
 		"tut"
-		"admin"
 	],
 	category: "oneTime"
 })
@@ -265,6 +264,9 @@ config.add("audioverse", {
 	description: "An audio version of a whole chapter in the bible",
 	commands: [
 		"audio verse ([\\w\\W]+)"
+	],
+	hints: [
+		"admin"
 	],
 	hasArgs: true,
 	category: "theology"
