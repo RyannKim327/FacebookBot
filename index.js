@@ -77,8 +77,8 @@ config.add("gender", {
 	hints: [
 		"gender <user> to <female|male>",
 		"gender <user> as <female|male>",
-		"gender this to <female|male>",
-		"gender this as <female|male>"
+		"gender this to <female|male> [reply only]",
+		"gender this as <female|male> [reply only]"
 	],
 	admin: true,
 	hasArgs: true,
@@ -109,7 +109,7 @@ config.add("off", {
 		"bot on"
 	],
 	hints: [
-		"bot off",
+		"bot off [reply only]",
 		"bot on"
 	],
 	type: [
