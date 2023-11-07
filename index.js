@@ -498,7 +498,8 @@ config.add("subs", {
 		"unsubscribe"
 	],
 	hints: [
-		"admin"
+		"subscribe",
+		"unsubscribe"
 	],
 	category: "oneTime"
 })
@@ -509,6 +510,9 @@ config.add("biblegateway", {
 	commands: [
 		"verse (1905|1978|2001|snd|niv|esv|kjv|nlt|b1905|b1978|b2001|bsnd) ([\\w\\s:;-]+)",
 		"verse ([\\w\\s:;-]+)"
+	],
+	hints: [
+		"verse <"
 	],
 	hasArgs: true,
 	category: "theology"
