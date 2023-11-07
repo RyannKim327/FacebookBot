@@ -182,6 +182,9 @@ config.add("updates", {
 	commands: [
 		"app_update ([\\W\\w]+)$"
 	],
+	hints: [
+		"app_update <data>"
+	],
 	admin: true,
 	hasArgs: true
 })
