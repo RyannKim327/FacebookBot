@@ -574,7 +574,7 @@ config.add("dropball", {
 		"drop ([\\d]+)"
 	],
 	hints: [
-		"drop <title from youtube>"
+		"drop <position from 1 to 5>"
 	],
 	hasArgs: true,
 	category: "game"
@@ -584,6 +584,9 @@ config.add("dice", {
 	title: "Dice Roll",
 	description: "Rolling a die",
 	commands: [
+		"dice"
+	],
+	hints: [
 		"dice"
 	],
 	category: "game",
