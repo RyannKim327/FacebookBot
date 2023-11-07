@@ -76,9 +76,7 @@ config.add("gender", {
 	],
 	hints: [
 		"gender <user> to <female|male>",
-		"gender <user> as <female|male>",
-		"gender this to <female|male> [reply]",
-		"gender this as <female|male> [reply]"
+		"gender <user> as <female|male>"
 	],
 	admin: true,
 	hasArgs: true,
@@ -93,6 +91,9 @@ config.add("name", {
 	description: "For modifications only",
 	commands: [
 		"set name as ([\\w]+)"
+	],
+	hints: [
+		"admin"
 	],
 	hasArgs: true,
 	admin: true
