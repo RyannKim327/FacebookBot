@@ -127,8 +127,8 @@ config.add("pin", {
 		"pin"
 	],
 	hints: [
-		"clearpin",
-		"pin"
+		"clearpin [reply only]",
+		"pin [reply only]"
 	],
 	type: [
 		"message_reply"
