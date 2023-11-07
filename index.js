@@ -109,8 +109,8 @@ config.add("off", {
 		"bot on"
 	],
 	hints: [
-		"bot off [reply only]",
-		"bot on"
+		"bot off [both message and reply]",
+		"bot on [both message and reply]"
 	],
 	type: [
 		"message",
