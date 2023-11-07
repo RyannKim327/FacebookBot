@@ -106,6 +106,10 @@ config.add("off", {
 		"bot off",
 		"bot on"
 	],
+	hints: [
+		"bot on",
+		"bot off"
+	],
 	type: [
 		"message",
 		"message_reply"
