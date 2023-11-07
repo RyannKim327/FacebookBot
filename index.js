@@ -266,7 +266,7 @@ config.add("audioverse", {
 		"audio verse ([\\w\\W]+)"
 	],
 	hints: [
-		"admin"
+		"audio verse <book> <chapter>"
 	],
 	hasArgs: true,
 	category: "theology"
