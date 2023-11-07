@@ -313,7 +313,7 @@ config.add("fb", {
 	],
 	hints: [
 		"fb @<someone>",
-		"fb @<someone>",
+		"fb <username|facebook id>",
 		"fb this [reply only]",
 	],
 	hasArgs: true,
