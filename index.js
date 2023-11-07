@@ -8,7 +8,9 @@ config.add("admin", {
 	commands: [
 		"admin"
 	],
-	hints: []
+	hints: [
+		"admin"
+	],
 	admin: true
 })
 
@@ -16,6 +18,9 @@ config.add("ai", {
 	title: "AI Mode",
 	description: "For auto responses using reply method",
 	commands: [
+		"ai"
+	],
+	hints: [
 		"ai"
 	],
 	admin: true
@@ -27,6 +32,9 @@ config.add("busy", {
 	commands: [
 		"busy",
 		"clearbusy"
+	],
+	hints: [
+		"admin"
 	],
 	admin: true
 })
