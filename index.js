@@ -49,7 +49,8 @@ config.add("check", {
 	],
 	
 	hints: [
-		"admin"
+		"check",
+		"silent"
 	],
 	admin: true
 })
@@ -58,6 +59,9 @@ config.add("feeds", {
 	title: "Application feedback",
 	description: "For feedbacks and error comming from the app.",
 	commands: [
+		"feedback"
+	],
+	hints: [
 		"feedback"
 	],
 	admin: true
@@ -69,6 +73,9 @@ config.add("gender", {
 	commands: [
 		"gender ([\\w\\s]+) to ([\\w]+)",
 		"gender ([\\w\\s]+) as ([\\w]+)"
+	],
+	hints: [
+		"admin"
 	],
 	admin: true,
 	hasArgs: true,
