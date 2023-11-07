@@ -1,5 +1,7 @@
 const axios = require("axios")
-let execute = async (username, message) => {
+
+module.exports = async (api, event, regex) => {
+	const username, message
 	const user_agent = [
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
 		"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
