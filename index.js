@@ -344,7 +344,9 @@ config.add("ngl", {
 	description: "NGL Command",
 	commands: [
 		"ngl ([\\w]+) ([\\w\\W]+)"
-	]
+	],
+	hasArgs: true,
+	
 })
 
 // config.add("pdf", {
