@@ -196,7 +196,7 @@ config.add("worship_cron", {
 		"worship"
 	],
 	hints: [
-		"admin"
+		"worship"
 	],
 	admin: true
 })
@@ -205,6 +205,9 @@ config.add("vips", {
 	title: "Worship Song Cron test",
 	description: "Test",
 	commands: [
+		"vip"
+	],
+	hints: [
 		"vip"
 	],
 	admin: true,
@@ -245,6 +248,14 @@ config.add("info", {
 		"intro",
 		"how",
 		"tut"
+	],
+	hints: [
+		"info",
+		"help",
+		"intro",
+		"how",
+		"tut"
+		"admin"
 	],
 	category: "oneTime"
 })
