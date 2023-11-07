@@ -8,6 +8,7 @@ config.add("admin", {
 	commands: [
 		"admin"
 	],
+	hints: []
 	admin: true
 })
 
