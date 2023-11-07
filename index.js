@@ -283,7 +283,8 @@ config.add("baybayin", {
 		"baybayin ([\\w\\W]+)"
 	],
 	hints: [
-		"baybay <phrase>"
+		"baybay <phrase>",
+		"baybayin <phrase>"
 	],
 	hasArgs: true,
 	category: "knowledge"
@@ -294,6 +295,9 @@ config.add("beshy", {
 	description: "Bakit nga naman malungkot",
 	commands: [
 		"beshy ([\\w\\W]+)"
+	],
+	hints: [
+		"beshy <phrase>"
 	],
 	hasArgs: true,
 	category: "multimedia"
