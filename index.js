@@ -603,7 +603,7 @@ config.add("bugtong", {
 		"bugtong"
 	],
 	hints: [
-		""
+		"bugtong"
 	],
 	category: "game"
 })
@@ -613,6 +613,9 @@ config.add("answer", {
 	description: "This is the way for you to answer some question from facebook bot.",
 	commands: [
 		"answer ([\\w\\W]+)"
+	],
+	hints: [
+		"answer <your answer>"
 	],
 	hasArgs: true,
 	category: "game"
