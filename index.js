@@ -417,10 +417,9 @@ config.add("music", {
 		"play ([\\w\\W]+)"
 	],
 	hints: [
-		"music ([\\w\\W]+)",
-		"sing ([\\w\\W]+)",
-		"play ([\\w\\W]+)"
-		"admin"
+		"music <song title>",
+		"sing <song title>",
+		"play <song title>"
 	],
 	hasArgs: true,
 	category: "multimedia"
@@ -432,6 +431,10 @@ config.add("news", {
 	commands: [
 		"news ([\\w\\W]+)",
 		"news"
+	],
+	hints: [
+		"news",
+		"news <url>"
 	],
 	hasArgs: true,
 	category: "news"
