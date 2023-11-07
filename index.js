@@ -512,7 +512,8 @@ config.add("biblegateway", {
 		"verse ([\\w\\s:;-]+)"
 	],
 	hints: [
-		"verse <"
+		"verse <passage>",
+		"verse <passage>"
 	],
 	hasArgs: true,
 	category: "theology"
