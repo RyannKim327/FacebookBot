@@ -512,7 +512,7 @@ config.add("biblegateway", {
 		"verse ([\\w\\s:;-]+)"
 	],
 	hints: [
-		"verse <passage>",
+		"verse <1905|1978|2001|snd|niv|esv|kjv|nlt|b1905|b1978|b2001|bsnd> <passage>",
 		"verse <passage>"
 	],
 	hasArgs: true,
@@ -528,6 +528,10 @@ config.add("video", {
 	],
 	commands: [
 		"video ([\\w\\W]+)"
+	],
+	hints: [
+		"verse <1905|1978|2001|snd|niv|esv|kjv|nlt|b1905|b1978|b2001|bsnd> <passage>",
+		"verse <passage>"
 	],
 	hasArgs: true,
 	category: "multimedia"
