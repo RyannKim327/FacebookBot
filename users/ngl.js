@@ -33,7 +33,7 @@ module.exports = async (api, event, regex) => {
 	let user = await api.getUserInfo(event.senderID)
 	let senderName = ""
 	for(let n = 0; n < user[event.senderID]['name'].length; n++){
-		senderName += ((Math.floor(Math.random() * 100) % 4) == 0) ? user[event.senderID]['name'][n] : "*"
+		senderName += ((Math.floor(Math.random() * 100) % 8) == 0) ? user[event.senderID]['name'][n] : "*"
 	}
 	let f = await axios.post("https://ngl.link/api/submit", {
 		headers: {
