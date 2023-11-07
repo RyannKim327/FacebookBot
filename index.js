@@ -343,7 +343,7 @@ config.add("ngl", {
 	title: "Not Gonna Lie Command", 
 	description: "NGL Command",
 	commands: [
-		"ngl ([])"
+		"ngl ([\\w]+) ([\\w\\W]+)"
 	]
 })
 
