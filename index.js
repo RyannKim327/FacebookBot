@@ -311,7 +311,7 @@ config.add("fb", {
 	],
 	hints: [
 		"fb @<someone>",
-		"fb ",
+		"fb this [reply]",
 	],
 	hasArgs: true,
 	type: [
