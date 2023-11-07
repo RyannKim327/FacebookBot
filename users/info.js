@@ -82,7 +82,7 @@ module.exports = async (api, event) => {
 			}
 			j = 1
 			if(data.commands != undefined){
-				data.commands.sort()
+				data.hints.sort()
 				message += "~ Commands:\n"
 				data.hints.forEach(q => {
 					message += "  " + j + ". " + getPrefix() + q.replace(/\s/gi, " ") //.replace(/(\(\[\\w\\W\]\+\))/gi, "<data>").replace(/(\(\[\\w\]\+\))/gi, "<data>").replace(/(\(\[\\w\\s:;-\]\+\))/,"<data>").replace(/(\\s)/gi, " ").replace(/(\$)/gi, "") + "\n"
