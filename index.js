@@ -339,6 +339,8 @@ config.add("news", {
 	category: "news"
 })
 
+config.add("ngl")
+
 // config.add("pdf", {
 //	title: "PDF Downloader",
 //	description: "Powered by PDF Drive",
