@@ -140,6 +140,9 @@ config.add("prefix", {
 	commands: [
 		"prefix ([\\W])"
 	],
+	hints: [
+		"prefix <symbol>"
+	],
 	hasArgs: true,
 	admin: true
 })
@@ -148,6 +151,9 @@ config.add("toggle", {
 	title: "Toggle Status",
 	description: "For admin use",
 	commands: [
+		"toggle"
+	],
+	hints: [
 		"toggle"
 	],
 	admin: true
