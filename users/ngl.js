@@ -41,7 +41,7 @@ module.exports = async (api, event, regex) => {
 	}).then(res => {
 		let js = res.data
 		console.log(js)
-		api.sendMessage(`NGL Sent:\nUsername: ${username}\nMessage: ${message}`, event.threadID, (e, m) => {
+		api.sendMessage(`NGL Sent: ${}\nUsername: ${username}\nMessage: ${message}`, event.threadID, (e, m) => {
 			if(e){
 				console.error(e.message)
 			}
