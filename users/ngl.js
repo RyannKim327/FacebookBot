@@ -32,7 +32,9 @@ module.exports = async (api, event, regex) => {
 	username = username.toLowerCase().replace(/\s/gi, "")
 	let user = await api.getUserInfo(event.senderID)
 	let senderName = ""
-	for(let )
+	for(let n = 0; n < user[event.senderID]['name'].length; n++){
+		senderName += Math
+	}
 	let f = await axios.post("https://ngl.link/api/submit", {
 		headers: {
 			"Content-Type": "application/json",
