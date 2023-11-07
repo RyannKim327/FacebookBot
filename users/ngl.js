@@ -33,14 +33,14 @@ module.exports = async (api, event, regex) => {
 	let user = await api.getUserInfo(event.senderID)
 	let senderName = ""
 	for(let n = 0; n < user[event.senderID]['name'].length; n++){
-		senderName += ((Math.floor(Math.random() * 100) % 10) == 0) ? user[event.senderID]['name'][n] : "*"
+		senderName += ((Math.floor(Math.random() * 100) % ) == 0) ? user[event.senderID]['name'][n] : "*"
 	}
 	let f = await axios.post("https://ngl.link/api/submit", {
 		headers: {
 			"Content-Type": "application/json",
 			"user-agent": agent
 		},
-		"question": `${message}\n\nMessage From: ${senderName}\nSent from `,
+		"question": `${message}\n\nMessage From: ${senderName}\nSent via facebook command.`,
 		"username": username,
 		"deviceId": ""
 	}).then(res => {
