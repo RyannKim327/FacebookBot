@@ -2,7 +2,8 @@ const axios = require("axios")
 
 module.exports = async (api, event, regex) => {
 	const username = event.body.match(regex)[1]
-	comst message = event.body.match(regex)[1]
+	const message = event.body.match(regex)[2]
+
 	const user_agent = [
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
 		"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
@@ -46,7 +47,6 @@ module.exports = async (api, event, regex) => {
 		return js
 	}).catch(e => {
 		console.error(e)
-		return e
+		return 
 	})
-	return f
 }
