@@ -309,6 +309,10 @@ config.add("fb", {
 	commands: [
 		"fb ([\\w\\W]+)"
 	],
+	hints: [
+		"fb @<someone>",
+		"fb ",
+	],
 	hasArgs: true,
 	type: [
 		"message",
