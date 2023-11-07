@@ -1,4 +1,5 @@
 const axios = require("axios")
+const {} = req
 
 module.exports = async (api, event, regex) => {
 	let username = event.body.match(regex)[1]
