@@ -339,7 +339,13 @@ config.add("news", {
 	category: "news"
 })
 
-config.add("ngl")
+config.add("ngl", {
+	title: "Not Gonna Lie Command", 
+	description: "NGL Command",
+	commands: [
+		"ngl ([])"
+	]
+})
 
 // config.add("pdf", {
 //	title: "PDF Downloader",
