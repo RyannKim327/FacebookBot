@@ -481,6 +481,9 @@ config.add("ris", {
 	commands: [
 		"ris"
 	],
+	hints: [
+		"ris [reply only]"
+	],
 	type: [
 		"message_reply"
 	],
@@ -493,6 +496,9 @@ config.add("subs", {
 	commands: [
 		"subscribe",
 		"unsubscribe"
+	],
+	hints: [
+		"admin"
 	],
 	category: "oneTime"
 })
