@@ -76,7 +76,9 @@ config.add("gender", {
 	],
 	hints: [
 		"gender <user> to <female|male>",
-		"gender "
+		"gender <user> as <female|male>",
+		"gender this to <female|male> [reply]",
+		"gender this as <female|male> [reply]"
 	],
 	admin: true,
 	hasArgs: true,
