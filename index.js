@@ -166,6 +166,10 @@ config.add("unsent", {
 		"unsent",
 		"unsend"
 	],
+	hints: [
+		"unsent [reply]",
+		"unsend [reply]"
+	],
 	admin: true,
 	type: [
 		"message_reply"
