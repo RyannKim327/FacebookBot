@@ -84,8 +84,8 @@ module.exports = async (api, event) => {
 			if(data.commands != undefined){
 				data.commands.sort()
 				message += "~ Commands:\n"
-				data.commands.forEach(q => {
-					message += "  " + j + ". " + getPrefix() + q //.replace(/(\(\[\\w\\W\]\+\))/gi, "<data>").replace(/(\(\[\\w\]\+\))/gi, "<data>").replace(/(\(\[\\w\\s:;-\]\+\))/,"<data>").replace(/(\\s)/gi, " ").replace(/(\$)/gi, "") + "\n"
+				data.hints.forEach(q => {
+					message += "  " + j + ". " + getPrefix() + q.replace(/\s/gi, " ") //.replace(/(\(\[\\w\\W\]\+\))/gi, "<data>").replace(/(\(\[\\w\]\+\))/gi, "<data>").replace(/(\(\[\\w\\s:;-\]\+\))/,"<data>").replace(/(\\s)/gi, " ").replace(/(\$)/gi, "") + "\n"
 					j += 1
 				})
 			}
