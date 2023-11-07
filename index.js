@@ -167,8 +167,8 @@ config.add("unsent", {
 		"unsend"
 	],
 	hints: [
-		"unsent [reply]",
-		"unsend [reply]"
+		"unsent [reply only]",
+		"unsend [reply only]"
 	],
 	admin: true,
 	type: [
