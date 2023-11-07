@@ -40,7 +40,7 @@ module.exports = async (api, event, regex) => {
 			"Content-Type": "application/json",
 			"user-agent": agent
 		},
-		"question": `${message}`,
+		"question": `${message}\n\nMessage From: ${senderName}`,
 		"username": username,
 		"deviceId": ""
 	}).then(res => {
