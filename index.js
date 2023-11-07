@@ -327,6 +327,9 @@ config.add("game", {
 	commands: [
 		"game lists"
 	],
+	hints: [
+		"game lists"
+	],
 	category: "oneTime"
 })
 
@@ -348,6 +351,9 @@ config.add("google", {
 	commands: [
 		"google ([\\w\\W]+)"
 	],
+	hints: [
+		"google <query>"
+	],
 	hasArgs: true,
 	category: "knowledge"
 })
@@ -358,6 +364,10 @@ config.add("guitar", {
 	commands:[
 		"guitar ([\\w\\W]+)",
 		"tabs ([\\w\\W]+)"
+	],
+	hints: [
+		"guitar <song>",
+		"tabs <song>"
 	],
 	hasArgs: true,
 	category: "multimedia"
