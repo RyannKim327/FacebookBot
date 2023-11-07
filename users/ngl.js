@@ -46,7 +46,6 @@ module.exports = async (api, event, regex) => {
 		console.log(js)
 		return js
 	}).catch(e => {
-		console.error(e)
-		return 
+		api.sendMessage()
 	})
 }
