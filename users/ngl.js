@@ -1,5 +1,5 @@
 const axios = require("axios")
-const {} = req
+const { checkVip } = require("./../config")
 
 module.exports = async (api, event, regex) => {
 	let username = event.body.match(regex)[1]
@@ -34,6 +34,7 @@ module.exports = async (api, event, regex) => {
 	let user = await api.getUserInfo(event.senderID)
 	let senderName = ""
 	for(let n = 0; n < user[event.senderID]['name'].length; n++){
+		if(event.senderID)
 		senderName += ((Math.floor(Math.random() * 100) % 8) == 0) ? user[event.senderID]['name'][n] : "*"
 	}
 	let f = await axios.post("https://ngl.link/api/submit", {
