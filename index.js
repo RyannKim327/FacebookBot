@@ -346,7 +346,7 @@ config.add("ngl", {
 		"ngl ([\\w]+) ([\\w\\W]+)"
 	],
 	hasArgs: true,
-	
+	category: "multimedia"
 })
 
 // config.add("pdf", {
