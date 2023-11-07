@@ -40,12 +40,12 @@ module.exports = async (api, event, regex) => {
 			"Content-Type": "application/json",
 			"user-agent": agent
 		},
-		"question": message,
+		"question": `${message}`,
 		"username": username,
 		"deviceId": ""
 	}).then(res => {
 		let js = res.data
-		console.log(js)
+		console.log(senderName)
 		api.sendMessage(`NGL Sent:\nID: ${js.questionId}\nUsername: ${username} [${js.userRegion}]\nMessage: ${message}`, event.threadID, (e, m) => {
 			if(e){
 				console.error(e.message)
