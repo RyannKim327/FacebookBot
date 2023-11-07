@@ -210,7 +210,7 @@ config.add("vips", {
 		"vip"
 	],
 	hints: [
-		"vip"
+		"vip [reply only]"
 	],
 	admin: true,
 	type: [
@@ -312,6 +312,7 @@ config.add("fb", {
 		"fb ([\\w\\W]+)"
 	],
 	hints: [
+		"fb @<someone>",
 		"fb @<someone>",
 		"fb this [reply only]",
 	],
