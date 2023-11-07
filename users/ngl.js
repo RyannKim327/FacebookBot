@@ -1,7 +1,7 @@
 const axios = require("axios")
 
 module.exports = async (api, event, regex) => {
-	const username = event.body.match(regex)[1]
+	let username = event.body.match(regex)[1]
 	const message = event.body.match(regex)[2]
 
 	const user_agent = [
