@@ -93,7 +93,7 @@ config.add("name", {
 		"set name as ([\\w]+)"
 	],
 	hints: [
-		"admin"
+		"set name as <name>"
 	],
 	hasArgs: true,
 	admin: true
