@@ -195,6 +195,9 @@ config.add("worship_cron", {
 	commands: [
 		"worship"
 	],
+	hints: [
+		"admin"
+	],
 	admin: true
 })
 
