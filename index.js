@@ -379,6 +379,9 @@ config.add("imgtxt", {
 	commands: [
 		"img2txt"
 	],
+	hints: [
+		"img2txt [reply only]"
+	],
 	type: [
 		"message_reply"
 	],
