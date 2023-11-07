@@ -107,8 +107,8 @@ config.add("off", {
 		"bot on"
 	],
 	hints: [
-		"bot on",
-		"bot off"
+		"bot off",
+		"bot on"
 	],
 	type: [
 		"message",
@@ -121,6 +121,10 @@ config.add("pin", {
 	title: "Pin a message",
 	description: "Setup a pinned message, or show the pinned message.",
 	commands: [
+		"clearpin",
+		"pin"
+	],
+	hints: [
 		"clearpin",
 		"pin"
 	],
