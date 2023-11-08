@@ -258,13 +258,13 @@ let doListen = async (api) => {
 
 			if(json.ai && event.type == "message_reply"){
 				if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
-					openai(api, event)
+					// openai(api, event)
 					loop = false
 				}
 			}
 
 			if(lastMessage.includes(event.senderID) && event.senderID != self && trialCard[event.senderID] != undefined && event.type == "message" && !(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
-				openai(api, event)
+				// openai(api, event)
 				afk(api, json)
 			}
 
@@ -391,7 +391,7 @@ let doListen = async (api) => {
 					}
 				})
 				if(loop && json.ai == false && (admins.includes(event.senderID) || (json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined))){
-					openai(api, event)
+					// openai(api, event)
 					if(/give\b|create\b|what is (^your name)\b/.test(event.body))
 						cd(api, event, "ai", json)
 				}
