@@ -258,13 +258,13 @@ let doListen = async (api) => {
 
 			if(json.ai && event.type == "message_reply"){
 				if(event.messageReply.attachments.length <= 0 && event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
-					// openai(api, event)
+					openai(api, event)
 					loop = false
 				}
 			}
 
 			if(lastMessage.includes(event.senderID) && event.senderID != self && trialCard[event.senderID] != undefined && event.type == "message" && !(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
-				// openai(api, event)
+				openai(api, event)
 				afk(api, json)
 			}
 
