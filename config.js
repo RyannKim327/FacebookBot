@@ -348,7 +348,7 @@ let doListen = async (api) => {
 				}, ((1000 * 60) * 60))
 			}
 
-			if(body_lowercase == name_lowercase && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+			if(body_lowercase == name_lowercase && trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
 				let user = await api.getUserInfo(event.senderID)
 				let username = user[event.senderID]['name']
 				let firstName = user[event.senderID]['firstName']
