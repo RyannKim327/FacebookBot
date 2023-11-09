@@ -70,7 +70,7 @@ module.exports = async (api, event, regex) => {
 			let sec = lengthTime % 60
 			const time = `${min}:${sec}`
 			api.sendMessage({
-				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n`,
+				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\nhttps://youtu.be${info.videoDetails.video_url}`,
 				mentions:[{
 					id: event.senderID,
 					tag: user[event.senderID]['name']
