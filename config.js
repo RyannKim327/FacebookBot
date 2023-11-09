@@ -4,7 +4,7 @@ const axios = require("axios")
 
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
-const openai = require("./auto/openai")
+const openai = require("./auto/openai1")
 
 const mydate = require("./utils/date")
 const afk = require("./utils/afk")
