@@ -354,7 +354,7 @@ let doListen = async (api) => {
 				let firstName = user[event.senderID]['firstName']
 				let gender = gen(firstName)['eng']
 				calls += event.senderID + ", "
-				// trialCard[event.senderID] = "0"
+				trialCard[event.senderID] = "0"
 				setTimeout(() => {
 					if(trialCard[event.senderID] != undefined){
 						trialCard[event.senderID] = undefined
