@@ -66,7 +66,7 @@ module.exports = async (api, event, regex) => {
 		let reqBy = `${g} ${user[event.senderID]['name']}`
 		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 			api.sendMessage({
-				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${info.videoDetails.}`,
 				mentions:[{
 					id: event.senderID,
 					tag: user[event.senderID]['name']
