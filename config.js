@@ -272,7 +272,7 @@ let doListen = async (api) => {
 				trialCard[event.senderID] = undefined
 				return api.sendMessage("Auto AI messages are closed, to reactivate, kindly wait for an hour.", event.threadID, (e, m) => {
 					if(e){
-						ifapi.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 				})
 			}
