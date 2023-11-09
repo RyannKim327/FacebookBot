@@ -67,8 +67,8 @@ module.exports = async (api, event, regex) => {
 		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = lengthTime / 60
-			let sec = 
-			const time = ""
+			let sec = lengthTime % 60
+			const time = `${min}:${sec}`
 			api.sendMessage({
 				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}`,
 				mentions:[{
