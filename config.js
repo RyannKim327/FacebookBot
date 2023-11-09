@@ -268,7 +268,7 @@ let doListen = async (api) => {
 				afk(api, json)
 			}
 
-			if(body.toLowerCase().includes("stop") && body.toLowerCase().includes(name.toLowerCase())){
+			if(trialCard[event.senderID] != undefined && body.toLowerCase().includes("stop") && body.toLowerCase().includes(name.toLowerCase())){
 				trialCard[event.senderID] = undefined
 				return api.sendMessage("Auto AI messages are closed, to reactivate, kindly wait for an hour.", event.threadID, (e, m) => {
 					if(e){
