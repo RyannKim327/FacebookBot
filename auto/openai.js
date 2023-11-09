@@ -1,5 +1,5 @@
 const axios = require("axios")
 
 module.exports = async (api, event) => {
-	let 
+	let { data } = await axios.get(``)
 }
