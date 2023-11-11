@@ -30,7 +30,7 @@ module.exports = async (api, event) => {
 							fs.unlink(name, (e) => {})
 						}
 					})
-				})
+				}, event.threadID, (e, m) => {})
 			})
 		}
 	}
