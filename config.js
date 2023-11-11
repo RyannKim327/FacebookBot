@@ -236,6 +236,7 @@ let doListen = async (api) => {
 			}
 		}
 		unsent(api, event, msgLists)
+		
 		if(event.body != null && (json.status || admins.includes(event.senderID))){
 			let body = event.body
 			let body_lowercase = body.toLowerCase()
