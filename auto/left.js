@@ -17,7 +17,9 @@ module.exports = async (api, event) => {
 				"xOkBD4uPkcw"
 			]
 			const song = songs[Math.floor(Math.random() * songs.length)]
-			const yt = ytdl()
+			const yt = ytdl(`https://www.youtube.com/watch?v=${song}`, {
+				quality: "lowestaudio"
+			})
 		}
 	}
 }
