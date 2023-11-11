@@ -22,7 +22,10 @@ module.exports = async (api, event) => {
 			})
 			const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${song}`)
 			ffmpegs(yt).audioBitrate(96).save(`${__dirname}/../temp/${event.senderID}_farewell.mp3`).on("end", () => {
-				api.sendMessage()
+				api.sendMessage({
+					"body": "Babye test",
+					"attachment": fs.createReadStream()
+				})
 			})
 		}
 	}
