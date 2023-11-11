@@ -20,8 +20,8 @@ module.exports = async (api, event) => {
 			const yt = ytdl(`https://www.youtube.com/watch?v=${song}`, {
 				quality: "lowestaudio"
 			})
-			const info = ytdl.getInfo(`https://www.youtube.com/watch?v=${song}`)
-			ytdl.get
+			const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${song}`)
+			
 		}
 	}
 }
