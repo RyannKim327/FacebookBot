@@ -10,6 +10,7 @@ module.exports = async (api, event) => {
 			const songs = [
 				"Exi25VAo6wU",
 				"6iuUC8Gai9k",
+				"TGyLsf7PRpU",
 				""
 			]
 		}
