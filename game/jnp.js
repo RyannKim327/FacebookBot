@@ -5,10 +5,12 @@ module.exports = async (api, event, regex) => {
 	const scisor = "✌"
 	const ai = [rock, paper, scisor]
 	const choice = ai[Math.floor(Math.random() * ai.length)]
+	let won = ""
 	switch(data){
 		case rock:
 			switch(choice){
-				case
+				case paper:
+
 			}
 		break
 	}
