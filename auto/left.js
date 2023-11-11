@@ -16,7 +16,8 @@ module.exports = async (api, event) => {
 				"MWC291t05ec",
 				"xOkBD4uPkcw"
 			]
-			const song = songs[]
+			const song = songs[Math.floor(Math.random() * songs.length)]
+			const yt = ytdl()
 		}
 	}
 }
