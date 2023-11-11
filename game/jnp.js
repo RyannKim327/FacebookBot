@@ -4,7 +4,7 @@ module.exports = async (api, event, regex) => {
 	const paper = "🖐"
 	const scisor = "✌"
 	const ai = [rock, paper, scisor]
-	
+	const choice
 	switch(data){
 		case rock:
 			switch(ai)
