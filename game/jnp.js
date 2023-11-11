@@ -32,7 +32,7 @@ module.exports = async (api, event, regex) => {
 			}
 		break
 		default:
-			case paper:
+			case rock:
 				switch(choice){
 					case scisor:
 						won = "Bot"
