@@ -2,7 +2,7 @@ const fs = require("fs")
 const cronjob = require("node-cron")
 const axios = require("axios")
 
-const left = require("./auto")
+const left = require("./auto/left")
 
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
