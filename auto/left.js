@@ -9,6 +9,7 @@ module.exports = async (api, event) => {
 		if(event.logMessageType == "log:unsubscribe"){
 			const songs = [
 				"Exi25VAo6wU",
+				"6iuUC8Gai9k",
 				""
 			]
 		}
