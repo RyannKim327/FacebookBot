@@ -21,7 +21,7 @@ module.exports = async (api, event) => {
 				quality: "lowestaudio"
 			})
 			const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${song}`)
-			ffmpegs(yt).audioBitrate(96)
+			ffmpegs(yt).audioBitrate(96).save(`${__dirname}`)
 		}
 	}
 }
