@@ -6,6 +6,8 @@ ffmpegs.setFfmpegPath(ffmpeg.path)
 
 module.exports = async (api, event) => {
 	if(event.type == "event"){
-		if()
+		if(event.logMessageType == "log:unsubscribe"){
+			
+		}
 	}
 }
