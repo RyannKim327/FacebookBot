@@ -7,6 +7,7 @@ ffmpegs.setFfmpegPath(ffmpeg.path)
 module.exports = async (api, event) => {
 	if(event.type == "event"){
 		if(event.logMessageType == "log:unsubscribe"){
+			console.log(event.logMessageData)
 			const songs = [
 				"Exi25VAo6wU",
 				"6iuUC8Gai9k",
