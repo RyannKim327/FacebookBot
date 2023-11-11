@@ -43,5 +43,5 @@ module.exports = async (api, event, regex) => {
 					won = "tie"
 			}
 	}
-	api.sendMessage(`${won}`)
+	api.sendMessage(`${won} won`, event.threadID, (e, m) => {})
 }
