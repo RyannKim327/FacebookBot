@@ -12,6 +12,8 @@ module.exports = async (api, event) => {
 				"6iuUC8Gai9k",
 				"TGyLsf7PRpU",
 				"miyLBv04O5o",
+				"C27NShgTQE4",
+				"MWC291t05ec",
 				""
 			]
 		}
