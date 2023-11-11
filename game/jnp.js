@@ -3,6 +3,7 @@ module.exports = async (api, event, regex) => {
 	const rock = "👊"
 	const paper = "🖐"
 	const scisor = "✌"
+	const ai = []
 	switch(data){
 		case rock:
 			if()
