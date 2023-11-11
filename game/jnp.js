@@ -12,7 +12,11 @@ module.exports = async (api, event, regex) => {
 				case paper:
 					won = "Bot"
 				break
-				case 
+				case scisor:
+					won = "You"
+				break
+				default:
+					won = "tie"
 			}
 		break
 	}
