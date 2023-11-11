@@ -21,7 +21,7 @@ module.exports = async (api, event) => {
 				quality: "lowestaudio"
 			})
 			const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${song}`)
-			const name = `${__dirname}/../temp/${event.senderID}_farewell.mp3`
+			const name = `${__dirname}/../temp/${event.author}_farewell.mp3`
 			ffmpegs(yt).audioBitrate(96).save(name).on("end", () => {
 				api.sendMessage({
 					"body": "Babye test",
