@@ -32,17 +32,16 @@ module.exports = async (api, event, regex) => {
 			}
 		break
 		default:
-			case rock:
-				switch(choice){
-					case scisor:
-						won = "Bot"
-					break
-					case rock:
-						won = "You"
-					break
-					default:
-						won = "tie"
-				}
+			switch(choice){
+				case rock:
+					won = "Bot"
+				break
+				case paper:
+					won = "You"
+				break
+				default:
+					won = "tie"
+			}
 	}
-	
+	api.sendMessage(`${won}`)
 }
