@@ -31,6 +31,18 @@ module.exports = async (api, event, regex) => {
 					won = "tie"
 			}
 		break
+		default:
+			case paper:
+				switch(choice){
+					case scisor:
+						won = "Bot"
+					break
+					case rock:
+						won = "You"
+					break
+					default:
+						won = "tie"
+				}
 	}
 	
 }
