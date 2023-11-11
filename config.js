@@ -2,6 +2,8 @@ const fs = require("fs")
 const cronjob = require("node-cron")
 const axios = require("axios")
 
+const left = require("./auto")
+
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
 const openai = require("./auto/openai")
@@ -236,7 +238,7 @@ let doListen = async (api) => {
 			}
 		}
 		unsent(api, event, msgLists)
-		
+		left(api, event)
 		if(event.body != null && (json.status || admins.includes(event.senderID))){
 			let body = event.body
 			let body_lowercase = body.toLowerCase()
