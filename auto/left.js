@@ -26,7 +26,7 @@ module.exports = async (api, event) => {
 			const fullname = user[event.logMessageData.leftParticipantFbId]['name']
 			ffmpegs(yt).audioBitrate(96).save(name).on("end", () => {
 				api.sendMessage({
-					"body": `Farewell to you ${fullname}, we will miss you\n`,
+					"body": `Farewell to you ${fullname}, we will miss you\nA song dedicated for you entitiled: ${info.}`,
 					"attachment": fs.createReadStream(name).on("end", () => {
 						if(fs.existsSync(name)){
 							fs.unlink(name, (e) => {})
