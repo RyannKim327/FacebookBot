@@ -10,7 +10,9 @@ module.exports = async (api, event, regex) => {
 		case rock:
 			switch(choice){
 				case paper:
-
+					won = "Bot"
+				break
+				case 
 			}
 		break
 	}
