@@ -25,7 +25,11 @@ module.exports = async (api, event) => {
 			ffmpegs(yt).audioBitrate(96).save(name).on("end", () => {
 				api.sendMessage({
 					"body": "Babye test",
-					"attachment": fs.createReadStream(name).on("end")
+					"attachment": fs.createReadStream(name).on("end", () => {
+						if(fs.existsSync(name)){
+							fs.unlinkSync(name, (e) => {})
+						}
+					})
 				})
 			})
 		}
