@@ -27,7 +27,7 @@ module.exports = async (api, event) => {
 					"body": "Babye test",
 					"attachment": fs.createReadStream(name).on("end", () => {
 						if(fs.existsSync(name)){
-							fs.unlinkSync(name, (e) => {})
+							fs.unlink(name, (e) => {})
 						}
 					})
 				})
