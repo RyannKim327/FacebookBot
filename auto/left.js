@@ -5,5 +5,7 @@ const ffmpegs = require('fluent-ffmpeg')
 ffmpegs.setFfmpegPath(ffmpeg.path)
 
 module.exports = async (api, event) => {
-	if(event.)
+	if(event.type == "event"){
+		if()
+	}
 }
