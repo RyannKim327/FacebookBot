@@ -23,9 +23,10 @@ module.exports = async (api, event) => {
 			const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${song}`)
 			const name = `${__dirname}/../temp/${event.logMessageData.leftParticipantFbId}_farewell.mp3`
 			const user = await api.getUserInfo(event.logMessageData.leftParticipantFbId)
+			const fullname = user[event.logMessageData.leftParticipantFbId]['name']
 			ffmpegs(yt).audioBitrate(96).save(name).on("end", () => {
 				api.sendMessage({
-					"body": "Babye test",
+					"body": `Farewell to you ${fullname}, we will miss you\n`,
 					"attachment": fs.createReadStream(name).on("end", () => {
 						if(fs.existsSync(name)){
 							fs.unlink(name, (e) => {})
