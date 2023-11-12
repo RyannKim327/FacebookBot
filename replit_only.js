@@ -2,8 +2,8 @@ const { exec } = require("child_process")
 
 module.exports = () => {
 	setInterval(() => {
-		
-		if(exec(`git commit -m "Auto git system"`)){
+		const date = new Date()
+		if(exec(`git commit -m "${date.getMonth()}"`)){
 			exec("git push origin main")
 		}
 		if(exec("git fetch origin")){
