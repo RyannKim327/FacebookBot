@@ -7,7 +7,9 @@
 	},
 	"mpop.revii.ai": {
 		"ver": "AlphaLite 0.1",
-		"desc": "Changed UI and added some design".
+		"desc": "Changed UI and added some design",
+		"url": "",
+		"req": false,
 		
 	}
 }:
