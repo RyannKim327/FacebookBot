@@ -1,7 +1,4 @@
 module.exports = (str) => {
-	let s = str.replace("/", "\\/").replace("?", /\\?/)
-	if(s.startsWith("$")){
-		s = s.replace("$", )
-	}
+	let s = str.replace("/", "\\/").replace("?", /\\?/).replace("$", /\$/)
 	return new RegExp("^" + s, "i")
 }
