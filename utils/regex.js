@@ -1,5 +1,8 @@
 module.exports = (str) => {
-	let s = str.replace("/", "\\/").replace("?", /\\?/)
+	let s = str.replace("/", "\\/")
+	if(s.startsWith("?")){
+		s = s.replace("?", /\\?/)
+	}
 	if(s.startsWith("$")){
 		s = s.replace("$", /\$/)
 	}
