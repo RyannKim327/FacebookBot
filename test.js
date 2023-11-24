@@ -20,5 +20,6 @@
 // 	console.log(a[c])
 // }
 
-let a = "hello world"
-a.shit
+let a = "hello world po"
+a.shift()
+console.log(a.join(" "))
