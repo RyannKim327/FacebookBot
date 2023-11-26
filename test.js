@@ -36,13 +36,12 @@ const replacer = {
 	"Eb": "D#",
 	"Gb": "F#"
 }
-const key = "C"
+const key = "G"
 
 const song = data.split("\n")[1].split(/\s/)
 console.log(song)
 
 for(let s = 0; s < song.length; s++){
-	let chord = ""
 	let rep = song[s]
 	if(replacer[song[s]]){
 		rep = replacer[song[s]]
