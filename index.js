@@ -158,6 +158,16 @@ config.add("prefix", {
 	admin: true
 })
 
+config.add("newyear", {
+	title: "New year cron test",
+	description: "Test cron",
+	commands: [
+		"new year"
+	],
+	admin: true
+})
+
+
 config.add("toggle", {
 	title: "Toggle Status",
 	description: "For admin use",
