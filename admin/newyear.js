@@ -1,6 +1,6 @@
-const worship = require("./../cron/")
+const newyear = require("./../cron/newyear")
 
 module.exports = async (api, event) => {
 	api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
-	worship(api, event.threadID)
+	newyear(api, event.threadID)
 }
