@@ -38,7 +38,6 @@ const replacer = {
 }
 const key = "C"
 
-const song = data.split("\n")[1]
+const song = data.split("\n")[1].split(/\s/)
 
-song.
-
+for()
