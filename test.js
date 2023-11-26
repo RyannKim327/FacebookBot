@@ -13,5 +13,6 @@ let changeKey = (chords, default_key, change_key) => {
 	}
 	let result = ""
 	const chord = chords.split(/\n/)
-
+	for(let i = 0; i < ch)
+	return result
 }
