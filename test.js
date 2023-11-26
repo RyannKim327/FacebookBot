@@ -41,8 +41,8 @@ const key = "C"
 const song = data.split("\n")[1].split(/\s/)
 
 for(let s = 0; s < song.length; s++){
-	let rep = replacer[song[s]]
-	if(rep){
-		
+	let rep = song[s]
+	if(replacer[song[s]]){
+
 	}
 }
