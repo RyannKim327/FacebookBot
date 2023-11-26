@@ -29,5 +29,9 @@ const data = fs.readFileSync("a.txt", "utf-8")
 const keys = [
 	"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
 ]
-const replacer = 
+const replacer = {
+	"Ab": "G#",
+	"Bb": "A#",
+	"Db": ""
+}
 const key = "C"
