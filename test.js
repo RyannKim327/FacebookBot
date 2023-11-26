@@ -17,7 +17,10 @@ let changeKey = (chords, default_key, change_key) => {
 		const chords = chord[i].split(/\s/)
 		for(let j = 0; j < chords.length; j++){
 			const c = chords[j]
-			if()
+			if(c.length > 2){
+				break
+			}
+			
 		}
 	}
 	return result
