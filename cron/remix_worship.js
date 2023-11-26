@@ -23,7 +23,6 @@ module.exports = async (api, event) => {
 	try{
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
 		const file = fs.createWriteStream(`temp/${event}_worship_remix.mp3`)
-		const data = event.body.match(regex)[1]
 		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/
 		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]+)/
 		let music = {}
