@@ -45,7 +45,7 @@ module.exports = async (api, event) => {
 			}
 		}else{
 			await yt.initalize()
-			music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")
+			music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL").content
 			if(music.content.length <= 0){
 				throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
 			}else{
