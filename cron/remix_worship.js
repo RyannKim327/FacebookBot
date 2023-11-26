@@ -22,7 +22,7 @@ module.exports = async (api, event, regex) => {
 	}
 	try{
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
-		const file = fs.createWriteStream(`temp/${event.threadID}__worship_remix.mp3}.mp3`)
+		const file = fs.createWriteStream(`temp/${event.threadID}_worship_remix.mp3`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
 		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/
@@ -64,7 +64,7 @@ module.exports = async (api, event, regex) => {
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
-		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`).on("end", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
 			let sec = lengthTime % 60
