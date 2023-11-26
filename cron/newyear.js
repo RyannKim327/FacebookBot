@@ -23,7 +23,7 @@ module.exports = async (api, event) => {
 	if(!fs.existsSync(name)){
 		try{
 			let thread = await api.getThreadInfo(event)
-			const file = fs.createWriteStream(`temp/${event}_worship.mp3`)
+			const file = fs.createWriteStream(`temp/${event}_newyear.mp3`)
 			const url = `https://www.youtube.com/watch?v=${song}`
 			const strm = ytdl(url, {
 				quality: "lowestaudio"
@@ -34,8 +34,8 @@ module.exports = async (api, event) => {
 					api.sendMessage({
 						body: `Happy new year ${thread.threadName}, here's a simple greetings for all of you:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being part of my 2023`,
 						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
-							if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
-								fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
+							if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
+								fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
 									if(err){
 										console.log(err)
 									}
