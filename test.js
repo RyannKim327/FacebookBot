@@ -41,5 +41,5 @@ const key = "C"
 const song = data.split("\n")[1].split(/\s/)
 
 for(let s = 0; s < song.length; s++){
-	console.log()
+	console.log(replacer[song[s]])
 }
