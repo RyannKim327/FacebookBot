@@ -158,7 +158,7 @@ config.add("prefix", {
 	admin: true
 })
 
-config.add("newyear", {
+config.add("worship_remix", {
 	title: "New year cron test",
 	description: "Test cron",
 	commands: [
