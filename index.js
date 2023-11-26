@@ -162,11 +162,11 @@ config.add("newyear", {
 	title: "New year cron test",
 	description: "Test cron",
 	commands: [
-		"new year"
+		"worship remix"
 	],
 	admin: true
 })
-	
+
 
 config.add("toggle", {
 	title: "Toggle Status",
