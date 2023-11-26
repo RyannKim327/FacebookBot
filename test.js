@@ -1,6 +1,6 @@
 const fs = require("fs")
 
-let changeKey = (default_key, change_key) => {
+let changeKey = (chords, default_key, change_key) => {
 	const keys = [
 		"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
 	]
@@ -11,4 +11,5 @@ let changeKey = (default_key, change_key) => {
 		"Eb": "D#",
 		"Gb": "F#"
 	}
+	const chord = chords.split()
 }
