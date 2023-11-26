@@ -26,5 +26,7 @@
 
 const fs = require("fs")
 const data = fs.readFileSync("a.txt", "utf-8")
-
+const [
+	"C", "D", "E", "F"
+]
 const key = "C"
