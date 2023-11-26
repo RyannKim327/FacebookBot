@@ -4,6 +4,7 @@ let a = async () => {
 	let b = new YoutubeMusicApi()
 	await b.initalize()
 	let c = await b.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")['content']
-	console.log(c)
+	let _music = c.content[Math.floor(Math.random() * c.content.length)]
+	console.log(_music)
 }
 a()
