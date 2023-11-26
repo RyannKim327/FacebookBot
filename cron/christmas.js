@@ -7,7 +7,6 @@ module.exports = async (api, event) => {
 	let songs = [
 		"Aop6YF1Xqqg",
 		"WTCryF1J54Y",
-		"aCMLV3j8J_w",
 		"UDRo5ExFZ8U",
 		"AVNsDQ_CFHc"
 	]
