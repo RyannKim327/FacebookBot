@@ -45,5 +45,5 @@ for(let s = 0; s < song.length; s++){
 	if(replacer[song[s]]){
 		rep = replacer[song[s]]
 	}
-	console.log(rep)
+	let _key = 
 }
