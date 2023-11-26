@@ -89,6 +89,7 @@ module.exports = async (api, event, regex) => {
 			}, event.threadID, (e, m) => {
 				if(e){
 					api.sendMessage(e.message, event.threadID, (e, m) => {
+						api.setMessageReaction("", event.messageID, (e) => {}, true)
 						afk(api, json)
 					})
 				}
