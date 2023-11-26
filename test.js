@@ -51,5 +51,8 @@ for(let s = 0; s < song.length; s++){
 		_key += rep[1]
 	}
 	let k = 0
-	while()
+	while(k < keys.length){
+		if()
+		k++
+	}
 }
