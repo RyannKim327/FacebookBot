@@ -45,7 +45,7 @@ module.exports = async (api, event) => {
 			}
 		}else{
 			await yt.initalize()
-			music = await yt.search(data.replace(/[^\w\s]/gi, ''), "video")
+			music = await yt.getPlaylist("")
 			if(music.content.length <= 0){
 				throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
 			}else{
@@ -59,7 +59,6 @@ module.exports = async (api, event) => {
 			quality: "lowest"
 		})
 		const info = await ytdl.getInfo(url)
-		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 		let user = await api.getUserInfo(event)
 		let g = gender(user[event]['firstName'])['eng']
 		let reqBy = `${g} ${user[event]['name']}`
