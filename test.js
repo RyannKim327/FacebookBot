@@ -2,6 +2,7 @@ const YoutubeMusicApi = require("youtube-music-api");
 
 let a = async () => {
 	let b = new YoutubeMusicApi()
-	let c = b.getArtist("")
+	let c = b.getArtist("@Reyer")
+	console.log(c)
 }
 a()
