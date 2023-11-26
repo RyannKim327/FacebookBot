@@ -27,4 +27,4 @@ let changeKey = (chords, default_key, change_key) => {
 
 const data = fs.readFileSync("a.txt", "utf-8")
 const a = changeKey(data, "C", "D")
-console.log(data)
+console.log(a)
