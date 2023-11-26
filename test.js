@@ -57,5 +57,5 @@ for(let s = 0; s < song.length; s++){
 		}
 		k++
 	}
-	console.log(k)
+	for(let )
 }
