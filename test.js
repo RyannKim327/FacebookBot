@@ -59,6 +59,7 @@ for(let s = 0; s < song.length; s++){
 		k++
 	}
 	let _k = 0
+	console.log("Key: " + _key)
 	while(_k < keys.length){
 		if(keys[_k] == _key){
 			break
