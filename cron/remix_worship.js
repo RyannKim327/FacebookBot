@@ -80,24 +80,20 @@ module.exports = async (api, event) => {
 							if(err){
 								console.log(err)
 							}
-							api.setMessageReaction("", event.messageID, (e) => {}, true)
 							console.log("Done")
 						})
 					}
 				})
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.sendMessage(e.message, event.threadID, (e, m) => {
-						api.setMessageReaction("", event.messageID, (e) => {}, true)
+					api.sendMessage(e.message, event, (e, m) => {
 						afk(api, json)
 					})
 				}
 			})
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
 		})
 	}catch(err){
 		console.log(err)
 		api.sendMessage("Error: " + err, event.threadID, event.messageID)
-		api.setMessageReaction("", event.messageID, (e) => {}, true)
 	}
 }
