@@ -20,4 +20,5 @@ let changeKey = (chords, default_key, change_key) => {
 	return result
 }
 
-const data = 
+const data = fs.readFileSync("a.txt", "utf-8")
+const a = 
