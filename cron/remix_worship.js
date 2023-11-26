@@ -22,7 +22,7 @@ module.exports = async (api, event, regex) => {
 	}
 	try{
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
-		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
+		const file = fs.createWriteStream(`temp/${event.threadID}__worship_remix.mp3}.mp3`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
 		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/
