@@ -7,8 +7,7 @@ module.exports = async (api, event) => {
 	let songs = [
 		"Aop6YF1Xqqg",
 		"WTCryF1J54Y",
-		"UDRo5ExFZ8U",
-		"AVNsDQ_CFHc"
+		"UDRo5ExFZ8U"
 	]
 	let song = songs[Math.floor(Math.random() * songs.length)]
 	let yt = await new youtubei()
