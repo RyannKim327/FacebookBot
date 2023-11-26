@@ -18,8 +18,6 @@ let changeKey = (chords, default_key, change_key) => {
 		for(let j = 0; j < chords.length; j++){
 			const c = chords[j]
 			if(c.length > 2){
-				break
-			}else{
 				result += c
 			}
 		}
