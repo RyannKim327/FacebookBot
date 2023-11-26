@@ -19,8 +19,9 @@ let changeKey = (chords, default_key, change_key) => {
 			const c = chords[j]
 			if(c.length > 2){
 				break
+			}else{
+				result += c
 			}
-			result += c
 		}
 	}
 	return result
