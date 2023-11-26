@@ -23,7 +23,7 @@ let changeKey = (chords, default_key, change_key) => {
 				c = replacer[c]
 			}
 			if(keys.includes(c)){
-				result += c + " "
+				result = replacement(c)
 			}
 		}
 	}
