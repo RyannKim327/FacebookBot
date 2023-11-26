@@ -13,7 +13,7 @@ const react =  require("../utils/react")
 const font = require("../utils/font")
 
 module.exports = async (api, event, regex) => {
-	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`)){
 		return api.sendMessage("Your request is still in progress, please wait for a moment", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReaction(react, event.messageID, (e) => {}, true)
