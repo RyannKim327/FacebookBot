@@ -1,6 +1,20 @@
 const fs = require("fs")
 
-let replacement = ()
+let replacement = (chord) => {
+	const keys = [
+		"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B",
+		"Cm", "C#m", "Dm", "D#m", "Em", "Fm", "F#m", "Gm", "G#m", "Am", "A#m", "Bm",
+		"Cmaj", "C#maj", "Dmaj", "D#maj", "Emaj", "Fmaj", "F#maj", "Gmaj", "G#maj", "Amaj", "A#maj", "Bmaj"
+	]
+	const replacer = {
+		"Ab": "G#",
+		"Bb": "A#",
+		"Db": "C#",
+		"Eb": "D#",
+		"Gb": "F#"
+	}
+	
+}
 
 let changeKey = (chords, default_key, change_key) => {
 	const keys = [
