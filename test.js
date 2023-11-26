@@ -38,33 +38,3 @@ const replacer = {
 }
 const default_key = "G"
 const to_key = "A"
-
-const song = data.split("\n")[1].split(/\s/)
-console.log(song)
-
-for(let s = 0; s < song.length; s++){
-	let rep = song[s]
-	if(replacer[song[s]]){
-		rep = replacer[song[s]]
-	}
-	let _key = rep[0]
-	if(rep[1] == "b" || rep[1] == "#"){
-		_key += rep[1]
-	}
-	let k = 0
-	while(k < keys.length){
-		if(keys[k] == key){
-			break
-		}
-		k++
-	}
-	let _k = 0
-	console.log("Key: " + _key)
-	while(_k < keys.length){
-		if(keys[_k] == _key){
-			break
-		}
-		_k++
-	}
-	console.log(keys[k + _k])
-}
