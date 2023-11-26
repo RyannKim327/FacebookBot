@@ -20,7 +20,7 @@ let changeKey = (chords, default_key, change_key) => {
 			if(c.length > 2){
 				break
 			}
-			
+			result += ""
 		}
 	}
 	return result
