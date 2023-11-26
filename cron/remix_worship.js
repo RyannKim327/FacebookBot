@@ -60,9 +60,9 @@ module.exports = async (api, event) => {
 		})
 		const info = await ytdl.getInfo(url)
 		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
-		let user = await api.getUserInfo(event.senderID)
-		let g = gender(user[event.senderID]['firstName'])['eng']
-		let reqBy = `${g} ${user[event.senderID]['name']}`
+		let user = await api.getUserInfo(event)
+		let g = gender(user[event]['firstName'])['eng']
+		let reqBy = `${g} ${user[event]['name']}`
 		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
@@ -72,7 +72,7 @@ module.exports = async (api, event) => {
 				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}`,
 				mentions:[{
 					id: event.senderID,
-					tag: user[event.senderID]['name']
+					tag: user[event]['name']
 				}],
 				attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 					if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
@@ -94,6 +94,6 @@ module.exports = async (api, event) => {
 		})
 	}catch(err){
 		console.log(err)
-		api.sendMessage("Error: " + err, event.threadID, event.messageID)
+		api.sendMessage("Error: " + err, event)
 	}
 }
