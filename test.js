@@ -34,6 +34,8 @@ const replacer = {
 	"Bb": "A#",
 	"Db": "C#",
 	"Eb": "D#",
-	"G"
+	"Gb": "F#",
 }
 const key = "C"
+
+
