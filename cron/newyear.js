@@ -15,7 +15,8 @@ module.exports = async (api, event) => {
 	let name = `${__dirname}/../temp/${event}_newyear.mp3`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let songs = [
-		"UDRo5ExFZ8U"
+		"UDRo5ExFZ8U",
+		"IXVVA7ILn7c"
 	]
 	let song = songs[Math.floor(Math.random() * songs.length)]
 	if(!fs.existsSync(name)){
