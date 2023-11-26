@@ -75,9 +75,9 @@ module.exports = async (api, event, regex) => {
 					id: event.senderID,
 					tag: user[event.senderID]['name']
 				}],
-				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
-					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
-						fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
+				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`).on("end", async () => {
+					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`)){
+						fs.unlink(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`, (err) => {
 							if(err){
 								console.log(err)
 							}
