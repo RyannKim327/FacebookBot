@@ -101,6 +101,10 @@ config.add("name", {
 	admin: true
 })
 
+config.add("newyear", {
+	title
+})
+
 config.add("off", {
 	title: "Off/On Bot Feature",
 	description: "Setup by an admin to enable/disable the bot commands in a particular group or person.",
