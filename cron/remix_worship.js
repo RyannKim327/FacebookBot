@@ -25,7 +25,7 @@ module.exports = async (api, event) => {
 		const file = fs.createWriteStream(`temp/${event}_worship_remix.mp3`)
 		await yt.initalize()
 		let music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")
-		let _music = music[Math.floor(Math.random() * music.length)]
+		let _music = music.content[Math.floor(Math.random() * music.content.length)]
 		const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 		const strm = ytdl(url, {
 			quality: "lowest"
