@@ -28,10 +28,6 @@ module.exports = async (api, event) => {
 		let _music = music.content[Math.floor(Math.random() * music.content.length)]
 		const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 		const strm = ytdl(url, {
-			quality: "lowest"
-		})
-		const info = await ytdl.getInfo(url)
-		const strm = ytdl(url, {
 			quality: "lowestaudio"
 		})
 		const info = await ytdl.getInfo(url)
