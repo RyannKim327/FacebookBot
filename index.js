@@ -166,7 +166,7 @@ config.add("newyear", {
 	],
 	admin: true
 })
-
+	
 
 config.add("toggle", {
 	title: "Toggle Status",
