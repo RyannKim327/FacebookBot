@@ -42,6 +42,7 @@ const song = data.split("\n")[1].split(/\s/)
 console.log(song)
 
 for(let s = 0; s < song.length; s++){
+	let chord = ""
 	let rep = song[s]
 	if(replacer[song[s]]){
 		rep = replacer[song[s]]
@@ -58,6 +59,7 @@ for(let s = 0; s < song.length; s++){
 		k++
 	}
 	for(let a = 0; a < k; a++){
-
+		chord = 
 	}
+	console.log(chord)
 }
