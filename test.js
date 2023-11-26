@@ -25,4 +25,5 @@
 // console.log(a.join(" "))
 
 const fs = require("fs")
-con
+const data = fs.readFileSync("a.txt", "utf-8")
+
