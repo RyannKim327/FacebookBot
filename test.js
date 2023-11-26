@@ -50,5 +50,7 @@ for(let s = 0; s < song.length; s++){
 	if(rep[1] == "b" || rep[1] == "#"){
 		_key += rep[1]
 	}
-	for(let c = 0; c < )
+	for(let c = 0; c < keys; c++){
+		
+	}
 }
