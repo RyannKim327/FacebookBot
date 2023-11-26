@@ -45,7 +45,7 @@ module.exports = async (api, event) => {
 			}
 		}else{
 			await yt.initalize()
-			music = await yt.getPlaylist("")
+			music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")
 			if(music.content.length <= 0){
 				throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
 			}else{
@@ -54,6 +54,7 @@ module.exports = async (api, event) => {
 				}
 			}
 		}
+		
 		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
 		const strm = ytdl(url, {
 			quality: "lowest"
