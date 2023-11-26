@@ -60,7 +60,9 @@ for(let s = 0; s < song.length; s++){
 	}
 	let _k = 0
 	while(_k < keys.length){
-		if(keys[_k] == rep)
+		if(keys[_k] == _key){
+			break
+		}
 		_k++
 	}
 	console.log(keys[k + _k])
