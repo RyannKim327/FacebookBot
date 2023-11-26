@@ -59,8 +59,8 @@ for(let s = 0; s < song.length; s++){
 		k++
 	}
 	let _k = 0
-	while(let c = 0; c < keys.length; c++){
-
+	while(_k < keys.length){
+		_k++
 	}
-	console.log()
+	console.log(keys[])
 }
