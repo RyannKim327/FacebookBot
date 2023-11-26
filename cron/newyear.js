@@ -54,9 +54,9 @@ module.exports = async (api, event) => {
 					let name = `${g} ${user[event]['name']}`
 					api.sendMessage({
 						body: `Happy New Year to you ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being a part of my 2023.`,
-						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship.mp3`).on("end", async () => {
-							if(fs.existsSync(`${__dirname}/../temp/${event}_worship.mp3`)){
-								fs.unlink(`${__dirname}/../temp/${event}_worship.mp3`, (err) => {
+						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
+							if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
+								fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
 									if(err){
 										console.log(err)
 									}
