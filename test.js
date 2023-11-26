@@ -59,7 +59,7 @@ for(let s = 0; s < song.length; s++){
 		k++
 	}
 	for(let a = 0; a < k; a++){
-		chord = 
+		chord = keys[k]
 	}
 	console.log(chord)
 }
