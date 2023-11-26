@@ -32,6 +32,8 @@ const keys = [
 const replacer = {
 	"Ab": "G#",
 	"Bb": "A#",
-	"Db": ""
+	"Db": "C#",
+	"Eb": "D#",
+	"G"
 }
 const key = "C"
