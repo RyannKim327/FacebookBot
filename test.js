@@ -58,7 +58,7 @@ for(let s = 0; s < song.length; s++){
 		}
 		k++
 	}
-	for(let a = 0; a < k; a++){
+	for(let a = 0; a < keys.length; a++){
 		chord = keys[k]
 	}
 	console.log(chord)
