@@ -31,40 +31,53 @@ module.exports = async (api, event) => {
 			quality: "lowest"
 		})
 		const info = await ytdl.getInfo(url)
-		let user = await api.getUserInfo(event)
-		let g = gender(user[event]['firstName'])['eng']
-		let reqBy = `${g} ${user[event]['name']}`
-		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
-			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
-			let min = Math.floor(lengthTime / 60)
-			let sec = lengthTime % 60
-			const time = `${min}:${sec}`
-			api.sendMessage({
-				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}`,
-				mentions:[{
-					id: event.senderID,
-					tag: user[event]['name']
-				}],
-				attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
-					if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
-						fs.unlink(`${__dirname}/../temp/${event}_worship_remix.mp3`, (err) => {
-							if(err){
-								console.log(err)
-							}
-							console.log("Done")
-						})
+		const strm = ytdl(url, {
+			quality: "lowestaudio"
+		})
+		const info = await ytdl.getInfo(url)
+		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
+			if(thread.isGroup){
+				api.sendMessage({
+					body: `Happy new year ${thread.threadName}, here's a simple greetings for all of you:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being part of my 2023`,
+					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
+						if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
+							fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
+								if(err){
+									console.log(err)
+								}
+								console.log("Done")
+							})
+						}
+					})
+				}, event, (e, m) => {
+					if(e){
+						afk(api, json2)
 					}
 				})
-			}, event.threadID, (e, m) => {
-				if(e){
-					api.sendMessage(e.message, event, (e, m) => {
-						afk(api, json)
+			}else{
+				let user = await api.getUserInfo(event)
+				const g =	 gender(user[event]['firstName'])['eng']
+				let name = `${g} ${user[event]['name']}`
+				api.sendMessage({
+					body: `Happy New Year to you ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being a part of my 2023.`,
+					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
+						if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
+							fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
+								if(err){
+									console.log(err)
+								}
+								console.log("Done")
+							})
+						}
 					})
-				}
-			})
+				}, event, (e, m) => {
+					if(e){
+						afk(api, json2)
+					}
+				})
+			}
 		})
 	}catch(err){
 		console.log(err)
-		api.sendMessage("Error: " + err, event)
 	}
 }
