@@ -12,9 +12,9 @@ const gender = require("../utils/gender")
 const react =  require("../utils/react")
 const font = require("../utils/font")
 
-module.exports = async (api, event, regex) => {
-	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`)){
-		return api.sendMessage("Your request is still in progress, please wait for a moment", event.threadID, (e, m) => {
+module.exports = async (api, event) => {
+	if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
+		return api.sendMessage("Your request is still in progress, please wait for a moment", event, (e, m) => {
 			if(e){
 				api.setMessageReaction(react, event.messageID, (e) => {}, true)
 			}
@@ -22,8 +22,7 @@ module.exports = async (api, event, regex) => {
 	}
 	try{
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
-		const file = fs.createWriteStream(`temp/${event.threadID}_worship_remix.mp3`)
-		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
+		const file = fs.createWriteStream(`temp/${event}_worship_remix.mp3`)
 		const data = event.body.match(regex)[1]
 		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/
 		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]+)/
@@ -64,7 +63,7 @@ module.exports = async (api, event, regex) => {
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
-		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`).on("end", async () => {
+		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
 			let sec = lengthTime % 60
@@ -75,9 +74,9 @@ module.exports = async (api, event, regex) => {
 					id: event.senderID,
 					tag: user[event.senderID]['name']
 				}],
-				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`).on("end", async () => {
-					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`)){
-						fs.unlink(`${__dirname}/../temp/${event.threadID}_worship_remix.mp3`, (err) => {
+				attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
+					if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
+						fs.unlink(`${__dirname}/../temp/${event}_worship_remix.mp3`, (err) => {
 							if(err){
 								console.log(err)
 							}
