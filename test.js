@@ -36,7 +36,8 @@ const replacer = {
 	"Eb": "D#",
 	"Gb": "F#"
 }
-const key = "G"
+const default_key = "G"
+const to_key = "A"
 
 const song = data.split("\n")[1].split(/\s/)
 console.log(song)
