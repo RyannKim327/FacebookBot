@@ -11,5 +11,7 @@ let changeKey = (chords, default_key, change_key) => {
 		"Eb": "D#",
 		"Gb": "F#"
 	}
-	const chord = chords.split()
+	let result = ""
+	const chord = chords.split(/\n/)
+
 }
