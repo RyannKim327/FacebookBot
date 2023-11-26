@@ -26,33 +26,8 @@ module.exports = async (api, event) => {
 		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/
 		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]+)/
 		let music = {}
-		if(yt_1.test(data)){
-			music = {
-				"content": [
-					{
-						"videoId": data.match(yt_1)[1]
-					}
-				]
-			}
-		}else if(yt_2.test(data)){
-			music = {
-				"content": [
-					{
-						"videoId": data.match(yt_2)[1].split("?")[0]
-					}
-				]
-			}
-		}else{
-			await yt.initalize()
-			music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL").content
-			if(music.content.length <= 0){
-				throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
-			}else{
-				if(music.content[0].videoId == undefined){
-					throw new Error(`${data.replace(/[^\w\s]/gi, '')} is not found on youtube music. Try to add the singer, maybe I can find it.`)
-				}
-			}
-		}
+		await yt.initalize()
+		music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL").content
 		let _music = music[Math.floor(Math.random() * music.length)]
 		const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 		const strm = ytdl(url, {
