@@ -57,5 +57,7 @@ for(let s = 0; s < song.length; s++){
 		}
 		k++
 	}
-	for(let )
+	for(let a = 0; a < keys.length; a++){
+		
+	}
 }
