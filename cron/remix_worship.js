@@ -24,8 +24,7 @@ module.exports = async (api, event) => {
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
 		const file = fs.createWriteStream(`temp/${event}_worship_remix.mp3`)
 		await yt.initalize()
-		let music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL").content
-		console.log(music)
+		let music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")
 		let _music = music[Math.floor(Math.random() * music.length)]
 		const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 		const strm = ytdl(url, {
