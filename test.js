@@ -52,7 +52,10 @@ for(let s = 0; s < song.length; s++){
 	}
 	let k = 0
 	while(k < keys.length){
-		if()
+		if(keys[k] == key){
+			break
+		}
 		k++
 	}
+	console.log(k)
 }
