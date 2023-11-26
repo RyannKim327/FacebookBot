@@ -39,7 +39,7 @@ const replacer = {
 const key = "C"
 
 const song = data.split("\n")[1].split(/\s/)
-con
+console.log(song)
 
 for(let s = 0; s < song.length; s++){
 	let rep = song[s]
