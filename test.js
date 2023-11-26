@@ -50,5 +50,5 @@ for(let s = 0; s < song.length; s++){
 	if(rep[1] == "b" || rep[1] == "#"){
 		_key += rep[1]
 	}
-	console.log(_key)
+	for(let c = 0; c < )
 }
