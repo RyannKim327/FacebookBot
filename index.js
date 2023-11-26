@@ -104,7 +104,10 @@ config.add("name", {
 config.add("newyear", {
 	title: "New year cron test",
 	description: "Test cron",
-	commands: 
+	commands: [
+		"new year"
+	],
+	admin: true
 })
 
 config.add("off", {
