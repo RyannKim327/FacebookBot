@@ -47,5 +47,6 @@ for(let s = 0; s < song.length; s++){
 		rep = replacer[song[s]]
 	}
 	let _key = rep[0]
+	if(rep[1] == "b" || rep1[])
 	console.log(_key)
 }
