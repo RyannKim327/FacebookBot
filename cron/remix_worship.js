@@ -14,6 +14,7 @@ const font = require("../utils/font")
 
 module.exports = async (api, event) => {
 	try{
+		let thread = await api.getThreadInfo(event)
 		const file = fs.createWriteStream(`temp/${event}_worship_remix.mp3`)
 		await yt.initalize()
 		let music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")
@@ -23,7 +24,7 @@ module.exports = async (api, event) => {
 			quality: "lowestaudio"
 		})
 		const info = await ytdl.getInfo(url)
-		console.log(event.isGroup)
+		console.log(thread.isGroup)
 		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 			if(event.isGroup){
 				api.sendMessage({
