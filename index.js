@@ -95,8 +95,8 @@ config.add("name", {
 		"set name as ([\\w]+)"
 	],
 	hints: [
-		"set name as <name>"
-		"set name as <name>"
+		"set name as <name>",
+		"set name to <name>"
 	],
 	hasArgs: true,
 	admin: true
