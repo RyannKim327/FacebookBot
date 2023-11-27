@@ -27,7 +27,7 @@ module.exports = async (api, event) => {
 		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 			if(thread.isGroup){
 				api.sendMessage({
-					body: `A random worship song (remix) for ${thread.threadName}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nNot all remixing worship songs are bad, as if you worship God`,
+					body: `A random worship song (remix) for ${thread.threadName}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nNot all remixing worship songs are bad, as if you worshiping God and praising him.`,
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
 							fs.unlink(`${__dirname}/../temp/${event}_worship_remix.mp3`, (err) => {
