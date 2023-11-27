@@ -23,6 +23,7 @@ module.exports = async (api, event) => {
 			quality: "lowestaudio"
 		})
 		const info = await ytdl.getInfo(url)
+		console.log(event.isGroup)
 		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 			if(event.isGroup){
 				api.sendMessage({
