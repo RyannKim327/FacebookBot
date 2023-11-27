@@ -7,8 +7,8 @@ const afk = require("./../utils/afk")
 const g = require("./../utils/gender")
 let date = require("./../utils/date")
 const music = require("./music")
-
-
+const remix = require("./remix_worship")
+const ny = require("./newyear")
 
 let today = async () => {
 	let time = date("Asia/Manila")
@@ -114,6 +114,8 @@ module.exports = async (api) => {
 		scheduled: true,
 		timezone: "Asia/Manila"
 	})
+
+	cronjob.schedule
 
 	// cronjob.schedule("17 0 * * *", () => {
 	// 	api.getThreadList(20, null, ['INBOX'], (e, data) => {
