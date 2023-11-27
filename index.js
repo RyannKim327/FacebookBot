@@ -96,6 +96,7 @@ config.add("name", {
 	],
 	hints: [
 		"set name as <name>"
+		"set name as <name>"
 	],
 	hasArgs: true,
 	admin: true
