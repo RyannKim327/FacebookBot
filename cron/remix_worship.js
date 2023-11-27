@@ -31,13 +31,13 @@ module.exports = async (api, event) => {
 			quality: "lowestaudio"
 		})
 		const info = await ytdl.getInfo(url)
-		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
+		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 			if(thread.isGroup){
 				api.sendMessage({
 					body: `Happy new year ${thread.threadName}, here's a simple greetings for all of you:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being part of my 2023`,
-					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
-						if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
-							fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
+					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
+						if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
+							fs.unlink(`${__dirname}/../temp/${event}_worship_remix.mp3`, (err) => {
 								if(err){
 									console.log(err)
 								}
@@ -56,9 +56,9 @@ module.exports = async (api, event) => {
 				let name = `${g} ${user[event]['name']}`
 				api.sendMessage({
 					body: `Happy New Year to you ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being a part of my 2023.`,
-					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
-						if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
-							fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
+					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
+						if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
+							fs.unlink(`${__dirname}/../temp/${event}_worship_remix.mp3`, (err) => {
 								if(err){
 									console.log(err)
 								}
