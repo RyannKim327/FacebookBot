@@ -13,15 +13,7 @@ const react =  require("../utils/react")
 const font = require("../utils/font")
 
 module.exports = async (api, event) => {
-	if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
-		return api.sendMessage("Your request is still in progress, please wait for a moment", event, (e, m) => {
-			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
-			}
-		}, event.messageID)
-	}
 	try{
-		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
 		const file = fs.createWriteStream(`temp/${event}_worship_remix.mp3`)
 		await yt.initalize()
 		let music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")
