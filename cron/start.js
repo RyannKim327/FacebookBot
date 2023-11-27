@@ -8,6 +8,8 @@ const g = require("./../utils/gender")
 let date = require("./../utils/date")
 const music = require("./music")
 
+
+
 let today = async () => {
 	let time = date("Asia/Manila")
 	let result = await axios.get(`https://today.zenquotes.io/api/${time.getMonth() + 1}/${time.getDay()}`).then(r => {
