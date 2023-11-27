@@ -44,7 +44,7 @@ module.exports = async (api, event) => {
 				})
 			}else{
 				let user = await api.getUserInfo(event)
-				const g =	 gender(user[event]['firstName'])['eng']
+				const g = gender(user[event]['firstName'])['eng']
 				let name = `${g} ${user[event]['name']}`
 				api.sendMessage({
 					body: `Happy New Year to you ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being a part of my 2023.`,
