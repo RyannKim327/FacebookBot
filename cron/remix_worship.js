@@ -48,7 +48,7 @@ module.exports = async (api, event) => {
 				const g = gender(user[event]['firstName'])['eng']
 				let name = `${g} ${user[event]['name']}`
 				api.sendMessage({
-					body: `A random worship song (remix) for ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being a part of my 2023.`,
+					body: `A random worship song (remix) for ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nNot all remixing worship songs are bad, as if you worshiping God and praising him.`,
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_worship_remix.mp3`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event}_worship_remix.mp3`)){
 							fs.unlink(`${__dirname}/../temp/${event}_worship_remix.mp3`, (err) => {
