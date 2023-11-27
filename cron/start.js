@@ -131,6 +131,22 @@ module.exports = async (api) => {
 		timezone: "Asia/Manila"
 	})
 
+	cronjob.schedule("0 0 1 1 *", () => {
+		api.getThreadList(20, null, ['INBOX'], (e, data) => {
+			if(e) return (`Error [Remix]: ${e}`)
+			let i = 0
+			data.forEach(r => {
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
+					remix(api, r.threadID)
+				}
+				i++
+			})
+		})
+	}, {
+		scheduled: true,
+		timezone: "Asia/Manila"
+	})
+
 	// cronjob.schedule("17 0 * * *", () => {
 	// 	api.getThreadList(20, null, ['INBOX'], (e, data) => {
 	// 		if(e) return (`Error [New year]: ${e}`)
