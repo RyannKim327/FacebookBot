@@ -120,10 +120,8 @@ module.exports = async (api) => {
 			if(e) return (`Error [New Year]: ${e}`)
 			let i = 0
 			data.forEach(r => {
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
-					ny(api, r.threadID)
-				}
-				i++
+				ny(api, r.threadID)
+				
 			})
 		})
 	}, {
