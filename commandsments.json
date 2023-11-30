@@ -623,9 +623,9 @@
 			"bugtong"
 		],
 		"category": "game"
-	})
-
-	config.add("answer", {
+	},
+	{
+		"script": "answer",
 		"title": "Answer bot games",
 		"description": "This is the way for you to answer some question from facebook bot.",
 		"commands": [
@@ -636,6 +636,5 @@
 		],
 		"hasArgs": true,
 		"category": "game"
-	})
-
+	}
 ]
