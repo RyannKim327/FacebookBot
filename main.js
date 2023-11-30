@@ -1,8 +1,9 @@
+const fs = require("fs")
 const config = require("./config")
 const server = require("./server")
 const repl = require("./replit_only.js")
 
-
+config
 
 config.addAdmins("100011558238843")
 config.addAdmins("100081698814451")
