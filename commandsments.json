@@ -91,12 +91,12 @@ config.add("name", {
 	"commands": [
 		"set name as ([\\w]+)"
 	],
-	hints: [
+	"hints": [
 		"set name as <name>",
 		"set name to <name>"
 	],
 	hasArgs: true,
-	admin: true
+	"admin": true
 })
 
 config.add("newyear", {
@@ -105,7 +105,7 @@ config.add("newyear", {
 	"commands": [
 		"new year"
 	],
-	admin: true
+	"admin": true
 })
 
 config.add("off", {
@@ -115,7 +115,7 @@ config.add("off", {
 		"bot off",
 		"bot on"
 	],
-	hints: [
+	"hints": [
 		"bot off [both message and reply]",
 		"bot on [both message and reply]"
 	],
@@ -123,7 +123,7 @@ config.add("off", {
 		"message",
 		"message_reply"
 	],
-	admin: true
+	"admin": true
 })
 
 config.add("pin", {
@@ -133,14 +133,14 @@ config.add("pin", {
 		"clearpin",
 		"pin"
 	],
-	hints: [
+	"hints": [
 		"clearpin [reply only]",
 		"pin [reply only]"
 	],
 	type: [
 		"message_reply"
 	],
-	admin: true
+	"admin": true
 })
 
 config.add("prefix", {
@@ -149,11 +149,11 @@ config.add("prefix", {
 	"commands": [
 		"prefix ([\\W])"
 	],
-	hints: [
+	"hints": [
 		"prefix <symbol>"
 	],
 	hasArgs: true,
-	admin: true
+	"admin": true
 })
 
 config.add("remix", {
@@ -162,7 +162,7 @@ config.add("remix", {
 	"commands": [
 		"worship remix"
 	],
-	admin: true
+	"admin": true
 })
 
 
@@ -172,10 +172,10 @@ config.add("toggle", {
 	"commands": [
 		"toggle"
 	],
-	hints: [
+	"hints": [
 		"toggle"
 	],
-	admin: true
+	"admin": true
 })
 
 config.add("unsent", {
@@ -185,11 +185,11 @@ config.add("unsent", {
 		"unsent",
 		"unsend"
 	],
-	hints: [
+	"hints": [
 		"unsent [reply only]",
 		"unsend [reply only]"
 	],
-	admin: true,
+	"admin": true,
 	type: [
 		"message_reply"
 	]
@@ -201,10 +201,10 @@ config.add("updates", {
 	"commands": [
 		"app_update ([\\W\\w]+)$"
 	],
-	hints: [
+	"hints": [
 		"app_update <data>"
 	],
-	admin: true,
+	"admin": true,
 	hasArgs: true
 })
 
@@ -214,10 +214,10 @@ config.add("worship_cron", {
 	"commands": [
 		"worship"
 	],
-	hints: [
+	"hints": [
 		"worship"
 	],
-	admin: true
+	"admin": true
 })
 
 config.add("vips", {	
@@ -226,10 +226,10 @@ config.add("vips", {
 	"commands": [
 		"vip"
 	],
-	hints: [
+	"hints": [
 		"vip [reply only]"
 	],
-	admin: true,
+	"admin": true,
 	type: [
 		"message_reply"
 	]
@@ -242,7 +242,7 @@ config.add("vips", {
 // 		"add worship song ([\\w\\W]+)"
 // 	],
 // 	hasArgs: true,
-// 	admin: true
+// 	"admin": true
 // })
 
 // config.add("worshiplists", {
@@ -251,7 +251,7 @@ config.add("vips", {
 // 	"commands": [
 // 		"worship lists"
 // 	],
-// 	admin: true
+// 	"admin": true
 // })
 
 config.add("info", {
@@ -268,7 +268,7 @@ config.add("info", {
 		"how",
 		"tut"
 	],
-	hints: [
+	"hints": [
 		"info",
 		"help",
 		"intro",
@@ -284,7 +284,7 @@ config.add("audioverse", {
 	"commands": [
 		"audio verse ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"audio verse <book> <chapter>"
 	],
 	hasArgs: true,
@@ -301,7 +301,7 @@ config.add("baybayin", {
 		"baybay ([\\w\\W]+)",
 		"baybayin ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"baybay <phrase>",
 		"baybayin <phrase>"
 	],
@@ -315,7 +315,7 @@ config.add("beshy", {
 	"commands": [
 		"beshy ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"beshy <phrase>"
 	],
 	hasArgs: true,
@@ -328,7 +328,7 @@ config.add("fb", {
 	"commands": [
 		"fb ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"fb @<someone>",
 		"fb <username|facebook id>",
 		"fb this [reply only]",
@@ -347,7 +347,7 @@ config.add("game", {
 	"commands": [
 		"game lists"
 	],
-	hints: [
+	"hints": [
 		"game lists"
 	],
 	category: "oneTime"
@@ -371,7 +371,7 @@ config.add("google", {
 	"commands": [
 		"google ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"google <query>"
 	],
 	hasArgs: true,
@@ -385,7 +385,7 @@ config.add("guitar", {
 		"guitar ([\\w\\W]+)",
 		"tabs ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"guitar <song>",
 		"tabs <song>"
 	],
@@ -399,7 +399,7 @@ config.add("imgtxt", {
 	"commands": [
 		"img2txt"
 	],
-	hints: [
+	"hints": [
 		"img2txt [reply only]"
 	],
 	type: [
@@ -414,7 +414,7 @@ config.add("lexi", {
 	"commands": [
 		"lexi ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"lexi <query>"
 	],
 	hasArgs: true,
@@ -433,7 +433,7 @@ config.add("music", {
 		"sing ([\\w\\W]+)",
 		"play ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"music <song title>",
 		"sing <song title>",
 		"play <song title>"
@@ -449,7 +449,7 @@ config.add("news", {
 		"news ([\\w\\W]+)",
 		"news"
 	],
-	hints: [
+	"hints": [
 		"news",
 		"news <url>"
 	],
@@ -463,7 +463,7 @@ config.add("ngl", {
 	"commands": [
 		"ngl ([\\w]+) ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"ngl <username> <message>"
 	],
 	hasArgs: true,
@@ -486,7 +486,7 @@ config.add("pin", {
 	"commands": [
 		"pin"
 	],
-	hints: [
+	"hints": [
 		"pin"
 	],
 	category: "oneTime"
@@ -498,7 +498,7 @@ config.add("ris", {
 	"commands": [
 		"ris"
 	],
-	hints: [
+	"hints": [
 		"ris [reply only]"
 	],
 	type: [
@@ -514,7 +514,7 @@ config.add("subs", {
 		"subscribe",
 		"unsubscribe"
 	],
-	hints: [
+	"hints": [
 		"subscribe",
 		"unsubscribe"
 	],
@@ -528,7 +528,7 @@ config.add("biblegateway", {
 		"verse (1905|1978|2001|snd|niv|esv|kjv|nlt|b1905|b1978|b2001|bsnd) ([\\w\\s:;-]+)",
 		"verse ([\\w\\s:;-]+)"
 	],
-	hints: [
+	"hints": [
 		"verse <1905|1978|2001|snd|niv|esv|kjv|nlt|b1905|b1978|b2001|bsnd> <passage>",
 		"verse <passage>"
 	],
@@ -546,7 +546,7 @@ config.add("video", {
 	"commands": [
 		"video ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"video <title from youtube>"
 	],
 	hasArgs: true,
@@ -564,7 +564,7 @@ config.add("wiki", {
 		"wiki search ([\\w\\W]+)$",
 		"wiki ([\\w\\W]+)$"
 	],
-	hints: [
+	"hints": [
 		"wiki <query>"
 	],
 	hasArgs: true,
@@ -577,7 +577,7 @@ config.add("word", {
 	"commands": [
 		"word ([\\w]+)$"
 	],
-	hints: [
+	"hints": [
 		"word <word>"
 	],
 	hasArgs: true,
@@ -590,7 +590,7 @@ config.add("dropball", {
 	"commands": [
 		"drop ([\\d]+)"
 	],
-	hints: [
+	"hints": [
 		"drop <position from 1 to 5>"
 	],
 	hasArgs: true,
@@ -603,7 +603,7 @@ config.add("dice", {
 	"commands": [
 		"dice"
 	],
-	hints: [
+	"hints": [
 		"dice [message and reply]"
 	],
 	category: "game",
@@ -619,7 +619,7 @@ config.add("bugtong", {
 	"commands": [
 		"bugtong"
 	],
-	hints: [
+	"hints": [
 		"bugtong"
 	],
 	category: "game"
@@ -631,7 +631,7 @@ config.add("answer", {
 	"commands": [
 		"answer ([\\w\\W]+)"
 	],
-	hints: [
+	"hints": [
 		"answer <your answer>"
 	],
 	hasArgs: true,
