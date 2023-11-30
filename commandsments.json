@@ -275,9 +275,9 @@
 			"tut"
 		],
 		"category": "oneTime"
-	})
-
-	config.add("audioverse", {
+	},
+	{
+		"script": "audioverse",
 		"title": "Audio Verse",
 		"description": "An audio version of a whole chapter in the bible",
 		"commands": [
@@ -288,7 +288,7 @@
 		],
 		"hasArgs": true,
 		"category": "theology"
-	})
+	},
 
 	config.add("baybayin", {
 		"title": "Baybayin Transliterator",
