@@ -363,8 +363,8 @@
 	// 	"hasArgs": true,
 	// 	"category": "multimedia"
 	// })
-
-	config.add("google", {
+	{
+		"script": "google",
 		"title": "Google Search Engine",
 		"description": "A command with educational purposes searches.",
 		"commands": [
@@ -375,9 +375,7 @@
 		],
 		"hasArgs": true,
 		"category": "knowledge"
-	})
-
-	config.add("guitar", {
+	},"guitar", {
 		"title": "Ultimate Guitar Tabs Command",
 		"description": "A command which gives you a random guitar chords/tabs.",
 		"commands":[
