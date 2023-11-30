@@ -10,3 +10,6 @@
 // a()
 try{
 	console.log(JSON.parse("test"))
+}catch(e){
+	console.error("test" + e)
+}
