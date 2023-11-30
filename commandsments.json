@@ -154,19 +154,18 @@
 		],
 		"hasArgs": true,
 		"admin": true
-	}
-
-	"remix", {
+	},
+	{
+		"script": "remix",
 		"title": "New year cron test",
 		"description": "Test cron",
 		"commands": [
 			"worship remix"
 		],
 		"admin": true
-	})
-
-
-	config.add("toggle", {
+	},
+	{
+		"script": "toggle",
 		"title": "Toggle Status",
 		"description": "For admin use",
 		"commands": [
