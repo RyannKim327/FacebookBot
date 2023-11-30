@@ -85,7 +85,7 @@ let setCommands = (data) => {
 			return console.error("This can't be converted to JSON")
 		}
 	}
-	
+	commands = data
 }
 let addAdmins = (data) => {
 	admins.push(data)
