@@ -79,7 +79,11 @@ let add = (script, data) => {
 }
 let setCommands = (data) => {
 	if(typeof data != 'object'){
-		data = JSON.parse(data)
+		try{
+			data = JSON.parse(data)
+		}catch(e){
+			console.error("This can't be converted to JSON")
+		}
 	}
 	
 }
