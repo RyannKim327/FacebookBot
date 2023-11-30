@@ -406,7 +406,8 @@
 		],
 		"category": "multimedia"
 	},
-	"lexi", {
+	{
+		"script": "lexi",
 		"title": "Lexica Art",
 		"description": "Test mode image generator",
 		"commands": [
@@ -417,9 +418,9 @@
 		],
 		"hasArgs": true,
 		"category": "multimedia"
-	})
-
-	config.add("music", {
+	},
+	{
+		"script": "music",
 		"title": "YouTube Music Command",
 		"description": "A music command which gives you a youtube music based results",
 		"queries": [
@@ -438,9 +439,9 @@
 		],
 		"hasArgs": true,
 		"category": "multimedia"
-	})
-
-	config.add("news", {
+	},
+	{
+		"script": "news",
 		"title": "Manila Times News",
 		"description": "A daily news update requests from manila times.",
 		"commands": [
@@ -453,9 +454,9 @@
 		],
 		"hasArgs": true,
 		"category": "news"
-	})
-
-	config.add("ngl", {
+	},
+	{
+		"script": "ngl",
 		"title": "Not Gonna Lie Command", 
 		"description": "NGL Command",
 		"commands": [
