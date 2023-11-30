@@ -65,25 +65,25 @@
 	},
 	{
 		"script": "gender",
-		title: "Add new Gender",
-		description: "Setup by an admin to add a new name data with gender..",
-		commands: [
+		"title": "Add new Gender",
+		"description": "Setup by an admin to add a new name data with gender..",
+		"commands": [
 			"gender (.*?) to (.*?)",
 			"gender (.*?) as (.*?)"
 		],
-		hints: [
+		"hints": [
 			"gender <user> to <female|male>",
 			"gender <user> as <female|male>",
 			"gender this to <female|male> [reply only]",
 			"gender this as <female|male> [reply only]"
 		],
-		admin: true,
-		hasArgs: true,
-		type: [
+		"admin": true,
+		"hasArgs": true,
+		"type": [
 			"message",
 			"message_reply"
 		]
-	})
+	}
 
 config.add("name", {
 	title: "New bot name",
