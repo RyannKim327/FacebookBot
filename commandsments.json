@@ -86,7 +86,7 @@
 	}
 
 config.add("name", {
-	title: "New bot name",
+	"title": "New bot name",
 	description: "For modifications only",
 	commands: [
 		"set name as ([\\w]+)"
@@ -100,7 +100,7 @@ config.add("name", {
 })
 
 config.add("newyear", {
-	title: "New year cron test",
+	"title": "New year cron test",
 	description: "Test cron",
 	commands: [
 		"new year"
@@ -109,7 +109,7 @@ config.add("newyear", {
 })
 
 config.add("off", {
-	title: "Off/On Bot Feature",
+	"title": "Off/On Bot Feature",
 	description: "Setup by an admin to enable/disable the bot commands in a particular group or person.",
 	commands: [
 		"bot off",
@@ -127,7 +127,7 @@ config.add("off", {
 })
 
 config.add("pin", {
-	title: "Pin a message",
+	"title": "Pin a message",
 	description: "Setup a pinned message, or show the pinned message.",
 	commands: [
 		"clearpin",
@@ -144,7 +144,7 @@ config.add("pin", {
 })
 
 config.add("prefix", {
-	title: "Prefix Change",
+	"title": "Prefix Change",
 	description: "To change the prefix.",
 	commands: [
 		"prefix ([\\W])"
@@ -157,7 +157,7 @@ config.add("prefix", {
 })
 
 config.add("remix", {
-	title: "New year cron test",
+	"title": "New year cron test",
 	description: "Test cron",
 	commands: [
 		"worship remix"
@@ -167,7 +167,7 @@ config.add("remix", {
 
 
 config.add("toggle", {
-	title: "Toggle Status",
+	"title": "Toggle Status",
 	description: "For admin use",
 	commands: [
 		"toggle"
@@ -179,7 +179,7 @@ config.add("toggle", {
 })
 
 config.add("unsent", {
-	title: "Unsent Messgae",
+	"title": "Unsent Messgae",
 	description: "Unsent a message by only and admin can do",
 	commands: [
 		"unsent",
@@ -196,7 +196,7 @@ config.add("unsent", {
 })
 
 config.add("updates", {
-	title: "Application Updates",
+	"title": "Application Updates",
 	description: "An updater of app",
 	commands: [
 		"app_update ([\\W\\w]+)$"
@@ -209,7 +209,7 @@ config.add("updates", {
 })
 
 config.add("worship_cron", {
-	title: "Worship Song Cron test",
+	"title": "Worship Song Cron test",
 	description: "Test",
 	commands: [
 		"worship"
@@ -221,7 +221,7 @@ config.add("worship_cron", {
 })
 
 config.add("vips", {	
-	title: "Worship Song Cron test",
+	"title": "Worship Song Cron test",
 	description: "Test",
 	commands: [
 		"vip"
@@ -236,7 +236,7 @@ config.add("vips", {
 })
 
 // config.add("worship", {
-// 	title: "New Worship song",
+// 	"title": "New Worship song",
 // 	description: "Add new worship song playlist.",
 // 	commands: [
 // 		"add worship song ([\\w\\W]+)"
@@ -246,7 +246,7 @@ config.add("vips", {
 // })
 
 // config.add("worshiplists", {
-// 	title: "Worship song lists",
+// 	"title": "Worship song lists",
 // 	description: "Get worship song playlist.",
 // 	commands: [
 // 		"worship lists"
@@ -255,7 +255,7 @@ config.add("vips", {
 // })
 
 config.add("info", {
-	title: "Bot Information",
+	"title": "Bot Information",
 	description: "A simple introduction about the bot.",
 	queries: [
 		"who are you",
@@ -279,7 +279,7 @@ config.add("info", {
 })
 
 config.add("audioverse", {
-	title: "Audio Verse",
+	"title": "Audio Verse",
 	description: "An audio version of a whole chapter in the bible",
 	commands: [
 		"audio verse ([\\w\\W]+)"
@@ -292,7 +292,7 @@ config.add("audioverse", {
 })
 
 config.add("baybayin", {
-	title: "Baybayin Transliterator",
+	"title": "Baybayin Transliterator",
 	description: "A command which can transform a normal text into baybayin characters.",
 	queries: [
 		"please transliterate ([\\w\\W]+) to baybayin",
@@ -310,7 +310,7 @@ config.add("baybayin", {
 })
 
 config.add("beshy", {
-	title: "Beshifier Command",
+	"title": "Beshifier Command",
 	description: "Bakit nga naman malungkot",
 	commands: [
 		"beshy ([\\w\\W]+)"
@@ -323,7 +323,7 @@ config.add("beshy", {
 })
 
 config.add("fb", {
-	title: "Facebook Information Profiling",
+	"title": "Facebook Information Profiling",
 	description: "A command that gives you the basics information of the account owner, according to its facebook profile",
 	commands: [
 		"fb ([\\w\\W]+)"
@@ -342,7 +342,7 @@ config.add("fb", {
 })
 
 config.add("game", {
-	title: "Game lists",
+	"title": "Game lists",
 	description: "Still ongoing, soon to be initialized.",
 	commands: [
 		"game lists"
@@ -354,7 +354,7 @@ config.add("game", {
 })
 
 // config.add("genimg", {
-// 	title: "Image Generator",
+// 	"title": "Image Generator",
 // 	description: "Beta test",
 // 	queries: [
 // 		"create an image of ([\\w\\W]+)",
@@ -366,7 +366,7 @@ config.add("game", {
 // })
 
 config.add("google", {
-	title: "Google Search Engine",
+	"title": "Google Search Engine",
 	description: "A command with educational purposes searches.",
 	commands: [
 		"google ([\\w\\W]+)"
@@ -379,7 +379,7 @@ config.add("google", {
 })
 
 config.add("guitar", {
-	title: "Ultimate Guitar Tabs Command",
+	"title": "Ultimate Guitar Tabs Command",
 	description: "A command which gives you a random guitar chords/tabs.",
 	commands:[
 		"guitar ([\\w\\W]+)",
@@ -394,7 +394,7 @@ config.add("guitar", {
 })
 
 config.add("imgtxt", {
-	title: "Text recognizer from image",
+	"title": "Text recognizer from image",
 	description: "This will extract the text scanned. The result is based on the image quality",
 	commands: [
 		"img2txt"
@@ -409,7 +409,7 @@ config.add("imgtxt", {
 })
 
 config.add("lexi", {
-	title: "Lexica Art",
+	"title": "Lexica Art",
 	description: "Test mode image generator",
 	commands: [
 		"lexi ([\\w\\W]+)"
@@ -422,7 +422,7 @@ config.add("lexi", {
 })
 
 config.add("music", {
-	title: "YouTube Music Command",
+	"title": "YouTube Music Command",
 	description: "A music command which gives you a youtube music based results",
 	queries: [
 		"play the song ([\\w\\W]+) please",
@@ -443,7 +443,7 @@ config.add("music", {
 })
 
 config.add("news", {
-	title: "Manila Times News",
+	"title": "Manila Times News",
 	description: "A daily news update requests from manila times.",
 	commands: [
 		"news ([\\w\\W]+)",
@@ -458,7 +458,7 @@ config.add("news", {
 })
 
 config.add("ngl", {
-	title: "Not Gonna Lie Command", 
+	"title": "Not Gonna Lie Command", 
 	description: "NGL Command",
 	commands: [
 		"ngl ([\\w]+) ([\\w\\W]+)"
@@ -471,7 +471,7 @@ config.add("ngl", {
 })
 
 // config.add("pdf", {
-//	title: "PDF Downloader",
+//	"title": "PDF Downloader",
 //	description: "Powered by PDF Drive",
 //	commands: [
 //		"pdf ([\\w\\W]+)"
@@ -481,7 +481,7 @@ config.add("ngl", {
 // })
 
 config.add("pin", {
-	title: "Show pinned message",
+	"title": "Show pinned message",
 	description: "Showing the current pinned message",
 	commands: [
 		"pin"
@@ -493,7 +493,7 @@ config.add("pin", {
 })
 
 config.add("ris", {
-	title: "Reverse Image Search",
+	"title": "Reverse Image Search",
 	description: "A google feature command for some researches.",
 	commands: [
 		"ris"
@@ -508,7 +508,7 @@ config.add("ris", {
 })
 
 config.add("subs", {
-	title: "Subscribe to cron",
+	"title": "Subscribe to cron",
 	description: "Is is a way for you to subscribe and get daily cron updates from the bot.",
 	commands: [
 		"subscribe",
@@ -522,7 +522,7 @@ config.add("subs", {
 })
 
 config.add("biblegateway", {
-	title: "Bible verse ",
+	"title": "Bible verse ",
 	description: "Bible verses powered by biblegateway",
 	commands: [
 		"verse (1905|1978|2001|snd|niv|esv|kjv|nlt|b1905|b1978|b2001|bsnd) ([\\w\\s:;-]+)",
@@ -537,7 +537,7 @@ config.add("biblegateway", {
 })
 
 config.add("video", {
-	title: "Youtube Video Command",
+	"title": "Youtube Video Command",
 	description: "This will send the top search result video from youtube platform. Sometimes, this feature has error, due to the limit of facebook messenger that can only sent upto 25mb.",
 	queries: [
 		"play the video ([\\w\\W]+) please",
@@ -554,7 +554,7 @@ config.add("video", {
 })
 
 config.add("wiki", {
-	title: "Wikipedia Search",
+	"title": "Wikipedia Search",
 	description: "A simple search document which gives you a wikipedia based resukts.\nDisclaimer: Wikipedia is not so accurate so that if you were using this for research purposes, please don't continue it.",
 	queries: [
 		"please search ([\\w\\W]+) please",
@@ -572,7 +572,7 @@ config.add("wiki", {
 })
 
 config.add("word", {
-	title: "Wiki Dictionary",
+	"title": "Wiki Dictionary",
 	definition: "A wiki based result word informations",
 	commands: [
 		"word ([\\w]+)$"
@@ -585,7 +585,7 @@ config.add("word", {
 })
 
 config.add("dropball", {
-	title: "Dropball Game",
+	"title": "Dropball Game",
 	description: "For test",
 	commands: [
 		"drop ([\\d]+)"
@@ -598,7 +598,7 @@ config.add("dropball", {
 })
 
 config.add("dice", {
-	title: "Dice Roll",
+	"title": "Dice Roll",
 	description: "Rolling a die",
 	commands: [
 		"dice"
@@ -614,7 +614,7 @@ config.add("dice", {
 })
 
 config.add("bugtong", {
-	title: "Pinoy Riddles",
+	"title": "Pinoy Riddles",
 	description: "A filipino based riddles",
 	commands: [
 		"bugtong"
@@ -626,7 +626,7 @@ config.add("bugtong", {
 })
 
 config.add("answer", {
-	title: "Answer bot games",
+	"title": "Answer bot games",
 	description: "This is the way for you to answer some question from facebook bot.",
 	commands: [
 		"answer ([\\w\\W]+)"
