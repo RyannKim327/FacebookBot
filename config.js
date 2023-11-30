@@ -17,7 +17,7 @@ const unsent = require("./utils/unsent")
 const react = require("./utils/react")
 const api = require("./cron/api")
 
-const setup = 
+const setup = JSON.parse(fs.readFileSync("setup/data.json", "utf-8"))
 
 let autoBot = true
 let bot = []
