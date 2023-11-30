@@ -467,7 +467,7 @@
 		],
 		"hasArgs": true,
 		"category": "multimedia"
-	})
+	},
 
 	// config.add("pdf", {
 	//	"title": "PDF Downloader",
@@ -479,7 +479,8 @@
 	//	"category": "knowledge"
 	// })
 
-	config.add("pin", {
+	{
+		"script": "pin",
 		"title": "Show pinned message",
 		"description": "Showing the current pinned message",
 		"commands": [
@@ -489,9 +490,7 @@
 			"pin"
 		],
 		"category": "oneTime"
-	})
-
-	config.add("ris", {
+	},"ris", {
 		"title": "Reverse Image Search",
 		"description": "A google feature command for some researches.",
 		"commands": [
