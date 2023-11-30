@@ -175,9 +175,9 @@
 			"toggle"
 		],
 		"admin": true
-	}
-
-	config.add("unsent", {
+	},
+	{
+		"script"
 		"title": "Unsent Messgae",
 		"description": "Unsent a message by only and admin can do",
 		"commands": [
