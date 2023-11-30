@@ -8,5 +8,5 @@
 // 	console.log(_music)
 // }
 // a()
-
-console.log(JSON.parse("test"))
+try{
+	console.log(JSON.parse("test"))
