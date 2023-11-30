@@ -1,41 +1,47 @@
 [
 	{
 		"script": "admin",
-		"title": "Admin commands",
-		"description": "Lists of all admin commandments.",
-		"commands": [
-			"admin"
-		],
-		"hints": [
-			"admin"
-		],
-		"admin": true
+		"data": {
+			"title": "Admin commands",
+			"description": "Lists of all admin commandments.",
+			"commands": [
+				"admin"
+			],
+			"hints": [
+				"admin"
+			],
+			"admin": true
+		}
 	},
 	{
 		"script": "ai",
-		"title": "AI Mode",
-		"description": "For auto responses using reply method",
-		"commands": [
-			"ai"
-		],
-		"hints": [
-			"ai"
-		],
-		"admin": true
+		"data": {
+			"title": "AI Mode",
+			"description": "For auto responses using reply method",
+			"commands": [
+				"ai"
+			],
+			"hints": [
+				"ai"
+			],
+			"admin": true
+		}
 	},
 	{
 		"script": "busy",
-		"title": "Busy Mode",
-		"description": "Setup by an admin during busy.",
-		"commands": [
-			"busy",
-			"clearbusy"
-		],
-		"hints": [
-			"busy",
-			"clearbusy"
-		],
-		"admin": true
+		"data": {
+			"title": "Busy Mode",
+			"description": "Setup by an admin during busy.",
+			"commands": [
+				"busy",
+				"clearbusy"
+			],
+			"hints": [
+				"busy",
+				"clearbusy"
+			],
+			"admin": true
+		}
 	},
 	{
 		"script": "check",
@@ -53,36 +59,40 @@
 	},
 	{
 		"script": "feeds",
-		"title": "Application feedback",
-		"description": "For feedbacks and error comming from the app.",
-		"commands": [
-			"feedback"
-		],
-		"hints": [
-			"feedback"
-		],
-		"admin": true
+		"data":{
+			"title": "Application feedback",
+			"description": "For feedbacks and error comming from the app.",
+			"commands": [
+				"feedback"
+			],
+			"hints": [
+				"feedback"
+			],
+			"admin": true
+		}
 	},
 	{
 		"script": "gender",
-		"title": "Add new Gender",
-		"description": "Setup by an admin to add a new name data with gender..",
-		"commands": [
-			"gender (.*?) to (.*?)",
-			"gender (.*?) as (.*?)"
-		],
-		"hints": [
-			"gender <user> to <female|male>",
-			"gender <user> as <female|male>",
-			"gender this to <female|male> [reply only]",
-			"gender this as <female|male> [reply only]"
-		],
-		"admin": true,
-		"hasArgs": true,
-		"type": [
-			"message",
-			"message_reply"
-		]
+		"data":{
+			"title": "Add new Gender",
+			"description": "Setup by an admin to add a new name data with gender..",
+			"commands": [
+				"gender (.*?) to (.*?)",
+				"gender (.*?) as (.*?)"
+			],
+			"hints": [
+				"gender <user> to <female|male>",
+				"gender <user> as <female|male>",
+				"gender this to <female|male> [reply only]",
+				"gender this as <female|male> [reply only]"
+			],
+			"admin": true,
+			"hasArgs": true,
+			"type": [
+				"message",
+				"message_reply"
+			]
+		}
 	},
 	{
 		"script": "name",
