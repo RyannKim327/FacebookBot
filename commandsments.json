@@ -490,7 +490,9 @@
 			"pin"
 		],
 		"category": "oneTime"
-	},"ris", {
+	},
+	{
+		"script": "ris",
 		"title": "Reverse Image Search",
 		"description": "A google feature command for some researches.",
 		"commands": [
@@ -503,9 +505,9 @@
 			"message_reply"
 		],
 		"category": "knowledge"
-	})
-
-	config.add("subs", {
+	},
+	{
+		"script": "subs",
 		"title": "Subscribe to cron",
 		"description": "Is is a way for you to subscribe and get daily cron updates from the bot.",
 		"commands": [
@@ -517,9 +519,7 @@
 			"unsubscribe"
 		],
 		"category": "oneTime"
-	})
-
-	config.add("biblegateway", {
+	},"biblegateway", {
 		"title": "Bible verse ",
 		"description": "Bible verses powered by biblegateway",
 		"commands": [
