@@ -332,18 +332,6 @@
 		],
 		"category": "oneTime"
 	},
-
-	// config.add("genimg", {
-	// 	"title": "Image Generator",
-	// 	"description": "Beta test",
-	// 	"queries": [
-	// 		"create an image of ([\\w\\W]+)",
-	// 		"generate an image of ([\\w\\W]+)",
-	// 		"generate an image that ([\\w\\W]+)"
-	// 	],
-	// 	"hasArgs": true,
-	// 	"category": "multimedia"
-	// })
 	{
 		"script": "google",
 		"title": "Google Search Engine",
@@ -449,17 +437,6 @@
 		"hasArgs": true,
 		"category": "multimedia"
 	},
-
-	// config.add("pdf", {
-	//	"title": "PDF Downloader",
-	//	"description": "Powered by PDF Drive",
-	//	"commands": [
-	//		"pdf ([\\w\\W]+)"
-	//	],
-	//	"hasArgs": true,
-	//	"category": "knowledge"
-	// })
-
 	{
 		"script": "pin",
 		"title": "Show pinned message",
