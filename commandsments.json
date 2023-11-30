@@ -289,8 +289,8 @@
 		"hasArgs": true,
 		"category": "theology"
 	},
-
-	config.add("baybayin", {
+	{
+		"script"
 		"title": "Baybayin Transliterator",
 		"description": "A command which can transform a normal text into baybayin characters.",
 		"queries": [
