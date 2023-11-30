@@ -36,34 +36,33 @@
 			"clearbusy"
 		],
 		"admin": true
-	}
-
-config.add("check", {
-	title: "Bot status Checker",
-	description: "A message reaction program, to check if the bot is still alive or not.",
-	commands: [
-		"check",
-		"silent"
-	],
-	
-	hints: [
-		"check",
-		"silent"
-	],
-	admin: true
-})
-
-config.add("feeds", {
-	title: "Application feedback",
-	description: "For feedbacks and error comming from the app.",
-	commands: [
-		"feedback"
-	],
-	hints: [
-		"feedback"
-	],
-	admin: true
-})
+	},
+	{
+		"script": "check",
+		"title": "Bot status Checker",
+		"description": "A message reaction program, to check if the bot is still alive or not.",
+		"commands": [
+			"check",
+			"silent"
+		],
+		"hints": [
+			"check",
+			"silent"
+		],
+		"admin": true
+	},
+	{
+		"sc"
+		title: "Application feedback",
+		description: "For feedbacks and error comming from the app.",
+		commands: [
+			"feedback"
+		],
+		hints: [
+			"feedback"
+		],
+		admin: true
+	})
 
 config.add("gender", {
 	title: "Add new Gender",
