@@ -177,7 +177,7 @@
 		"admin": true
 	},
 	{
-		"script"
+		"script": "unsent",
 		"title": "Unsent Messgae",
 		"description": "Unsent a message by only and admin can do",
 		"commands": [
@@ -192,9 +192,8 @@
 		"type": [
 			"message_reply"
 		]
-	})
-
-	config.add("updates", {
+	},
+	{
 		"title": "Application Updates",
 		"description": "An updater of app",
 		"commands": [
