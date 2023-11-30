@@ -584,7 +584,7 @@
 		"category": "knowledge"
 	},
 	{
-
+		"script": "dropball",
 		"title": "Dropball Game",
 		"description": "For test",
 		"commands": [
@@ -595,9 +595,7 @@
 		],
 		"hasArgs": true,
 		"category": "game"
-	})
-
-	config.add("dice", {
+	},"dice", {
 		"title": "Dice Roll",
 		"description": "Rolling a die",
 		"commands": [
