@@ -97,16 +97,16 @@
 		],
 		"hasArgs": true,
 		"admin": true
-})
-
-config.add("newyear", {
-	"title": "New year cron test",
-	"description": "Test cron",
-	"commands": [
-		"new year"
-	],
-	"admin": true
-})
+	},
+	{
+		"script"
+		"title": "New year cron test",
+		"description": "Test cron",
+		"commands": [
+			"new year"
+		],
+		"admin": true
+	}
 
 config.add("off", {
 	"title": "Off/On Bot Feature",
