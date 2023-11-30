@@ -58,11 +58,11 @@
 		"commands": [
 			"feedback"
 		],
-		hints: [
+		"hints": [
 			"feedback"
 		],
-		admin: true
-	})
+		"admin": true
+	}
 
 config.add("gender", {
 	title: "Add new Gender",
