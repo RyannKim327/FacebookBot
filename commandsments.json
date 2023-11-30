@@ -519,7 +519,9 @@
 			"unsubscribe"
 		],
 		"category": "oneTime"
-	},"biblegateway", {
+	},
+	{
+		"script": "biblegateway",
 		"title": "Bible verse ",
 		"description": "Bible verses powered by biblegateway",
 		"commands": [
@@ -532,9 +534,9 @@
 		],
 		"hasArgs": true,
 		"category": "theology"
-	})
-
-	config.add("video", {
+	},
+	{
+		"script": "video",
 		"title": "Youtube Video Command",
 		"description": "This will send the top search result video from youtube platform. Sometimes, this feature has error, due to the limit of facebook messenger that can only sent upto 25mb.",
 		"queries": [
