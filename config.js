@@ -17,6 +17,8 @@ const unsent = require("./utils/unsent")
 const react = require("./utils/react")
 const api = require("./cron/api")
 
+const setup = 
+
 let autoBot = true
 let bot = []
 let msgLists = {}
