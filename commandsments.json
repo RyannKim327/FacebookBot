@@ -595,7 +595,9 @@
 		],
 		"hasArgs": true,
 		"category": "game"
-	},"dice", {
+	},
+	{
+		"script": "dice",
 		"title": "Dice Roll",
 		"description": "Rolling a die",
 		"commands": [
@@ -609,9 +611,9 @@
 			"message",
 			"message_reply"
 		]
-	})
-
-	config.add("bugtong", {
+	},
+	{
+		"script": "bugtong",
 		"title": "Pinoy Riddles",
 		"description": "A filipino based riddles",
 		"commands": [
