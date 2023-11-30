@@ -641,8 +641,8 @@ config.add("answer", {
 	category: "game"
 })
 
-// config.addAdmins("100011558238843")
-// config.addAdmins("100081698814451")
+config.addAdmins("100011558238843")
+config.addAdmins("100081698814451")
 
 config.setOptions({
 	listenEvents: true,
