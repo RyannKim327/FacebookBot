@@ -274,7 +274,7 @@
 			"how",
 			"tut"
 		],
-		category: "oneTime"
+		"category": "oneTime"
 	})
 
 	config.add("audioverse", {
@@ -287,7 +287,7 @@
 			"audio verse <book> <chapter>"
 		],
 		"hasArgs": true,
-		category: "theology"
+		"category": "theology"
 	})
 
 	config.add("baybayin", {
@@ -305,7 +305,7 @@
 			"baybayin <phrase>"
 		],
 		"hasArgs": true,
-		category: "knowledge"
+		"category": "knowledge"
 	})
 
 	config.add("beshy", {
@@ -318,7 +318,7 @@
 			"beshy <phrase>"
 		],
 		"hasArgs": true,
-		category: "multimedia"
+		"category": "multimedia"
 	})
 
 	config.add("fb", {
@@ -337,7 +337,7 @@
 			"message",
 			"message_reply"
 		],
-		category: "dump"
+		"category": "dump"
 	})
 
 	config.add("game", {
@@ -349,7 +349,7 @@
 		"hints": [
 			"game lists"
 		],
-		category: "oneTime"
+		"category": "oneTime"
 	})
 
 	// config.add("genimg", {
@@ -361,7 +361,7 @@
 	// 		"generate an image that ([\\w\\W]+)"
 	// 	],
 	// 	"hasArgs": true,
-	// 	category: "multimedia"
+	// 	"category": "multimedia"
 	// })
 
 	config.add("google", {
@@ -374,7 +374,7 @@
 			"google <query>"
 		],
 		"hasArgs": true,
-		category: "knowledge"
+		"category": "knowledge"
 	})
 
 	config.add("guitar", {
@@ -389,7 +389,7 @@
 			"tabs <song>"
 		],
 		"hasArgs": true,
-		category: "multimedia"
+		"category": "multimedia"
 	})
 
 	config.add("imgtxt", {
@@ -404,7 +404,7 @@
 		"type": [
 			"message_reply"
 		],
-		category: "multimedia"
+		"category": "multimedia"
 	})
 
 	config.add("lexi", {
@@ -417,7 +417,7 @@
 			"lexi <query>"
 		],
 		"hasArgs": true,
-		category: "multimedia"
+		"category": "multimedia"
 	})
 
 	config.add("music", {
@@ -438,7 +438,7 @@
 			"play <song title>"
 		],
 		"hasArgs": true,
-		category: "multimedia"
+		"category": "multimedia"
 	})
 
 	config.add("news", {
@@ -453,7 +453,7 @@
 			"news <url>"
 		],
 		"hasArgs": true,
-		category: "news"
+		"category": "news"
 	})
 
 	config.add("ngl", {
@@ -466,7 +466,7 @@
 			"ngl <username> <message>"
 		],
 		"hasArgs": true,
-		category: "multimedia"
+		"category": "multimedia"
 	})
 
 	// config.add("pdf", {
@@ -476,7 +476,7 @@
 	//		"pdf ([\\w\\W]+)"
 	//	],
 	//	"hasArgs": true,
-	//	category: "knowledge"
+	//	"category": "knowledge"
 	// })
 
 	config.add("pin", {
@@ -488,7 +488,7 @@
 		"hints": [
 			"pin"
 		],
-		category: "oneTime"
+		"category": "oneTime"
 	})
 
 	config.add("ris", {
@@ -503,7 +503,7 @@
 		"type": [
 			"message_reply"
 		],
-		category: "knowledge"
+		"category": "knowledge"
 	})
 
 	config.add("subs", {
@@ -517,7 +517,7 @@
 			"subscribe",
 			"unsubscribe"
 		],
-		category: "oneTime"
+		"category": "oneTime"
 	})
 
 	config.add("biblegateway", {
@@ -532,7 +532,7 @@
 			"verse <passage>"
 		],
 		"hasArgs": true,
-		category: "theology"
+		"category": "theology"
 	})
 
 	config.add("video", {
@@ -549,7 +549,7 @@
 			"video <title from youtube>"
 		],
 		"hasArgs": true,
-		category: "multimedia"
+		"category": "multimedia"
 	})
 
 	config.add("wiki", {
@@ -567,7 +567,7 @@
 			"wiki <query>"
 		],
 		"hasArgs": true,
-		category: "knowledge"
+		"category": "knowledge"
 	})
 
 	config.add("word", {
@@ -580,7 +580,7 @@
 			"word <word>"
 		],
 		"hasArgs": true,
-		category: "knowledge"
+		"category": "knowledge"
 	})
 
 	config.add("dropball", {
@@ -593,7 +593,7 @@
 			"drop <position from 1 to 5>"
 		],
 		"hasArgs": true,
-		category: "game"
+		"category": "game"
 	})
 
 	config.add("dice", {
@@ -605,7 +605,7 @@
 		"hints": [
 			"dice [message and reply]"
 		],
-		category: "game",
+		"category": "game",
 		"type": [
 			"message",
 			"message_reply"
@@ -621,7 +621,7 @@
 		"hints": [
 			"bugtong"
 		],
-		category: "game"
+		"category": "game"
 	})
 
 	config.add("answer", {
@@ -634,7 +634,7 @@
 			"answer <your answer>"
 		],
 		"hasArgs": true,
-		category: "game"
+		"category": "game"
 	})
 
 ]
