@@ -252,10 +252,11 @@
 	// 	],
 	// 	"admin": true
 	// })
-, {
+	{
+		"script": "info",
 		"title": "Bot Information",
 		"description": "A simple introduction about the bot.",
-		queries: [
+		"queries": [
 			"who are you",
 			"please introduce yourself to us"
 		],
@@ -292,7 +293,7 @@
 	config.add("baybayin", {
 		"title": "Baybayin Transliterator",
 		"description": "A command which can transform a normal text into baybayin characters.",
-		queries: [
+		"queries": [
 			"please transliterate ([\\w\\W]+) to baybayin",
 		],
 		"commands": [
@@ -354,7 +355,7 @@
 	// config.add("genimg", {
 	// 	"title": "Image Generator",
 	// 	"description": "Beta test",
-	// 	queries: [
+	// 	"queries": [
 	// 		"create an image of ([\\w\\W]+)",
 	// 		"generate an image of ([\\w\\W]+)",
 	// 		"generate an image that ([\\w\\W]+)"
@@ -422,7 +423,7 @@
 	config.add("music", {
 		"title": "YouTube Music Command",
 		"description": "A music command which gives you a youtube music based results",
-		queries: [
+		"queries": [
 			"play the song ([\\w\\W]+) please",
 			"please play the song ([\\w\\W]+)"
 		],
@@ -537,7 +538,7 @@
 	config.add("video", {
 		"title": "Youtube Video Command",
 		"description": "This will send the top search result video from youtube platform. Sometimes, this feature has error, due to the limit of facebook messenger that can only sent upto 25mb.",
-		queries: [
+		"queries": [
 			"play the video ([\\w\\W]+) please",
 			"please play the video ([\\w\\W]+)"
 		],
@@ -554,7 +555,7 @@
 	config.add("wiki", {
 		"title": "Wikipedia Search",
 		"description": "A simple search document which gives you a wikipedia based resukts.\nDisclaimer: Wikipedia is not so accurate so that if you were using this for research purposes, please don't continue it.",
-		queries: [
+		"queries": [
 			"please search ([\\w\\W]+) please",
 			"can I have a wiki result of ([\\w\\W]+)"
 		],
