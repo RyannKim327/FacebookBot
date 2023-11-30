@@ -319,9 +319,9 @@
 		],
 		"hasArgs": true,
 		"category": "multimedia"
-	}
-
-	config.add("fb", {
+	},
+	{
+		"script": "fb",
 		"title": "Facebook Information Profiling",
 		"description": "A command that gives you the basics information of the account owner, according to its facebook profile",
 		"commands": [
