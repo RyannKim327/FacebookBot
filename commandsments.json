@@ -207,7 +207,7 @@
 		"hasArgs": true
 	},
 	{
-		"script": 
+		"script": "worship_cron",
 		"title": "Worship Song Cron test",
 		"description": "Test",
 		"commands": [
@@ -217,9 +217,9 @@
 			"worship"
 		],
 		"admin": true
-	})
-
-	config.add("vips", {	
+	},
+	{
+		"script": "vips",	
 		"title": "Worship Song Cron test",
 		"description": "Test",
 		"commands": [
@@ -232,7 +232,7 @@
 		"type": [
 			"message_reply"
 		]
-	})
+	}
 
 	// config.add("worship", {
 	// 	"title": "New Worship song",
