@@ -78,8 +78,9 @@ let add = (script, data) => {
 	}
 }
 let setCommands = (data) => {
-	if(typeof data != 'object')
-	
+	if(typeof data != 'object'){
+		
+	}
 }
 let addAdmins = (data) => {
 	admins.push(data)
