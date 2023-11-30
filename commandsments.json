@@ -126,23 +126,23 @@
 		"admin": true
 	},
 	{
-	"title": "Pin a message",
-	"description": "Setup a pinned message, or show the pinned message.",
-	"commands": [
-		"clearpin",
-		"pin"
-	],
-	"hints": [
-		"clearpin [reply only]",
-		"pin [reply only]"
-	],
-	"type": [
-		"message_reply"
-	],
-	"admin": true
-})
-
-config.add("prefix", {
+		"script": "pin",
+		"title": "Pin a message",
+		"description": "Setup a pinned message, or show the pinned message.",
+		"commands": [
+			"clearpin",
+			"pin"
+		],
+		"hints": [
+			"clearpin [reply only]",
+			"pin [reply only]"
+		],
+		"type": [
+			"message_reply"
+		],
+		"admin": true
+	},
+	{
 	"title": "Prefix Change",
 	"description": "To change the prefix.",
 	"commands": [
