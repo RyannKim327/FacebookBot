@@ -338,9 +338,9 @@
 			"message_reply"
 		],
 		"category": "dump"
-	})
-
-	config.add("game", {
+	},
+	{
+		"script": "game",
 		"title": "Game lists",
 		"description": "Still ongoing, soon to be initialized.",
 		"commands": [
@@ -350,7 +350,7 @@
 			"game lists"
 		],
 		"category": "oneTime"
-	})
+	},
 
 	// config.add("genimg", {
 	// 	"title": "Image Generator",
