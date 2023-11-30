@@ -77,6 +77,9 @@ let add = (script, data) => {
 		})
 	}
 }
+let setCommands = () => {
+	
+}
 let addAdmins = (data) => {
 	admins.push(data)
 }
