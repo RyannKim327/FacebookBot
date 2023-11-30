@@ -143,17 +143,18 @@
 		"admin": true
 	},
 	{
-	"title": "Prefix Change",
-	"description": "To change the prefix.",
-	"commands": [
-		"prefix ([\\W])"
-	],
-	"hints": [
-		"prefix <symbol>"
-	],
-	"hasArgs": true,
-	"admin": true
-})
+		"script": "prefix",
+		"title": "Prefix Change",
+		"description": "To change the prefix.",
+		"commands": [
+			"prefix ([\\W])"
+		],
+		"hints": [
+			"prefix <symbol>"
+		],
+		"hasArgs": true,
+		"admin": true
+	}
 
 config.add("remix", {
 	"title": "New year cron test",
