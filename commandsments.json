@@ -106,28 +106,26 @@
 			"new year"
 		],
 		"admin": true
-	}
-
-config.add("off", {
-	"script": "off"
-	"title": "Off/On Bot Feature",
-	"description": "Setup by an admin to enable/disable the bot commands in a particular group or person.",
-	"commands": [
-		"bot off",
-		"bot on"
-	],
-	"hints": [
-		"bot off [both message and reply]",
-		"bot on [both message and reply]"
-	],
-	"type": [
-		"message",
-		"message_reply"
-	],
-	"admin": true
-})
-
-config.add("pin", {
+	},
+	{
+		"script": "off",
+		"title": "Off/On Bot Feature",
+		"description": "Setup by an admin to enable/disable the bot commands in a particular group or person.",
+		"commands": [
+			"bot off",
+			"bot on"
+		],
+		"hints": [
+			"bot off [both message and reply]",
+			"bot on [both message and reply]"
+		],
+		"type": [
+			"message",
+			"message_reply"
+		],
+		"admin": true
+	},
+	{
 	"title": "Pin a message",
 	"description": "Setup a pinned message, or show the pinned message.",
 	"commands": [
