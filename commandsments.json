@@ -375,7 +375,9 @@
 		],
 		"hasArgs": true,
 		"category": "knowledge"
-	},"guitar", {
+	},
+	{
+		"script": "guitar",
 		"title": "Ultimate Guitar Tabs Command",
 		"description": "A command which gives you a random guitar chords/tabs.",
 		"commands":[
@@ -388,9 +390,9 @@
 		],
 		"hasArgs": true,
 		"category": "multimedia"
-	})
-
-	config.add("imgtxt", {
+	},
+	{
+		"script": "imgtxt",
 		"title": "Text recognizer from image",
 		"description": "This will extract the text scanned. The result is based on the image quality",
 		"commands": [
@@ -403,9 +405,8 @@
 			"message_reply"
 		],
 		"category": "multimedia"
-	})
-
-	config.add("lexi", {
+	},
+	"lexi", {
 		"title": "Lexica Art",
 		"description": "Test mode image generator",
 		"commands": [
