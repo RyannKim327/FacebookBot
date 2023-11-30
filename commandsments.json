@@ -52,10 +52,10 @@
 		"admin": true
 	},
 	{
-		"sc"
-		title: "Application feedback",
-		description: "For feedbacks and error comming from the app.",
-		commands: [
+		"script": "feeds",
+		"title": "Application feedback",
+		"description": "For feedbacks and error comming from the app.",
+		"commands": [
 			"feedback"
 		],
 		hints: [
