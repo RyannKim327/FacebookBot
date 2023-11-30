@@ -175,7 +175,7 @@
 			"toggle"
 		],
 		"admin": true
-	})
+	}
 
 	config.add("unsent", {
 		"title": "Unsent Messgae",
