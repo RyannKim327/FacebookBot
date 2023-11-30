@@ -551,9 +551,9 @@
 		],
 		"hasArgs": true,
 		"category": "multimedia"
-	})
-
-	config.add("wiki", {
+	},
+	{
+		"script": "wiki",
 		"title": "Wikipedia Search",
 		"description": "A simple search document which gives you a wikipedia based resukts.\nDisclaimer: Wikipedia is not so accurate so that if you were using this for research purposes, please don't continue it.",
 		"queries": [
@@ -569,11 +569,11 @@
 		],
 		"hasArgs": true,
 		"category": "knowledge"
-	})
-
-	config.add("word", {
+	},
+	{
+		"script": "word",
 		"title": "Wiki Dictionary",
-		definition: "A wiki based result word informations",
+		"description": "A wiki based result word informations",
 		"commands": [
 			"word ([\\w]+)$"
 		],
@@ -582,9 +582,9 @@
 		],
 		"hasArgs": true,
 		"category": "knowledge"
-	})
+	},
+	{
 
-	config.add("dropball", {
 		"title": "Dropball Game",
 		"description": "For test",
 		"commands": [
