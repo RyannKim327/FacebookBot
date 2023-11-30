@@ -25,18 +25,18 @@
 	},
 	{
 		"script": "busy",
-	title: "Busy Mode",
-	description: "Setup by an admin during busy.",
-	commands: [
-		"busy",
-		"clearbusy"
-	],
-	hints: [
-		"busy",
-		"clearbusy"
-	],
-	admin: true
-})
+		"title": "Busy Mode",
+		"description": "Setup by an admin during busy.",
+		"commands": [
+			"busy",
+			"clearbusy"
+		],
+		"hints": [
+			"busy",
+			"clearbusy"
+		],
+		"admin": true
+	}
 
 config.add("check", {
 	title: "Bot status Checker",
