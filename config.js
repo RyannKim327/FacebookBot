@@ -54,16 +54,7 @@ let categories = {
 	news: "news"
 }
 
-let time = {
-	oneTime: 0,
-	multimedia: 3,
-	theology: 0.5,
-	knowledge: 2,
-	dump: 0,
-	game: 0,
-	ai: 5,
-	news: 0.25
-}
+let time = 
 
 let commands = []
 let prefix
