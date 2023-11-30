@@ -16,13 +16,13 @@
 		"title": "AI Mode",
 		"description": "For auto responses using reply method",
 		"commands": [
-		"ai"
-	],
-	hints: [
-		"ai"
-	],
-	admin: true
-})
+			"ai"
+		],
+		"hints": [
+			"ai"
+		],
+		"admin": true
+	}
 
 config.add("busy", {
 	title: "Busy Mode",
