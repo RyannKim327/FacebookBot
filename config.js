@@ -82,7 +82,7 @@ let setCommands = (data) => {
 		try{
 			data = JSON.parse(data)
 		}catch(e){
-			console.error("This can't be converted to JSON")
+			return console.error("This can't be converted to JSON")
 		}
 	}
 	
