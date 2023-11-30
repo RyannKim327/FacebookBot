@@ -56,7 +56,7 @@ let categories = {
 	news: "news"
 }
 
-let time = 
+let time = setup['time']
 
 let commands = []
 let prefix
