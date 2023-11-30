@@ -294,7 +294,7 @@
 		"title": "Baybayin Transliterator",
 		"description": "A command which can transform a normal text into baybayin characters.",
 		"queries": [
-			"please transliterate ([\\w\\W]+) to baybayin",
+			"please transliterate ([\\w\\W]+) to baybayin"
 		],
 		"commands": [
 			"baybay ([\\w\\W]+)",
@@ -330,7 +330,7 @@
 		"hints": [
 			"fb @<someone>",
 			"fb <username|facebook id>",
-			"fb this [reply only]",
+			"fb this [reply only]"
 		],
 		"hasArgs": true,
 		"type": [
