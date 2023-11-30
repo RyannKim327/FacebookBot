@@ -22,9 +22,9 @@
 			"ai"
 		],
 		"admin": true
-	}
-
-config.add("busy", {
+	},
+	{
+		"script": "busy",
 	title: "Busy Mode",
 	description: "Setup by an admin during busy.",
 	commands: [
