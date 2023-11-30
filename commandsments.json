@@ -1,16 +1,16 @@
 [
-	
-config.add("admin", {
-	title: "Admin commands",
-	description: "Lists of all admin commandments.",
-	commands: [
-		"admin"
-	],
-	hints: [
-		"admin"
-	],
-	admin: true
-})
+	{
+		"script": "admin",
+		"title": "Admin commands",
+		"description": "Lists of all admin commandments.",
+		"commands": [
+			"admin"
+		],
+		"hints": [
+			"admin"
+		],
+		"admin": true
+	},
 
 config.add("ai", {
 	title: "AI Mode",
