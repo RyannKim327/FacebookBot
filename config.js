@@ -79,8 +79,9 @@ let add = (script, data) => {
 }
 let setCommands = (data) => {
 	if(typeof data != 'object'){
-		
+		data = JSON.parse(data)
 	}
+	
 }
 let addAdmins = (data) => {
 	admins.push(data)
