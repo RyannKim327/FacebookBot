@@ -194,6 +194,7 @@
 		]
 	},
 	{
+		"script": "updates",
 		"title": "Application Updates",
 		"description": "An updater of app",
 		"commands": [
@@ -204,9 +205,9 @@
 		],
 		"admin": true,
 		"hasArgs": true
-	})
-
-	config.add("worship_cron", {
+	},
+	{
+		"script": 
 		"title": "Worship Song Cron test",
 		"description": "Test",
 		"commands": [
