@@ -3,7 +3,7 @@ const config = require("./config")
 const server = require("./server")
 const repl = require("./replit_only.js")
 
-config.setCommands(J(fs.readFileSync("commandsments.json", "utf-8")))
+config.setCommands(JSON.parse(fs.readFileSync("commandsments.json", "utf-8")))
 
 config.addAdmins("100011558238843")
 config.addAdmins("100081698814451")
