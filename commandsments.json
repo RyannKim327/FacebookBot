@@ -232,7 +232,7 @@
 		"type": [
 			"message_reply"
 		]
-	}
+	},
 
 	// config.add("worship", {
 	// 	"title": "New Worship song",
@@ -252,8 +252,7 @@
 	// 	],
 	// 	"admin": true
 	// })
-
-	config.add("info", {
+, {
 		"title": "Bot Information",
 		"description": "A simple introduction about the bot.",
 		queries: [
