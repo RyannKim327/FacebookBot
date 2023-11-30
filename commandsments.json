@@ -85,18 +85,18 @@
 		]
 	},
 	{
-		"script": "name"
-	"title": "New bot name",
-	"description": "For modifications only",
-	"commands": [
-		"set name as ([\\w]+)"
-	],
-	"hints": [
-		"set name as <name>",
-		"set name to <name>"
-	],
-	hasArgs: true,
-	"admin": true
+		"script": "name",
+		"title": "New bot name",
+		"description": "For modifications only",
+		"commands": [
+			"set name as ([\\w]+)"
+		],
+		"hints": [
+			"set name as <name>",
+			"set name to <name>"
+		],
+		"hasArgs": true,
+		"admin": true
 })
 
 config.add("newyear", {
@@ -152,7 +152,7 @@ config.add("prefix", {
 	"hints": [
 		"prefix <symbol>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	"admin": true
 })
 
@@ -205,7 +205,7 @@ config.add("updates", {
 		"app_update <data>"
 	],
 	"admin": true,
-	hasArgs: true
+	"hasArgs": true
 })
 
 config.add("worship_cron", {
@@ -241,7 +241,7 @@ config.add("vips", {
 // 	"commands": [
 // 		"add worship song ([\\w\\W]+)"
 // 	],
-// 	hasArgs: true,
+// 	"hasArgs": true,
 // 	"admin": true
 // })
 
@@ -287,7 +287,7 @@ config.add("audioverse", {
 	"hints": [
 		"audio verse <book> <chapter>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "theology"
 })
 
@@ -305,7 +305,7 @@ config.add("baybayin", {
 		"baybay <phrase>",
 		"baybayin <phrase>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "knowledge"
 })
 
@@ -318,7 +318,7 @@ config.add("beshy", {
 	"hints": [
 		"beshy <phrase>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "multimedia"
 })
 
@@ -333,7 +333,7 @@ config.add("fb", {
 		"fb <username|facebook id>",
 		"fb this [reply only]",
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	"type": [
 		"message",
 		"message_reply"
@@ -361,7 +361,7 @@ config.add("game", {
 // 		"generate an image of ([\\w\\W]+)",
 // 		"generate an image that ([\\w\\W]+)"
 // 	],
-// 	hasArgs: true,
+// 	"hasArgs": true,
 // 	category: "multimedia"
 // })
 
@@ -374,7 +374,7 @@ config.add("google", {
 	"hints": [
 		"google <query>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "knowledge"
 })
 
@@ -389,7 +389,7 @@ config.add("guitar", {
 		"guitar <song>",
 		"tabs <song>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "multimedia"
 })
 
@@ -417,7 +417,7 @@ config.add("lexi", {
 	"hints": [
 		"lexi <query>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "multimedia"
 })
 
@@ -438,7 +438,7 @@ config.add("music", {
 		"sing <song title>",
 		"play <song title>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "multimedia"
 })
 
@@ -453,7 +453,7 @@ config.add("news", {
 		"news",
 		"news <url>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "news"
 })
 
@@ -466,7 +466,7 @@ config.add("ngl", {
 	"hints": [
 		"ngl <username> <message>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "multimedia"
 })
 
@@ -476,7 +476,7 @@ config.add("ngl", {
 //	"commands": [
 //		"pdf ([\\w\\W]+)"
 //	],
-//	hasArgs: true,
+//	"hasArgs": true,
 //	category: "knowledge"
 // })
 
@@ -532,7 +532,7 @@ config.add("biblegateway", {
 		"verse <1905|1978|2001|snd|niv|esv|kjv|nlt|b1905|b1978|b2001|bsnd> <passage>",
 		"verse <passage>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "theology"
 })
 
@@ -549,7 +549,7 @@ config.add("video", {
 	"hints": [
 		"video <title from youtube>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "multimedia"
 })
 
@@ -567,7 +567,7 @@ config.add("wiki", {
 	"hints": [
 		"wiki <query>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "knowledge"
 })
 
@@ -580,7 +580,7 @@ config.add("word", {
 	"hints": [
 		"word <word>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "knowledge"
 })
 
@@ -593,7 +593,7 @@ config.add("dropball", {
 	"hints": [
 		"drop <position from 1 to 5>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "game"
 })
 
@@ -634,7 +634,7 @@ config.add("answer", {
 	"hints": [
 		"answer <your answer>"
 	],
-	hasArgs: true,
+	"hasArgs": true,
 	category: "game"
 })
 
