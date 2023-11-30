@@ -290,7 +290,7 @@
 		"category": "theology"
 	},
 	{
-		"script"
+		"script": "baybayin",
 		"title": "Baybayin Transliterator",
 		"description": "A command which can transform a normal text into baybayin characters.",
 		"queries": [
@@ -306,9 +306,9 @@
 		],
 		"hasArgs": true,
 		"category": "knowledge"
-	})
-
-	config.add("beshy", {
+	},
+	{
+		"script": "beshy",
 		"title": "Beshifier Command",
 		"description": "Bakit nga naman malungkot",
 		"commands": [
@@ -319,7 +319,7 @@
 		],
 		"hasArgs": true,
 		"category": "multimedia"
-	})
+	}
 
 	config.add("fb", {
 		"title": "Facebook Information Profiling",
