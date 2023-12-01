@@ -1,12 +1,11 @@
 const YoutubeMusicApi = require("youtube-music-api");
 
 let a = async () => {
-	let b = new YoutubeMusicApi()
-	await b.initalize()
-	let c = await b.getPlaylist("PLR1NTS3hgCejXMPADNG4Z-g_kI8n0Yu57")
-	let _music = c.content[Math.floor(Math.random() * c.content.length)]
-	console.log(_music)
-}
+	let yt = new YoutubeMusicApi()
+	await yt.initalize()
+	let music = await yt.getPlaylist("PLR1NTS3hgCejXMPADNG4Z-g_kI8n0Yu57")
+	let _music = music.content[Math.floor(Math.random() * music.content.length)]
+	const song = `https://www.youtube.com/watch?v=${_music.videoId}`
 a()
 // try{
 // 	console.log(JSON.parse("test"))
