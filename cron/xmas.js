@@ -14,11 +14,13 @@ const font = require("../utils/font")
 module.exports = async (api, event) => {
 	let name = `${__dirname}/../temp/${event}_pasko.mp3`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	let songs = [
-		"UDRo5ExFZ8U",
-		"IXVVA7ILn7c",
-		"kZswF9efl28"
-	]
+	await yt.initalize()
+	let music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")
+	let _music = music.content[Math.floor(Math.random() * music.content.length)]
+	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
+	const strm = ytdl(url, {
+		quality: "lowestaudio"
+	})
 	let song = songs[Math.floor(Math.random() * songs.length)]
 	if(!fs.existsSync(name)){
 		try{
