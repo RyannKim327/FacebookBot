@@ -163,7 +163,7 @@ config.add("pasko", {
 	title: "New year cron test",
 	description: "Test cron",
 	commands: [
-		"worship remix"
+		"pasko"
 	],
 	admin: true
 })
