@@ -124,7 +124,6 @@ module.exports = async (api) => {
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
 					ny(api, r.threadID)
 				}
-				i++
 			})
 		})
 	}, {
