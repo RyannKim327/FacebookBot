@@ -106,7 +106,6 @@ module.exports = async (api) => {
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
 					music(api, r.threadID)
 				}
-				i++
 			})
 		})
 	},{
@@ -131,7 +130,6 @@ module.exports = async (api) => {
 	cronjob.schedule("0 18 1-25 12 *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [Pasko]: ${e}`)
-			let i = 0
 			data.forEach(r => {
 				//  && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID)) {
