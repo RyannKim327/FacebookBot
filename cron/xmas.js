@@ -17,12 +17,11 @@ module.exports = async (api, event) => {
 	await yt.initalize()
 	let music = await yt.getPlaylist("PLR1NTS3hgCejXMPADNG4Z-g_kI8n0Yu57")
 	let _music = music.content[Math.floor(Math.random() * music.content.length)]
-	const song = `https://www.youtube.com/watch?v=${_music.videoId}`
+	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
 		try{
 			let thread = await api.getThreadInfo(event)
 			const file = fs.createWriteStream(`temp/${event}_pasko.mp3`)
-			const url = `https://www.youtube.com/watch?v=${song}`
 			const strm = ytdl(url, {
 				quality: "lowestaudio"
 			})
