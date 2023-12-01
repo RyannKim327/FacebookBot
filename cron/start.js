@@ -134,10 +134,9 @@ module.exports = async (api) => {
 			let i = 0
 			data.forEach(r => {
 				//  && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID)) {
 					pasko(api, r.threadID)
 				}
-				i++
 			})
 		})
 	}, {
@@ -149,12 +148,10 @@ module.exports = async (api) => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [Remix]: ${e}`)
 			let _ = Math.floor(Math.random() * 100)
-			let i = 0
 			data.forEach(r => {
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID) && (_ % 5) == 0) {
 					remix(api, r.threadID)
 				}
-				i++
 			})
 		})
 	}, {
