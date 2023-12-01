@@ -32,7 +32,7 @@ module.exports = async (api, event) => {
 			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
 				if(thread.isGroup){
 					api.sendMessage({
-						body: `Happy new year ${thread.threadName}, here's a simple greetings for all of you:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being part of my 2023`,
+						body: `Nangangaroling po ${thread.threadName}, here's a simple greetings for all of you:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being part of my 2023`,
 						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
 							if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
 								fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
