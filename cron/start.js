@@ -132,12 +132,13 @@ module.exports = async (api) => {
 		timezone: "Asia/Manila"
 	})
 
-	cronjob.schedule("0 18 * 12 *", () => {
+	cronjob.schedule("0 18 1-25 12 *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [Pasko]: ${e}`)
 			let i = 0
 			data.forEach(r => {
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
+				//  && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)
+				if(self == r.threadID) {
 					pasko(api, r.threadID)
 				}
 				i++
