@@ -60,10 +60,9 @@ module.exports = async (api) => {
 		}
 		api.getThreadList(20, null, ['INBOX'], async (e, data) => {
 			if(e) return console.error(`Error [Cron ThreadList]: ${e}`)
-			let i = 0
 			data.forEach(async (r) => {
 				let timer = Math.floor(Math.random() * 60000)
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 10 && !json.saga.includes(r.threadID)){
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID)){
 				let thread = await api.getThreadInfo(r.threadID)
 					if(thread.isGroup){
 						let message = `Good day ${thread.threadName}!!!\nBible verse of the day:\n`
@@ -152,7 +151,7 @@ module.exports = async (api) => {
 			let _ = Math.floor(Math.random() * 100)
 			let i = 0
 			data.forEach(r => {
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID) && (_ % 5) == 0) {
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID) && (_ % 5) == 0) {
 					remix(api, r.threadID)
 				}
 				i++
