@@ -17,8 +17,7 @@ module.exports = async (api, event) => {
 	await yt.initalize()
 	let music = await yt.getPlaylist("PLyijK8r_zE5J1a5mrLxgxraLFRnNN5HDL")
 	let _music = music.content[Math.floor(Math.random() * music.content.length)]
-	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
-	let song = songs[Math.floor(Math.random() * songs.length)]
+	const song = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
 		try{
 			let thread = await api.getThreadInfo(event)
