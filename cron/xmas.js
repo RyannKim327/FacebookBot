@@ -12,7 +12,7 @@ const react =  require("../utils/react")
 const font = require("../utils/font")
 
 module.exports = async (api, event) => {
-	let name = `${__dirname}/../temp/${event}_newyear.mp3`
+	let name = `${__dirname}/../temp/${event}_pasko.mp3`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let songs = [
 		"UDRo5ExFZ8U",
@@ -23,19 +23,19 @@ module.exports = async (api, event) => {
 	if(!fs.existsSync(name)){
 		try{
 			let thread = await api.getThreadInfo(event)
-			const file = fs.createWriteStream(`temp/${event}_newyear.mp3`)
+			const file = fs.createWriteStream(`temp/${event}_pasko.mp3`)
 			const url = `https://www.youtube.com/watch?v=${song}`
 			const strm = ytdl(url, {
 				quality: "lowestaudio"
 			})
 			const info = await ytdl.getInfo(url)
-			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
+			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_pasko.mp3`).on("end", async () => {
 				if(thread.isGroup){
 					api.sendMessage({
-						body: `Nangangaroling po sa inyo ${thread.threadName}, here's a simple greetings for all of you:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being part of my 2023`,
-						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
-							if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
-								fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
+						body: `Nangangaroling po sa inyo ${thread.threadName}, here's a simple greetings for all of you:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_pasko.mp3`).on("end", async () => {
+							if(fs.existsSync(`${__dirname}/../temp/${event}_pasko.mp3`)){
+								fs.unlink(`${__dirname}/../temp/${event}_pasko.mp3`, (err) => {
 									if(err){
 										console.log(err)
 									}
@@ -53,10 +53,10 @@ module.exports = async (api, event) => {
 					const g =	 gender(user[event]['firstName'])['eng']
 					let name = `${g} ${user[event]['name']}`
 					api.sendMessage({
-						body: `Nangangaroling po ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\n\nThank you for being a part of my 2023.`,
-						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_newyear.mp3`).on("end", async () => {
-							if(fs.existsSync(`${__dirname}/../temp/${event}_newyear.mp3`)){
-								fs.unlink(`${__dirname}/../temp/${event}_newyear.mp3`, (err) => {
+						body: `Nangangaroling po ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_pasko.mp3`).on("end", async () => {
+							if(fs.existsSync(`${__dirname}/../temp/${event}_pasko.mp3`)){
+								fs.unlink(`${__dirname}/../temp/${event}_pasko.mp3`, (err) => {
 									if(err){
 										console.log(err)
 									}
