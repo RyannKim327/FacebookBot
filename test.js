@@ -8,8 +8,8 @@
 // 	console.log(_music)
 // }
 // a()
-try{
-	console.log(JSON.parse("test"))
-}catch(e){
-	console.error("test" + e)
-}
+// try{
+// 	console.log(JSON.parse("test"))
+// }catch(e){
+// 	console.error("test" + e)
+// }
