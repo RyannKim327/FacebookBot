@@ -131,7 +131,7 @@ module.exports = async (api) => {
 		timezone: "Asia/Manila"
 	})
 
-	cronjob.schedule("0 8 * * *", () => {
+	cronjob.schedule("0 18 * 12 *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [Remix]: ${e}`)
 			let _ = Math.floor(Math.random() * 100)
