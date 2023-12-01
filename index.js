@@ -159,6 +159,16 @@ config.add("prefix", {
 	admin: true
 })
 
+config.add("pasko", {
+	title: "New year cron test",
+	description: "Test cron",
+	commands: [
+		"worship remix"
+	],
+	admin: true
+})
+
+
 config.add("remix", {
 	title: "New year cron test",
 	description: "Test cron",
