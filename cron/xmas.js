@@ -15,7 +15,7 @@ module.exports = async (api, event) => {
 	let name = `${__dirname}/../temp/${event}_pasko.mp3`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	await yt.initalize()
-	let music = await yt.getPlaylist("PLR1NTS3hgCejXMPADNG4Z-g_kI8n0Yu57")
+	let music = await yt.getPlaylist("PL6MWD1eg4jVsCyEBjOrFJu3yC2-n4Vi9A")
 	let _music = music.content[Math.floor(Math.random() * music.content.length)]
 	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
