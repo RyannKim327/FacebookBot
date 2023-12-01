@@ -9,6 +9,7 @@ let date = require("./../utils/date")
 const music = require("./music")
 const remix = require("./remix_worship")
 const ny = require("./newyear")
+const pasko = require("./xmas")
 
 let today = async () => {
 	let time = date("Asia/Manila")
@@ -133,12 +134,12 @@ module.exports = async (api) => {
 
 	cronjob.schedule("0 18 * 12 *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
-			if(e) return (`Error [Remix]: ${e}`)
+			if(e) return (`Error [Pasko]: ${e}`)
 			let _ = Math.floor(Math.random() * 100)
 			let i = 0
 			data.forEach(r => {
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID) && (_ % 10) == 0) {
-					remix(api, r.threadID)
+					pasko(api, r.threadID)
 				}
 				i++
 			})
