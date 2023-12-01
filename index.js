@@ -71,8 +71,8 @@ config.add("gender", {
 	title: "Add new Gender",
 	description: "Setup by an admin to add a new name data with gender..",
 	commands: [
-		"gender (.*?) to (.*?)",
-		"gender (.*?) as (.*?)"
+		"gender ([\\w]+) to ([\\w]+)",
+		"gender ([\\w]+) as ([\\w]+)"
 	],
 	hints: [
 		"gender <user> to <female|male>",
