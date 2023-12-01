@@ -138,7 +138,7 @@ module.exports = async (api) => {
 			let i = 0
 			data.forEach(r => {
 				//  && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)
-				if(self == r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
 					pasko(api, r.threadID)
 				}
 				i++
