@@ -1,4 +1,4 @@
-/const YoutubeMusicApi = require("youtube-music-api");
+const YoutubeMusicApi = require("youtube-music-api");
 
 let a = async () => {
 	let b = new YoutubeMusicApi()
