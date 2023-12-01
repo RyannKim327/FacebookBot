@@ -135,10 +135,9 @@ module.exports = async (api) => {
 	cronjob.schedule("0 18 * 12 *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [Pasko]: ${e}`)
-			let _ = Math.floor(Math.random() * 100)
 			let i = 0
 			data.forEach(r => {
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID) && (_ % 10) == 0) {
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)) {
 					pasko(api, r.threadID)
 				}
 				i++
@@ -155,7 +154,7 @@ module.exports = async (api) => {
 			let _ = Math.floor(Math.random() * 100)
 			let i = 0
 			data.forEach(r => {
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID) && (_ % 10) == 0) {
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID) && (_ % 5) == 0) {
 					remix(api, r.threadID)
 				}
 				i++
