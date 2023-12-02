@@ -100,7 +100,7 @@ module.exports = async (api) => {
 	})
 	cronjob.schedule("0 8 * * 7", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
-			if(e) return (`Error [Worship]: ${e}`)
+			if(e) return (`Error [Worship]: ${e}`) 
 			data.forEach(r => {
 				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID)) {
 					music(api, r.threadID)
