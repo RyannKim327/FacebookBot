@@ -146,7 +146,7 @@ module.exports = async (api) => {
 			if(e) return (`Error [Remix]: ${e}`)
 			let _ = Math.floor(Math.random() * 100)
 			data.forEach(r => {
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID) && (_ % 3) == 0) {
+				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID) && ((_ % 3) == 0)) {
 					remix(api, r.threadID)
 				}
 			})
