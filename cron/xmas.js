@@ -47,10 +47,10 @@ module.exports = async (api, event) => {
 					})
 				}else{
 					let user = await api.getUserInfo(event)
-					const g =	 gender(user[event]['firstName'])['tag']
+					const g =	 gender(user[event]['firstName'])['eng']
 					let name = `${g} ${user[event]['name']}`
 					api.sendMessage({
-						body: `Ma po ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+						body: `Advance merry christmas po ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 						attachment: fs.createReadStream(`${__dirname}/../temp/${event}_pasko.mp3`).on("end", async () => {
 							if(fs.existsSync(`${__dirname}/../temp/${event}_pasko.mp3`)){
 								fs.unlink(`${__dirname}/../temp/${event}_pasko.mp3`, (err) => {
