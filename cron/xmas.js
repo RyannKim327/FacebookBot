@@ -47,7 +47,7 @@ module.exports = async (api, event) => {
 					})
 				}else{
 					let user = await api.getUserInfo(event)
-					const g =	 gender(user[event]['firstName'])['eng']
+					const g =	 gender(user[event]['firstName'])['tag']
 					let name = `${g} ${user[event]['name']}`
 					api.sendMessage({
 						body: `Nangangaroling po ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
