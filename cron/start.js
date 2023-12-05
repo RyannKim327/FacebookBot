@@ -126,7 +126,7 @@ module.exports = async (api) => {
 		timezone: "Asia/Manila"
 	})
 
-	cronjob.schedule("16 21 * 12 *", () => {
+	cronjob.schedule("30 18 * 12 *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [Pasko]: ${e}`)
 			data.forEach(r => {
