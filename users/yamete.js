@@ -13,7 +13,7 @@ const react =  require("../utils/react")
 const font = require("../utils/font")
 
 module.exports = async (api, event) => {
-	let name = `${__dirname}/../temp/${event.threadID}_.mp3`
+	let name = `${__dirname}/../temp/${event.threadID}_${event.senderID}_yamete.mp3`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	await yt.initalize()
 	let music = await yt.getPlaylist("RDCLAK5uy_nNqfsxA_apsMMI91IFHF-k91QXDuWAbYY")
@@ -21,20 +21,20 @@ module.exports = async (api, event) => {
 	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
 		try{
-			const file = fs.createWriteStream(`temp/${event}_.mp3`)
+			const file = fs.createWriteStream(`temp/${event}_${event.senderID}_yamete.mp3`)
 			const strm = ytdl(url, {
 				quality: "lowestaudio"
 			})
 			const info = await ytdl.getInfo(url)
-			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_.mp3`).on("end", async () => {
+			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_${event.senderID}_yamete.mp3`).on("end", async () => {
 				let user = await api.getUserInfo(event)
 				const g =	 gender(user[event]['firstName'])['eng']
 				let name = `${g} ${user[event]['name']}`
 				api.sendMessage({
 					body: `Here's your request ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
-					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_.mp3`).on("end", async () => {
-						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_.mp3`)){
-							fs.unlink(`${__dirname}/../temp/${event.threadID}_.mp3`, (err) => {
+					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}_yamete.mp3`).on("end", async () => {
+						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}_yamete.mp3`)){
+							fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}_yamete.mp3`, (err) => {
 								if(err){
 									console.log(err)
 								}
