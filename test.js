@@ -15,4 +15,4 @@
 // 	console.error("test" + e)
 // }
 
-console.log(new Date().toLocaleDateString( 'en-US', { timeZone: 'Asia/Manila' }))
+)
