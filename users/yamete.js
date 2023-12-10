@@ -21,7 +21,7 @@ module.exports = async (api, event) => {
 	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
 		try{
-			const file = fs.createWriteStream(`temp/${event}_${event.senderID}_yamete.mp3`)
+			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}_yamete.mp3`)
 			const strm = ytdl(url, {
 				quality: "lowestaudio"
 			})
