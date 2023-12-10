@@ -5,6 +5,8 @@ const repl = require("./replit_only.js")
 
 config.setCommands(JSON.parse(fs.readFileSync("commandsments.json", "utf-8")))
 
+// doing some test with auto git modified
+
 config.addAdmins("100011558238843")
 config.addAdmins("100081698814451")
 
