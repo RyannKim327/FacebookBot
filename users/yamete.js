@@ -13,7 +13,7 @@ const react =  require("../utils/react")
 const font = require("../utils/font")
 
 module.exports = async (api, event) => {
-	let name = `${__dirname}/../temp/${event}_pasko.mp3`
+	let name = `${__dirname}/../temp/${eventthreadID}_pasko.mp3`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	await yt.initalize()
 	let music = await yt.getPlaylist("RDCLAK5uy_nNqfsxA_apsMMI91IFHF-k91QXDuWAbYY")
@@ -21,7 +21,6 @@ module.exports = async (api, event) => {
 	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
 		try{
-			let thread = await api.getThreadInfo(event)
 			const file = fs.createWriteStream(`temp/${event}_pasko.mp3`)
 			const strm = ytdl(url, {
 				quality: "lowestaudio"
@@ -34,8 +33,8 @@ module.exports = async (api, event) => {
 				api.sendMessage({
 					body: `Here's your request ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event}_pasko.mp3`).on("end", async () => {
-						if(fs.existsSync(`${__dirname}/../temp/${event}_pasko.mp3`)){
-							fs.unlink(`${__dirname}/../temp/${event}_pasko.mp3`, (err) => {
+						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_pasko.mp3`)){
+							fs.unlink(`${__dirname}/../temp/${event.threadID}_pasko.mp3`, (err) => {
 								if(err){
 									console.log(err)
 								}
