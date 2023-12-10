@@ -48,7 +48,7 @@ module.exports = async (api, event) => {
 						afk(api, json2)
 					}
 				})
-		})
+			})
 		}catch(err){
 			console.log(err)
 		}
