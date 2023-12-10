@@ -96,7 +96,7 @@
 			const button = buttons[i]
 			if(button.textContent != "=" || button.textContent != "C"){
 				button.onclick = (event) => {
-					document.getElementById("input")
+					document.getElementById("input").value += button.textContent
 				}
 			}
 		}
