@@ -597,7 +597,7 @@ config.add("word", {
 	category: "knowledge"
 })
 
-config.add("yameta", {
+config.add("yamete", {
 	title: "Anime random songs",
 	description: "A music command which gives you some anime songs",
 	commands: [
@@ -606,7 +606,6 @@ config.add("yameta", {
 	hints: [
 		"yamete"
 	],
-	hasArgs: false,
 	category: "multimedia"
 })
 
