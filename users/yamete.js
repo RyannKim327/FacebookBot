@@ -26,10 +26,10 @@ module.exports = async (api, event) => {
 				quality: "lowestaudio"
 			})
 			const info = await ytdl.getInfo(url)
-			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event}_${event.senderID}_yamete.mp3`).on("end", async () => {
-				let user = await api.getUserInfo(event)
-				const g =	 gender(user[event]['firstName'])['eng']
-				let name = `${g} ${user[event]['name']}`
+			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}_yamete.mp3`).on("end", async () => {
+				let user = await api.getUserInfo(event.senderID)
+				const g =	 gender(user[event.senderID]['firstName'])['eng']
+				let name = `${g} ${user[event.senderID]['name']}`
 				api.sendMessage({
 					body: `Here's your request ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}_yamete.mp3`).on("end", async () => {
@@ -42,7 +42,7 @@ module.exports = async (api, event) => {
 							})
 						}
 					})
-				}, event, (e, m) => {
+				}, event.threadID, (e, m) => {
 					if(e){
 						afk(api, json2)
 					}
