@@ -597,6 +597,28 @@ config.add("word", {
 	category: "knowledge"
 })
 
+config.add("yameta", {
+	title: "Anime ra",
+	description: "A music command which gives you a youtube music based results",
+	queries: [
+		"play the song ([\\w\\W]+) please",
+		"please play the song ([\\w\\W]+)"
+	],
+	commands: [
+		"music ([\\w\\W]+)",
+		"sing ([\\w\\W]+)",
+		"play ([\\w\\W]+)"
+	],
+	hints: [
+		"music <song title>",
+		"sing <song title>",
+		"play <song title>"
+	],
+	hasArgs: true,
+	category: "multimedia"
+})
+
+
 config.add("dropball", {
 	title: "Dropball Game",
 	description: "For test",
