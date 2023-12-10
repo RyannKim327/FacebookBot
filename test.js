@@ -15,4 +15,3 @@
 // 	console.error("test" + e)
 // }
 
-// Lutang na hahaha ulit
