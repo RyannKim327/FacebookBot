@@ -601,16 +601,12 @@ config.add("yameta", {
 	title: "Anime random songs",
 	description: "A music command which gives you some anime songs",
 	commands: [
-		"music ([\\w\\W]+)",
-		"sing ([\\w\\W]+)",
-		"play ([\\w\\W]+)"
+		"yamete"
 	],
 	hints: [
-		"music <song title>",
-		"sing <song title>",
-		"play <song title>"
+		"yamete"
 	],
-	hasArgs: true,
+	hasArgs: false,
 	category: "multimedia"
 })
 
