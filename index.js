@@ -598,12 +598,8 @@ config.add("word", {
 })
 
 config.add("yameta", {
-	title: "Anime ra",
-	description: "A music command which gives you a youtube music based results",
-	queries: [
-		"play the song ([\\w\\W]+) please",
-		"please play the song ([\\w\\W]+)"
-	],
+	title: "Anime random songs",
+	description: "A music command which gives you some anime songs",
 	commands: [
 		"music ([\\w\\W]+)",
 		"sing ([\\w\\W]+)",
