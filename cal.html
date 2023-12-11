@@ -125,6 +125,12 @@
 									equation = ""
 									document.getElementById("input").value = "0"
 								}
+								if(document.getElementById("input").value == "0" || document.getElementById("input").value == ""){
+						document.getElementById("input").value = "0"
+					}
+					if(document.getElementById("input").value.startsWith("0")){
+						document.getElementById("input").value = document.getElementById("input").value.substring(1)
+					}
 							break
 							case "=":
 								document.getElementById("input").value = (eval(equation))
