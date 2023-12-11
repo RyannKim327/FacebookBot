@@ -9,9 +9,3 @@ let a = async () => {
 	console.log(song)
 }
 a()
-// try{
-// 	console.log(JSON.parse("test"))
-// }catch(e){
-// 	console.error("test" + e)
-// }
-
