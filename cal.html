@@ -97,8 +97,9 @@
 			if(button.textContent != "=" || button.textContent != "C"){
 				button.onclick = (event) => {
 					let text = button.textContent
-					if()
-					document.getElementById("input").value += text
+					if(text){
+						document.getElementById("input").value += text
+					}
 				}
 			}
 		}
