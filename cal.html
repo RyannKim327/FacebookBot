@@ -103,8 +103,9 @@
 					const f = ["+", "-", "*", "/"]
 					if(!d.includes(text)){
 						equation += text
+						document.getElementById("input").value += text
 						if(f.includes(text)){
-							
+							document.getElementById("input").value = ""
 						}
 						eq = false
 					}else{
