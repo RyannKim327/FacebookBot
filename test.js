@@ -9,3 +9,5 @@ let a = async () => {
 	console.log(song)
 }
 a()
+
+// test
