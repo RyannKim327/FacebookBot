@@ -92,7 +92,7 @@
 	</body>
 	<script>
 		const buttons = document.getElementsByTagName("button")
-		
+		let equation = ""
 		for(let i = 0; i < buttons.length; i++){
 			const button = buttons[i]
 			if(button.textContent != "=" || button.textContent != "C"){
@@ -107,7 +107,7 @@
 								// clear
 							break
 							case "=":
-							document.getElementById("input").value = (eval(document.getElementById("input").value))
+								document.getElementById("input").value = (eval(equation))
 							break
 						}
 					}
