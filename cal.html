@@ -102,11 +102,14 @@
 					const d = ["C", "="]
 					if(!d.includes(text)){
 						document.getElementById("input").value += text
+						eq = false
 					}else{
 						switch(text.toLowerCase()){
 							case "c":
 								// clear
-								
+								if(eq){
+									equation = ""
+								}
 							break
 							case "=":
 								document.getElementById("input").value = (eval(equation))
