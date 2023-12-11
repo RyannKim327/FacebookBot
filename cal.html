@@ -100,9 +100,12 @@
 				button.onclick = (event) => {
 					let text = button.textContent
 					const d = ["C", "="]
-					const 
+					const f = ["+", "-", "*", "/"]
 					if(!d.includes(text)){
 						equation += text
+						if(f.includes(text)){
+							
+						}
 						eq = false
 					}else{
 						switch(text.toLowerCase()){
