@@ -101,6 +101,7 @@
 			const button = buttons[i]
 			if(button.textContent != "=" || button.textContent != "C"){
 				button.onclick = (event) => {
+					if()
 					let text = button.textContent
 					const d = ["C", "="]
 					const f = ["+", "-", "*", "/"]
@@ -117,7 +118,7 @@
 								// clear
 								if(eq){
 									equation = ""
-									document.getElementById("input").value = ""
+									document.getElementById("input").value = "0"
 								}
 							break
 							case "=":
