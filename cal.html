@@ -120,7 +120,7 @@
 					}else{
 						switch(text.toLowerCase()){
 							case "c":
-								document.getElementById("input").value
+								document.getElementById("input").value = document.getElementById("input").value.substring(0, document.getElementById("input").value.length - 1)
 								if(eq){
 									equation = ""
 									document.getElementById("input").value = "0"
