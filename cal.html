@@ -97,7 +97,7 @@
 			if(button.textContent != "=" || button.textContent != "C"){
 				button.onclick = (event) => {
 					let text = button.textContent
-					const d = ["C"]
+					const d = ["C", "="]
 					if(!d.includes(text)){
 						document.getElementById("input").value += text
 					}else{
@@ -106,7 +106,7 @@
 								// clear
 							break
 							case "=":
-								eval()
+							document.getElementById("input").value = (eval(document.getElementById("input").value))
 							break
 						}
 					}
