@@ -100,8 +100,9 @@
 				button.onclick = (event) => {
 					let text = button.textContent
 					const d = ["C", "="]
+					const 
 					if(!d.includes(text)){
-						document.getElementById("input").value += text
+						equation += text
 						eq = false
 					}else{
 						switch(text.toLowerCase()){
