@@ -98,7 +98,7 @@ module.exports = async (api) => {
 		scheduled: true,
 		timezone: "Asia/Manila"
 	})
-	cronjob.schedule("0 8 * * 7", () => {
+	cronjob.schedule("0 10 * * 7", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
 			if(e) return (`Error [Worship]: ${e}`) 
 			data.forEach(r => {
