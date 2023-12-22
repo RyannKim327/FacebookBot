@@ -1,6 +1,9 @@
 const config = require("./config")
 const server = require("./server")
 const repl = require("./replit_only.js")
+const dump = require("./dump")
+
+dump()
 
 config.add("admin", {
 	title: "Admin commands",

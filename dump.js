@@ -6,7 +6,19 @@ module.exports = () => {
 	cron.schedule("0 0 * * *", () => {
 		const time = new Date()
 		const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
-		fs.writeFileSync("Auto git.txt", m, "utf-8")
+		const m2 = [
+			"Sana ako pa rin",
+			"Bakit na mimiss ko pa rin sya",
+			"Ano kaya ang susunod na ilalagay ko dito",
+			"From valentines, hanggang pasko, na sana pati bagong taon",
+			"Ang cute nya, lalo na pag inis sya saken",
+			"Wala, talaga lang attractive sya saken",
+			"Nugagawen kapag miss ko na sya?"
+		]
+
+		const m3 = m2[Math.floor(Math.random() * m2.length)]
+
+		fs.writeFileSync("Auto git.txt", m3, "utf-8")
 		setTimeout(() => {
 			exec("git add .", (e) => {console.error(e)})
 		})
