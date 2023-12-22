@@ -28,5 +28,8 @@ module.exports = () => {
 		setTimeout(() => {
 			exec(`git push origin main`, (e) => {console.error(e)})
 		}, 2000)
+	}, {
+		scheduled: true,
+		timezone: "Asia/Manila"
 	})
 }
