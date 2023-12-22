@@ -21,6 +21,12 @@ const { exec } = require("child_process")
 const time = new Date()
 const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 fs.writeFileSync("Auto git.txt", m, "utf-8")
-// exec("git add .", (e) => {console.error(e)})
-exec(`git commit -m "${m}"`, (e) => {console.error(e)})
-exec(`git push origin main`, (e) => {console.error(e)})
+setTimeout(() => {
+	exec("git add .", (e) => {console.error(e)})
+})
+setTimeout(() => {
+	exec(`git commit -m "${m}"`, (e) => {console.error(e)})
+},2000)
+setTimeout(() => {
+	exec(`git push origin main`, (e) => {console.error(e)})
+}, 3000)
