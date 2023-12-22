@@ -3,7 +3,7 @@ const fs = require("fs")
 const { exec } = require("child_process")
 
 module.exports = () => {
-	cron.schedule("0 0 */4 * *", () => {
+	cron.schedule("0 */4 * * *", () => {
 		const time = new Date()
 		const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 		const m2 = [
