@@ -6,13 +6,12 @@ module.exports = async (api, event) => {
 	let json = JSON.parse(fs.readFileSync("data/pin.json", "utf8"))
 	if(event.body == (getPrefix() + "clearpin")){
 		json[event.threadID] = undefined
-		console.log("hi")
 	}else{
 		let msg = event.messageReply
 		if(json[event.threadID] == undefined)
 			json[event.threadID] = {}
 		json[event.threadID].senderID = msg.senderID
-		json[event.threadID].body = msg.body
+		json[event.threadID].body = btoa(msg.body)
 		if(msg.attachments != undefined){
 			json[event.threadID].attachments = []
 			let att = msg.attachments

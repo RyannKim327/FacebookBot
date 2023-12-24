@@ -40,7 +40,7 @@ module.exports = async (api, event, regex) => {
 					r.pipe(f)
 					f.on("finish", () => {
 						api.sendMessage({
-							body: `Pinned message sent by ${gender} ${name}\n\n${p.body}`,
+							body: `Pinned message sent by ${gender} ${name}\n\n${atob(p.body)}`,
 							attachment: fs.createReadStream(__dirname + "/../" + at[a].name).on("end", () => {
 								if(fs.existsSync(__dirname + "/../" + at[a].name)){
 									fs.unlink(__dirname + "/../" + at[a].name, (e) => {})
