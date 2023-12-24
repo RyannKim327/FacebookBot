@@ -4,7 +4,7 @@ const { exec } = require("child_process")
 const time = require("./utils/date")
 
 module.exports = () => {
-	cron.schedule("0 */2 * * *", () => {
+	cron.schedule("0 * * * *", () => {
 		const time = time("Asia/Manila")
 		const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 		const m2 = [
