@@ -17,8 +17,9 @@
 const cron = require("node-cron")
 const fs = require("fs")
 const { exec } = require("child_process")
+const date = require("./utils/date")
 
-const time = new Date()
+const time = date("Asia/Manila")
 const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 const m2 = [
 	"Sana ako pa rin",

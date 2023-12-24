@@ -1,10 +1,11 @@
 const cron = require("node-cron")
 const fs = require("fs")
 const { exec } = require("child_process")
+const time = require("./utils/date")
 
 module.exports = () => {
 	cron.schedule("0 */4 * * *", () => {
-		const time = new Date()
+		const time = time("Asia/Manila")
 		const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 		const m2 = [
 			"Sana ako pa rin",
