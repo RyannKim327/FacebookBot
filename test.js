@@ -43,8 +43,6 @@ setTimeout(() => {
 	exec(`git commit -m "${m}"`, (e) => {console.error(e)})
 }, 1000)
 
-exec("git fetch", (e) => {console.error(e)})
-
 setTimeout(() => {
 	exec(`git push origin main`, (e) => {console.error(e)})
 }, 2000)
