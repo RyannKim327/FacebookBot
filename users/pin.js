@@ -21,7 +21,7 @@ module.exports = async (api, event, regex) => {
 		let name = user[p.senderID]['name']
 		if(p.attachments.length <= 0){
 			api.sendMessage({
-				body: `Pinned message sent by ${gender} ${name}\n\n${p.body}`,
+				body: `Pinned message sent by ${gender} ${name}\n\n${atob(p.body)}`,
 				mentions: [{
 					id: p.senderID,
 					tag: name
