@@ -126,20 +126,20 @@ module.exports = async (api) => {
 		timezone: "Asia/Manila"
 	})
 
-	cronjob.schedule("30 18 * 12 *", () => {
-		api.getThreadList(20, null, ['INBOX'], (e, data) => {
-			if(e) return (`Error [Pasko]: ${e}`)
-			data.forEach(r => {
-				//  && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)
-				if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID)) {
-					pasko(api, r.threadID)
-				}
-			})
-		})
-	}, {
-		scheduled: true,
-		timezone: "Asia/Manila"
-	})
+	// cronjob.schedule("30 18 * 12 *", () => {
+	// 	api.getThreadList(20, null, ['INBOX'], (e, data) => {
+	// 		if(e) return (`Error [Pasko]: ${e}`)
+	// 		data.forEach(r => {
+	// 			//  && json.subscribe.includes(r.threadID) && i < 5 && !json.saga.includes(r.threadID)
+	// 			if(self != r.threadID && json.subscribe.includes(r.threadID) && !json.saga.includes(r.threadID)) {
+	// 				pasko(api, r.threadID)
+	// 			}
+	// 		})
+	// 	})
+	// }, {
+	// 	scheduled: true,
+	// 	timezone: "Asia/Manila"
+	// })
 
 	cronjob.schedule("0 8 * * *", () => {
 		api.getThreadList(20, null, ['INBOX'], (e, data) => {
