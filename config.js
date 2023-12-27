@@ -331,10 +331,36 @@ let listerner = async (api) => {
 				afkCalls[event.threadID] = undefined
 			}, ((1000 * 60) * 60))
 		}
-		
-		if()
 	
 		if(trialCard[event.senderID] != undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+			if(){
+				let user = await api.getUserInfo(event.senderID)
+				let username = user[event.senderID]['name']
+				let firstName = user[event.senderID]['firstName']
+				let gender = gen(firstName)['eng']
+				calls += event.senderID + ", "
+				trialCard[event.senderID] = "0"
+				setTimeout(() => {
+					if(trialCard[event.senderID] != undefined){
+						trialCard[event.senderID] = undefined
+					}
+				}, ((60 * 1000) * 30))
+				api.sendMessage({
+					body: `Yes ${gender} ${username}? Would you like to ask something?`,
+					mentions: [{
+						id: event.senderID,
+						tag: username
+					}]
+				}, event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					}
+					afk(api, json)
+				})
+				setTimeout(() => {
+					calls = calls.replace(event.senderID + ", ", "")
+				}, ((60 * 1000) * 60))
+			}
 			if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())){
 				// Name
 			}else if(event.body.startsWith(prefix)){
