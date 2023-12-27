@@ -225,6 +225,7 @@ let listerner = async (api) => {
 		if(error) return console.error(`Error [Event]: ${error.message}`)
 		let json_ = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		let thisTime = new Date()
+		let loop = true
 		if(options.autoMarkRead!= undefined){
 			if(options.autoMarkRead){
 				await api.markAsReadAll()
