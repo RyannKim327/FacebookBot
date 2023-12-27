@@ -333,7 +333,9 @@ let listerner = async (api) => {
 		}
 		if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())|| event.body.startsWith(prefix)){
 			// trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
-			if(trialCard[event.senderID] == undefined && !json.off)
+			if(trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+				
+			}
 		}
 	})
 }
