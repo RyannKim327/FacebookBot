@@ -281,6 +281,28 @@ let listerner = async (api) => {
 			intervals[event.senderID] -= 1
 		}
 
+		if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
+			if(event.threadID == event.senderID){
+				api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
+					if(e){
+						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					}
+				})
+				json.busylist.push(event.threadID)
+				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+			}else if(event.mentions != undefined){
+				if(event.mentions[self] != undefined){
+					api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
+						if(e){
+							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						}
+					})
+					json.busylist.push(event.threadID)
+					fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+				}
+			}
+		}
+
 	})
 }
 

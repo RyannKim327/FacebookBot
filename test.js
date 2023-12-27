@@ -47,11 +47,11 @@ let run = async () => {
 	await setTimeout(() => {
 		exec(`git commit -m "${m}"`, (e) => {
 			if(e) console.error(e)
-			setTimeout(() => {
-				exec(`git push`, (e) => {
-					if(e) console.error(e)
-				})
-			}, 2000)
+			// setTimeout(() => {
+			// 	exec(`git push`, (e) => {
+			// 		if(e) console.error(e)
+			// 	})
+			// }, 2000)
 		})
 	}, 1000)
 
