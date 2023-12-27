@@ -333,7 +333,7 @@ let listerner = async (api) => {
 			}, ((1000 * 60) * 60))
 		}
 	
-		if(trialCard[event.senderID] != undefined && !json_.off.includes(event.senderID) && !calls.includes(event.senderID)){
+		if(trialCard[event.senderID] == undefined && !json_.off.includes(event.senderID) && !calls.includes(event.senderID)){
 			if(event.body.trim().toLowerCase() == name.toLowerCase() && event.senderID != self){
 				let user = await api.getUserInfo(event.senderID)
 				let username = user[event.senderID]['name']
@@ -361,7 +361,7 @@ let listerner = async (api) => {
 				setTimeout(() => {
 					calls = calls.replace(event.senderID + ", ", "")
 				}, ((60 * 1000) * 60))
-			}else if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())){
+			}else if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() != name.toLowerCase())){
 				commands.forEach(r => {
 					if(r.data.queries != undefined){
 						let que = r.data.queries
