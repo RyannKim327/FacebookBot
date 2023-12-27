@@ -619,9 +619,9 @@ let start = (state) => {
 		}
 		resetOneTime()
 
-		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-		name = json.name
-		prefix = json.prefix
+		fs.writeFileSync("data/preferences.json", JSON.stringify(json_), "utf8")
+		name = json_.name
+		prefix = json_.prefix
 
 		interval_()
 
