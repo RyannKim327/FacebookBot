@@ -330,7 +330,7 @@ let listerner = async (api) => {
 				afkCalls[event.threadID] = undefined
 			}, ((1000 * 60) * 60))
 		}
-		if(event.body.toLowerCase().startsWith(name.to))
+		if(event.body.toLowerCase().startsWith(name.toLowerCase()) || event.body.startsWith(prefix))
 	})
 }
 
