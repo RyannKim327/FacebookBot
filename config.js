@@ -270,7 +270,7 @@ let listerner = async (api) => {
 			})
 		}
 
-		if(!vips.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
+		if(!vips.includes(event.senderID) && trua && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
 			if(intervals[event.senderID] == undefined){
 				intervals[event.senderID] = 5
 			}else if(intervals[event.senderID] <= 0){
