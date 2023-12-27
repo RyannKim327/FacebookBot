@@ -331,7 +331,10 @@ let listerner = async (api) => {
 				afkCalls[event.threadID] = undefined
 			}, ((1000 * 60) * 60))
 		}
-		if(trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+		
+		if()
+	
+		if(trialCard[event.senderID] != undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
 			if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())){
 				// Name
 			}else if(event.body.startsWith(prefix)){
