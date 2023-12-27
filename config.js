@@ -384,7 +384,19 @@ let listerner = async (api) => {
 						cd(api, event, "ai", json)
 				}
 			}else if(event.body.startsWith(prefix)){
-				// Prefix
+				commands.forEach(r => {
+					if(r.data.commands != undefined){
+						let cmds = r.data.commands
+						for(let s in cmds){
+							let q = cmds[s]
+							if(loop){
+								loop = system(api, event, r, q, prefix)
+								if(!loop)
+									break
+							}
+						}
+					}
+				})
 			}
 		}
 	})
