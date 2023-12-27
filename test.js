@@ -45,7 +45,7 @@ let run = () => {
 	}, 1000)
 
 	setTimeout(() => {
-		exec(`git push origin main`, (e) => {console.error(e)})
+		exec(`git push`, (e) => {console.error(e)})
 	}, 2000)
 }
 
