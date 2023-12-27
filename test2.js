@@ -16,7 +16,6 @@ let data = [
         allowed: true
     }
 ]
-
 for(let i in data){
     if(data[i].allowed){
         console.log(data[i].title)
