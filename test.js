@@ -33,8 +33,8 @@ let run = () => {
 
 	const m3 = m2[Math.floor(Math.random() * m2.length)]
 
-	exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
-	exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
+	// exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
+	// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
 
 	fs.writeFileSync("Auto git.txt", m3, "utf-8")
 	setTimeout(() => {
