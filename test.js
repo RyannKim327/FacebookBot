@@ -44,11 +44,14 @@ let run = () => {
 	})
 	setTimeout(() => {
 		exec(`git commit -m "${m}"`, (e) => {
-			if(e)console.error(e)})
+			if(e)console.error(e)
+		})
 	}, 1000)
 
 	setTimeout(() => {
-		exec(`git push`, (e) => {console.error(e)})
+		exec(`git push`, (e) => {
+			if(e) console.error(e)
+		})
 	}, 2000)
 }
 
