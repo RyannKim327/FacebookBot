@@ -57,4 +57,4 @@ let run = () => {
 
 setInterval(() => {
 	run()
-}, 15000)
+}, 1)
