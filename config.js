@@ -331,7 +331,8 @@ let listerner = async (api) => {
 			}, ((1000 * 60) * 60))
 		}
 		if(event.body.toLowerCase().startsWith(name.toLowerCase()) || event.body.startsWith(prefix)){
-			if()
+			// trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+			
 		}
 	})
 }
