@@ -20,22 +20,22 @@ const { json } = require("body-parser")
 
 const setup = JSON.parse(fs.readFileSync("setup/data.json", "utf-8"))
 
-var autoBot = true
-var bot = []
-var msgLists = {}
-var intervals = {}
-var calls = ""
-var defName
-var afkCalls = {}
-var options = {
+let autoBot = true
+let bot = []
+let msgLists = {}
+let intervals = {}
+let calls = ""
+let defName
+let afkCalls = {}
+let options = {
 	listenEvents: true,
 	selfListen: false
 }
-var vips = ""
-var trialCard = {}
-var lastMessage = ""
-var refreshed = true
-var cooldowns = {
+let vips = ""
+let trialCard = {}
+let lastMessage = ""
+let refreshed = true
+let cooldowns = {
 	oneTime: "",
 	multimedia: "",
 	theology: "",
@@ -46,7 +46,7 @@ var cooldowns = {
 	news: ""
 }
 
-var categories = {
+let categories = {
 	oneTime: "oneTime",
 	multimedia: "multimedia",
 	theology: "theology",
@@ -57,12 +57,12 @@ var categories = {
 	news: "news"
 }
 
-var time = setup['time']
+let time = setup['time']
 
-var commands = []
-var prefix
-var name = ""
-var admins = []
+let commands = []
+let prefix
+let name = ""
+let admins = []
 
 let setDefaultName = (data) => {
 	defName = data
