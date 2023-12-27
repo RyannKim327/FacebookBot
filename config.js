@@ -16,6 +16,7 @@ const gen = require("./utils/gender")
 const unsent = require("./utils/unsent")
 const react = require("./utils/react")
 const api = require("./cron/api")
+const { json } = require("body-parser")
 
 const setup = JSON.parse(fs.readFileSync("setup/data.json", "utf-8"))
 
@@ -332,7 +333,7 @@ let listerner = async (api) => {
 		}
 		if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())|| event.body.startsWith(prefix)){
 			// trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
-			if()
+			if(trialCard[event.senderID] == undefined && !json.off)
 		}
 	})
 }
