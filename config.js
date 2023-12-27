@@ -333,8 +333,10 @@ let listerner = async (api) => {
 		}
 		if(trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
 			if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())){
-
-			}else if(event.body.startsWith(prefix))
+				// Name
+			}else if(event.body.startsWith(prefix)){
+				// Prefix
+			}
 		}
 	})
 }
