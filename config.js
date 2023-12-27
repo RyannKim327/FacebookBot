@@ -362,6 +362,28 @@ let listerner = async (api) => {
 				}, ((60 * 1000) * 60))
 			}else if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())){
 				// Name
+				commands.forEach(r => {
+					if(r.data.queries != undefined){
+						let que = r.data.queries
+						for(let s in que){
+							let q = que[s]
+							if(loop){
+								let _prefix = name + ", "
+								loop = system(api, event, r, q, _prefix)
+								if(!loop)
+									break
+							}
+						}
+					}
+				})
+				if(loop && json.ai == false && (admins.includes(event.senderID) || (json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined))){
+					let _ = event.body.split(" ")
+					_.shift()
+					event.body = _.join(" ")
+					openai(api, event)
+					if(/give\b|create\b|what is (^your name)\b/.test(event.body))
+						cd(api, event, "ai", json)
+				}
 			}else if(event.body.startsWith(prefix)){
 				// Prefix
 			}
