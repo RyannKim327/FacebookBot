@@ -360,8 +360,7 @@ let listerner = async (api) => {
 				setTimeout(() => {
 					calls = calls.replace(event.senderID + ", ", "")
 				}, ((60 * 1000) * 60))
-			}
-			if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())){
+			}else if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())){
 				// Name
 			}else if(event.body.startsWith(prefix)){
 				// Prefix
