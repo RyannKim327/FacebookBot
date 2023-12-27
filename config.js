@@ -247,7 +247,40 @@ let listerner = async (api) => {
 		}else{
 			lastMessage = event.senderID
 		}
-		
+
+		if(json.ai && event.type == "message_reply"){
+			if(event.messageReply.attachments <= 0 && !event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
+				openai(api, event)
+				loop = false
+			}
+		}
+
+		if(lastMessage.includes(event.senderID) && event.senderID != self && trialCard[event.senderID] != undefined && event.type == "message" && !(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
+			openai(api, event)
+			afk(api, json)
+		}
+
+		if(trialCard[event.senderID] != undefined && body.toLowerCase().includes("stop") && body.toLowerCase().includes(name.toLowerCase())){
+			trialCard[event.senderID] = undefined
+			return api.sendMessage("Auto AI messages are closed, to reactivate, kindly wait for an hour.", event.threadID, (e, m) => {
+				if(e){
+					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				}
+			})
+		}
+
+		if(!vips.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
+			if(intervals[event.senderID] == undefined){
+				intervals[event.senderID] = 5
+			}else if(intervals[event.senderID] <= 0){
+				let id = event.senderID
+				json.off.push(id)
+				api.sendMessage("The system detected a spam request from a user, the system was automatically banned for the bot requests. Please contact the developer or the bot admin to enable the commands again.", event.threadID, (e, m) => {}, event.messageID)
+				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+			}
+			intervals[event.senderID] -= 1
+		}
+
 	})
 }
 
@@ -316,28 +349,6 @@ let doListen = async (api) => {
 				})
 			}
 
-			if(intervals[event.senderID] == undefined)
-				intervals[event.senderID] = 5
-			if(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase())){
-				intervals[event.senderID] -= 1
-			}
-			if(intervals[event.senderID] == 0 && !json.off.includes(event.senderID) && !admins.includes(event.senderID) && (body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
-				let id = event.senderID
-				let user = await api.getUserInfo(id)
-				json.off.push(id)
-				api.sendMessage({
-					body: `Bot actions are now disabled for ${user[id]['name']}`,
-					mentions: [{
-						id,
-						tag: user[id]['name']
-					}]
-				}, event.threadID, (e, m) => {
-					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
-					}
-				})
-				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
-			}
 			if(!admins.includes(event.senderID) && json.busy && !json.busylist.includes(event.threadID)){
 				if(event.threadID == event.senderID){
 					api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {

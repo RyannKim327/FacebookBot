@@ -18,7 +18,7 @@ const fs = require("fs")
 const { exec } = require("child_process")
 const date = require("./utils/date")
 
-let run = () => {
+let run = async () => {
 	const time = date("Asia/Manila")
 	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 	const m2 = [
@@ -33,28 +33,31 @@ let run = () => {
 
 	const m3 = m2[Math.floor(Math.random() * m2.length)]
 
+	console.log("Restating")
+
 	// exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
 	// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
 
 	fs.writeFileSync("Auto git.txt", m3, "utf-8")
-	setTimeout(() => {
-		exec("git add .", (e) => {
-			if(e) console.error(e)
-		})
-	})
-	setTimeout(() => {
+	// setTimeout(() => {
+	// 	exec("git add .", (e) => {
+	// 		if(e) console.error(e)
+	// 	})
+	// })
+	await setTimeout(() => {
 		exec(`git commit -m "${m}"`, (e) => {
-			if(e)console.error(e)
+			if(e) console.error(e)
+			setTimeout(() => {
+				exec(`git push`, (e) => {
+					if(e) console.error(e)
+				})
+			}, 2000)
 		})
 	}, 1000)
 
-	setTimeout(() => {
-		exec(`git push`, (e) => {
-			if(e) console.error(e)
-		})
-	}, 2000)
+	console.log("Close")
 }
 
 setInterval(() => {
 	run()
-}, 1)
+}, 15000)
