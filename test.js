@@ -38,10 +38,13 @@ let run = () => {
 
 	fs.writeFileSync("Auto git.txt", m3, "utf-8")
 	setTimeout(() => {
-		exec("git add .", (e) => {console.error(e)})
+		exec("git add .", (e) => {
+			if(e) console.error(e)
+		})
 	})
 	setTimeout(() => {
-		exec(`git commit -m "${m}"`, (e) => {console.error(e)})
+		exec(`git commit -m "${m}"`, (e) => {
+			if(e)console.error(e)})
 	}, 1000)
 
 	setTimeout(() => {
