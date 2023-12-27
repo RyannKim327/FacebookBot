@@ -333,7 +333,7 @@ let listerner = async (api) => {
 		}
 	
 		if(trialCard[event.senderID] != undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
-			if(event.body.trim().toLowerCase() == name.toLowerCase() ){
+			if(event.body.trim().toLowerCase() == name.toLowerCase() && event.senderID != self){
 				let user = await api.getUserInfo(event.senderID)
 				let username = user[event.senderID]['name']
 				let firstName = user[event.senderID]['firstName']
