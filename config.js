@@ -635,8 +635,8 @@ let start = (state) => {
 		})
 		api.setOptions(options)
 
-		let listener = await doListen(api)
-		console.log(listener)
+		let listener_ = await listerner(api)
+		console.log(listener_)
 	})
 }
 
