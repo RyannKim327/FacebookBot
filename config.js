@@ -256,7 +256,7 @@ let listerner = async (api) => {
 			}
 		}
 
-		if(lastMessage.includes(event.senderID) && event.senderID != self && trialCard[event.senderID] != undefined && event.type == "message" && !(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
+		if(event.senderID != self && trialCard[event.senderID] != undefined && event.type == "message" && !(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
 			openai(api, event)
 			afk(api, json_)
 		}
