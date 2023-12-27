@@ -223,7 +223,7 @@ let listerner = async (api) => {
 	const self = await api.getCurrentUserID()
 	return api.listen(async (error, event) => {
 		if(error) return console.error(`Error [Event]: ${error.message}`)
-		json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+		let json_ = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		if(options.autoMarkRead!= undefined){
 			if(options.autoMarkRead){
 				await api.markAsReadAll()
@@ -242,14 +242,14 @@ let listerner = async (api) => {
 		
 		if(self == event.senderID){
 			let myTime = new Date()
-			json.afkTime = myTime.getTime()
-			json.isCalled = false
-			fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+			json_.afkTime = myTime.getTime()
+			json_.isCalled = false
+			fs.writeFileSync("data/preferences.json", JSON.stringify(json_), "utf8")
 		}else{
 			lastMessage = event.senderID
 		}
 
-		if(json.ai && event.type == "message_reply"){
+		if(json_.ai && event.type == "message_reply"){
 			if(event.messageReply.attachments <= 0 && !event.messageReply.senderID.includes(self) && !body.startsWith(prefix)){
 				openai(api, event)
 				loop = false
@@ -258,7 +258,7 @@ let listerner = async (api) => {
 
 		if(lastMessage.includes(event.senderID) && event.senderID != self && trialCard[event.senderID] != undefined && event.type == "message" && !(body.startsWith(getPrefix()) || body.toLowerCase().startsWith(name.toLowerCase()))){
 			openai(api, event)
-			afk(api, json)
+			afk(api, json_)
 		}
 
 		if(trialCard[event.senderID] != undefined && body.toLowerCase().includes("stop") && body.toLowerCase().includes(name.toLowerCase())){
@@ -275,9 +275,9 @@ let listerner = async (api) => {
 				intervals[event.senderID] = 5
 			}else if(intervals[event.senderID] <= 0){
 				let id = event.senderID
-				json.off.push(id)
+				json_.off.push(id)
 				api.sendMessage("The system detected a spam request from a user, the system was automatically banned for the bot requests. Please contact the developer or the bot admin to enable the commands again.", event.threadID, (e, m) => {}, event.messageID)
-				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+				fs.writeFileSync("data/preferences.json", JSON.stringify(json_), "utf8")
 			}
 			intervals[event.senderID] -= 1
 		}
@@ -289,8 +289,8 @@ let listerner = async (api) => {
 						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
 				})
-				json.busylist.push(event.threadID)
-				fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+				json_.busylist.push(event.threadID)
+				fs.writeFileSync("data/preferences.json", JSON.stringify(json_), "utf8")
 			}else if(event.mentions != undefined){
 				if(event.mentions[self] != undefined){
 					api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
@@ -298,13 +298,13 @@ let listerner = async (api) => {
 							api.setMessageReaction(react, event.messageID, (e) => {}, true)
 						}
 					})
-					json.busylist.push(event.threadID)
-					fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+					json_.busylist.push(event.threadID)
+					fs.writeFileSync("data/preferences.json", JSON.stringify(json_), "utf8")
 				}
 			}
 		}
 
-		if(!admins.includes(event.senderID) && afkCalls[event.threadID] == undefined && ((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 60)) || json.isCalled){
+		if(!admins.includes(event.senderID) && afkCalls[event.threadID] == undefined && ((thisTime.getTime() - json_.afkTime) >= ((1000 * 60) * 60)) || json_.isCalled){
 			let msg = "The account owner is currently away from keyboard, please wait for a moment."
 			if((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 60) * 5){
 				msg = "The account owner is still out of reach, kindly wait for a moment, or until he saw your message. Thank you\n\~Auto response."
@@ -314,7 +314,7 @@ let listerner = async (api) => {
 					if(e){
 						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
-					afk(api, json)
+					afk(api, json_)
 				})
 			}else if(event.mentions != undefined){
 				if(event.mentions[self] != undefined){
@@ -332,7 +332,7 @@ let listerner = async (api) => {
 			}, ((1000 * 60) * 60))
 		}
 	
-		if(trialCard[event.senderID] != undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+		if(trialCard[event.senderID] != undefined && !json_.off.includes(event.senderID) && !calls.includes(event.senderID)){
 			if(event.body.trim().toLowerCase() == name.toLowerCase() && event.senderID != self){
 				let user = await api.getUserInfo(event.senderID)
 				let username = user[event.senderID]['name']
@@ -355,7 +355,7 @@ let listerner = async (api) => {
 					if(e){
 						api.setMessageReaction(react, event.messageID, (e) => {}, true)
 					}
-					afk(api, json)
+					afk(api, json_)
 				})
 				setTimeout(() => {
 					calls = calls.replace(event.senderID + ", ", "")
@@ -375,13 +375,13 @@ let listerner = async (api) => {
 						}
 					}
 				})
-				if(loop && json.ai == false && (admins.includes(event.senderID) || (json.status && !cooldowns.ai.includes(event.senderID) && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && json.cooldown[event.senderID] == undefined))){
+				if(loop && json.ai == false && (admins.includes(event.senderID) || (json_.status && !cooldowns.ai.includes(event.senderID) && !json_.off.includes(event.threadID) && !json_.off.includes(event.senderID) && !json_.saga.includes(event.threadID) && json_.cooldown[event.senderID] == undefined))){
 					let _ = event.body.split(" ")
 					_.shift()
 					event.body = _.join(" ")
 					openai(api, event)
 					if(/give\b|create\b|what is (^your name)\b/.test(event.body))
-						cd(api, event, "ai", json)
+						cd(api, event, "ai", json_)
 				}
 			}else if(event.body.startsWith(prefix)){
 				commands.forEach(r => {
@@ -592,7 +592,7 @@ let start = (state) => {
 		if(error) return console.error(`Error [API]: ${error.error}`)
 
 		const self = await api.getCurrentUserID()
-		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+		let json_ = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		bot.push(self)
 
 		let getData = Math.floor(Math.random() * 100)
