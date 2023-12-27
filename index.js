@@ -505,7 +505,8 @@ config.add("pin", {
 	hints: [
 		"pin"
 	],
-	category: "oneTime"
+	category: "oneTime",
+	allowed: true
 })
 
 config.add("ris", {
@@ -534,7 +535,8 @@ config.add("subs", {
 		"subscribe",
 		"unsubscribe"
 	],
-	category: "oneTime"
+	category: "oneTime",
+	allowed: true
 })
 
 config.add("biblegateway", {
@@ -549,7 +551,8 @@ config.add("biblegateway", {
 		"verse <passage>"
 	],
 	hasArgs: true,
-	category: "theology"
+	category: "theology",
+	allowed: true
 })
 
 config.add("video", {

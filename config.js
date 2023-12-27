@@ -218,6 +218,39 @@ let system = (api, event, r, q, _prefix) => {
 	}
 }
 
+let listerner = async (api) => {
+	const self = await api.getCurrentUserID()
+	return api.listen(async (error, event) => {
+		if(error) return console.error(`Error [Event]: ${error.message}`)
+		json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+		if(options.autoMarkRead!= undefined){
+			if(options.autoMarkRead){
+				await api.markAsReadAll()
+			}
+		}
+		if(msgLists[event.threadID] == undefined){
+			msgLists[event.threadID] = {"":""}
+		}
+		if(event.messageID!= undefined){
+			if(msgLists[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply")){
+				msgLists[event.threadID][event.messageID] = event
+			}
+		}
+		unsent(api, event, msgLists)
+		left(api, event)
+		
+		if(self == event.senderID){
+			let myTime = new Date()
+			json.afkTime = myTime.getTime()
+			json.isCalled = false
+			fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
+		}else{
+			lastMessage = event.senderID
+		}
+		
+	})
+}
+
 let doListen = async (api) => {
 	const self = await api.getCurrentUserID()
 	return api.listen(async (error, event) => {
