@@ -331,8 +331,8 @@ let listerner = async (api) => {
 				afkCalls[event.threadID] = undefined
 			}, ((1000 * 60) * 60))
 		}
-		if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())|| event.body.startsWith(prefix)){
-			if(trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+		if(trialCard[event.senderID] == undefined && !json.off.includes(event.senderID) && !calls.includes(event.senderID)){
+			if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())|| event.body.startsWith(prefix)){
 
 			}
 		}
