@@ -302,6 +302,7 @@ let listerner = async (api) => {
 				}
 			}
 		}
+		
 		if(!admins.includes(event.senderID) && afkCalls[event.threadID] == undefined && ((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 60)) || json.isCalled){
 			let msg = "The account owner is currently away from keyboard, please wait for a moment."
 			if((thisTime.getTime() - json.afkTime) >= ((1000 * 60) * 60) * 5){
