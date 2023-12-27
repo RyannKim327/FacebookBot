@@ -1,4 +1,5 @@
 .autogit
+.git-credentials
 node_modules/*
 *.traineddata
 .env
