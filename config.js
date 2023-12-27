@@ -361,7 +361,6 @@ let listerner = async (api) => {
 					calls = calls.replace(event.senderID + ", ", "")
 				}, ((60 * 1000) * 60))
 			}else if((event.body.toLowerCase().startsWith(name.toLowerCase()) && event.body.trim().toLowerCase() == name.toLowerCase())){
-				// Name
 				commands.forEach(r => {
 					if(r.data.queries != undefined){
 						let que = r.data.queries
