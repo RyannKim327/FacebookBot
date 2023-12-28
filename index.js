@@ -62,8 +62,8 @@ config.add("commit", {
 	title: "Commit message",
     description: "Pinagbabawal na teknik prii",
     commands: [
-        "commit",
-		"commit ([\\w\\W]+)"
+		"commit ([\\w\\W]+)",
+        "commit"
     ],
     hints: [
         "commit",
