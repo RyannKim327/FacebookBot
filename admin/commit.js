@@ -2,7 +2,7 @@ const fs = require("fs")
 const { exec } = require("child_process")
 const date = require("./../utils/date")
 
-let run = async (api, event) => {
+module.exports (api, event) => {
 	const time = date("Asia/Manila")
 	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 	const m2 = [
@@ -42,7 +42,3 @@ let run = async (api, event) => {
 		})
 	})
 }
-
-setInterval(() => {
-	run()
-}, 10000)
