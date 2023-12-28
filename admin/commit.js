@@ -2,9 +2,12 @@ const fs = require("fs")
 const { exec } = require("child_process")
 const date = require("./../utils/date")
 
-module.exports = (api, event) => {
+module.exports = (api, event, regex) => {
 	const time = date("Asia/Manila")
-	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
+	let m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
+	if(event.body.match(regex)[1]){
+		m = event.body.match(regex)[1]
+	}
 	const m2 = [
 		"Sana ako pa rin",
 		"Bakit na mimiss ko pa rin sya",
