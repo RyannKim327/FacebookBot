@@ -20,7 +20,9 @@ module.exports = () => {
 
 		const m3 = m2[Math.floor(Math.random() * m2.length)]
 		fs.writeFileSync("Auto git.txt", m3, "utf-8")
-		
+
+		console.log("Restating")
+
 		setTimeout(() => {
 			console.log("Git add")
 			exec("git add .", (e) => {
@@ -33,6 +35,7 @@ module.exports = () => {
 							console.log("Git push")
 							exec(`git push`, (e) => {
 								if(e) console.error(e)
+								console.log("Close")
 							})
 						}, 2000)
 					})

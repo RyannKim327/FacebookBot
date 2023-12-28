@@ -51,14 +51,13 @@ let run = async () => {
 						console.log("Git push")
 						exec(`git push`, (e) => {
 							if(e) console.error(e)
+							console.log("Close")
 						})
 					}, 2000)
 				})
 			}, 1000)
 		})
 	})
-
-	console.log("Close")
 }
 
 setInterval(() => {
