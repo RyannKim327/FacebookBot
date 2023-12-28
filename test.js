@@ -45,7 +45,7 @@ let run = async () => {
 			if(e) console.error(e)
 			setTimeout(() => {
 				console.log("Git Commit")
-				exec(`git commit -m "${m} [Test mode]"`, (e) => {
+				exec(`git commit -m "${m} [Test repl mode]"`, (e) => {
 					if(e) console.error(e)
 					setTimeout(() => {
 						console.log("Git push")
