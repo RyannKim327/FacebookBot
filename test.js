@@ -39,21 +39,21 @@ let run = async () => {
 	// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
 
 	fs.writeFileSync("Auto git.txt", m3, "utf-8")
-	// setTimeout(() => {
-	// 	exec("git add .", (e) => {
-	// 		if(e) console.error(e)
-	// 	})
-	// })
-	await setTimeout(() => {
-		exec(`git commit -m "${m}"`, (e) => {
+	setTimeout(() => {
+		exec("git add .", (e) => {
 			if(e) console.error(e)
-			// setTimeout(() => {
-			// 	exec(`git push`, (e) => {
-			// 		if(e) console.error(e)
-			// 	})
-			// }, 2000)
+			setTimeout(() => {
+				exec(`git commit -m "${m}"`, (e) => {
+					if(e) console.error(e)
+					setTimeout(() => {
+						exec(`git push`, (e) => {
+							if(e) console.error(e)
+						})
+					}, 2000)
+				})
+			}, 1000)
 		})
-	}, 1000)
+	})
 
 	console.log("Close")
 }
