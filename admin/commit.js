@@ -5,7 +5,7 @@ const date = require("./../utils/date")
 module.exports = (api, event, regex) => {
 	const time = date("Asia/Manila")
 	let m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
-	if(event.body.match(regex)[1] != null){
+	if(event.body.match(regex)[1] != undefined){
 		m = event.body.match(regex)[1]
 	}
 	const m2 = [
