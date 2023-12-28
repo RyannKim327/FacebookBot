@@ -58,6 +58,18 @@ config.add("check", {
 	admin: true
 })
 
+config.add("commit", {
+	title: "Commit message",
+    description: "Pinagbabawal na teknik prii",
+    commands: [
+        "commit"
+    ],
+    hints: [
+        "commit"
+    ],
+    admin: true
+})
+
 config.add("feeds", {
 	title: "Application feedback",
 	description: "For feedbacks and error comming from the app.",
