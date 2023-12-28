@@ -62,10 +62,12 @@ config.add("commit", {
 	title: "Commit message",
     description: "Pinagbabawal na teknik prii",
     commands: [
-        "commit"
+        "commit",
+		"commit ([\\w\\W]+)"
     ],
     hints: [
-        "commit"
+        "commit",
+		"commit <Message>"
     ],
     admin: true
 })
