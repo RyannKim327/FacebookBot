@@ -2,7 +2,7 @@ const fs = require("fs")
 const { exec } = require("child_process")
 const date = require("./../utils/date")
 
-module.exports (api, event) => {
+module.exports = (api, event) => {
 	const time = date("Asia/Manila")
 	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 	const m2 = [
