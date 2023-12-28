@@ -40,5 +40,5 @@ module.exports = (api, event) => {
 				})
 			}, 1000)
 		})
-	})
+	}, 500)
 }
