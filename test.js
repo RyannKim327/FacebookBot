@@ -35,8 +35,8 @@ let run = async () => {
 
 	console.log("Restating")
 
-	exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
-	exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
+	// exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
+	// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
 
 	fs.writeFileSync("Auto git.txt", m3, "utf-8")
 	setTimeout(() => {
@@ -45,7 +45,7 @@ let run = async () => {
 			if(e) console.error(e)
 			setTimeout(() => {
 				console.log("Git Commit")
-				exec(`git commit -m "${m}"`, (e) => {
+				exec(`git commit -m "${m} [Test mode]"`, (e) => {
 					if(e) console.error(e)
 					setTimeout(() => {
 						console.log("Git push")
