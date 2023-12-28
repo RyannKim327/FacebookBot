@@ -44,10 +44,11 @@ let run = async () => {
 		exec("git add .", (e) => {
 			if(e) console.error(e)
 			setTimeout(() => {
-				
+				console.log("Git Commit")
 				exec(`git commit -m "${m}"`, (e) => {
 					if(e) console.error(e)
 					setTimeout(() => {
+						console.log("Git push")
 						exec(`git push`, (e) => {
 							if(e) console.error(e)
 						})
