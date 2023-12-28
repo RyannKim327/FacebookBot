@@ -20,16 +20,25 @@ module.exports = () => {
 
 		const m3 = m2[Math.floor(Math.random() * m2.length)]
 
-		fs.writeFileSync("Auto git.txt", m3, "utf-8")
 		setTimeout(() => {
-			exec("git add .", (e) => {console.error(e)})
+			console.log("Git add")
+			exec("git add .", (e) => {
+				if(e) console.error(e)
+				setTimeout(() => {
+					console.log("Git Commit")
+					exec(`git commit -m "${m}"`, (e) => {
+						if(e) console.error(e)
+						setTimeout(() => {
+							console.log("Git push")
+							exec(`git push`, (e) => {
+								if(e) console.error(e)
+							})
+						}, 2000)
+					})
+				}, 1000)
+			})
 		})
-		setTimeout(() => {
-			exec(`git commit -m "${m}"`, (e) => {console.error(e)})
-		}, 1000)
-		setTimeout(() => {
-			exec(`git push origin main`, (e) => {console.error(e)})
-		}, 2000)
+		
 	}, {
 		scheduled: true,
 		timezone: "Asia/Manila"
