@@ -1,6 +1,6 @@
 const fs = require("fs")
 const { exec } = require("child_process")
-const date = require("./utils/date")
+const date = require("./../utils/date")
 
 let run = async (api, event) => {
 	const time = date("Asia/Manila")
