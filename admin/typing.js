@@ -4,6 +4,7 @@ module.exports = (api, event) => {
 		if(i > 0){
 			await api.sendTypingIndicator(event.threadID, (e) => {
 				console.log(e.message)
+				i--
 			})
 		}
 	})
