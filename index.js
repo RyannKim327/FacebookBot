@@ -240,7 +240,7 @@ config.add("updates", {
 	title: "Application Updates",
 	description: "An updater of app",
 	commands: [
-		"app_update ([\\W\\w]+)$"
+		"app_update ([\\W\\w]+)"
 	],
 	hints: [
 		"app_update <data>"
@@ -605,8 +605,8 @@ config.add("wiki", {
 		"can I have a wiki result of ([\\w\\W]+)"
 	],
 	commands: [
-		"wiki search ([\\w\\W]+)$",
-		"wiki ([\\w\\W]+)$"
+		"wiki search ([\\w\\W]+)",
+		"wiki ([\\w\\W]+)"
 	],
 	hints: [
 		"wiki <query>"
@@ -619,7 +619,7 @@ config.add("word", {
 	title: "Wiki Dictionary",
 	definition: "A wiki based result word informations",
 	commands: [
-		"word ([\\w]+)$"
+		"word ([\\w]+)"
 	],
 	hints: [
 		"word <word>"
