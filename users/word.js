@@ -12,6 +12,7 @@ let whatIs = async (x) => {
 	return o
 }
 module.exports = async (api, event, regex) => {
+	console.log("Word")
 	let word = event.body.match(regex)[1]
 	let info = await whatIs(word)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))

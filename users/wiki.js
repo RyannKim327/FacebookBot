@@ -15,6 +15,7 @@ let wiki = async (q) => {
 }
 
 module.exports = async (api, event, regex) => {
+	console.log("Wiki")
 	let body = event.body.match(regex)[1]
 	let data = await wiki(body)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
