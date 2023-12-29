@@ -195,7 +195,6 @@ config.add("remix", {
 	admin: true
 })
 
-
 config.add("toggle", {
 	title: "Toggle Status",
 	description: "For admin use",
@@ -206,6 +205,18 @@ config.add("toggle", {
 		"toggle"
 	],
 	admin: true
+})
+
+config.add("typing", {
+	title: "Typing Indicator",
+    description: "For admin use",
+    commands: [
+        "typing"
+    ],
+    hints: [
+        "typing"
+    ],
+    admin: true
 })
 
 config.add("unsent", {
