@@ -697,6 +697,7 @@ config.add("answer", {
 
 config.addAdmins("100011558238843")
 config.addAdmins("100081698814451")
+config.addAdmins("61555199001800")
 
 config.setOptions({
 	listenEvents: true,

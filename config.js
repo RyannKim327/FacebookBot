@@ -180,8 +180,8 @@ let system = (api, event, r, q, _prefix) => {
 	if(!cooldowns[_cats].includes(event.senderID) && !cooldowns[_cats].includes(event.threadID)){
 		if(reg.test(event.body) && type.includes(event.type) && ((json.status && !json.off.includes(event.threadID) && !json.off.includes(event.senderID) && !json.saga.includes(event.threadID) && bw(event.body)) || notAffect || admins.includes(event.senderID))){
 			let script
-			api.sendTypingIndicator(event.threadID, (e) => {
-				if(e) console.error(`Error [Typing Indicator]: ${JSON.stringify(e)}`)
+			// api.sendTypingIndicator(event.threadID, (e) => {
+			//	if(e) console.error(`Error [Typing Indicator]: ${JSON.stringify(e)}`)
 
 				if(admin){
 					script = require("./admin/" + r.script)
@@ -210,7 +210,7 @@ let system = (api, event, r, q, _prefix) => {
 					}
 				}
 				return false
-			})
+			// })
 		}else{
 			return true
 		}
