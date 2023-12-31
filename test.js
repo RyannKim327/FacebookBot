@@ -56,6 +56,9 @@ let run = async () => {
 							if(e) console.error(e)
 							console.log("Close")
 							exec("clear", (e) => {})
+							setTimeout(() => {
+								run()
+							}, 2000)
 						})
 					}, 2000)
 				})
@@ -64,6 +67,4 @@ let run = async () => {
 	})
 }
 
-setInterval(() => {
-	run()
-}, 5000)
+run()
