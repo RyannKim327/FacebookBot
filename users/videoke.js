@@ -11,7 +11,8 @@ const gender = require("./../utils/gender")
 
 module.exports = async (api, event) => {
 	const pl = [
-		"PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf"
+		"PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf",
+		"PLHrvPPZnleL5nQZljS4dhfVz5sHWih2C6"
 	]
 	const playlist = pl[Math.floor(Math.random() * pl.length)]
 	let name = `${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`
@@ -21,6 +22,7 @@ module.exports = async (api, event) => {
 	let _music = music.content[Math.floor(Math.random() * music.content.length)]
 	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
+		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 		try{
 			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}_videoke.mp4`)
 			const strm = ytdl(url, {
@@ -39,6 +41,7 @@ module.exports = async (api, event) => {
 								if(err){
 									console.log(err)
 								}
+								api.setMessageReaction("", event.messageID, (e) => {}, true)
 								console.log("Done")
 							})
 						}
