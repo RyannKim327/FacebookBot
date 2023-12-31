@@ -10,7 +10,10 @@ const afk = require("./../utils/afk")
 const gender = require("./../utils/gender")
 
 module.exports = async (api, event) => {
-	const playlist = "PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf"
+	const pl = [
+		"PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf"
+	]
+	const playlist = pl[Math.floor(Math.random() * pl.length)]
 	let name = `${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	await yt.initalize()
@@ -39,7 +42,11 @@ module.exports = async (api, event) => {
 								console.log("Done")
 							})
 						}
-					})
+					}),
+					mentions: [{
+						id: event.senderID,
+						tag: name
+					}]
 				}, event.threadID, (e, m) => {
 					if(e){
 						afk(api, json2)
