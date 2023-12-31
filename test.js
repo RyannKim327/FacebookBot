@@ -28,7 +28,8 @@ let run = async () => {
 		"From valentines, hanggang pasko, na sana pati bagong taon",
 		"Ang cute nya, lalo na pag inis sya saken",
 		"Wala, talaga lang attractive sya saken",
-		"Nugagawen kapag miss ko na sya?"
+		"Nugagawen kapag miss ko na sya?",
+		"Parang malabo na pala, di na ko aasa"
 	]
 
 	const m3 = m2[Math.floor(Math.random() * m2.length)]
