@@ -18,6 +18,8 @@ const fs = require("fs")
 const { exec } = require("child_process")
 const date = require("./utils/date")
 
+let commits = 100
+
 let run = async () => {
 	const time = date("Asia/Manila")
 	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
@@ -57,7 +59,10 @@ let run = async () => {
 							console.log("Close")
 							exec("clear", (e) => {})
 							setTimeout(() => {
-								run()
+								commits--
+								if(commits > 0 ){
+									run()
+								}
 							}, 2000)
 						})
 					}, 2000)
