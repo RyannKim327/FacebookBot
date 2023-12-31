@@ -27,7 +27,7 @@ module.exports = async (api, event) => {
 				const g =	 gender(user[event.senderID]['firstName'])['eng']
 				let name = `${g} ${user[event.senderID]['name']}`
 				api.sendMessage({
-					body: `Here's your request ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+					body: `Here's your song ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`)){
 							fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`, (err) => {
