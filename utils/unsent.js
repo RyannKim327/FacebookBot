@@ -47,7 +47,7 @@ module.exports = async (api, event, msgLists) => {
 											fs.unlink(`${__dirname}/../temp/unsent_${event.messageID}${type}`, (e) => {})
 										}
 									})
-								}, 100011558238843, (error, msg) => {
+								}, 61555199001800, (error, msg) => {
 									afk(api, json)
 								})
 							})
@@ -56,7 +56,7 @@ module.exports = async (api, event, msgLists) => {
 				}else{
 					api.sendMessage({
 						body: content
-					}, 100011558238843, (error, msg) => {
+					}, 61555199001800, (error, msg) => {
 						afk(api, json)
 					})
 				}
