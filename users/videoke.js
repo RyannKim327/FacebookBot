@@ -1,11 +1,13 @@
 const YoutubeMusicApi = require("youtube-music-api")
 const yt = new YoutubeMusicApi()
-const http = require("https")
 const fs = require("fs")
 const ytdl = require("ytdl-core")
 const ffmpeg = require("@ffmpeg-installer/ffmpeg")
 const ffmpegs = require("fluent-ffmpeg")
 ffmpegs.setFfmpegPath(ffmpeg.path)
+
+const afk = require("./../utils/afk")
+const gender = require("./../utils/gender")
 
 module.exports = async (api, event) => {
 	const playlist = "PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf"
