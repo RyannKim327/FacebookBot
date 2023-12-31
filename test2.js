@@ -1,29 +1,14 @@
-// const time = require("./utils/date")
+const youtube = require("youtube-music-api")
+const yt = new youtube()
 
-// console.log(time("Asia/Manila").getFullYear() - 1)
-
-// let data = [
-//     {
-//         title: "Test",
-//         allowed: true
-//     },{
-//         title: "Test2",
-//         allowed: false
-//     }, {
-//         title: "Test3",
-//         allowed: true
-//     }
-// ]
-// for(let i in data){
-//     if(data[i].allowed){
-//         console.log(data[i].title)
-//     }
-// }
-
-let data = /commit/
-const msg = "commit test"
-if(msg.match(data)){
-    console.log(msg.match(data)[1])
+let run = async () => {
+    console.log("Test")
+    const playlist = "PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf"
+    await yt.initalize()
+    const list = await yt.getPlaylist(playlist)
+    const musics = list.content
+    const music = musics[Math.floor(Math.random() * musics.length)]
+    const url = `https://www.youtube.com/watch?v=${music.videoId}`
+    console.log(url)
 }
-
-console.log("Executed")
+run()
