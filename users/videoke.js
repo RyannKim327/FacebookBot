@@ -10,12 +10,24 @@ const afk = require("./../utils/afk")
 const gender = require("./../utils/gender")
 
 module.exports = async (api, event) => {
-	const playlist = "PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf"
+	const playlists = [
+		"PLI3KQeEwuu89pAYq9wl4izyZ-9b1Njsog",
+		"PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf",
+		"PLpL27IibkE6v1WHG-WrbskY-fFHdTK0sH",
+		"PLUfc10pMf7KRU0sFsv8d8m8APdkE9cuE2"
+	]
+	const playlist = playlists[Math.floor(Math.random() * playlists.length)]
 	let name = `${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	await yt.initalize()
 	let music = await yt.getPlaylist(playlist)
 	let _music = music.content[Math.floor(Math.random() * music.content.length)]
+	while(_music.videoId == undefined){
+		_music = music.content[Math.floor(Math.random() * music.content.length)]
+	}
+	while(_music.videoId == null){
+		_music = music.content[Math.floor(Math.random() * music.content.length)]
+	}
 	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
 		try{
@@ -29,7 +41,7 @@ module.exports = async (api, event) => {
 				const g =	 gender(user[event.senderID]['firstName'])['eng']
 				let name = `${g} ${user[event.senderID]['name']}`
 				api.sendMessage({
-					body: `Here's your song ${name}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}`,
+					body: `Here's your song ${name}:\nTitle: ${info.videoDetails.title}\nGalingan mo sa pagkanta. ENJOY!!!`,
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`)){
 							fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`, (err) => {
