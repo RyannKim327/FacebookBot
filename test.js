@@ -45,13 +45,14 @@ let run = async () => {
 			if(e) console.error(e)
 			setTimeout(() => {
 				console.log("Git Commit")
-				exec(`git commit -m "${m} [Test repl mode]"`, (e) => {
+				exec(`git commit -m "${m} [User mode]"`, (e) => {
 					if(e) console.error(e)
 					setTimeout(() => {
 						console.log("Git push")
 						exec(`git push`, (e) => {
 							if(e) console.error(e)
 							console.log("Close")
+							exec("clear", (e) => {})
 						})
 					}, 2000)
 				})
