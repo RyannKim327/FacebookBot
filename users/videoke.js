@@ -17,6 +17,7 @@ module.exports = async (api, event) => {
 		"PLUfc10pMf7KRU0sFsv8d8m8APdkE9cuE2"
 	]
 	const playlist = playlists[Math.floor(Math.random() * playlists.length)]
+	console.log(playlist)
 	let name = `${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`
 	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	await yt.initalize()
