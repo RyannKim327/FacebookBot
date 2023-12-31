@@ -29,7 +29,8 @@ let run = async () => {
 		"Ang cute nya, lalo na pag inis sya saken",
 		"Wala, talaga lang attractive sya saken",
 		"Nugagawen kapag miss ko na sya?",
-		"Parang malabo na pala, di na ko aasa"
+		"Parang malabo na pala, di na ko aasa",
+		"Mahirap lang isipin, pero tanggap ko."
 	]
 
 	const m3 = m2[Math.floor(Math.random() * m2.length)]
