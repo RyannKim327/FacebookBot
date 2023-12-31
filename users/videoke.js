@@ -9,30 +9,43 @@ ffmpegs.setFfmpegPath(ffmpeg.path)
 
 module.exports = async (api, event) => {
 	const playlist = "PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf"
-	let filename = `${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`
-	const list = await yt.getPlaylist(playlist)
-	console.log(list)
-	const musics = list.content
-	const music = musics[Math.floor(Math.random() * musics.length)]
-	const url = `https://www.youtube.com/watch?v=${music.videoId}`
-	if(!fs.existsSync(filename)){
+	let name = `${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`
+	let json2 = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
+	await yt.initalize()
+	let music = await yt.getPlaylist(playlist)
+	let _music = music.content[Math.floor(Math.random() * music.content.length)]
+	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
+	if(!fs.existsSync(name)){
 		try{
-			const file = `temp/${event.threadID}_${event.senderID}_videoke.mp4`
-			const stream = ytdl(url, {
+			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}_videoke.mp4`)
+			const strm = ytdl(url, {
 				quality: "lowest"
 			})
-			ffmpegs(stream).audioBitrate(96).save(filename).on("end", async () => {
+			const info = await ytdl.getInfo(url)
+			ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`).on("end", async () => {
+				let user = await api.getUserInfo(event.senderID)
+				const g =	 gender(user[event.senderID]['firstName'])['eng']
+				let name = `${g} ${user[event.senderID]['name']}`
 				api.sendMessage({
-					body: "Its your time to shine, kanta mo na to!",
-					attachment: fs.createReadStream(filename).on("end", async () => {
-						if(fs.existsSync(filename)){
-							fs.unlink(filename, (err) => {})
+					body: `Here's your request ${name}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}`,
+					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`).on("end", async () => {
+						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`)){
+							fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`, (err) => {
+								if(err){
+									console.log(err)
+								}
+								console.log("Done")
+							})
 						}
 					})
-				}, event.threadID, (e, m) => {})
+				}, event.threadID, (e, m) => {
+					if(e){
+						afk(api, json2)
+					}
+				})
 			})
-		}catch(err) {
-			api.sendMessage(`Error: ${err.message}`, event.threadID, (e, m) => {})
+		}catch(err){
+			console.log(err)
 		}
 	}
 }
