@@ -66,4 +66,4 @@ let run = async () => {
 
 setInterval(() => {
 	run()
-}, 10000)
+}, 5000)
