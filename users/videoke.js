@@ -21,12 +21,12 @@ module.exports = async (api, event) => {
 			const stream = ytdl(url, {
 				quality: "lowest"
 			})
-			ffmpegs(stream).audioBitrate(48).save(filename).on("end", async () => {
+			ffmpegs(stream).audioBitrate(96).save(filename).on("end", async () => {
 				api.sendMessage({
 					body: "Its your time to shine, kanta mo na to!",
 					attachment: fs.createReadStream(filename).on("end", async () => {
 						if(fs.existsSync(filename)){
-							fs.unlinkSync(filename, (err) => {})
+							fs.unlink(filename, (err) => {})
 						}
 					})
 				}, event.threadID, (e, m) => {})
