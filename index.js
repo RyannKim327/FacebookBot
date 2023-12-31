@@ -580,6 +580,18 @@ config.add("biblegateway", {
 	allowed: true
 })
 
+config.add("videoke", {
+	title: "Videoke Command",
+	description: "A random videoke song",
+	commands: [
+		"videoke"
+	],
+	hints: [
+		"videoke"
+	],
+	category: "multimedia"
+})
+
 config.add("video", {
 	title: "Youtube Video Command",
 	description: "This will send the top search result video from youtube platform. Sometimes, this feature has error, due to the limit of facebook messenger that can only sent upto 25mb.",

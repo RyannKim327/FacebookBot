@@ -6,7 +6,7 @@ const ffmpeg = require("@ffmpeg-installer/ffmpeg")
 const ffmpegs = require("fluent-ffmpeg")
 ffmpegs.setFfmpegPath(ffmpeg.path)
 
-module.exports = async (api, event, regex) => {
+module.exports = async (api, event) => {
 	const playlist = "PLWzl3AM4OHkxyqK9-BEKefHMSRzwEs3Bf"
 	let filename = `${__dirname}/../temp/${event.threadID}_${event.senderID}_videoke.mp4`
 	const yt = new youtube()
