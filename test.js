@@ -202,6 +202,8 @@ let run = async () => {
 									commits--
 									if(commits > 0 ){
 										run()
+									}else{
+										console.log("End")
 									}
 								}, 2000)
 							})
