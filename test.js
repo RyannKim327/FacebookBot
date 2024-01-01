@@ -150,55 +150,61 @@ let run = async () => {
 		"How can I find the longest common substring of two strings in javascript?"
 	]	
 	const m3 = m2[Math.floor(Math.random() * m2.length)]
-	let { data } = await axios.get(`https://hercai.onrender.com/v3-beta/hercai?question=${m3}`)
+	try{
+		let { data } = await axios.get(`https://hercai.onrender.com/v3-beta/hercai?question=${m3}`)
 
-	let datas = data.reply.split("\n")
-	let result = ""
-	let active = false
+		let datas = data.reply.split("\n")
+		let result = ""
+		let active = false
 
-	for(let i = 0; i < datas.length; i++){
-		if(datas[i].toLowerCase().startsWith("``` javascript")){
-			active = !active
-		}else if(datas[i].startsWith("```")){
-			active = !active
+		for(let i = 0; i < datas.length; i++){
+			if(datas[i].toLowerCase().startsWith("``` javascript")){
+				active = !active
+			}else if(datas[i].startsWith("```")){
+				active = !active
+			}
+			if(active && !datas[i].startsWith("```")){
+				result += datas[i] + "\n"
+			}
 		}
-		if(active && !datas[i].startsWith("```")){
-			result += datas[i] + "\n"
-		}
-	}
 
 
-	// exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
-	// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
+		// exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
+		// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
 
-	fs.writeFileSync("autogit.js", result, "utf-8")
-	setTimeout(() => {
-		console.log("Git add")
-		exec("git add .", (e) => {
-			if(e) console.error(e)
-			setTimeout(() => {
-				console.log("Git Commit")
-				exec(`git commit -m "${m} [User mode]"`, (e) => {
-					if(e) console.error(e)
-					setTimeout(() => {
-						console.log("Git push")
-						exec(`git push`, (e) => {
-							if(e) console.error(e)
-							console.log("Close")
-							exec("clear", (e) => {})
-							setTimeout(() => {
-								_commitments++
-								commits--
-								if(commits > 0 ){
-									run()
-								}
-							}, 2000)
-						})
-					}, 2000)
-				})
-			}, 1000)
+		fs.writeFileSync("autogit.js", result, "utf-8")
+		setTimeout(() => {
+			console.log("Git add")
+			exec("git add .", (e) => {
+				if(e) console.error(e)
+				setTimeout(() => {
+					console.log("Git Commit")
+					exec(`git commit -m "${m} [User mode]"`, (e) => {
+						if(e) console.error(e)
+						setTimeout(() => {
+							console.log("Git push")
+							exec(`git push`, (e) => {
+								if(e) console.error(e)
+								console.log("Close")
+								exec("clear", (e) => {})
+								setTimeout(() => {
+									_commitments++
+									commits--
+									if(commits > 0 ){
+										run()
+									}
+								}, 2000)
+							})
+						}, 2000)
+					})
+				}, 1000)
+			})
 		})
-	})
+	}catch(e){
+		setTimeout(() => {
+			run()
+		}, 5000)
+	}
 }
 
 run()
