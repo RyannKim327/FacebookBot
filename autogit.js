@@ -1,10 +1,7 @@
-const axios = require('axios');
-const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+const cron = require('node-cron');
 
-axios.get(apiUrl)
-  .then(response => {
-    console.log('Response:', response.data);
-  })
-  .catch(error => {
-    console.log('Error:', error);
-  });
+// Schedule a task to run every minute
+cron.schedule('* * * * *', () => {
+  console.log('Running cron job');
+  // Add your code here to perform the desired task
+});
