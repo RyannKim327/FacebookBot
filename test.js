@@ -197,7 +197,6 @@ let run = async () => {
 							exec(`git push`, (e) => {
 								if(e) console.error(e)
 								console.log("Close")
-								exec("clear", (e) => {})
 								setTimeout(() => {
 									_commitments++
 									commits--
@@ -212,9 +211,10 @@ let run = async () => {
 			})
 		})
 	}catch(e){
-		setTimeout(() => {
-			run()
-		}, 5000)
+		// setTimeout(() => {
+		// 	run()
+		// }, 5000)
+		console.error(e)
 	}
 }
 

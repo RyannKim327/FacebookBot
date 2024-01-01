@@ -1,28 +1,15 @@
-async function fetchData(url) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-    return null;
+const stringWithVowels = "Hello, World!";
+const stringWithoutVowels = stringWithVowels.replace(/[aeiou]/gi, "");
+console.log(stringWithoutVowels);
+const stringWithVowels = "Hello, World!";
+let stringWithoutVowels = "";
+for (let i = 0; i < stringWithVowels.length; i++) {
+  const letter = stringWithVowels[i].toLowerCase();
+  if (letter !== "a" && letter !== "e" && letter !== "i" && letter !== "o" && letter !== "u") {
+    stringWithoutVowels += stringWithVowels[i];
   }
 }
-
-async function connectAsyncTask() {
-  const url = 'https://api.example.com/data'; // Replace with your API endpoint
-  
-  const data = await fetchData(url);
-  
-  // Do something with the fetched data
-  if (data) {
-    console.log('Fetched data:', data);
-    // Process the data
-  } else {
-    console.log('Failed to fetch data');
-    // Handle the error
-  }
-}
-
-// Trigger the async task
-connectAsyncTask();
+console.log(stringWithoutVowels);
+const stringWithVowels = "Hello, World!";
+const stringWithoutVowels = Array.from(stringWithVowels).filter(letter => !"aeiouAEIOU".includes(letter)).join("");
+console.log(stringWithoutVowels);
