@@ -1,44 +1,60 @@
-class ListNode {
-  constructor(val, next = null) {
-    this.val = val;
-    this.next = next;
-  }
+function bmhSearch(text, pattern) {
+  // ...
 }
+function bmhSearch(text, pattern) {
+  const textLength = text.length;
+  const patternLength = pattern.length;
 
-function isPalindrome(arr) {
-  let left = 0;
-  let right = arr.length - 1;
+  // Create a `badMatchTable` to store the number of characters to shift
+  // when a mismatch occurs in the pattern.
+  const badMatchTable = {};
 
-  while (left < right) {
-    if (arr[left] !== arr[right]) {
-      return false;
+  // Initialize `shift` to the length of the pattern.
+  let shift = patternLength;
+
+  // Populate `badMatchTable` with the shift values for each character in the pattern.
+  for (let i = 0; i < patternLength - 1; i++) {
+    badMatchTable[pattern[i]] = shift - i - 1;
+  }
+  // ...
+}
+function bmhSearch(text, pattern) {
+  const textLength = text.length;
+  const patternLength = pattern.length;
+  const badMatchTable = {};
+  let shift = patternLength;
+  
+  for (let i = 0; i < patternLength - 1; i++) {
+    badMatchTable[pattern[i]] = shift - i - 1;
+  }
+  
+  const matches = [];
+
+  let index = 0;
+  while (index <= textLength - patternLength) {
+    let patternIndex = patternLength - 1;
+
+    // Match pattern from right to left
+    while (patternIndex >= 0 && pattern[patternIndex] === text[patternIndex + index]) {
+      patternIndex--;
     }
 
-    left++;
-    right--;
+    if (patternIndex === -1) {
+      matches.push(index); // Found a match at current index
+      shift = patternLength; // Shift by the length of the pattern
+    } else {
+      // Look up the shift value in `badMatchTable` for the mismatched character
+      const badMatchShift = badMatchTable[text[index + patternLength - 1]] || patternLength;
+      shift = badMatchShift;
+    }
+
+    index += shift; // Shift the index by the computed value
   }
-
-  return true;
+  
+  return matches;
 }
+const text = "ABAAABCDABCDEF";
+const pattern = "ABC";
 
-function isLinkedListPalindrome(head) {
-  let node = head;
-  const values = [];
-
-  while (node) {
-    values.push(node.val);
-    node = node.next;
-  }
-
-  return isPalindrome(values);
-}
-
-// Example usage:
-// Create a linked list: 1 -> 2 -> 3 -> 2 -> 1
-const list = new ListNode(1);
-list.next = new ListNode(2);
-list.next.next = new ListNode(3);
-list.next.next.next = new ListNode(2);
-list.next.next.next.next = new ListNode(1);
-
-console.log(isLinkedListPalindrome(list)); // true
+console.log(bmhSearch(text, pattern));
+// Output: [2, 7]

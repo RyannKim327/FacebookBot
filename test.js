@@ -200,9 +200,9 @@ let run = async () => {
 									commits--
 									if(commits > 0 ){
 										run()
-									}else{
-										console.log("Thank you for spamming hahaha")
-										process.exit(0)
+									// }else{
+									// 	console.log("Thank you for spamming hahaha")
+									// 	process.exit(0)
 									}
 								}, 2000)
 							})
