@@ -53,7 +53,7 @@ let run = async () => {
 	let active = false
 
 	for(let i = 0; i < datas.length; i++){
-		if(datas[i].startsWith("```javascript")){
+		if(datas[i].startsWith("``` javascript") || datas[i].startsWith("```javascript") || datas[i].startsWith("``` Javascript") || datas[i].startsWith("```Javascript")){
 			active = !active
 		}
 		if(active && datas[i].startsWith("```")){
