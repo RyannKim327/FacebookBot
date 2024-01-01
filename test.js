@@ -18,8 +18,16 @@ const fs = require("fs")
 const { exec } = require("child_process")
 const date = require("./utils/date")
 const axios = require("axios")
+const readline = require("readline")
 
-let commits = 10
+const rd = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+})
+
+let commits = rd.question("How many commits do you want? ", com => {
+	return com
+})
 let _commitments = 1
 
 let run = async () => {
