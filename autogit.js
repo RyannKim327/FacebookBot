@@ -1,61 +1,16 @@
-class SkipList {
-  constructor() {
-    this.head = {
-      value: -Infinity,
-      next: null,
-    };
-    this.maxLevel = 1;
+function findKthSmallestElement(arr, k) {
+  if (k < 1 || k > arr.length) {
+    return null;
   }
 
-  // other methods will be added here
+  // Sort the array in non-decreasing order
+  arr.sort((a, b) => a - b);
+
+  // Return the kth smallest element
+  return arr[k - 1];
 }
-class Node {
-  constructor(value, level) {
-    this.value = value;
-    this.next = new Array(level).fill(null);
-  }
-}
-class SkipList {
-  // ...
+const array = [7, 2, 1, 6, 8, 5, 3];
+const k = 4;
 
-  insert(value) {
-    const level = this.getRandomLevel(); // generate level for new node
-    const newNode = new Node(value, level);
-
-    while (this.maxLevel < level) {
-      // update maximum level if necessary
-      this.maxLevel++;
-    }
-
-    let currentLevel = this.maxLevel - 1;
-    let currentNode = this.head;
-
-    while (currentLevel >= 0) {
-      if (
-        !currentNode.next[currentLevel] ||
-        currentNode.next[currentLevel].value > value
-      ) {
-        // insert new node at this level
-        if (currentLevel < level) {
-          newNode.next[currentLevel] = currentNode.next[currentLevel]; // update references
-          currentNode.next[currentLevel] = newNode;
-        }
-
-        currentLevel--; // move to the next level down
-      } else {
-        // move forward on this level
-        currentNode = currentNode.next[currentLevel];
-      }
-    }
-  }
-
-  getRandomLevel() {
-    let level = 1;
-    while (Math.random() < 0.5 && level < this.maxLevel) {
-      level++;
-    }
-    return level;
-  }
-
-  // other methods will be added here
-}
+const kthSmallestElement = findKthSmallestElement(array, k);
+console.log(`The ${k}th smallest element is: ${kthSmallestElement}`);
