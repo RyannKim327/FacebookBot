@@ -23,6 +23,9 @@ let commits = 10
 let _commitments = 1
 
 let run = async () => {
+
+	console.log(`-----${}-----`)
+
 	const time = date("Asia/Manila")
 	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 	// const m2 = [
