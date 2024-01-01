@@ -1,46 +1,27 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}
+// Function to perform Burrows-Wheeler Transform (BWT)
+function burrowsWheelerTransform(input) {
+  // Append end of text marker
+  let text = input + "$";
 
-function reverseLinkedList(head) {
-  let prev = null;
-  let current = head;
-  let next = null;
-
-  while (current !== null) {
-    next = current.next;
-    current.next = prev;
-    prev = current;
-    current = next;
+  // Generate all rotations of the input string
+  let rotations = [];
+  for (let i = 0; i < text.length; i++) {
+    rotations.push(text.slice(i) + text.slice(0, i));
   }
 
-  return prev;
+  // Sort the rotations lexicographically
+  rotations.sort();
+
+  // Get the last characters of each rotation
+  let transformed = "";
+  for (let i = 0; i < rotations.length; i++) {
+    transformed += rotations[i].charAt(rotations[i].length - 1);
+  }
+
+  return transformed;
 }
 
-// Example usage:
-const node1 = new Node(1);
-const node2 = new Node(2);
-const node3 = new Node(3);
-const node4 = new Node(4);
-
-node1.next = node2;
-node2.next = node3;
-node3.next = node4;
-
-console.log("Original linked list:");
-let current = node1;
-while (current !== null) {
-  console.log(current.value);
-  current = current.next;
-}
-
-const reversed = reverseLinkedList(node1);
-console.log("Reversed linked list:");
-current = reversed;
-while (current !== null) {
-  console.log(current.value);
-  current = current.next;
-}
+// Example usage
+let input = "banana";
+let transformed = burrowsWheelerTransform(input);
+console.log(transformed);  // Outputs: anbn$aa
