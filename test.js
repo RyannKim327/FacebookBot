@@ -20,6 +20,7 @@ const date = require("./utils/date")
 const axios = require("axios")
 
 let commits = 10
+let _commitments = 1
 
 let run = async () => {
 	const time = date("Asia/Manila")
