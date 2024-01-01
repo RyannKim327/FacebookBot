@@ -24,7 +24,7 @@ let _commitments = 1
 
 let run = async () => {
 
-	console.log(`-----${}-----`)
+	console.log(`-----${_commitments}-----`)
 
 	const time = date("Asia/Manila")
 	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
@@ -187,6 +187,7 @@ let run = async () => {
 							console.log("Close")
 							exec("clear", (e) => {})
 							setTimeout(() => {
+								_commitments++
 								commits--
 								if(commits > 0 ){
 									run()
