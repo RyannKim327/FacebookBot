@@ -1,60 +1,21 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.neighbors = [];
-  }
-}
-function bidirectionalSearch(startNode, targetNode) {
-  const forwardQueue = [startNode];
-  const backwardQueue = [targetNode];
-}
-function bidirectionalSearch(startNode, targetNode) {
-  const forwardVisited = new Set();
-  const backwardVisited = new Set();
-}
-function bidirectionalSearch(startNode, targetNode) {
-  const forwardVisited = new Set();
-  const backwardVisited = new Set();
+const cron = require('node-cron');
 
-  forwardVisited.add(startNode);
-  backwardVisited.add(targetNode);
+// Schedule a task to run every 10 seconds
+cron.schedule('*/10 * * * * *', () => {
+  console.log('Task executed!');
+});
 
-  while (forwardQueue.length && backwardQueue.length) {
-    // Code for expanding nodes and checking for intersections
-  }
+// Schedule a task to run every day at 3:00 PM
+cron.schedule('0 15 * * *', () => {
+  console.log('Task executed at 3:00 PM!');
+});
 
-  return undefined; // No path found
-}
-while (forwardQueue.length && backwardQueue.length) {
-  const forwardNode = forwardQueue.shift();
+// Schedule a task to run every Monday at 9:30 AM
+cron.schedule('30 9 * * 1', () => {
+  console.log('Task executed on Monday at 9:30 AM!');
+});
 
-  for (const neighbor of forwardNode.neighbors) {
-    if (!forwardVisited.has(neighbor)) {
-      forwardVisited.add(neighbor);
-      forwardQueue.push(neighbor);
-
-      if (backwardVisited.has(neighbor)) {
-        // Intersection found, path exists
-        return neighbor;
-      }
-    }
-  }
-}
-while (forwardQueue.length && backwardQueue.length) {
-  // ...
-
-  const backwardNode = backwardQueue.shift();
-
-  for (const neighbor of backwardNode.neighbors) {
-    if (!backwardVisited.has(neighbor)) {
-      backwardVisited.add(neighbor);
-      backwardQueue.push(neighbor);
-
-      if (forwardVisited.has(neighbor)) {
-        // Intersection found, path exists
-        return neighbor;
-      }
-    }
-  }
-}
-return undefined; // No path found
+// Schedule a task to run every last day of the month at 11:59 PM
+cron.schedule('59 23 28-31 * *', () => {
+  console.log('Task executed on the last day of the month at 11:59 PM!');
+});
