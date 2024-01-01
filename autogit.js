@@ -1,29 +1,61 @@
-const prime = 101;
-
-function hash(str) {
-  let hashValue = 0;
-  for (let i = 0; i < str.length; i++) {
-    hashValue = (hashValue * prime + str.charCodeAt(i)) % prime;
+class SkipList {
+  constructor() {
+    this.head = {
+      value: -Infinity,
+      next: null,
+    };
+    this.maxLevel = 1;
   }
-  return hashValue;
+
+  // other methods will be added here
 }
-function rabinKarp(pattern, text) {
-  const patternHash = hash(pattern);
-  const patternLength = pattern.length;
-  const textLength = text.length;
+class Node {
+  constructor(value, level) {
+    this.value = value;
+    this.next = new Array(level).fill(null);
+  }
+}
+class SkipList {
+  // ...
 
-  for (let i = 0; i <= textLength - patternLength; i++) {
-    const substring = text.substring(i, i + patternLength);
-    const substringHash = hash(substring);
+  insert(value) {
+    const level = this.getRandomLevel(); // generate level for new node
+    const newNode = new Node(value, level);
 
-    if (substringHash === patternHash && substring === pattern) {
-      return i; // Return the index at which the pattern is found.
+    while (this.maxLevel < level) {
+      // update maximum level if necessary
+      this.maxLevel++;
+    }
+
+    let currentLevel = this.maxLevel - 1;
+    let currentNode = this.head;
+
+    while (currentLevel >= 0) {
+      if (
+        !currentNode.next[currentLevel] ||
+        currentNode.next[currentLevel].value > value
+      ) {
+        // insert new node at this level
+        if (currentLevel < level) {
+          newNode.next[currentLevel] = currentNode.next[currentLevel]; // update references
+          currentNode.next[currentLevel] = newNode;
+        }
+
+        currentLevel--; // move to the next level down
+      } else {
+        // move forward on this level
+        currentNode = currentNode.next[currentLevel];
+      }
     }
   }
 
-  return -1; // Return -1 if the pattern is not found.
-}
-const text = 'The quick brown fox jumps over the lazy dog';
-const pattern = 'fox';
+  getRandomLevel() {
+    let level = 1;
+    while (Math.random() < 0.5 && level < this.maxLevel) {
+      level++;
+    }
+    return level;
+  }
 
-console.log(rabinKarp(pattern, text));  // Output: 16
+  // other methods will be added here
+}
