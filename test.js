@@ -25,9 +25,9 @@ const rd = readline.createInterface({
 	output: process.stdout
 })
 
-let commits = rd.question("How many commits do you want? ", com => {
+let commits = parseInt(rd.question("How many commits do you want? ", com => {
 	return com
-})
+}))
 
 let _commitments = 1
 
