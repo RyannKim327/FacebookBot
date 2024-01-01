@@ -25,9 +25,12 @@ const rd = readline.createInterface({
 	output: process.stdout
 })
 
-let commits = rd.question("How many commits do you want? ", com => {
-	return com
-})
+// let commits = rd.question("How many commits do you want? ", com => {
+// 	return com
+// })
+
+let commits = 1
+
 let _commitments = 1
 
 let run = async () => {

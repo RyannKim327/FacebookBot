@@ -1,17 +1,28 @@
-function binarySearch(arr, target, start = 0, end = arr.length - 1) {
-    if (start > end) {
-        return -1;
-    }
-
-    const middle = Math.floor((start + end) / 2);
-
-    if (arr[middle] === target) {
-        return middle;
-    }
-
-    if (arr[middle] > target) {
-        return binarySearch(arr, target, start, middle - 1);
-    }
-
-    return binarySearch(arr, target, middle + 1, end);
+async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
 }
+
+async function connectAsyncTask() {
+  const url = 'https://api.example.com/data'; // Replace with your API endpoint
+  
+  const data = await fetchData(url);
+  
+  // Do something with the fetched data
+  if (data) {
+    console.log('Fetched data:', data);
+    // Process the data
+  } else {
+    console.log('Failed to fetch data');
+    // Handle the error
+  }
+}
+
+// Trigger the async task
+connectAsyncTask();
