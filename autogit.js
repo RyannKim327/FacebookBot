@@ -1,37 +1,41 @@
-const k = 5; // initial beam size
-let beam = new Array(k).fill('');
-function score(candidate) {
-  // Calculate the score for the candidate
-  // Return a numeric score
-}
-let candidates = ['candidate1', 'candidate2', 'candidate3'];
+function boyerMooreHorspool(text, pattern) {
+  var m = pattern.length;
+  var n = text.length;
 
-for (let i = 0; i < candidates.length; i++) {
-  beam[i] = candidates[i];
-}
-const levels = 10; // number of levels to search
+  if (m > n) {
+    return -1; // pattern is longer than the text, no match possible
+  }
 
-for (let level = 0; level < levels; level++) {
-  let newBeam = new Array(k).fill('');
-  
-  for (let i = 0; i < k; i++) {
-    let candidate = beam[i];
-	
-    // Generate new candidates based on the current candidate
-    let newCandidates = generateCandidates(candidate);
-	
-    for (let j = 0; j < newCandidates.length; j++) {
-      let newCandidate = newCandidates[j];
-      let newScore = score(newCandidate);
-	  
-      if (newScore > score(newBeam[k - 1])) {
-        // Replace the worst candidate in the beam with the new candidate
-        newBeam[k - 1] = newCandidate;
-        newBeam.sort((a, b) => score(b) - score(a)); // Sort the beam by score
-      }
+  // Preprocessing
+  var skip = new Array(256).fill(m);
+  for (var i = 0; i < m - 1; i++) {
+    skip[pattern[i].charCodeAt()] = m - i - 1;
+  }
+
+  // Searching
+  var i = 0;
+  while (i <= n - m) {
+    var j = m - 1;
+    while (j >= 0 && pattern[j] === text[i + j]) {
+      j--;
+    }
+    if (j < 0) {
+      return i; // pattern found
+    } else {
+      i += skip[text[i + m].charCodeAt()];
     }
   }
-  
-  beam = newBeam;
+
+  return -1; // pattern not found
 }
-console.log(beam[0]);
+
+// Example usage
+var text = "Hello World";
+var pattern = "World";
+
+var index = boyerMooreHorspool(text, pattern);
+if (index !== -1) {
+  console.log("Pattern found at index", index);
+} else {
+  console.log("Pattern not found");
+}
