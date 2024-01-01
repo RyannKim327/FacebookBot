@@ -1,21 +1,22 @@
-const cron = require('node-cron');
+// Import axios library
+const axios = require('axios');
 
-// Schedule a cron job to run every 1 minute
-const task = cron.schedule('* * * * *', () => {
-  console.log('This task runs every minute');
-});
+// Define the endpoint URL
+const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
 
-// Schedule a cron job to run every weekday at 9:00 AM
-const morningTask = cron.schedule('0 9 * * 1-5', () => {
-  console.log('Good morning!');
-}, {
-  scheduled: true,
-  timezone: 'America/New_York'
-});
+// Define an async function to make the API request
+async function fetchData() {
+  try {
+    // Send a GET request to the API endpoint
+    const response = await axios.get(apiUrl);
+    
+    // Log the response data to the console
+    console.log(response.data);
+  } catch (error) {
+    // Handle any errors that occur during the request
+    console.error('Error:', error.message);
+  }
+}
 
-// Stop the first task after 5 minutes
-setTimeout(() => {
-  task.stop();
-  console.log('Task has been stopped');
-}, 5 * 60 * 1000);
-npm install node-cron
+// Call the fetchData function to make the API request
+fetchData();
