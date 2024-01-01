@@ -20,23 +20,18 @@ const date = require("./utils/date")
 const axios = require("axios")
 const readline = require("readline")
 
-// const rd = readline.createInterface({
-// 	input: process.stdin,
-// 	output: process.stdout
-// })
+const rd = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+})
 
-// let commits = rd.question("How many commits do you want? ", com => {
-// 	return com
-// })
-
-let commits = 1
+let commits = rd.question("How many commits do you want? ", com => {
+	return com
+})
 
 let _commitments = 1
 
 let run = async () => {
-
-	console.log(`-----${_commitments}-----`)
-
 	const time = date("Asia/Manila")
 	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
 	// const m2 = [
@@ -161,13 +156,15 @@ let run = async () => {
 		"How can I find the longest common substring of two strings in javascript?"
 	]	
 	const m3 = m2[Math.floor(Math.random() * m2.length)]
+	
+	
 	try{
 		let { data } = await axios.get(`https://hercai.onrender.com/v3-beta/hercai?question=${m3}`)
-
+		
 		let datas = data.reply.split("\n")
 		let result = ""
 		let active = false
-
+		
 		for(let i = 0; i < datas.length; i++){
 			if(datas[i].toLowerCase().startsWith("``` javascript")){
 				active = !active
@@ -178,13 +175,14 @@ let run = async () => {
 				result += datas[i] + "\n"
 			}
 		}
-
-
+		
+		
 		// exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
 		// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
-
+		
 		fs.writeFileSync("autogit.js", result, "utf-8")
 		setTimeout(() => {
+			console.log(`-----${_commitments}-----`)
 			console.log("Git add")
 			exec("git add .", (e) => {
 				if(e) console.error(e)
