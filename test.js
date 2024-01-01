@@ -198,6 +198,7 @@ let run = async () => {
 								setTimeout(() => {
 									_commitments++
 									commits--
+									console.log(commits)
 									if(commits > 0 ){
 										run()
 									// }else{

@@ -1,21 +1,29 @@
-function isPalindrome(s) {
-  let start = 0;
-  let end = s.length - 1;
+const prime = 101;
 
-  while (start < end) {
-    if (s[start] !== s[end]) {
-      return false;
+function hash(str) {
+  let hashValue = 0;
+  for (let i = 0; i < str.length; i++) {
+    hashValue = (hashValue * prime + str.charCodeAt(i)) % prime;
+  }
+  return hashValue;
+}
+function rabinKarp(pattern, text) {
+  const patternHash = hash(pattern);
+  const patternLength = pattern.length;
+  const textLength = text.length;
+
+  for (let i = 0; i <= textLength - patternLength; i++) {
+    const substring = text.substring(i, i + patternLength);
+    const substringHash = hash(substring);
+
+    if (substringHash === patternHash && substring === pattern) {
+      return i; // Return the index at which the pattern is found.
     }
-    start++;
-    end--;
   }
 
-  return true;
+  return -1; // Return -1 if the pattern is not found.
 }
+const text = 'The quick brown fox jumps over the lazy dog';
+const pattern = 'fox';
 
-// Testing
-console.log(isPalindrome("racecar")); // Output: true
-console.log(isPalindrome("hello")); // Output: false
-console.log(isPalindrome("level")); // Output: true
-console.log(isPalindrome("madam")); // Output: true
-console.log(isPalindrome("")); // Output: true (empty string is considered a valid palindrome)
+console.log(rabinKarp(pattern, text));  // Output: 16
