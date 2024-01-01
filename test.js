@@ -40,7 +40,10 @@ let run = async () => {
 		"a random javascript code that has input",
 		"a random javascript code that uses fetch",
 		"a random javascript code that uses axios",
-		"a random javascript code that uses cron"
+		"a random javascript code that uses cron",
+		"a random javascript code of a random sort algorithm",
+		"a random javascript code that uses api",
+		"a random javascript code that connects thru async task in android"
 	]	
 	const m3 = m2[Math.floor(Math.random() * m2.length)]
 	let { data } = await axios.get(`https://hercai.onrender.com/v3-beta/hercai?question=${m3}`)
