@@ -55,7 +55,7 @@ let run = async () => {
 	for(let i = 0; i < datas.length; i++){
 		if(datas[i].toLowerCase().startsWith("``` javascript")){
 			active = !active
-		}else if(active && datas[i].startsWith("```")){
+		}else if(datas[i].startsWith("```")){
 			active = !active
 		}
 		if(active && !datas[i].startsWith("```")){
