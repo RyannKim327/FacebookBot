@@ -20,16 +20,16 @@ const date = require("./utils/date")
 const axios = require("axios")
 const readline = require("readline")
 
-const rd = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout
-})
+// const rd = readline.createInterface({
+// 	input: process.stdin,
+// 	output: process.stdout
+// })
 
 // let commits = rd.question("How many commits do you want? ", com => {
 // 	return com
 // })
 
-let commits = 1
+let commits = process.stdin
 
 let _commitments = 1
 
