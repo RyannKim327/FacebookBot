@@ -183,42 +183,41 @@ let run = async () => {
 		// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
 		
 		fs.writeFileSync("autogit.js", result, "utf-8")
-		setTimeout(() => {
-			console.log(`-----${_commitments}-----`)
-			console.log("Git add")
-			exec("git add .", (e) => {
-				if(e) console.error(e)
-				setTimeout(() => {
-					console.log("Git Commit")
-					exec(`git commit -m "${m} [User mode]"`, (e) => {
-						if(e) console.error(e)
-						setTimeout(() => {
-							console.log("Git push")
-							exec(`git push`, (e) => {
-								if(e) console.error(e)
-								console.log("Close")
-								setTimeout(() => {
-									_commitments++
-									commits--
-									if(commits > 0 ){
-										run()
-									}else{
-										console.log("Thank you for spamming hahaha")
-										process.exit(0)
-									}
-								}, 2000)
-							})
-						}, 2000)
-					})
-				}, 1000)
-			})
-		})
-	}catch(e){
-		// setTimeout(() => {
-		// 	run()
-		// }, 5000)
-		console.error(e)
-	}
+	// 	setTimeout(() => {
+	// 		console.log(`-----${_commitments}-----`)
+	// 		console.log("Git add")
+	// 		exec("git add .", (e) => {
+	// 			if(e) console.error(e)
+	// 			setTimeout(() => {
+	// 				console.log("Git Commit")
+	// 				exec(`git commit -m "${m} [User mode]"`, (e) => {
+	// 					if(e) console.error(e)
+	// 					setTimeout(() => {
+	// 						console.log("Git push")
+	// 						exec(`git push`, (e) => {
+	// 							if(e) console.error(e)
+	// 							console.log("Close")
+	// 							setTimeout(() => {
+	// 								_commitments++
+	// 								commits--
+	// 								if(commits > 0 ){
+	// 									run()
+	// 								}else{
+	// 									console.log("Thank you for spamming hahaha")
+	// 									process.exit(0)
+	// 								}
+	// 							}, 2000)
+	// 						})
+	// 					}, 2000)
+	// 				})
+	// 			}, 1000)
+	// 		})
+	// 	})
+	// }catch(e){
+	// 	setTimeout(() => {
+	// 		run()
+	// 	}, 5000)
+	// }
 }
 
 run()
