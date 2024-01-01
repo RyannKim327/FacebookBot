@@ -1,23 +1,12 @@
-function burrowsWheelerTransform(input) {
-  // Generate all rotations of the input string
-  const rotations = [];
-  let str = input + '\0';
-  for (let i = 0; i < str.length; i++) {
-    rotations.push(str);
-    str = str[str.length - 1] + str.substring(0, str.length - 1);
+function findStringLength(str) {
+  let count = 0;
+  while (str[count] !== undefined) {
+    count++;
   }
-
-  // Sort the rotations
-  rotations.sort();
-
-  // Extract the last characters of each rotation
-  let transformed = '';
-  for (let i = 0; i < rotations.length; i++) {
-    transformed += rotations[i][rotations[i].length - 1];
-  }
-
-  return transformed;
+  return count;
 }
-const input = 'banana';
-const transformed = burrowsWheelerTransform(input);
-console.log(transformed); // Outputs: 'annb$aa'
+
+// Example usage:
+const str = "Hello World";
+const length = findStringLength(str);
+console.log(length); // Output: 11
