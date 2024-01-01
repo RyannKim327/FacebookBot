@@ -29,7 +29,7 @@ const readline = require("readline")
 // 	return com
 // })
 
-let commits = process.stdin
+let commits = 1
 
 let _commitments = 1
 
@@ -203,7 +203,8 @@ let run = async () => {
 									if(commits > 0 ){
 										run()
 									}else{
-										console.log("End")
+										console.log("Thank you for spamming hahaha")
+										process.exit(0)
 									}
 								}, 2000)
 							})
