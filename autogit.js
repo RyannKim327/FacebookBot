@@ -1,64 +1,20 @@
-// Import axios library
-import axios from 'axios';
+// Function to find the middle element of a linked list
+const findMiddleElement = (head) => {
+  // Check if the linked list is empty
+  if (head === null) {
+    return null;
+  }
 
-// Define an endpoint URL
-const endpoint = 'https://random-data-api.com/api/v2/users?size=10';
+  // Initialize two pointers: slow and fast
+  let slow = head;
+  let fast = head;
 
-// Make a GET request using axios to fetch random user data
-axios.get(endpoint)
-  .then((response) => {
-    // Handle the response
-    console.log(response.data);
-  })
-  .catch((error) => {
-    // Handle the error
-    console.error(error);
-  });
+  // Move the slow pointer one node at a time, and the fast pointer two nodes at a time
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
 
-// You can also define custom headers for the request
-const headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer <token>'
+  // Return the slow pointer, which will be pointing to the middle element of the linked list
+  return slow;
 };
-
-// Make a POST request with custom headers
-axios.post(endpoint, data, { headers })
-  .then((response) => {
-    // Handle the response
-    console.log(response.data);
-  })
-  .catch((error) => {
-    // Handle the error
-    console.error(error);
-  });
-
-// You can also use axios to make PUT, DELETE or PATCH requests
-axios.put(endpoint, data)
-  .then((response) => {
-    // Handle the response
-    console.log(response.data);
-  })
-  .catch((error) => {
-    // Handle the error
-    console.error(error);
-  });
-
-axios.delete(endpoint)
-  .then((response) => {
-    // Handle the response
-    console.log(response.data);
-  })
-  .catch((error) => {
-    // Handle the error
-    console.error(error);
-  });
-
-axios.patch(endpoint, data)
-  .then((response) => {
-    // Handle the response
-    console.log(response.data);
-  })
-  .catch((error) => {
-    // Handle the error
-    console.error(error);
-  });
