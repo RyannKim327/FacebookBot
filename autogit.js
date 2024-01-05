@@ -1,12 +1,9 @@
-function areAnagrams(string1, string2) {
-  // Convert both strings to lowercase
-  string1 = string1.toLowerCase();
-  string2 = string2.toLowerCase();
-
-  // Sort both strings alphabetically
-  string1 = string1.split('').sort().join(''); // Convert to array, sort, join back to string
-  string2 = string2.split('').sort().join('');
-
-  // Compare the sorted strings
-  return string1 === string2;
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// Generate a random number between 1 and 10
+let randomNumber = randomNumber(1, 10);
+
+// Log the generated random number
+console.log(randomNumber);
