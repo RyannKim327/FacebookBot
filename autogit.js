@@ -1,29 +1,24 @@
-function countingSort(arr, maxValue) {
-  // Create an array to store the count of each number
-  const countArray = new Array(maxValue + 1).fill(0);
+function longestIncreasingSubsequence(arr) {
+  const lis = new Array(arr.length).fill(1);
+  let maxLen = 1;
 
-  // Count the occurrences of each number in the input array
-  for (let i = 0; i < arr.length; i++) {
-    countArray[arr[i]]++;
+  for (let i = 1; i < arr.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (arr[j] < arr[i]) {
+        lis[i] = Math.max(lis[i], lis[j] + 1);
+      }
+    }
+    maxLen = Math.max(maxLen, lis[i]);
   }
 
-  // Create an output array to store the sorted numbers
-  const sortedArray = [];
-
-  // Iterate over the count array and add each number to the output array based on its count
-  for (let i = 0; i <= maxValue; i++) {
-    while (countArray[i] > 0) {
-      sortedArray.push(i);
-      countArray[i]--;
+  const result = [];
+  let prevLen = maxLen;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (lis[i] === prevLen) {
+      result.unshift(arr[i]);
+      prevLen--;
     }
   }
 
-  // Return the sorted array
-  return sortedArray;
+  return result;
 }
-const arr = [1, 5, 2, 8, 3, 4, 9];
-const maxValue = 9; // Assuming that the numbers in the array are between 0 and 9
-
-const sortedArray = countingSort(arr, maxValue);
-
-console.log(sortedArray); // Output: [1, 2, 3, 4, 5, 8, 9]
