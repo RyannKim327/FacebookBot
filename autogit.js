@@ -1,27 +1,42 @@
-function longestCommonPrefix(strings) {
-  if (strings.length === 0) return "";
-  if (strings.length === 1) return strings[0];
-  
-  strings.sort(); // Sort the strings in lexicographical order
-  
-  let commonPrefix = "";
-  
-  for (let i = 0; i < strings[0].length; i++) {
-    const currentChar = strings[0][i];
-    
-    for (let j = 1; j < strings.length; j++) {
-      if (strings[j][i] !== currentChar) {
-        return commonPrefix;
-      }
-    }
-    
-    commonPrefix += currentChar;
+function mergeSort(array) {
+  if (array.length <= 1) {
+    return array;
   }
-  
-  return commonPrefix;
-}
-const set1 = ["flower", "flow", "flight"];
-console.log(longestCommonPrefix(set1)); // Output: "fl"
 
-const set2 = ["dog", "racecar", "car"];
-console.log(longestCommonPrefix(set2)); // Output: ""
+  // Create an array of single-item arrays
+  let sortedArrays = array.map(item => [item]);
+
+  // Merge pairs of arrays until there is only one sorted array left
+  while (sortedArrays.length > 1) {
+    let nextSortedArrays = [];
+
+    // Merge pairs of arrays
+    for (let i = 0; i < sortedArrays.length; i += 2) {
+      let mergedArray = merge(sortedArrays[i], sortedArrays[i + 1]);
+      nextSortedArrays.push(mergedArray);
+    }
+
+    sortedArrays = nextSortedArrays;
+  }
+
+  return sortedArrays[0];
+}
+
+function merge(left, right) {
+  let mergedArray = [];
+
+  while (left.length && right.length) {
+    if (left[0] <= right[0]) {
+      mergedArray.push(left.shift());
+    } else {
+      mergedArray.push(right.shift());
+    }
+  }
+
+  // Concatenate the remaining elements (if any) from left and right
+  return mergedArray.concat(left).concat(right);
+}
+
+// Example usage:
+const unsortedArray = [9, 4, 8, 2, 7, 1, 5, 3, 6];
+console.log(mergeSort(unsortedArray)); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
