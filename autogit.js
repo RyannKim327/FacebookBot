@@ -1,42 +1,94 @@
-function mergeSort(array) {
-  if (array.length <= 1) {
-    return array;
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+    this.height = 1;
   }
-
-  // Create an array of single-item arrays
-  let sortedArrays = array.map(item => [item]);
-
-  // Merge pairs of arrays until there is only one sorted array left
-  while (sortedArrays.length > 1) {
-    let nextSortedArrays = [];
-
-    // Merge pairs of arrays
-    for (let i = 0; i < sortedArrays.length; i += 2) {
-      let mergedArray = merge(sortedArrays[i], sortedArrays[i + 1]);
-      nextSortedArrays.push(mergedArray);
-    }
-
-    sortedArrays = nextSortedArrays;
-  }
-
-  return sortedArrays[0];
 }
-
-function merge(left, right) {
-  let mergedArray = [];
-
-  while (left.length && right.length) {
-    if (left[0] <= right[0]) {
-      mergedArray.push(left.shift());
-    } else {
-      mergedArray.push(right.shift());
-    }
+class AVLTree {
+  constructor() {
+    this.root = null;
   }
 
-  // Concatenate the remaining elements (if any) from left and right
-  return mergedArray.concat(left).concat(right);
+  // Other tree operations will be implemented here
 }
+function height(node) {
+  if (node === null) return 0;
+  return node.height;
+}
+function updateHeight(node) {
+  node.height = Math.max(height(node.left), height(node.right)) + 1;
+}
+function leftRotate(node) {
+  const newRoot = node.right;
+  node.right = newRoot.left;
+  newRoot.left = node;
 
-// Example usage:
-const unsortedArray = [9, 4, 8, 2, 7, 1, 5, 3, 6];
-console.log(mergeSort(unsortedArray)); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  updateHeight(node);
+  updateHeight(newRoot);
+
+  return newRoot;
+}
+function rightRotate(node) {
+  const newRoot = node.left;
+  node.left = newRoot.right;
+  newRoot.right = node;
+
+  updateHeight(node);
+  updateHeight(newRoot);
+
+  return newRoot;
+}
+function balanceFactor(node) {
+  return height(node.left) - height(node.right);
+}
+function insert(value, root) {
+  if (root === null) {
+    return new Node(value);
+  }
+
+  if (value < root.value) {
+    root.left = insert(value, root.left);
+  } else if (value > root.value) {
+    root.right = insert(value, root.right);
+  } else {
+    // Duplicate values are not allowed in an AVL tree
+    return root;
+  }
+
+  updateHeight(root);
+
+  const balance = balanceFactor(root);
+
+  // Left-Left case
+  if (balance > 1 && value < root.left.value) {
+    return rightRotate(root);
+  }
+
+  // Right-Right case
+  if (balance < -1 && value > root.right.value) {
+    return leftRotate(root);
+  }
+
+  // Left-Right case
+  if (balance > 1 && value > root.left.value) {
+    root.left = leftRotate(root.left);
+    return rightRotate(root);
+  }
+
+  // Right-Left case
+  if (balance < -1 && value < root.right.value) {
+    root.right = rightRotate(root.right);
+    return leftRotate(root);
+  }
+
+  return root;
+}
+const avlTree = new AVLTree();
+
+avlTree.root = insert(10, avlTree.root);
+avlTree.root = insert(20, avlTree.root);
+avlTree.root = insert(30, avlTree.root);
+avlTree.root = insert(40, avlTree.root);
+avlTree.root = insert(50, avlTree.root);
