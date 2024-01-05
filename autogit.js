@@ -1,11 +1,32 @@
-function insertionSort(arr) {
-  for (let i = 1; i < arr.length; i++) {
-    let currentVal = arr[i];
-    let j;
-    for (j = i - 1; j >= 0 && arr[j] > currentVal; j--) {
-      arr[j + 1] = arr[j];
-    }
-    arr[j + 1] = currentVal;
-  }
-  return arr;
+// Import the API library
+const fetch = require('node-fetch');
+
+// Define the API endpoint
+const endpoint = 'https://example.com/api/v1/data';
+
+// Define the API key
+const apiKey = 'YOUR_API_KEY';
+
+// Create an async function to fetch the data
+async function getData() {
+  // Create a request object
+  const request = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`,
+    },
+  };
+
+  // Fetch the data
+  const response = await fetch(endpoint, request);
+
+  // Parse the response as JSON
+  const data = await response.json();
+
+  // Log the data
+  console.log(data);
 }
+
+// Call the async function
+getData();
