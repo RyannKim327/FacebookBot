@@ -1,11 +1,29 @@
-area = (base * height) / 2;
-// Define the base and height of the triangle.
-let base = 10;
-let height = 5;
+function binarySearch(arr, target) {
+  let start = 0;
+  let end = arr.length - 1;
 
-// Calculate the area of the triangle.
-let area = (base * height) / 2;
+  while (start <= end) {
+    let middleIndex = Math.floor((start + end) / 2);
+    let middleElement = arr[middleIndex];
 
-// Display the area of the triangle.
-console.log("The area of the triangle is " + area + " square units.");
-The area of the triangle is 25 square units.
+    if (target === middleElement) {
+      return middleIndex;
+    } else if (target < middleElement) {
+      end = middleIndex - 1;
+    } else {
+      start = middleIndex + 1;
+    }
+  }
+
+  return -1; // Target not found
+}
+
+const arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+const target = 15;
+
+const result = binarySearch(arr, target);
+if (result === -1) {
+  console.log("Target not found.");
+} else {
+  console.log(`Target found at index ${result}.`);
+}
