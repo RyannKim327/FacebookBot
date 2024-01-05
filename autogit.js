@@ -1,50 +1,14 @@
-class Node {
-  constructor(value, children) {
-    this.value = value;
-    this.children = children || [];
+function calculateFactorial(num) {
+  if (num === 0 || num === 1) {
+    return 1;
+  } else {
+    let factorial = 1;
+    for (let i = 2; i <= num; i++) {
+      factorial *= i;
+    }
+    return factorial;
   }
 }
 
-function breadthLimitedSearch(startNode, targetValue, depthLimit) {
-  let queue = [startNode];
-  let depth = 0;
-  
-  while (queue.length > 0 && depth <= depthLimit) {
-    let currentNode = queue.shift();
-
-    if (currentNode.value === targetValue) {
-      return currentNode;
-    }
-    
-    if (depth < depthLimit) {
-      queue.push(...currentNode.children);
-    }
-
-    depth++;
-  }
-
-  return null;
-}
-
-// Example usage:
-let graph = new Node('A', [
-  new Node('B', [
-    new Node('C'),
-    new Node('D'),
-  ]),
-  new Node('E', [
-    new Node('F'),
-    new Node('G', [
-      new Node('H'),
-      new Node('I'),
-    ]),
-  ]),
-]);
-
-let targetNode = breadthLimitedSearch(graph, 'H', 2);
-
-if (targetNode) {
-  console.log(`Target node found: ${targetNode.value}`);
-} else {
-  console.log('Target node not found within depth limit.');
-}
+// Example usage
+console.log(calculateFactorial(5)); // Output: 120
