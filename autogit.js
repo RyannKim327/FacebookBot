@@ -1,32 +1,64 @@
-array.splice(index, numElementsToRemove);
-const myArray = ['a', 'b', 'c', 'd', 'e'];
+// Import axios library
+import axios from 'axios';
 
-// Remove the element at index 2
-myArray.splice(2, 1); // ['a', 'b', 'd', 'e']
+// Define an endpoint URL
+const endpoint = 'https://random-data-api.com/api/v2/users?size=10';
 
-// Remove two elements starting from index 1
-myArray.splice(1, 2); // ['a', 'd', 'e']
-array.filter((element, index, array) => {
-  // Return true to keep the element, false to remove it
-});
-// Create an array of numbers
-const myArray = [1, 2, 3, 4, 5];
+// Make a GET request using axios to fetch random user data
+axios.get(endpoint)
+  .then((response) => {
+    // Handle the response
+    console.log(response.data);
+  })
+  .catch((error) => {
+    // Handle the error
+    console.error(error);
+  });
 
-// Remove all numbers greater than 3
-const filteredArray = myArray.filter((element) => element <= 3); // [1, 2, 3]
-array.pop();
-// Create an array of strings
-const myArray = ['a', 'b', 'c'];
+// You can also define custom headers for the request
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer <token>'
+};
 
-// Remove the last element
-const poppedElement = myArray.pop(); // 'c'
+// Make a POST request with custom headers
+axios.post(endpoint, data, { headers })
+  .then((response) => {
+    // Handle the response
+    console.log(response.data);
+  })
+  .catch((error) => {
+    // Handle the error
+    console.error(error);
+  });
 
-// The array now contains only 'a' and 'b'
-array.shift();
-// Create an array of numbers
-const myArray = [1, 2, 3];
+// You can also use axios to make PUT, DELETE or PATCH requests
+axios.put(endpoint, data)
+  .then((response) => {
+    // Handle the response
+    console.log(response.data);
+  })
+  .catch((error) => {
+    // Handle the error
+    console.error(error);
+  });
 
-// Remove the first element
-const shiftedElement = myArray.shift(); // 1
+axios.delete(endpoint)
+  .then((response) => {
+    // Handle the response
+    console.log(response.data);
+  })
+  .catch((error) => {
+    // Handle the error
+    console.error(error);
+  });
 
-// The array now contains only 2 and 3
+axios.patch(endpoint, data)
+  .then((response) => {
+    // Handle the response
+    console.log(response.data);
+  })
+  .catch((error) => {
+    // Handle the error
+    console.error(error);
+  });
