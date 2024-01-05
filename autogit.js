@@ -1,36 +1,26 @@
-async function fetchData() {
-  const url = "http://api.example.com/data"; // Replace with your API endpoint
+function findFirstNonRepeatingChar(str) {
+  // Step 1: Create an object/map to store characters and their frequencies
+  const charFrequency = {};
 
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log("Data received: ", data);
-    // Handle the data here
-
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    // Handle error here
+  // Step 2: Iterate through the string and update the frequency of each character
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    charFrequency[char] = charFrequency[char] ? charFrequency[char] + 1 : 1;
   }
+
+  // Step 3: Iterate through the string and return the first character with frequency 1
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    if (charFrequency[char] === 1) {
+      return char;
+    }
+  }
+
+  // If no non-repeating character is found, return null or any default value
+  return null;
 }
 
-async function makeAsyncTask() {
-  const AsyncTask = Java.use("android.os.AsyncTask");
-  const task = AsyncTask.$new();
-
-  const doInBackground = AsyncTask.doInBackground.overload("java.lang.Object[]");
-  const onPostExecute = AsyncTask.onPostExecute.overload("java.lang.Object");
-
-  doInBackground.implementation = function(params) {
-    const taskResult = fetchData(); // Call the async function to fetch data
-    return taskResult; // Return the result of the async function
-  };
-
-  onPostExecute.implementation = function(result) {
-    console.log("Async task finished. Result:", result);
-    // Handle the result here
-  };
-
-  task.execute(); // Execute the async task
-}
-
-makeAsyncTask();
+// Example usage:
+const inputString = 'abacabad';
+const firstNonRepeatingChar = findFirstNonRepeatingChar(inputString);
+console.log(firstNonRepeatingChar); // Output: 'c'
