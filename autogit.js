@@ -1,16 +1,56 @@
-function areAnagrams(string1, string2) {
-  // removing spaces and converting to lowercase
-  string1 = string1.replace(/\s/g, '').toLowerCase();
-  string2 = string2.replace(/\s/g, '').toLowerCase();
+// Create a queue using an array
+class Queue {
+  constructor() {
+    this.items = [];
+  }
 
-  // sorting the strings
-  const sortedString1 = string1.split('').sort().join('');
-  const sortedString2 = string2.split('').sort().join('');
+  enqueue(element) {
+    this.items.push(element);
+  }
 
-  // comparing the sorted strings
-  return sortedString1 === sortedString2;
+  dequeue() {
+    if (this.isEmpty())
+      return "Underflow";
+    return this.items.shift();
+  }
+
+  isEmpty() {
+    return this.items.length == 0;
+  }
 }
 
-// example usage
-console.log(areAnagrams('listen', 'silent')); // true
-console.log(areAnagrams('hello', 'world')); // false
+// BFS implementation
+function breadthFirstSearch(graph, startNode) {
+  let visited = new Set();
+  let queue = new Queue();
+
+  visited.add(startNode);
+  queue.enqueue(startNode);
+
+  while (!queue.isEmpty()) {
+    let currentNode = queue.dequeue();
+    
+    console.log(currentNode); // Process the node
+
+    let neighbors = graph[currentNode];
+    for (let i = 0; i < neighbors.length; i++) {
+      let neighbor = neighbors[i];
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.enqueue(neighbor);
+      }
+    }
+  }
+}
+
+// Example graph
+let graph = {
+  A: ["B", "C"],
+  B: ["A", "D"],
+  C: ["A", "E"],
+  D: ["B"],
+  E: ["C"]
+};
+
+// Run BFS starting from node "A"
+breadthFirstSearch(graph, "A");
