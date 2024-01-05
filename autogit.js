@@ -1,76 +1,42 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
+function longestCommonSubstring(str1, str2) {
+  let len1 = str1.length;
+  let len2 = str2.length;
+  let longestSubstring = "";
+  let start = 0;
+  let end = 0;
+  let maxLen = 0;
+
+  // Create a 2D matrix to store the lengths of the longest common substrings of substrings of str1 and str2
+  let lcsMatrix = new Array(len1 + 1).fill(0).map(() => new Array(len2 + 1).fill(0));
+
+  // Iterate over the rows of the matrix
+  for (let i = 1; i <= len1; i++) {
+    // Iterate over the columns of the matrix
+    for (let j = 1; j <= len2; j++) {
+      // If the characters at the current positions in str1 and str2 are the same
+      if (str1[i - 1] === str2[j - 1]) {
+        // Update the length of the longest common substring
+        lcsMatrix[i][j] = lcsMatrix[i - 1][j - 1] + 1;
+
+        // If the current length is greater than the maximum length so far
+        if (lcsMatrix[i][j] > maxLen) {
+          // Update the maximum length
+          maxLen = lcsMatrix[i][j];
+
+          // Update the starting and ending indices of the longest common substring
+          start = i - maxLen;
+          end = i;
+        }
+      }
+    }
   }
+
+  // Extract the longest common substring from str1
+  longestSubstring = str1.substring(start, end);
+
+  return longestSubstring;
 }
-class BinarySearchTree {
-  constructor() {
-    this.root = null;
-  }
-insert(value) {
-    let newNode = new Node(value);
-    if (this.root === null) {
-      this.root = newNode;
-    } else {
-      this._insertNode(newNode, this.root);
-    }
-  }
-_insertNode(newNode, currentNode) {
-    if (newNode.value < currentNode.value) {
-      if (currentNode.left === null) {
-        currentNode.left = newNode;
-      } else {
-        this._insertNode(newNode, currentNode.left);
-      }
-    } else {
-      if (currentNode.right === null) {
-        currentNode.right = newNode;
-      } else {
-        this._insertNode(newNode, currentNode.right);
-      }
-    }
-  }
-search(value) {
-    let currentNode = this.root;
-    while (currentNode !== null) {
-      if (value === currentNode.value) {
-        return currentNode;
-      } else if (value < currentNode.value) {
-        currentNode = currentNode.left;
-      } else {
-        currentNode = currentNode.right;
-      }
-    }
-    return null;
-  }
-delete(value) {
-    this.root = this._deleteNode(value, this.root);
-  }
-_deleteNode(value, currentNode) {
-    if (currentNode === null) {
-      return null;
-    }
-    if (value === currentNode.value) {
-      // Case 1: No children
-      if (currentNode.left === null && currentNode.right === null) {
-        return null;
-      }
-      // Case 2: One child
-      if (currentNode.left === null) {
-        return currentNode.right;
-      } else if (currentNode.right === null) {
-        return currentNode.left;
-      }
-      // Case 3: Two children
-      let successor = this._findSuccessor(currentNode);
-      currentNode.value = successor.value;
-      currentNode.right = this._deleteNode(successor.value, currentNode.right);
-    } else if (value < currentNode.value) {
-      currentNode.left = this._deleteNode(value, currentNode.left);
-    } else {
-      currentNode.right = this._deleteNode(value, currentNode.right);
-    }
-    return currentNode;
-  }
+console.log(longestCommonSubstring("ABCDGH", "ACDGHR")); // "CDGH"
+console.log(longestCommonSubstring("ABCDE", "ABFDE")); // "AB"
+console.log(longestCommonSubstring("ABCDEF", "FABCDE")); // "ABCDE"
+console.log(longestCommonSubstring("ABCD", "EFGH")); // ""
