@@ -1,38 +1,27 @@
-function interpolationSearch(arr, value) {
-  let low = 0;
-  let high = arr.length - 1;
-
-  while (low <= high) {
-    // Calculate the interpolation index
-    let pos = low + Math.floor(((high - low) / (arr[high] - arr[low])) * (value - arr[low]));
-
-    // Check if the value is found at the interpolation index
-    if (arr[pos] === value) {
-      return pos;
-    }
-
-    // If the value is less than the value at the interpolation index, search in the left subarray
-    else if (arr[pos] > value) {
-      high = pos - 1;
-    }
-
-    // If the value is greater than the value at the interpolation index, search in the right subarray
-    else {
-      low = pos + 1;
-    }
+// Function to convert decimal to binary
+function dec2bin(decimal) {
+  // Check if the decimal is valid
+  if (decimal < 0 || decimal > 255) {
+    throw new Error("Decimal number must be between 0 and 255");
   }
 
-  // Value not found
-  return -1;
-}
-const arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
-const value = 11;
+  var binary = "";  // Variable to store the binary representation
 
-const index = interpolationSearch(arr, value);
+  // Loop until the decimal is 0
+  while (decimal > 0) {
+    // Check if the decimal is even
+    if (decimal % 2 == 0) {
+      binary += "0";
+    } else {
+      binary += "1";
+    }
 
-if (index !== -1) {
-  console.log(`Value ${value} found at index ${index}`);
-} else {
-  console.log(`Value ${value} not found in the array`);
+    // Divide the decimal by 2 to get the next bit
+    decimal = Math.floor(decimal / 2);
+  }
+
+  // Reverse the binary string
+  binary = binary.split("").reverse().join("");
+
+  return binary;
 }
-Value 11 found at index 5
