@@ -1,18 +1,31 @@
-function reverseWords(str) {
-  // Step 1: Split the string into an array of words
-  var wordsArray = str.split(" ");
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
 
-  // Step 2: Reverse the order of the array
-  var reversedArray = wordsArray.reverse();
-
-  // Step 3: Join the elements of the array back into a string
-  var reversedString = reversedArray.join(" ");
-
-  return reversedString;
+function countLeafNodes(node) {
+    if (node === null) {
+        return 0;
+    } else if (node.left === null && node.right === null) {
+        // Leaf node
+        return 1;
+    } else {
+        // Recursive calls for left and right subtrees
+        return countLeafNodes(node.left) + countLeafNodes(node.right);
+    }
 }
 
 // Example usage
-var originalString = "Hello World!";
-var reversedString = reverseWords(originalString);
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+root.right.left = new Node(6);
+root.right.right = new Node(7);
 
-console.log(reversedString); // Output: "World! Hello"
+const leafNodeCount = countLeafNodes(root);
+console.log("Number of leaf nodes:", leafNodeCount);
