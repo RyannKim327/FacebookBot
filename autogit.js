@@ -1,31 +1,46 @@
-function binarySearch(arr, target) {
-  let left = 0;
-  let right = arr.length - 1;
-
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-
-    if (arr[mid] === target) {
-      return mid; // Found the target, return the index
-    }
-
-    if (arr[mid] < target) {
-      left = mid + 1; // Target is in the right half of the sorted array
-    } else {
-      right = mid - 1; // Target is in the left half of the sorted array
-    }
+class Graph {
+  constructor() {
+    this.vertices = {};
   }
 
-  return -1; // Target was not found
+  addVertex(vertex) {
+    this.vertices[vertex] = [];
+  }
+
+  addEdge(vertex1, vertex2) {
+    this.vertices[vertex1].push(vertex2);
+    this.vertices[vertex2].push(vertex1);
+  }
+
+  breadthFirstSearch(startingVertex) {
+    const visited = new Set();
+    const queue = [startingVertex];
+
+    while (queue.length > 0) {
+      const currentVertex = queue.shift();
+      console.log(currentVertex);
+      visited.add(currentVertex);
+
+      const adjacentVertices = this.vertices[currentVertex];
+      for (let i = 0; i < adjacentVertices.length; i++) {
+        const vertex = adjacentVertices[i];
+        if (!visited.has(vertex)) {
+          queue.push(vertex);
+          visited.add(vertex);
+        }
+      }
+    }
+  }
 }
 
-// Example usage:
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const targetNumber = 8;
-const index = binarySearch(numbers, targetNumber);
+// Example usage
+const graph = new Graph();
+graph.addVertex(1);
+graph.addVertex(2);
+graph.addVertex(3);
+graph.addVertex(4);
+graph.addEdge(1, 2);
+graph.addEdge(2, 3);
+graph.addEdge(3, 4);
 
-if (index !== -1) {
-  console.log(`Found at index ${index}`);
-} else {
-  console.log('Target number not found');
-}
+graph.breadthFirstSearch(1);
