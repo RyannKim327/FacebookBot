@@ -1,51 +1,86 @@
-// Importing the Axios library
-const axios = require('axios');
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
 
-// Example API endpoint URL
-const apiUrl = 'https://api.example.com/data';
+class BST {
+  constructor() {
+    this.root = null;
+  }
 
-// Making a GET request
-axios.get(apiUrl)
-  .then(response => {
-    // Handling the response data
-    console.log(response.data);
-  })
-  .catch(error => {
-    // Handling any errors
-    console.error(error);
-  });
+  insert(value) {
+    const newNode = new Node(value);
 
-// Making a POST request
-const postData = { name: 'John Doe', age: 30 };
-axios.post(apiUrl, postData)
-  .then(response => {
-    // Handling the response data
-    console.log(response.data);
-  })
-  .catch(error => {
-    // Handling any errors
-    console.error(error);
-  });
+    if (this.root === null) {
+      this.root = newNode;
+    } else {
+      this.insertNode(this.root, newNode);
+    }
+  }
 
-// Making a PUT request
-const putData = { id: 123, name: 'Jane Smith', age: 25 };
-axios.put(apiUrl, putData)
-  .then(response => {
-    // Handling the response data
-    console.log(response.data);
-  })
-  .catch(error => {
-    // Handling any errors
-    console.error(error);
-  });
+  insertNode(node, newNode) {
+    if (newNode.value < node.value) {
+      if (node.left === null) {
+        node.left = newNode;
+      } else {
+        this.insertNode(node.left, newNode);
+      }
+    } else {
+      if (node.right === null) {
+        node.right = newNode;
+      } else {
+        this.insertNode(node.right, newNode);
+      }
+    }
+  }
 
-// Making a DELETE request
-axios.delete(apiUrl)
-  .then(response => {
-    // Handling the response data
-    console.log(response.data);
-  })
-  .catch(error => {
-    // Handling any errors
-    console.error(error);
-  });
+  search(value) {
+    return this.searchNode(this.root, value);
+  }
+
+  searchNode(node, value) {
+    if (node === null) {
+      return false;
+    }
+
+    if (value < node.value) {
+      return this.searchNode(node.left, value);
+    } else if (value > node.value) {
+      return this.searchNode(node.right, value);
+    } else {
+      return true;
+    }
+  }
+
+  inOrderTraversal(callback) {
+    this.inOrderTraversalNode(this.root, callback);
+  }
+
+  inOrderTraversalNode(node, callback) {
+    if (node !== null) {
+      this.inOrderTraversalNode(node.left, callback);
+      callback(node.value);
+      this.inOrderTraversalNode(node.right, callback);
+    }
+  }
+}
+
+// Usage example:
+
+const bst = new BST();
+
+bst.insert(4);
+bst.insert(2);
+bst.insert(1);
+bst.insert(3);
+bst.insert(6);
+bst.insert(5);
+bst.insert(7);
+
+console.log(bst.search(5)); // true
+console.log(bst.search(8)); // false
+
+bst.inOrderTraversal(value => console.log(value)); // 1 2 3 4 5 6 7
