@@ -1,40 +1,51 @@
-function longestCommonSubstring(str1, str2) {
-  // Create a matrix to store the lengths of the longest common substrings of the prefixes of str1 and str2
-  const matrix = new Array(str1.length + 1).fill(0).map(() => new Array(str2.length + 1).fill(0));
+// JavaScript code to connect to an Android async task
 
-  // Initialize the first row and column of the matrix to 0
-  for (let i = 0; i <= str1.length; i++) {
-    matrix[i][0] = 0;
-  }
-  for (let j = 0; j <= str2.length; j++) {
-    matrix[0][j] = 0;
-  }
+// Create a new JavaScript object to represent the Android async task
+var task = new AndroidAsyncTask();
 
-  // Fill the matrix using dynamic programming
-  for (let i = 1; i <= str1.length; i++) {
-    for (let j = 1; j <= str2.length; j++) {
-      if (str1[i - 1] === str2[j - 1]) {
-        matrix[i][j] = matrix[i - 1][j - 1] + 1;
-      } else {
-        matrix[i][j] = 0;
-      }
-    }
-  }
+// Define the task's parameters
+var params = ["param1", "param2"];
 
-  // Find the maximum value in the matrix to determine the length of the longest common substring
-  let max = 0;
-  let maxI = 0;
-  let maxJ = 0;
-  for (let i = 0; i <= str1.length; i++) {
-    for (let j = 0; j <= str2.length; j++) {
-      if (matrix[i][j] > max) {
-        max = matrix[i][j];
-        maxI = i;
-        maxJ = j;
-      }
-    }
+// Execute the task
+task.execute(params);
+
+// Define a callback function to handle the task's result
+function onTaskCompleted(result) {
+  // The task's result is passed as the first argument to the callback function
+  console.log("Task completed with result: " + result);
+}
+
+// Set the task's callback function
+task.setCallback(onTaskCompleted);
+// Java code to create an Android async task that can be called from JavaScript code
+
+public class AndroidAsyncTask extends AsyncTask<String, Void, String> {
+
+  // The task's callback function
+  private Callback callback;
+
+  // Set the task's callback function
+  public void setCallback(Callback callback) {
+    this.callback = callback;
   }
 
-  // Construct the longest common substring using the matrix
-  return str1.substring(maxI - max, maxI);
+  // The task's doInBackground method
+  @Override
+  protected String doInBackground(String... params) {
+    // Perform the task's operations here
+    String result = "Task completed successfully";
+    return result;
+  }
+
+  // The task's onPostExecute method
+  @Override
+  protected void onPostExecute(String result) {
+    // Call the task's callback function with the task's result
+    callback.onTaskCompleted(result);
+  }
+
+  // Interface to define the task's callback function
+  public interface Callback {
+    void onTaskCompleted(String result);
+  }
 }
