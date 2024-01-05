@@ -1,42 +1,40 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.children = [];
+function partition(arr, low, high) {
+  const pivot = arr[high];
+  let i = low - 1;
+  for (let j = low; j < high; j++) {
+    if (arr[j] < pivot) {
+      i++;
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+  [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+  return i + 1;
+}
+
+function quickSelect(arr, low, high, k) {
+  if (low === high) { // Only one element in the array
+    return arr[low];
+  }
+  
+  const pivotIndex = partition(arr, low, high);
+  if (k === pivotIndex) {
+    return arr[k];
+  } else if (k < pivotIndex) {
+    return quickSelect(arr, low, pivotIndex - 1, k);
+  } else {
+    return quickSelect(arr, pivotIndex + 1, high, k);
   }
 }
 
-function depthLimitedSearch(root, target, depthLimit) {
-  const stack = [];
-  stack.push({ node: root, depth: 0 });
-
-  while (stack.length > 0) {
-    const { node, depth } = stack.pop();
-
-    if (node.value === target) {
-      return true; // Target found
-    }
-
-    if (depth < depthLimit) {
-      // Add child nodes to the stack
-      for (let i = node.children.length - 1; i >= 0; i--) {
-        stack.push({ node: node.children[i], depth: depth + 1 });
-      }
-    }
+function findKthSmallest(arr, k) {
+  if (k < 1 || k > arr.length) {
+    return null;
   }
-
-  return false; // Target not found within depth limit
+  
+  return quickSelect(arr, 0, arr.length - 1, k - 1);
 }
 
-// Usage example
-const root = new Node(1);
-const node2 = new Node(2);
-const node3 = new Node(3);
-const node4 = new Node(4);
-const node5 = new Node(5);
-const node6 = new Node(6);
-
-root.children.push(node2, node3);
-node2.children.push(node4, node5);
-node3.children.push(node6);
-
-console.log(depthLimitedSearch(root, 6, 2)); // Output: true
+// Example usage
+const array = [5, 3, 8, 2, 9, 1];
+const k = 3;
+console.log(`The ${k}th smallest element is: ${findKthSmallest(array, k)}`);
