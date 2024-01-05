@@ -1,20 +1,15 @@
-function findFirstRepeatedChar(str) {
-  const charMap = {};
-
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i];
-
-    if (charMap[char]) {
-      return char;
-    }
-
-    charMap[char] = 1;
+function factorial(num) {
+  if (num === 0 || num === 1) {
+    return 1;
   }
-
-  return null; // No repeated characters found
+  
+  let result = 1;
+  for (let i = 2; i <= num; i++) {
+    result *= i;
+  }
+  
+  return result;
 }
-
-const str = "hello world";
-const firstRepeatedChar = findFirstRepeatedChar(str);
-
-console.log(firstRepeatedChar); // Output: l
+console.log(factorial(5)); // Output: 120
+console.log(factorial(0)); // Output: 1
+console.log(factorial(10)); // Output: 3628800
