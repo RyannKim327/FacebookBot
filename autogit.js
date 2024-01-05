@@ -1,19 +1,20 @@
-// Function to calculate the area of a triangle
-function calculateArea(base, height) {
-  // Check if the base and height are valid numbers
-  if (typeof base !== 'number' || typeof height !== 'number') {
-    throw new Error('Base and height must be numbers');
+function selectionSort(array) {
+  const length = array.length;
+  for (let i = 0; i < length; i++) {
+    let minIndex = i;
+    for (let j = i + 1; j < length; j++) {
+      if (array[j] < array[minIndex]) {
+        minIndex = j;
+      }
+    }
+    if (minIndex !== i) {
+      const temp = array[i];
+      array[i] = array[minIndex];
+      array[minIndex] = temp;
+    }
   }
-
-  // Calculate the area of the triangle
-  const area = 0.5 * base * height;
-
-  // Return the area
-  return area;
+  return array;
 }
-// Calculate the area of a triangle with a base of 10 and a height of 5
-const area = calculateArea(10, 5);
-
-// Log the area to the console
-console.log(`The area of the triangle is ${area}`);
-The area of the triangle is 25
+const array = [5, 3, 8, 2, 1, 4];
+const sortedArray = selectionSort(array);
+console.log(sortedArray); // Output: [1, 2, 3, 4, 5, 8]
