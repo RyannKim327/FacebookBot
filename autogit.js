@@ -1,26 +1,23 @@
-function binarySearch(array, target) {
-  let low = 0;
-  let high = array.length - 1;
+const string = "hello";
+const charArray = string.split("");
+const charCount = {};
 
-  while (low <= high) {
-    let mid = Math.floor((low + high) / 2);
-    let guess = array[mid];
-
-    if (guess === target) {
-      return mid;
-    } else if (guess < target) {
-      low = mid + 1;
-    } else {
-      high = mid - 1;
-    }
+charArray.forEach((char) => {
+  if (charCount[char]) {
+    charCount[char]++;
+  } else {
+    charCount[char] = 1;
   }
-
-  return -1;
+});
+for (let i = 0; i < charArray.length; i++) {
+  const char = charArray[i];
+  if (charCount[char] === 1) {
+    return char;
+  }
 }
-const array = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+return null;
+const string = "hello";
 
-const target = 13;
+const firstNonRepeatingChar = findFirstNonRepeatingChar(string);
 
-const result = binarySearch(array, target);
-
-console.log(result); // Output: 6
+console.log(firstNonRepeatingChar); // Output: "h"
