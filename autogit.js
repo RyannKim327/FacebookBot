@@ -1,46 +1,85 @@
-// Define the iterative depth-limited search algorithm
-function iterativeDLS(graph, start, destination, maxDepth) {
-  // Initialize the stack with the start node
-  let stack = [start];
+insert(value) {
+  // Add the value to the end of the heap array
+  this.heap.push(value);
 
-  // Initialize the visited nodes with the start node
-  let visited = new Set();
-  visited.add(start);
+  // Perform heapify-up operation to maintain the heap property
+  this.heapifyUp(this.heap.length - 1);
+}
 
-  // While the stack is not empty and the destination has not been found
-  while (stack.length > 0 && !visited.has(destination)) {
-    // Pop the top node from the stack
-    let current = stack.pop();
+// Heapify-up operation to maintain the heap property
+heapifyUp(index) {
+  while (index > 0) {
+    // Calculate the parent index
+    const parentIndex = Math.floor((index - 1) / 2);
 
-    // If the current node is within the max depth limit
-    if (getCurrentDepth(current) <= maxDepth) {
-      // Visit the current node
-      visited.add(current);
-
-      // If the current node is the destination, return true
-      if (current === destination) {
-        return true;
-      }
-
-      // Push the current node's neighbors onto the stack
-      for (let neighbor of graph[current]) {
-        if (!visited.has(neighbor)) {
-          stack.push(neighbor);
-        }
-      }
+    // If the parent value is greater than the child value, swap them
+    if (this.heap[parentIndex] > this.heap[index]) {
+      [this.heap[parentIndex], this.heap[index]] = [this.heap[index], this.heap[parentIndex]];
+    } else {
+      // If the heap property is satisfied, stop the heapify-up operation
+      break;
     }
-  }
 
-  // If the destination was not found, return false
-  return false;
+    // Update the index to continue heapifying up the tree
+    index = parentIndex;
+  }
+}
+extractMin() {
+  // Store the minimum value
+  const minValue = this.heap[0];
+
+  // Replace the root value with the last value in the heap array
+  this.heap[0] = this.heap.pop();
+
+  // Perform heapify-down operation to maintain the heap property
+  this.heapifyDown(0);
+
+  // Return the minimum value
+  return minValue;
 }
 
-// Helper function to get the current depth of a node
-function getCurrentDepth(node) {
-  let depth = 0;
-  while (node !== null) {
-    depth++;
-    node = node.parent;
+// Heapify-down operation to maintain the heap property
+heapifyDown(index) {
+  while (index < this.heap.length) {
+    // Calculate the left and right child indices
+    const leftChildIndex = 2 * index + 1;
+    const rightChildIndex = 2 * index + 2;
+
+    // Find the smallest child index among the current node and its children
+    let smallestChildIndex = index;
+    if (leftChildIndex < this.heap.length && this.heap[leftChildIndex] < this.heap[smallestChildIndex]) {
+      smallestChildIndex = leftChildIndex;
+    }
+    if (rightChildIndex < this.heap.length && this.heap[rightChildIndex] < this.heap[smallestChildIndex]) {
+      smallestChildIndex = rightChildIndex;
+    }
+
+    // If the smallest child is not the current node, swap them
+    if (smallestChildIndex !== index) {
+      [this.heap[smallestChildIndex], this.heap[index]] = [this.heap[index], this.heap[smallestChildIndex]];
+    } else {
+      // If the heap property is satisfied, stop the heapify-down operation
+      break;
+    }
+
+    // Update the index to continue heapifying down the tree
+    index = smallestChildIndex;
   }
-  return depth;
 }
+// Create a binary heap instance
+const priorityQueue = new BinaryHeap();
+
+// Insert values into the priority queue
+priorityQueue.insert(5);
+priorityQueue.insert(2);
+priorityQueue.insert(3);
+priorityQueue.insert(10);
+
+// Extract and display the minimum value
+console.log(priorityQueue.extractMin()); // 2
+
+// Insert another value
+priorityQueue.insert(8);
+
+// Extract and display the minimum value
+console.log(priorityQueue.extractMin()); // 3
