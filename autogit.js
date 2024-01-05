@@ -1,14 +1,10 @@
-function reverseLinkedList(head) {
-  let prev = null;
-  let current = head;
-  let next = null;
+// Array of numbers
+const numbers = [10, 5, 20, 15, 8];
 
-  while (current !== null) {
-    next = current.next;
-    current.next = prev;
-    prev = current;
-    current = next;
-  }
+// Method 1: Using spread operator
+const max1 = Math.max(...numbers);
+console.log(max1); // Output: 20
 
-  return prev;
-}
+// Method 2: Using apply() method
+const max2 = Math.max.apply(null, numbers);
+console.log(max2); // Output: 20
