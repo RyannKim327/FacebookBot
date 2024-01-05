@@ -1,42 +1,32 @@
-function findKthSmallestElement(arr, k) {
-  // Sort the array in ascending order
-  arr.sort((a, b) => a - b);
-  // Return the kth smallest element at index k-1
-  return arr[k - 1];
+function isPalindrome(str) {
+  // Convert the string to lowercase to avoid case-sensitive comparisons.
+  str = str.toLowerCase();
+
+  // Remove all non-alphanumeric characters from the string.
+  str = str.replace(/[^a-z0-9]/g, "");
+
+  // Check if the string is empty. If it is, then it is a palindrome.
+  if (str === "") {
+    return true;
+  }
+
+  // Check if the first and last characters of the string are the same.
+  // If they are, then remove them from the string and continue checking the rest of the string.
+  while (str.length > 1 && str[0] === str[str.length - 1]) {
+    str = str.substring(1, str.length - 1);
+  }
+
+  // After the loop, if the string is empty or contains only one character, then it is a palindrome.
+  return str.length === 0 || str.length === 1;
 }
-function findKthSmallestElement(arr, k) {
-  // Create a min-heap using Heap() or similar data structures
-  const heap = new Heap();
-  // Insert all elements of the array into the min-heap
-  for (let i = 0; i < arr.length; i++) {
-    heap.insert(arr[i]);
-  }
-  // Pop elements from the min-heap k times to get the kth smallest element
-  for (let i = 0; i < k - 1; i++) {
-    heap.extractMin();
-  }
-  // Return the minimum element at the top of the min-heap
-  return heap.extractMin();
-}
-function findKthSmallestElement(arr, k) {
-  // Select a pivot element
-  const pivot = arr[Math.floor(arr.length / 2)];
-  // Partition the array into two subarrays
-  const left = [];
-  const right = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < pivot) {
-      left.push(arr[i]);
-    } else if (arr[i] > pivot) {
-      right.push(arr[i]);
-    }
-  }
-  // Recursively find the kth smallest element in the appropriate subarray
-  if (k <= left.length) {
-    return findKthSmallestElement(left, k);
-  } else if (k > left.length + 1) {
-    return findKthSmallestElement(right, k - left.length - 1);
-  } else {
-    return pivot;
-  }
-}
+
+// Example usage:
+const str1 = "racecar";
+const str2 = "madam";
+const str3 = "radar";
+const str4 = "hello";
+
+console.log(isPalindrome(str1)); // true
+console.log(isPalindrome(str2)); // true
+console.log(isPalindrome(str3)); // true
+console.log(isPalindrome(str4)); // false
