@@ -1,58 +1,13 @@
-class SuffixTree {
-  constructor(string) {
-    this.root = {};
-    this.string = string;
-    this.insert(string);
-  }
+function isAnagram(string1, string2) {
+  // Convert both strings to lowercase and sort them alphabetically
+  let sortedString1 = string1.toLowerCase().split('').sort().join('');
+  let sortedString2 = string2.toLowerCase().split('').sort().join('');
 
-  insert(string) {
-    let current = this.root;
-    for (let i = 0; i < string.length; i++) {
-      if (!current[string[i]]) {
-        current[string[i]] = {};
-      }
-      current = current[string[i]];
-    }
-    current['end'] = true;
-  }
-
-  search(query) {
-    let current = this.root;
-    for (let i = 0; i < query.length; i++) {
-      if (!current[query[i]]) {
-        return false;
-      }
-      current = current[query[i]];
-    }
-    return !!current['end'];
-  }
-
-  getLongestCommonSubstring() {
-    let maxLen = 0;
-    let lcs = "";
-    this._getLongestCommonSubstring(this.root, "", maxLen, lcs);
-    return lcs;
-  }
-
-  _getLongestCommonSubstring(node, currentLCS, maxLen, lcs) {
-    if (!node) {
-      return;
-    }
-    if (node['end']) {
-      if (currentLCS.length > maxLen) {
-        maxLen = currentLCS.length;
-        lcs = currentLCS;
-      }
-    }
-    for (let key in node) {
-      if (key !== 'end') {
-        this._getLongestCommonSubstring(node[key], currentLCS + key, maxLen, lcs);
-      }
-    }
-  }
+  // Compare the sorted strings
+  return sortedString1 === sortedString2;
 }
-
-const suffixTree = new SuffixTree('banana');
-console.log(suffixTree.search('ana')); // true
-console.log(suffixTree.search('app')); // false
-console.log(suffixTree.getLongestCommonSubstring()); // 'ana'
+console.log(isAnagram('hello', 'olleh')); // true
+console.log(isAnagram('anagram', 'nag aram')); // true
+console.log(isAnagram('javascript', 'scriptjava')); // true
+console.log(isAnagram('dog', 'god')); // false
+console.log(isAnagram('house', 'mouse')); // false
