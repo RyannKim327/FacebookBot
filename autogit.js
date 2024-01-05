@@ -1,28 +1,23 @@
-const string = "The quick brown fox jumps over the lazy dog.";
-const word = "the";
-const matches = string.match(new RegExp(word, "g"));
-const count = matches.length;
-console.log(`The word "${word}" occurs ${count} times in the string.`);
-const string = "The quick brown fox jumps over the lazy dog.";
-const word = "the";
-const parts = string.split(word);
-const count = parts.length - 1;
-console.log(`The word "${word}" occurs ${count} times in the string.`);
-const string = "The quick brown fox jumps over the lazy dog.";
-const word = "the";
-let count = 0;
-let index = string.indexOf(word);
-while (index !== -1) {
-  count++;
-  index = string.indexOf(word, index + 1);
+// Function to find the middle element of a linked list
+function findMiddle(head) {
+  //  if the list is empty, return null
+  if (head === null) {
+    return null;
+  }
+  //  if the list has only one element, return the element
+  if (head.next === null) {
+    return head;
+  }
+  //  initialize two pointers, slow and fast, and set slow to the head
+  let slow = head;
+  let fast = head;
+  //  traverse the linked list until the fast pointer reaches the end
+  while (fast !== null && fast.next !== null) {
+    //  move the slow pointer one node at a time
+    slow = slow.next;
+    //  move the fast pointer two nodes at a time
+    fast = fast.next.next;
+  }
+  //  return the slow pointer, which is now pointing to the middle element
+  return slow;
 }
-console.log(`The word "${word}" occurs ${count} times in the string.`);
-const string = "The quick brown fox jumps over the lazy dog.";
-const word = "the";
-const regex = new RegExp(word, "g");
-let count = 0;
-let match;
-while ((match = regex.exec(string)) !== null) {
-  count++;
-}
-console.log(`The word "${word}" occurs ${count} times in the string.`);
