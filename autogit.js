@@ -1,18 +1,35 @@
-const arr = [1, 2, 3, 4, 5];
-arr.reverse();
-console.log(arr); // Output: [5, 4, 3, 2, 1]
-const arr = [1, 2, 3, 4, 5];
-let reversedArr = [];
-for (let i = arr.length - 1; i >= 0; i--) {
-  reversedArr.push(arr[i]);
+const str = 'hello';
+const reversedStr = str.reverse();
+console.log(reversedStr); // 'olleh'
+const str = 'hello';
+let reversedStr = '';
+
+for (let i = str.length - 1; i >= 0; i--) {
+  reversedStr += str[i];
 }
-console.log(reversedArr); // Output: [5, 4, 3, 2, 1]
-const arr = [1, 2, 3, 4, 5];
-const reversedArr = [...arr].reverse();
-console.log(reversedArr); // Output: [5, 4, 3, 2, 1]
-const arr = [1, 2, 3, 4, 5];
-const reversedArr = arr.reduceRight((acc, curr) => {
-  acc.push(curr);
-  return acc;
-}, []);
-console.log(reversedArr); // Output: [5, 4, 3, 2, 1]
+
+console.log(reversedStr); // 'olleh'
+const str = 'hello';
+let reversedStr = '';
+let i = str.length - 1;
+
+while (i >= 0) {
+  reversedStr += str[i];
+  i--;
+}
+
+console.log(reversedStr); // 'olleh'
+function reverseStr(str) {
+  if (str === '') {
+    return '';
+  } else {
+    return reverseStr(str.substring(1)) + str[0];
+  }
+}
+
+const str = 'hello';
+const reversedStr = reverseStr(str);
+console.log(reversedStr); // 'olleh'
+const str = 'hello';
+const reversedStr = [...str].reverse().join('');
+console.log(reversedStr); // 'olleh'
