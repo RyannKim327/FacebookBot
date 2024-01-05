@@ -1,16 +1,24 @@
-function shellSort(arr) {
-  let gap = Math.floor(arr.length / 2);
+const str = "Hello World!";
 
-  while (gap > 0) {
-    for (let i = gap; i < arr.length; i++) {
-      let temp = arr[i];
-      let j;
-      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
-        arr[j] = arr[j - gap];
-      }
-      arr[j] = temp;
-    }
-    gap = Math.floor(gap / 2);
-  }
-  return arr;
+// Reverse the string using the reverse() method
+const reversedStr = str.split(' ').reverse().join(' ');
+
+console.log(reversedStr); // Output: "!dlroW olleH"
+const str = "Hello World!";
+
+// Initialize an empty string to store the reversed string
+let reversedStr = "";
+
+// Iterate over the string from the end to the beginning
+for (let i = str.length - 1; i >= 0; i--) {
+  // Add the current character to the reversed string
+  reversedStr += str[i];
 }
+
+console.log(reversedStr); // Output: "!dlroW olleH"
+const str = "Hello World!";
+
+// Reverse the string using the reduce() method
+const reversedStr = str.split(' ').reduce((acc, curr) => curr + ' ' + acc, '');
+
+console.log(reversedStr); // Output: "!dlroW olleH"
