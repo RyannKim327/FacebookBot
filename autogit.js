@@ -1,44 +1,21 @@
-function isPalindrome(str) {
-  const reversedStr = str.split('').reverse().join('');
-  return str === reversedStr;
-}
-
-console.log(isPalindrome('racecar')); // true
-console.log(isPalindrome('hello')); // false
-function isPalindrome(str) {
-  for (let i = 0; i < str.length / 2; i++) {
-    if (str[i] !== str[str.length - 1 - i]) {
-      return false;
-    }
+// Function to calculate the area of a triangle using the formula:
+// Area = 0.5 * base * height
+function calculateTriangleArea(base, height) {
+  // Check if the inputs are valid numbers
+  if (typeof base !== 'number' || typeof height !== 'number') {
+    throw new Error('Inputs must be numbers');
   }
-  return true;
+
+  // Calculate the area of the triangle
+  const area = 0.5 * base * height;
+
+  // Return the calculated area
+  return area;
 }
 
-console.log(isPalindrome('racecar')); // true
-console.log(isPalindrome('hello')); // false
-function isPalindrome(str, start = 0, end = str.length - 1) {
-  if (start >= end) {
-    return true;
-  }
-  if (str[start] !== str[end]) {
-    return false;
-  }
-  return isPalindrome(str, start + 1, end - 1);
-}
+// Sample usage
+const base = 10;
+const height = 5;
+const area = calculateTriangleArea(base, height);
 
-console.log(isPalindrome('racecar')); // true
-console.log(isPalindrome('hello')); // false
-function isPalindrome(str) {
-  return str === str.split('').reverse().join('');
-}
-
-console.log(isPalindrome('racecar')); // true
-console.log(isPalindrome('hello')); // false
-function isPalindrome(str) {
-  const reversedStr = parseInt(str.split('').reverse().join(''), 2);
-  const originalStr = parseInt(str, 2);
-  return reversedStr === originalStr;
-}
-
-console.log(isPalindrome('11001100')); // true
-console.log(isPalindrome('10101011')); // false
+console.log(`The area of the triangle is ${area} square units.`);
