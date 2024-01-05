@@ -1,12 +1,11 @@
-const CronJob = require('cron').CronJob;
+function reverseOrderOfWords(str) {
+  var words = str.split(' ');
+  var reversedWords = words.reverse();
+  var reversedString = reversedWords.join(' ');
+  return reversedString;
+}
 
-// Define the cron schedule
-const cronSchedule = '* * * * *'; // Fire the task every minute
-
-// Create a new cron job
-const job = new CronJob(cronSchedule, function() {
-  console.log('This task runs every minute!');
-}, null, true, 'UTC');
-
-// Start the cron job
-job.start();
+// Example usage
+var sentence = "Hello, how are you today?";
+var reversedSentence = reverseOrderOfWords(sentence);
+console.log(reversedSentence);  // Output: "today? you are how Hello,"
