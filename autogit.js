@@ -1,55 +1,12 @@
-function calculateLPS(pattern) {
-  const lps = [0];
-  let len = 0;
-  let i = 1;
+const array = [1, 2, 3, 4, 2, 3, 5];
 
-  while (i < pattern.length) {
-    if (pattern[i] === pattern[len]) {
-      len++;
-      lps[i] = len;
-      i++;
-    } else {
-      if (len !== 0) {
-        len = lps[len - 1];
-      } else {
-        lps[i] = 0;
-        i++;
-      }
-    }
-  }
+const uniqueArray = Array.from(new Set(array));
 
-  return lps;
-}
+console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
+const array = [1, 2, 3, 4, 2, 3, 5];
 
-function KMPSearch(text, pattern) {
-  const lps = calculateLPS(pattern);
-  const result = [];
-  let i = 0;
-  let j = 0;
+const uniqueArray = array.filter((value, index, self) => {
+  return self.indexOf(value) === index;
+});
 
-  while (i < text.length) {
-    if (pattern[j] === text[i]) {
-      j++;
-      i++;
-    }
-
-    if (j === pattern.length) {
-      result.push(i - j);
-      j = lps[j - 1];
-    } else if (i < text.length && pattern[j] !== text[i]) {
-      if (j !== 0) {
-        j = lps[j - 1];
-      } else {
-        i++;
-      }
-    }
-  }
-
-  return result;
-}
-
-// Example usage
-const text = "ABABDABACDABABCABAB";
-const pattern = "ABABCABAB";
-const matches = KMPSearch(text, pattern);
-console.log(matches); // Output: [10]
+console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
