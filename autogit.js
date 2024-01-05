@@ -1,20 +1,44 @@
-// Function to check if a string is a palindrome
-function isPalindrome(str) {
-  // Convert the string to lowercase and remove all spaces
-  str = str.toLowerCase().replace(/\s/g, "");
+/**
+ * Finds the longest common prefix of a set of strings.
+ *
+ * @param {string[]} strs The set of strings to search.
+ * @return {string} The longest common prefix of the strings in strs.
+ */
+const longestCommonPrefix = (strs) => {
+  // If the array is empty, return an empty string.
+  if (strs.length === 0) {
+    return "";
+  }
 
-  // Check if the string is the same backwards and forwards
-  return str === str.split("").reverse().join("");
-}
+  // Find the shortest string in the array.
+  let shortestStr = strs[0];
+  for (let i = 1; i < strs.length; i++) {
+    if (strs[i].length < shortestStr.length) {
+      shortestStr = strs[i];
+    }
+  }
 
-let str = "racecar";
-console.log(isPalindrome(str)); // true
+  // Start comparing characters from the beginning of the shortest string.
+  let prefix = "";
+  for (let i = 0; i < shortestStr.length; i++) {
+    // Check if all strings in the array have the same character at the current index.
+    let char = shortestStr[i];
+    let allSame = true;
+    for (let j = 1; j < strs.length; j++) {
+      if (strs[j][i] !== char) {
+        allSame = false;
+        break;
+      }
+    }
 
-str = "madam";
-console.log(isPalindrome(str)); // true
+    // If all strings have the same character at the current index, add it to the prefix.
+    if (allSame) {
+      prefix += char;
+    } else {
+      // If not, we've found the longest common prefix.
+      break;
+    }
+  }
 
-str = "hello";
-console.log(isPalindrome(str)); // false
-
-str = "A man, a plan, a canal, Panama!";
-console.log(isPalindrome(str)); // true (ignores spaces and punctuation)
+  return prefix;
+};
