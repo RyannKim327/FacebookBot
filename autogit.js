@@ -1,51 +1,31 @@
-function topologicalSort(graph) {
-  // Create an adjacency list.
-  const adjacencyList = {};
-  for (const vertex of graph.vertices) {
-    adjacencyList[vertex] = [];
-  }
-  for (const edge of graph.edges) {
-    adjacencyList[edge.source].push(edge.destination);
-  }
-
-  // Create a stack.
-  const stack = [];
-
-  // Initialize the visited array.
-  const visited = {};
-  for (const vertex of graph.vertices) {
-    visited[vertex] = false;
+// Function to find the nth node from the end of a linked list
+// head: head of the linked list
+// n: nth node from the end to find
+function findNthNodeFromEnd(head, n) {
+  // If the list is empty or n is invalid, return null
+  if (head === null || n < 1) {
+    return null;
   }
 
-  // Choose a starting vertex.
-  const startingVertex = graph.vertices[0];
+  // Initialize two pointers, one to traverse the list and the other to lag behind by n nodes
+  let current = head;
+  let nthNode = head;
 
-  // Push the starting vertex onto the stack.
-  stack.push(startingVertex);
-
-  // Mark the starting vertex as visited.
-  visited[startingVertex] = true;
-
-  // While the stack is not empty:
-  while (stack.length > 0) {
-    // Pop the top vertex from the stack.
-    const vertex = stack.pop();
-
-    // Add the popped vertex to the topological order.
-    topologicalOrder.push(vertex);
-
-    // For each neighbor of the popped vertex:
-    for (const neighbor of adjacencyList[vertex]) {
-      // If the neighbor has not been visited, push it onto the stack.
-      if (!visited[neighbor]) {
-        stack.push(neighbor);
-      }
-
-      // Mark the neighbor as visited.
-      visited[neighbor] = true;
+  // Move the current pointer forward by n nodes
+  for (let i = 0; i < n; i++) {
+    if (current.next === null) {
+      // If the current pointer reaches the end of the list before moving forward n nodes, then the list is smaller than n, so return null
+      return null;
     }
+    current = current.next;
   }
 
-  // Return the topological order.
-  return topologicalOrder;
+  // Now, move both pointers forward together until the current pointer reaches the end of the list
+  while (current.next !== null) {
+    current = current.next;
+    nthNode = nthNode.next;
+  }
+
+  // Return the nth node from the end
+  return nthNode;
 }
