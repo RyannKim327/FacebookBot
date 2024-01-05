@@ -1,44 +1,53 @@
-/*
-Given two sorted arrays, find the median of the two sorted arrays.
-The median is the middle value of an ordered dataset. 
-It is the value that appears in the middle position in a sorted array.
-If there is an even number of elements, then there are two middle values and the median is their average.
-*/
-const findMedian = (arr1, arr2) => {
-  const mergedArr = mergeArrays(arr1, arr2);
-  if (mergedArr.length === 0) {
-    return 0;
-  } else if (mergedArr.length === 1) {
-    return mergedArr[0];
-  } else if (mergedArr.length % 2 === 1) {
-    return mergedArr[ Math.floor(mergedArr.length / 2)];
-  } else {
-    const middle1 = Math.floor((mergedArr.length - 1) / 2);
-    const middle2 = middle1 + 1;
-    return (mergedArr[middle1] + mergedArr[middle2]) / 2;
-  }
-};
+// Import the Axios library
+import axios from 'axios';
 
-const mergeArrays = (arr1, arr2) => {
-  const mergedArr = [];
-  let i = 0;
-  let j = 0;
-  while (i < arr1.length && j < arr2.length) {
-    if (arr1[i] < arr2[j]) {
-      mergedArr.push(arr1[i]);
-      i++;
-    } else {
-      mergedArr.push(arr2[j]);
-      j++;
-    }
-  }
-  while (i < arr1.length) {
-    mergedArr.push(arr1[i]);
-    i++;
-  }
-  while (j < arr2.length) {
-    mergedArr.push(arr2[j]);
-    j++;
-  }
-  return mergedArr;
-};
+// Make a GET request to a public API
+axios.get('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response => {
+    // Handle the response from the API
+    console.log(response);
+  })
+  .catch(error => {
+    // Handle the error if the API call fails
+    console.error(error);
+  });
+
+// Make a POST request to a public API
+axios.post('https://jsonplaceholder.typicode.com/posts', {
+  title: 'My New Post',
+  body: 'This is the body of my new post',
+  userId: 1
+})
+  .then(response => {
+    // Handle the response from the API
+    console.log(response);
+  })
+  .catch(error => {
+    // Handle the error if the API call fails
+    console.error(error);
+  });
+
+// Make a PUT request to a public API
+axios.put('https://jsonplaceholder.typicode.com/posts/1', {
+  title: 'Updated Title',
+  body: 'Updated Body'
+})
+  .then(response => {
+    // Handle the response from the API
+    console.log(response);
+  })
+  .catch(error => {
+    // Handle the error if the API call fails
+    console.error(error);
+  });
+
+// Make a DELETE request to a public API
+axios.delete('https://jsonplaceholder.typicode.com/posts/1')
+  .then(response => {
+    // Handle the response from the API
+    console.log(response);
+  })
+  .catch(error => {
+    // Handle the error if the API call fails
+    console.error(error);
+  });
