@@ -1,31 +1,45 @@
-function rabinkarpSearch(text, pattern) {
-  // Set some constants
-  const d = 256; // Number of characters in the alphabet
-  const q = 101; // A prime number for modular arithmetic
+// Boyer-Moore-Horspool algorithm for string searching
 
-  // Preprocess the pattern string
-  const patternHash = rabinkarpHash(pattern, d, q);
+// Preprocessing
+function preBmBc(pattern) {
+  let bmBc = new Array(256).fill(-1); // Bad character table
+  for (let i = 0; i < pattern.length; i++) {
+    bmBc[pattern.charCodeAt(i)] = i;
+  }
+  return bmBc;
+}
 
-  // Generate rolling hash values for the text string
-  let windowHash;
-  for (let i = 0; i <= text.length - pattern.length; i++) {
-    // Calculate the rolling hash for the current window
-    if (i === 0) {
-      windowHash = rabinkarpHash(text.substring(i, i + pattern.length), d, q);
-    } else {
-      windowHash = ((windowHash - text.charCodeAt(i - 1) * pow) * d + text.charCodeAt(i + pattern.length - 1)) % q;
-      if (windowHash < 0) { windowHash += q; }
+// String Searching
+function bmHorspool(text, pattern) {
+  let bmBc = preBmBc(pattern);
+  let i = 0;
+  let j = 0;
+
+  while (i <= text.length - pattern.length) {
+    j = pattern.length - 1;
+    while (j >= 0 && pattern.charAt(j) == text.charAt(i + j)) {
+      j--;
     }
-
-    // Compare the hash values
-    if (windowHash === patternHash) {
-      // Check if the characters match as well
-      if (text.substring(i, i + pattern.length) === pattern) {
-        return {found: true, index: i};
+    if (j < 0) {
+      return i;
+    } else {
+      let charCode = text.charCodeAt(i + j);
+      i += j - bmBc[charCode];
+      if (bmBc[charCode] < 0) {
+        i++;
       }
     }
   }
+  return -1;
+}
 
-  // Return the result
-  return {found: false, index: -1};
+// Example usage
+let text = "This is an example text for Boyer-Moore-Horspool algorithm.";
+let pattern = "example";
+let result = bmHorspool(text, pattern);
+
+if (result >= 0) {
+  console.log(`Pattern found at index ${result}.`);
+} else {
+  console.log("Pattern not found.");
 }
