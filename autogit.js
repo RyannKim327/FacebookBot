@@ -1,27 +1,36 @@
-function findFirstRepeatedCharacter(str) {
-  // Convert string to array of characters
-  const charArray = str.split('');
+function lcs(str1, str2) {
+  const m = str1.length;
+  const n = str2.length;
+  const lcs = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0));
 
-  // Initialize hash table to store character counts
-  const charCount = {};
-
-  // Iterate over the array of characters
-  for (let i = 0; i < charArray.length; i++) {
-    const char = charArray[i];
-
-    // Check if character is already in hash table
-    if (charCount[char]) {
-      return char; // Return the character as first repeated character
-    } else {
-      charCount[char] = 1; // Add character to hash table with count 1
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (str1[i - 1] === str2[j - 1]) {
+        lcs[i][j] = lcs[i - 1][j - 1] + 1;
+      } else {
+        lcs[i][j] = Math.max(lcs[i - 1][j], lcs[i][j - 1]);
+      }
     }
   }
 
-  // No repeated character found
-  return -1;
-}
+  let lcsStr = "";
+  let i = m;
+  let j = n;
+  while (i > 0 && j > 0) {
+    if (str1[i - 1] === str2[j - 1]) {
+      lcsStr = str1[i - 1] + lcsStr;
+      i--;
+      j--;
+    } else if (lcs[i - 1][j] > lcs[i][j - 1]) {
+      i--;
+    } else {
+      j--;
+    }
+  }
 
-// Example usage
-const str = 'hello world';
-const result = findFirstRepeatedCharacter(str);
-console.log(`First repeated character: ${result}`); // Output: 'l'
+  return lcsStr;
+}
+const str1 = "ABCDGH";
+const str2 = "AEDFHR";
+const lcsStr = lcs(str1, str2);
+console.log(lcsStr); // "ADH"
