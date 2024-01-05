@@ -1,59 +1,39 @@
-// Function to implement Fibonacci Search
-function fibonacciSearch(arr, n, x) {
-  // Find the smallest Fibonacci Number greater than or equal to n
-  let fibMMm2 = 0; // (m-2)th Fibonacci Number
-  let fibMMm1 = 1; // (m-1)th Fibonacci Number
-  let fibM = fibMMm2 + fibMMm1; // mth Fibonacci Number
-  while (fibM < n) {
-    fibMMm2 = fibMMm1;
-    fibMMm1 = fibM;
-    fibM = fibMMm2 + fibMMm1;
-  }
-
-  // Marks the eliminated range from front
-  let offset = -1;
-
-  // While there are elements to be inspected
-  while (fibM > 1) {
-    // Check if fibMm-1 is a valid location for x
-    let i = Math.min(offset + fibMMm1, n - 1);
-
-    // If x is greater than the value at index fibMm-1, cut the subarray from offset to i
-    if (arr[i] < x) {
-      fibM = fibMMm1;
-      fibMMm1 = fibMMm2;
-      fibMMm2 = fibM - fibMMm1;
-      offset = i;
-    }
-    // If x is less than the value at index fibMm-1, cut the subarray after i+1
-    else if (arr[i] > x) {
-      fibM = fibMMm2;
-      fibMMm1 = fibMMm1 - fibMMm2;
-      fibMMm2 = fibM - fibMMm1;
-    }
-    // element found
-    else {
-      return i;
+// Function to find the median of two sorted arrays
+function findMedianSortedArrays(arr1, arr2) {
+  // Create a merged array of the two sorted arrays
+  let mergedArr = [];
+  let i = 0, j = 0;
+  while (i < arr1.length && j < arr2.length) {
+    if (arr1[i] < arr2[j]) {
+      mergedArr.push(arr1[i]);
+      i++;
+    } else {
+      mergedArr.push(arr2[j]);
+      j++;
     }
   }
-  // comparing the last element with x
-  if (fibMMm1 && arr[offset + 1] == x) {
-    return offset + 1;
+  while (i < arr1.length) {
+    mergedArr.push(arr1[i]);
+    i++;
+  }
+  while (j < arr2.length) {
+    mergedArr.push(arr2[j]);
+    j++;
   }
 
-  // element not found
-  return -1;
+  // Find the median of the merged array
+  let median;
+  const halfLength = Math.floor(mergedArr.length / 2);
+  if (mergedArr.length % 2 === 0) {
+    median = (mergedArr[halfLength] + mergedArr[halfLength - 1]) / 2;
+  } else {
+    median = mergedArr[halfLength];
+  }
+
+  return median;
 }
 
-// Driver code
-let arr = [10, 12, 13, 16, 18, 19, 20, 21, 22, 23, 24, 33, 35];
-let n = arr.length;
-let x = 13;
-
-let result = fibonacciSearch(arr, n, x);
-
-if (result == -1) {
-  console.log("Element not found");
-} else {
-  console.log("Element found at index", result);
-}
+// Example usage
+const arr1 = [1, 3, 5, 7, 9];
+const arr2 = [2, 4, 6, 8, 10];
+console.log(findMedianSortedArrays(arr1, arr2)); // Output: 5.5
