@@ -1,33 +1,59 @@
-// Create a new instance of AsyncTask
+class ListNode {
+  constructor(val, next = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
 
-var MyAsyncTask = Java.extend(android.os.AsyncTask, {
-    doInBackground: function(params) {
-        // This method runs in the background thread
-        // Perform the network connection here
-        var url = new java.net.URL(params[0]);
-        var connection = url.openConnection();
-        var inputStream = connection.getInputStream();
-        var bufferedReader = new java.io.BufferedReader(new java.io.InputStreamReader(inputStream));
-        var result = new java.lang.StringBuilder();
-        var line;
-        
-        while ((line = bufferedReader.readLine()) != null) {
-            result.append(line);
-        }
-        
-        bufferedReader.close();
-        return result.toString();
-    },
+const isPalindrome = (head) => {
+  if (!head || !head.next) {
+    return true; // an empty list or single node is a palindrome
+  }
 
-    onPostExecute: function(result) {
-        // This method runs in the UI thread after doInBackground is finished
-        console.log(result);
-        // Do something with the result
+  // Find the middle of the linked list
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  // Reverse the second half of the linked list
+  let reversed = reverseLinkedList(slow);
+
+  // Compare the reversed second half with the first half
+  while (reversed) {
+    if (head.val !== reversed.val) {
+      return false; // not a palindrome
     }
-});
+    head = head.next;
+    reversed = reversed.next;
+  }
 
-// Execute the async task
+  return true; // it is a palindrome
+};
 
-var url = "https://www.example.com/api/data";
-var asyncTask = new MyAsyncTask();
-asyncTask.execute(url);
+const reverseLinkedList = (head) => {
+  let prev = null;
+  let curr = head;
+
+  while (curr) {
+    const next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+
+  return prev; // new head of the reversed list
+};
+const node1 = new ListNode(1);
+const node2 = new ListNode(2);
+const node3 = new ListNode(3);
+const node4 = new ListNode(2);
+const node5 = new ListNode(1);
+node1.next = node2;
+node2.next = node3;
+node3.next = node4;
+node4.next = node5;
+
+console.log(isPalindrome(node1)); // Output: true
