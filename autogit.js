@@ -1,20 +1,18 @@
-function insertionSort(array) {
-  for (let i = 1; i < array.length; i++) {
-    let key = array[i];
-    let j = i - 1;
-    
-    while (j >= 0 && array[j] > key) {
-      array[j + 1] = array[j];
-      j--;
+function isPalindrome(str) {
+  let left = 0;
+  let right = str.length - 1;
+
+  while (left < right) {
+    if (str.charAt(left) !== str.charAt(right)) {
+      return false;
     }
-    
-    array[j + 1] = key;
+    left++;
+    right--;
   }
 
-  return array;
+  return true;
 }
 
-// Example usage:
-const unsortedArray = [4, 2, 6, 8, 1, 3, 5, 7];
-const sortedArray = insertionSort(unsortedArray);
-console.log(sortedArray);
+// Examples:
+console.log(isPalindrome("racecar")); // true
+console.log(isPalindrome("hello")); // false
