@@ -1,51 +1,31 @@
-// JavaScript code to connect to an Android async task
+// Selection sort algorithm implementation in JavaScript
 
-// Create a new JavaScript object to represent the Android async task
-var task = new AndroidAsyncTask();
+// Function to sort an array using selection sort
+function selectionSort(array) {
+  // Loop through the array, starting from the first element
+  for (let i = 0; i < array.length; i++) {
+    // Set the current element as the minimum element
+    let minIndex = i;
 
-// Define the task's parameters
-var params = ["param1", "param2"];
+    // Loop through the remaining elements in the array
+    for (let j = i + 1; j < array.length; j++) {
+      // If the current element is greater than the minimum element, update the minimum element
+      if (array[j] < array[minIndex]) {
+        minIndex = j;
+      }
+    }
 
-// Execute the task
-task.execute(params);
+    // Swap the current element with the minimum element
+    let temp = array[i];
+    array[i] = array[minIndex];
+    array[minIndex] = temp;
+  }
 
-// Define a callback function to handle the task's result
-function onTaskCompleted(result) {
-  // The task's result is passed as the first argument to the callback function
-  console.log("Task completed with result: " + result);
+  // Return the sorted array
+  return array;
 }
 
-// Set the task's callback function
-task.setCallback(onTaskCompleted);
-// Java code to create an Android async task that can be called from JavaScript code
-
-public class AndroidAsyncTask extends AsyncTask<String, Void, String> {
-
-  // The task's callback function
-  private Callback callback;
-
-  // Set the task's callback function
-  public void setCallback(Callback callback) {
-    this.callback = callback;
-  }
-
-  // The task's doInBackground method
-  @Override
-  protected String doInBackground(String... params) {
-    // Perform the task's operations here
-    String result = "Task completed successfully";
-    return result;
-  }
-
-  // The task's onPostExecute method
-  @Override
-  protected void onPostExecute(String result) {
-    // Call the task's callback function with the task's result
-    callback.onTaskCompleted(result);
-  }
-
-  // Interface to define the task's callback function
-  public interface Callback {
-    void onTaskCompleted(String result);
-  }
-}
+// Example usage
+const unsortedArray = [5, 3, 1, 2, 4];
+const sortedArray = selectionSort(unsortedArray);
+console.log(sortedArray); // Output: [1, 2, 3, 4, 5]
