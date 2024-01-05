@@ -1,22 +1,39 @@
-// Function to perform insertion sort
-function insertionSort(array) {
-  for (let i = 1; i < array.length; i++) {
-    let key = array[i];
-    let j = i - 1;
+function boyerMooreSearch(text, pattern) {
+  // Check if pattern is empty
+  if (pattern === "") {
+    return [];
+  }
 
-    // Move elements of array[0...i-1], that are greater than key,
-    // to one position ahead of their current position
-    while (j >= 0 && array[j] > key) {
-      array[j + 1] = array[j];
+  // Preprocess pattern
+  const lastOccurrenceTable = {};
+  for (let i = 0; i < pattern.length; i++) {
+    lastOccurrenceTable[pattern[i]] = i;
+  }
+
+  // Search for pattern in text
+  const matches = [];
+  let i = pattern.length - 1;
+  while (i < text.length) {
+    // Compare pattern and text
+    let j = pattern.length - 1;
+    while (j >= 0 && pattern[j] === text[i - j]) {
       j--;
     }
 
-    // Insert key at its correct position in sorted array
-    array[j + 1] = key;
+    // If all characters matched
+    if (j === -1) {
+      matches.push(i - pattern.length + 1);
+      // Shift pattern forward to the next character after the last match
+      i += pattern.length - lastOccurrenceTable[text[i]];
+    } else {
+      // Shift pattern forward to the last occurrence of the character that caused the mismatch
+      i += Math.max(1, j - lastOccurrenceTable[text[i]]);
+    }
   }
-}
 
-// Testing the insertionSort function
-let array = [5, 3, 1, 2, 4];
-insertionSort(array);
-console.log("Sorted array: ", array);
+  return matches;
+}
+const text = "this is a sample text to search in";
+const pattern = "sample";
+const matches = boyerMooreSearch(text, pattern);
+console.log(matches); // Output: [16]
