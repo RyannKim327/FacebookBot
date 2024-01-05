@@ -1,20 +1,66 @@
-function isAnagram(str1, str2) {
-  // Step 1: Convert to lowercase
-  str1 = str1.toLowerCase();
-  str2 = str2.toLowerCase();
+class Node {
+  constructor(data, next = null) {
+    this.data = data;
+    this.next = next;
+  }
+}
 
-  // Step 2: Remove non-alphabetic characters
-  str1 = str1.replace(/[^a-z]/g, '');
-  str2 = str2.replace(/[^a-z]/g, '');
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
 
-  // Step 3: Sort the character arrays
-  const sortedStr1 = str1.split('').sort().join('');
-  const sortedStr2 = str2.split('').sort().join('');
+  // Method to reverse the linked list
+  reverse() {
+    let current = this.head;
+    let prev = null;
+    let next = null;
 
-  // Step 6: Compare the sorted strings
-  return sortedStr1 === sortedStr2;
+    while (current !== null) {
+      // Store the next node
+      next = current.next;
+      // Change next pointer of current node to the previous node
+      current.next = prev;
+      // Move prev and current one step forward
+      prev = current;
+      current = next;
+    }
+    // Set the new head as the last prev node
+    this.head = prev;
+  }
+
+  // Method to insert elements at the beginning of the linked list
+  insertAtBeginning(data) {
+    const newNode = new Node(data);
+    newNode.next = this.head;
+    this.head = newNode;
+  }
+
+  // Method to print the linked list
+  printList() {
+    let currentNode = this.head;
+    let listString = "";
+
+    while (currentNode) {
+      listString += currentNode.data + " -> ";
+      currentNode = currentNode.next;
+    }
+
+    listString += "null";
+    console.log(listString);
+  }
 }
 
 // Example usage:
-console.log(isAnagram('listen', 'silent')); // true
-console.log(isAnagram('hello', 'hi')); // false
+const linkedList = new LinkedList();
+linkedList.insertAtBeginning(3);
+linkedList.insertAtBeginning(2);
+linkedList.insertAtBeginning(1);
+
+console.log("Original linked list:");
+linkedList.printList();
+
+linkedList.reverse();
+
+console.log("Reversed linked list:");
+linkedList.printList();
