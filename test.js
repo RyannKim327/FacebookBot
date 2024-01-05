@@ -29,7 +29,7 @@ const rd = readline.createInterface({
 // 	return com
 // }))
 
-let commits = 5
+let commits = 250
 
 let _commitments = 1
 
