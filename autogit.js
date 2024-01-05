@@ -1,20 +1,22 @@
-function isPrime(num) {
-  // 1 and numbers less than 1 are not prime
-  if (num <= 1) {
-    return false;
+function burrowsWheelerTransform(input) {
+  const cyclicShifts = [];
+  
+  // Generate all cyclic shifts
+  for (let i = 0; i < input.length; i++) {
+    cyclicShifts.push(input.substr(i) + input.substr(0, i));
   }
-
-  // Check prime numbers from 2 to the square root of num
-  for (let i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) {
-      // num is divisible by i, so it's not prime
-      return false;
-    }
-  }
-
-  return true;
+  
+  // Sort cyclic shifts in lexicographic order
+  cyclicShifts.sort();
+  
+  // Find the last column of sorted cyclic shifts
+  const transformedString = cyclicShifts.map(shift => shift.charAt(input.length - 1)).join("");
+  
+  return transformedString;
 }
 
-// Usage
-console.log(isPrime(17)); // Output: true
-console.log(isPrime(21)); // Output: false
+// Example usage
+const inputString = "banana";
+const transformed = burrowsWheelerTransform(inputString);
+console.log(transformed);
+annb$aa
