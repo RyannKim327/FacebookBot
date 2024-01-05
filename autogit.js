@@ -1,20 +1,26 @@
-// Function to calculate the area of a triangle
-function triangleArea(base, height) {
-  // Check if the base and height are valid numbers
-  if (typeof base !== "number" || typeof height !== "number") {
-    throw new Error("Base and height must be numbers");
+function findFirstRepeatedCharacter(str) {
+  // Check if the string is empty
+  if (!str || str.length === 0) {
+    return null;
   }
-  
-  // Calculate the area of the triangle
-  const area = 0.5 * base * height;
-  
-  // Return the area
-  return area;
+
+  // Create a map to store the characters and their counts
+  const charMap = {};
+
+  // Iterate over the string
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+
+    // Check if the character is already in the map
+    if (charMap[char]) {
+      // If the character is already in the map, return it
+      return char;
+    } else {
+      // If the character is not in the map, add it to the map
+      charMap[char] = 1;
+    }
+  }
+
+  // If no repeated character is found, return null
+  return null;
 }
-
-// Example usage
-const base = 10;
-const height = 5;
-const area = triangleArea(base, height);
-
-console.log(`The area of the triangle is ${area} square units.`);
