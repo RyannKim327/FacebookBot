@@ -1,44 +1,44 @@
-/**
- * Finds the longest common prefix of a set of strings.
- *
- * @param {string[]} strs The set of strings to search.
- * @return {string} The longest common prefix of the strings in strs.
- */
-const longestCommonPrefix = (strs) => {
-  // If the array is empty, return an empty string.
-  if (strs.length === 0) {
-    return "";
+// Function to find the longest increasing subsequence
+function longestIncreasingSubsequence(arr) {
+  if (arr.length === 0) {
+    return [];
   }
 
-  // Find the shortest string in the array.
-  let shortestStr = strs[0];
-  for (let i = 1; i < strs.length; i++) {
-    if (strs[i].length < shortestStr.length) {
-      shortestStr = strs[i];
-    }
-  }
+  // Initialize the length of the longest increasing subsequence for each element
+  const lengths = new Array(arr.length).fill(1);
+  // Initialize the previous element in the longest increasing subsequence for each element
+  const previous = new Array(arr.length).fill(-1);
 
-  // Start comparing characters from the beginning of the shortest string.
-  let prefix = "";
-  for (let i = 0; i < shortestStr.length; i++) {
-    // Check if all strings in the array have the same character at the current index.
-    let char = shortestStr[i];
-    let allSame = true;
-    for (let j = 1; j < strs.length; j++) {
-      if (strs[j][i] !== char) {
-        allSame = false;
-        break;
+  // Iterate over the array
+  for (let i = 1; i < arr.length; i++) {
+    // For each element, find the longest increasing subsequence ending at that element
+    for (let j = 0; j < i; j++) {
+      if (arr[i] > arr[j] && lengths[i] < lengths[j] + 1) {
+        lengths[i] = lengths[j] + 1;
+        previous[i] = j;
       }
     }
+  }
 
-    // If all strings have the same character at the current index, add it to the prefix.
-    if (allSame) {
-      prefix += char;
-    } else {
-      // If not, we've found the longest common prefix.
-      break;
+  // Find the index of the element with the longest increasing subsequence
+  let maxIndex = 0;
+  for (let i = 1; i < arr.length; i++) {
+    if (lengths[i] > lengths[maxIndex]) {
+      maxIndex = i;
     }
   }
 
-  return prefix;
-};
+  // Reconstruct the longest increasing subsequence
+  const longestSubsequence = [];
+  while (maxIndex !== -1) {
+    longestSubsequence.unshift(arr[maxIndex]);
+    maxIndex = previous[maxIndex];
+  }
+
+  return longestSubsequence;
+}
+
+// Example usage
+const arr = [3, 1, 4, 1, 5, 9, 2, 6];
+const longestSubsequence = longestIncreasingSubsequence(arr);
+console.log(longestSubsequence); // [1, 4, 5, 9]
