@@ -1,45 +1,58 @@
-function interpolationSearch(arr, target) {
-  // Check if array is empty.
-  if (arr.length === 0) {
-    return -1;
+class SuffixTree {
+  constructor(string) {
+    this.root = {};
+    this.string = string;
+    this.insert(string);
   }
 
-  // Find the index of the element using interpolation search.
-  let low = 0;
-  let high = arr.length - 1;
-  while (low <= high) {
-    // Calculate the position of the target element.
-    let pos = low + Math.floor(((high - low) / (arr[high] - arr[low])) * (target - arr[low]));
-
-    // Check if the target element is at the calculated position.
-    if (arr[pos] === target) {
-      return pos;
+  insert(string) {
+    let current = this.root;
+    for (let i = 0; i < string.length; i++) {
+      if (!current[string[i]]) {
+        current[string[i]] = {};
+      }
+      current = current[string[i]];
     }
-
-    // Adjust the search interval based on the comparison.
-    if (arr[pos] < target) {
-      low = pos + 1;
-    } else {
-      high = pos - 1;
-    }
+    current['end'] = true;
   }
 
-  // Return -1 if the target element was not found.
-  return -1;
+  search(query) {
+    let current = this.root;
+    for (let i = 0; i < query.length; i++) {
+      if (!current[query[i]]) {
+        return false;
+      }
+      current = current[query[i]];
+    }
+    return !!current['end'];
+  }
+
+  getLongestCommonSubstring() {
+    let maxLen = 0;
+    let lcs = "";
+    this._getLongestCommonSubstring(this.root, "", maxLen, lcs);
+    return lcs;
+  }
+
+  _getLongestCommonSubstring(node, currentLCS, maxLen, lcs) {
+    if (!node) {
+      return;
+    }
+    if (node['end']) {
+      if (currentLCS.length > maxLen) {
+        maxLen = currentLCS.length;
+        lcs = currentLCS;
+      }
+    }
+    for (let key in node) {
+      if (key !== 'end') {
+        this._getLongestCommonSubstring(node[key], currentLCS + key, maxLen, lcs);
+      }
+    }
+  }
 }
-// Input array.
-const arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 
-// Target element to search for.
-const target = 11;
-
-// Perform interpolation search.
-const index = interpolationSearch(arr, target);
-
-// Print the result.
-if (index >= 0) {
-  console.log(`Element ${target} found at index ${index}.`);
-} else {
-  console.log("Element not found.");
-}
-Element 11 found at index 5.
+const suffixTree = new SuffixTree('banana');
+console.log(suffixTree.search('ana')); // true
+console.log(suffixTree.search('app')); // false
+console.log(suffixTree.getLongestCommonSubstring()); // 'ana'
