@@ -1,45 +1,26 @@
-// Boyer-Moore-Horspool algorithm for string searching
+function binarySearch(array, target) {
+  let low = 0;
+  let high = array.length - 1;
 
-// Preprocessing
-function preBmBc(pattern) {
-  let bmBc = new Array(256).fill(-1); // Bad character table
-  for (let i = 0; i < pattern.length; i++) {
-    bmBc[pattern.charCodeAt(i)] = i;
-  }
-  return bmBc;
-}
+  while (low <= high) {
+    let mid = Math.floor((low + high) / 2);
+    let guess = array[mid];
 
-// String Searching
-function bmHorspool(text, pattern) {
-  let bmBc = preBmBc(pattern);
-  let i = 0;
-  let j = 0;
-
-  while (i <= text.length - pattern.length) {
-    j = pattern.length - 1;
-    while (j >= 0 && pattern.charAt(j) == text.charAt(i + j)) {
-      j--;
-    }
-    if (j < 0) {
-      return i;
+    if (guess === target) {
+      return mid;
+    } else if (guess < target) {
+      low = mid + 1;
     } else {
-      let charCode = text.charCodeAt(i + j);
-      i += j - bmBc[charCode];
-      if (bmBc[charCode] < 0) {
-        i++;
-      }
+      high = mid - 1;
     }
   }
+
   return -1;
 }
+const array = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 
-// Example usage
-let text = "This is an example text for Boyer-Moore-Horspool algorithm.";
-let pattern = "example";
-let result = bmHorspool(text, pattern);
+const target = 13;
 
-if (result >= 0) {
-  console.log(`Pattern found at index ${result}.`);
-} else {
-  console.log("Pattern not found.");
-}
+const result = binarySearch(array, target);
+
+console.log(result); // Output: 6
