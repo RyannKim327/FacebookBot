@@ -1,37 +1,38 @@
-// Function to remove all vowels from a string
-function removeVowels(str) {
-  // Create an empty string to store the result
-  let result = "";
+function interpolationSearch(arr, value) {
+  let low = 0;
+  let high = arr.length - 1;
 
-  // Iterate over each character in the input string
-  for (let i = 0; i < str.length; i++) {
-    // Check if the current character is a vowel
-    if (
-      str[i] === "a" ||
-      str[i] === "e" ||
-      str[i] === "i" ||
-      str[i] === "o" ||
-      str[i] === "u" ||
-      str[i] === "A" ||
-      str[i] === "E" ||
-      str[i] === "I" ||
-      str[i] === "O" ||
-      str[i] === "U"
-    ) {
-      // If it is a vowel, skip it and move to the next character
-      continue;
-    } else {
-      // If it is not a vowel, append it to the result string
-      result += str[i];
+  while (low <= high) {
+    // Calculate the interpolation index
+    let pos = low + Math.floor(((high - low) / (arr[high] - arr[low])) * (value - arr[low]));
+
+    // Check if the value is found at the interpolation index
+    if (arr[pos] === value) {
+      return pos;
+    }
+
+    // If the value is less than the value at the interpolation index, search in the left subarray
+    else if (arr[pos] > value) {
+      high = pos - 1;
+    }
+
+    // If the value is greater than the value at the interpolation index, search in the right subarray
+    else {
+      low = pos + 1;
     }
   }
 
-  // Return the result string
-  return result;
+  // Value not found
+  return -1;
 }
+const arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+const value = 11;
 
-// Test the function with a sample string
-const str = "Hello, World!";
-const result = removeVowels(str);
+const index = interpolationSearch(arr, value);
 
-console.log(result); // Output: "Hll, Wrld!"
+if (index !== -1) {
+  console.log(`Value ${value} found at index ${index}`);
+} else {
+  console.log(`Value ${value} not found in the array`);
+}
+Value 11 found at index 5
