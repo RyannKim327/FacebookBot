@@ -1,12 +1,17 @@
-const array = [1, 2, 3, 4, 2, 3, 5];
+function isPalindrome(str) {
+  // Remove non-alphanumeric characters and convert to lowercase
+  const alphanumericStr = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
 
-const uniqueArray = Array.from(new Set(array));
+  // Create the reversed version of the string
+  const reversedStr = alphanumericStr.split('').reverse().join('');
 
-console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
-const array = [1, 2, 3, 4, 2, 3, 5];
+  // Compare original string with the reversed string
+  return alphanumericStr === reversedStr;
+}
 
-const uniqueArray = array.filter((value, index, self) => {
-  return self.indexOf(value) === index;
-});
+// Example usage
+const str1 = "A man, a plan, a canal, Panama!";
+console.log(isPalindrome(str1)); // Output: true
 
-console.log(uniqueArray); // Output: [1, 2, 3, 4, 5]
+const str2 = "Hello world";
+console.log(isPalindrome(str2)); // Output: false
