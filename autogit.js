@@ -1,54 +1,50 @@
-function createKMPTable(pattern) {
-  const table = Array(pattern.length).fill(0);
+class Node {
+  constructor(value, children) {
+    this.value = value;
+    this.children = children || [];
+  }
+}
 
-  let prefixIndex = 0;
-  let suffixIndex = 1;
+function breadthLimitedSearch(startNode, targetValue, depthLimit) {
+  let queue = [startNode];
+  let depth = 0;
+  
+  while (queue.length > 0 && depth <= depthLimit) {
+    let currentNode = queue.shift();
 
-  while (suffixIndex < pattern.length) {
-    if (pattern[prefixIndex] === pattern[suffixIndex]) {
-      table[suffixIndex] = prefixIndex + 1;
-      prefixIndex++;
-      suffixIndex++;
-    } else if (prefixIndex !== 0) {
-      prefixIndex = table[prefixIndex - 1];
-    } else {
-      table[suffixIndex] = 0;
-      suffixIndex++;
+    if (currentNode.value === targetValue) {
+      return currentNode;
     }
+    
+    if (depth < depthLimit) {
+      queue.push(...currentNode.children);
+    }
+
+    depth++;
   }
 
-  return table;
+  return null;
 }
-function searchByText(text, pattern) {
-  const table = createKMPTable(pattern);
 
-  let textIndex = 0;
-  let patternIndex = 0;
-  const indexes = [];
+// Example usage:
+let graph = new Node('A', [
+  new Node('B', [
+    new Node('C'),
+    new Node('D'),
+  ]),
+  new Node('E', [
+    new Node('F'),
+    new Node('G', [
+      new Node('H'),
+      new Node('I'),
+    ]),
+  ]),
+]);
 
-  while (textIndex < text.length) {
-    if (text[textIndex] === pattern[patternIndex]) {
-      textIndex++;
-      patternIndex++;
-    }
+let targetNode = breadthLimitedSearch(graph, 'H', 2);
 
-    if (patternIndex === pattern.length) {
-      indexes.push(textIndex - patternIndex);
-      patternIndex = table[patternIndex - 1];
-    } else if (textIndex < text.length && text[textIndex] !== pattern[patternIndex]) {
-      if (patternIndex !== 0) {
-        patternIndex = table[patternIndex - 1];
-      } else {
-        textIndex++;
-      }
-    }
-  }
-
-  return indexes;
+if (targetNode) {
+  console.log(`Target node found: ${targetNode.value}`);
+} else {
+  console.log('Target node not found within depth limit.');
 }
-const text = "ABABDABACDABABCABAB";
-const pattern = "ABABCABAB";
-
-const indexes = searchByText(text, pattern);
-
-console.log(indexes); // Output: [10]
