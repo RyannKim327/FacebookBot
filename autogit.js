@@ -1,59 +1,23 @@
-class ListNode {
-  constructor(val, next = null) {
-    this.val = val;
-    this.next = next;
+function findFirstNonRepeatingChar(str) {
+  const charFreqMap = {};
+
+  // Loop through the string to create the character frequency map
+  for (let char of str) {
+    charFreqMap[char] = (charFreqMap[char] || 0) + 1;
   }
+
+  // Loop through the string again to find the first non-repeating character
+  for (let char of str) {
+    if (charFreqMap[char] === 1) {
+      return char;
+    }
+  }
+
+  // No non-repeating character found
+  return null;
 }
 
-const isPalindrome = (head) => {
-  if (!head || !head.next) {
-    return true; // an empty list or single node is a palindrome
-  }
-
-  // Find the middle of the linked list
-  let slow = head;
-  let fast = head;
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-  }
-
-  // Reverse the second half of the linked list
-  let reversed = reverseLinkedList(slow);
-
-  // Compare the reversed second half with the first half
-  while (reversed) {
-    if (head.val !== reversed.val) {
-      return false; // not a palindrome
-    }
-    head = head.next;
-    reversed = reversed.next;
-  }
-
-  return true; // it is a palindrome
-};
-
-const reverseLinkedList = (head) => {
-  let prev = null;
-  let curr = head;
-
-  while (curr) {
-    const next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
-  }
-
-  return prev; // new head of the reversed list
-};
-const node1 = new ListNode(1);
-const node2 = new ListNode(2);
-const node3 = new ListNode(3);
-const node4 = new ListNode(2);
-const node5 = new ListNode(1);
-node1.next = node2;
-node2.next = node3;
-node3.next = node4;
-node4.next = node5;
-
-console.log(isPalindrome(node1)); // Output: true
+// Example usage:
+const str = "aabbccdeeffg";
+const firstNonRepeatingChar = findFirstNonRepeatingChar(str);
+console.log(firstNonRepeatingChar); // Output: "d"
