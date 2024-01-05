@@ -1,20 +1,53 @@
-function findMiddleElement(head) {
-  let slow = head;
-  let fast = head;
-
-  while (fast !== null && fast.next !== null) {
-    slow = slow.next;
-    fast = fast.next.next;
+class Stack {
+  constructor() {
+    this.items = [];
   }
 
-  return slow;
+  // Adds an element to the top of the stack
+  push(element) {
+    this.items.push(element);
+  }
+
+  // Removes and returns the top element of the stack
+  pop() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    return this.items.pop();
+  }
+
+  // Returns the top element of the stack without removing it
+  peek() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    return this.items[this.items.length - 1];
+  }
+
+  // Returns true if the stack is empty, false otherwise
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  // Returns the size of the stack
+  size() {
+    return this.items.length;
+  }
+
+  // Prints the contents of the stack
+  printStack() {
+    console.log(this.items);
+  }
 }
-let head = new ListNode(1);
-head.next = new ListNode(2);
-head.next.next = new ListNode(3);
-head.next.next.next = new ListNode(4);
-head.next.next.next.next = new ListNode(5);
 
-let middleElement = findMiddleElement(head);
-
-console.log(middleElement.val); // Output: 3
+// Example usage:
+const stack = new Stack();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+console.log("Stack: ");
+stack.printStack();
+console.log("Top element:", stack.peek());
+console.log("Popped element:", stack.pop());
+console.log("Stack: ");
+stack.printStack();
