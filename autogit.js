@@ -1,20 +1,15 @@
-// Function to find the middle element of a linked list
-const findMiddleElement = (head) => {
-  // Check if the linked list is empty
-  if (head === null) {
-    return null;
-  }
+// Function to check if a string is a valid palindrome
+function isPalindrome(str) {
+  // Convert the string to lowercase and remove all non-alphanumeric characters
+  const cleanStr = str.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-  // Initialize two pointers: slow and fast
-  let slow = head;
-  let fast = head;
+  // Check if the cleaned string is the same forwards and backwards
+  return cleanStr === cleanStr.split("").reverse().join("");
+}
 
-  // Move the slow pointer one node at a time, and the fast pointer two nodes at a time
-  while (fast !== null && fast.next !== null) {
-    slow = slow.next;
-    fast = fast.next.next;
-  }
+// Test the function with some example strings
+const testStrings = ["racecar", "madam", "hello", "1221", "A man, a plan, a canal, Panama!"];
 
-  // Return the slow pointer, which will be pointing to the middle element of the linked list
-  return slow;
-};
+for (const testString of testStrings) {
+  console.log(`${testString} is a palindrome: ${isPalindrome(testString)}`);
+}
