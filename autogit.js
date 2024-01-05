@@ -1,10 +1,44 @@
-// Array of numbers
-const numbers = [10, 5, 20, 15, 8];
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+class Queue {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+}
+enqueue(value) {
+  const newNode = new Node(value);
 
-// Method 1: Using spread operator
-const max1 = Math.max(...numbers);
-console.log(max1); // Output: 20
+  if (!this.head) {
+    this.head = newNode;
+    this.tail = newNode;
+  } else {
+    this.tail.next = newNode;
+    this.tail = newNode;
+  }
+}
+dequeue() {
+  if (!this.head) {
+    return null;
+  }
 
-// Method 2: Using apply() method
-const max2 = Math.max.apply(null, numbers);
-console.log(max2); // Output: 20
+  const dequeuedValue = this.head.value;
+  this.head = this.head.next;
+
+  if (!this.head) {
+    this.tail = null;
+  }
+
+  return dequeuedValue;
+}
+peek() {
+  if (!this.head) {
+    return null;
+  }
+
+  return this.head.value;
+}
