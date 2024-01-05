@@ -1,24 +1,28 @@
-let str = "Hello, world!";
-let reversedStr = str.reverse();
+const str1 = "Hello";
+const str2 = "World!";
 
-console.log(reversedStr); // !dlrow ,olleH
-let str = "Hello, world!";
-let reversedStr = str.split("").reverse().join("");
+// Concatenate the two strings using the `+` operator
+const concatenatedString = str1 + str2;
 
-console.log(reversedStr); // !dlrow ,olleH
-let str = "Hello, world!";
-let reversedStr = "";
+console.log(concatenatedString); // Output: "HelloWorld!"
+const str1 = "Hello";
+const str2 = "World!";
 
-for (let i = str.length - 1; i >= 0; i--) {
-  reversedStr += str[i];
-}
+// Concatenate the two strings using the `concat()` method
+const concatenatedString = str1.concat(str2);
 
-console.log(reversedStr); // !dlrow ,olleH
-let str = "Hello, world!";
-let reversedStr = [...str].reverse().join("");
+console.log(concatenatedString); // Output: "HelloWorld!"
+let str1 = "Hello";
+const str2 = "World!";
 
-console.log(reversedStr); // !dlrow ,olleH
-let str = "Hello, world!";
-let reversedStr = str.split("").reduce((reversed, char) => char + reversed, "");
+// Concatenate the two strings using the `+=` operator
+str1 += str2;
 
-console.log(reversedStr); // !dlrow ,olleH
+console.log(str1); // Output: "HelloWorld!"
+const str1 = "Hello";
+const str2 = "World!";
+
+// Concatenate the two strings using Template Literals
+const concatenatedString = `${str1} ${str2}`;
+
+console.log(concatenatedString); // Output: "Hello World!"
