@@ -1,59 +1,39 @@
-// Rabin-Karp algorithm for string searching
+/*
+Given a linked list, find the nth node from the end of the list.
 
-// Preprocessing
-function preProcess(pattern, q) {
-  const m = pattern.length;
-  const hashPattern = new Array(m);
-  hashPattern[0] = pattern.charCodeAt(0);
-  for (let i = 1; i < m; i++) {
-    hashPattern[i] = (hashPattern[i - 1] * 31 + pattern.charCodeAt(i)) % q;
-  }
-  return hashPattern;
-}
+Example:
+Input: [1, 2, 3, 4, 5], n = 2
+Output: 4
 
-// Hash function
-function hashString(string, start, end) {
-  let hashValue = 0;
-  for (let i = start; i < end; i++) {
-    hashValue = (hashValue * 31 + string.charCodeAt(i)) % q;
-  }
-  return hashValue;
-}
-
-// Rabin-Karp algorithm for string searching
-function rabinKarp(text, pattern) {
-  const n = text.length;
-  const m = pattern.length;
-  if (m > n) {
-    return [];
+Strategy:
+1. Find the length of the linked list.
+2. Subtract n from the length to find the index of the nth node from the end.
+3. Traverse the linked list from the beginning, stopping at the index found in step 2.
+4. Return the node at the index found in step 3.
+*/
+const findNthNodeFromEnd = (head, n) => {
+  // If the linked list is empty or n is invalid, return null.
+  if (!head || n <= 0) {
+    return null;
   }
 
-  const q = 1000007; // A large prime number for modulo
-  const hashPattern = preProcess(pattern, q);
-
-  let hashText = hashString(text, 0, m);
-
-  const matches = [];
-
-  for (let i = 0; i <= n - m; i++) {
-    if (hashText === hashPattern) {
-      if (pattern === text.substring(i, i + m)) {
-        matches.push(i);
-      }
-    }
-
-    if (i < n - m) {
-      hashText =
-        ((hashText - text.charCodeAt(i) * Math.pow(31, m - 1)) % q + q) % q;
-      hashText = (hashText * 31 + text.charCodeAt(i + m)) % q;
-    }
+  // Find the length of the linked list.
+  let length = 0;
+  let current = head;
+  while (current) {
+    length++;
+    current = current.next;
   }
 
-  return matches;
-}
-const text = "This is an example text for string searching.";
-const pattern = "example";
+  // Subtract n from the length to find the index of the nth node from the end.
+  const index = length - n;
 
-const matches = rabinKarp(text, pattern);
+  // Traverse the linked list from the beginning, stopping at the index found in step 2.
+  current = head;
+  for (let i = 0; i < index; i++) {
+    current = current.next;
+  }
 
-console.log(matches); // Output: [10]
+  // Return the node at the index found in step 3.
+  return current;
+};
