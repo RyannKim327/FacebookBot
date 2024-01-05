@@ -1,18 +1,17 @@
-function isAnagram(string1, string2) {
-  // Convert both strings to lowercase.
-  string1 = string1.toLowerCase();
-  string2 = string2.toLowerCase();
+// Import the necessary modules.
+const fetch = require('node-fetch');
+const fs = require('fs');
 
-  // Sort the characters in each string alphabetically.
-  string1 = string1.split('').sort().join('');
-  string2 = string2.split('').sort().join('');
+// Define the URL of the API endpoint.
+const endpoint = 'https://example.com/api/v1/endpoint';
 
-  // Compare the sorted strings.
-  return string1 === string2;
-}
-
-// Test the function with different input strings.
-console.log(isAnagram('hello', 'olleh')); // true
-console.log(isAnagram('listen', 'silent')); // true
-console.log(isAnagram('dormitory', 'dirtyroom')); // true
-console.log(isAnagram('cat', 'dog')); // false
+// Make a GET request to the API endpoint.
+fetch(endpoint)
+  .then(response => response.json())
+  .then(data => {
+    // Save the data to a file.
+    fs.writeFileSync('data.json', JSON.stringify(data));
+  })
+  .catch(error => {
+    console.error(error);
+  });
