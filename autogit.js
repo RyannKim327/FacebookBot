@@ -1,10 +1,58 @@
-function getRandomNumber(min, max) {
-  // The Math.random() function returns a random number between 0 (inclusive) and 1 (exclusive)
-  // We multiply it by (max - min + 1) so that the range is inclusive of both min and max
-  // Then we use the Math.floor() function to round down the number to the nearest integer
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+class Graph {
+  constructor() {
+    this.adjList = new Map();
+  }
+
+  addVertex(vertex) {
+    this.adjList.set(vertex, []);
+  }
+
+  addEdge(vertex1, vertex2) {
+    this.adjList.get(vertex1).push(vertex2);
+    this.adjList.get(vertex2).push(vertex1);
+  }
+
+  getAdjacencyList() {
+    return this.adjList;
+  }
+}
+function dfs(graph, startVertex) {
+  let visited = [];
+  for (let vertex of graph.adjList.keys()) {
+    visited[vertex] = false;
+  }
+  dfsUtil(graph, startVertex, visited);
 }
 
-// Example usage: generating a random number between 1 and 10
-var randomNumber = getRandomNumber(1, 10);
-console.log(randomNumber);
+function dfsUtil(graph, vertex, visited) {
+  visited[vertex] = true;
+  console.log(vertex);
+
+  let neighbors = graph.adjList.get(vertex);
+  for (let neighbor of neighbors) {
+    if (!visited[neighbor]) {
+      dfsUtil(graph, neighbor, visited);
+    }
+  }
+}
+let graph = new Graph();
+
+// Adding vertices
+graph.addVertex(0);
+graph.addVertex(1);
+graph.addVertex(2);
+graph.addVertex(3);
+graph.addVertex(4);
+graph.addVertex(5);
+
+// Adding edges
+graph.addEdge(0, 1);
+graph.addEdge(0, 2);
+graph.addEdge(1, 3);
+graph.addEdge(1, 4);
+graph.addEdge(2, 4);
+graph.addEdge(3, 4);
+graph.addEdge(3, 5);
+
+// Depth-First Search
+dfs(graph, 0);
