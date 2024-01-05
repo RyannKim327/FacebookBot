@@ -1,69 +1,43 @@
-class TreeNode {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
+let fib0 = 0;
+let fib1 = 1;
+let fib2 = fib0 + fib1;
+
+while (fib2 < arr.length) {
+  fib0 = fib1;
+  fib1 = fib2;
+  fib2 = fib0 + fib1;
 }
+function fibonacciSearch(arr, key) {
+  let fib0 = 0;
+  let fib1 = 1;
+  let fib2 = fib0 + fib1;
 
-class BinarySearchTree {
-  constructor() {
-    this.root = null;
+  while (fib2 < arr.length) {
+    fib0 = fib1;
+    fib1 = fib2;
+    fib2 = fib0 + fib1;
   }
 
-  insert(value) {
-    const newNode = new TreeNode(value);
+  let offset = -1;
+  let mid = -1;
 
-    if (!this.root) {
-      this.root = newNode;
+  while (fib2 > 1) {
+    const index = Math.min(offset + fib0, arr.length - 1);
+
+    if (arr[index] === key) {
+      mid = index;
+      break;
+    } else if (arr[index] < key) {
+      fib0 = fib1;
+      fib1 = fib2;
+      fib2 = fib0 + fib1;
+      offset = index;
     } else {
-      let currentNode = this.root;
-
-      while (true) {
-        if (value < currentNode.value) {
-          if (!currentNode.left) {
-            currentNode.left = newNode;
-            return this;
-          }
-          currentNode = currentNode.left;
-        } else {
-          if (!currentNode.right) {
-            currentNode.right = newNode;
-            return this;
-          }
-          currentNode = currentNode.right;
-        }
-      }
+      fib2 = fib1;
+      fib1 = fib0;
+      fib0 = fib2 - fib1;
     }
   }
 
-  search(value) {
-    let currentNode = this.root;
-
-    while (currentNode) {
-      if (value === currentNode.value) {
-        return true;
-      } else if (value < currentNode.value) {
-        currentNode = currentNode.left;
-      } else {
-        currentNode = currentNode.right;
-      }
-    }
-
-    return false;
-  }
-
-  // Additional operations like delete, traversal, etc. can be implemented here
+  return mid;
 }
-
-// Usage example:
-
-const bst = new BinarySearchTree();
-bst.insert(10);
-bst.insert(5);
-bst.insert(15);
-bst.insert(2);
-bst.insert(7);
-
-console.log(bst.search(2)); // true
-console.log(bst.search(8)); // false
