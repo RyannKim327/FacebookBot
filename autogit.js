@@ -1,35 +1,81 @@
-const numbers = [5, 2, 9, 1, 3, 8, 4, 7, 6];
+// Node class to represent a node in the graph
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.neighbors = [];
+    this.visited = false;
+  }
+}
 
-// Sort the numbers in ascending order
-numbers.sort((a, b) => a - b);
+// Graph class to represent the graph of nodes
+class Graph {
+  constructor() {
+    this.nodes = [];
+  }
 
-// Print the sorted array
-console.log(numbers); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
-const numbers = [5, 2, 9, 1, 3, 8, 4, 7, 6];
+  // Add a node to the graph
+  addNode(node) {
+    this.nodes.push(node);
+  }
 
-// Define a custom sorting function
-const compareNumbers = (a, b) => {
-  return a - b;
-};
+  // Add an edge between two nodes
+  addEdge(node1, node2) {
+    node1.neighbors.push(node2);
+    node2.neighbors.push(node1);
+  }
 
-// Sort the numbers using the custom sorting function
-numbers.sort(compareNumbers);
+  // Perform breadth-first search starting from a given node
+  breadthFirstSearch(startingNode) {
+    // Create a queue to store the nodes to visit
+    const queue = [];
 
-// Print the sorted array
-console.log(numbers); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
-const numbers = [5, 2, 9, 1, 3, 8, 4, 7, 6];
+    // Mark the starting node as visited and enqueue it
+    startingNode.visited = true;
+    queue.push(startingNode);
 
-// Sort the numbers in ascending order using a comparison function
-numbers.sort(function(a, b) {
-  return a - b;
-});
+    // While the queue is not empty
+    while (queue.length > 0) {
+      // Dequeue the first node from the queue
+      const currentNode = queue.shift();
 
-// Print the sorted array
-console.log(numbers); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
-const numbers = [5, 2, 9, 1, 3, 8, 4, 7, 6];
+      // Visit the node's adjacent nodes
+      for (const neighbor of currentNode.neighbors) {
+        // Check if the neighbor has been visited
+        if (!neighbor.visited) {
+          // Mark the neighbor as visited and enqueue it
+          neighbor.visited = true;
+          queue.push(neighbor);
+        }
+      }
+    }
+  }
+}
 
-// Sort the numbers in ascending order using an arrow function
-numbers.sort((a, b) => a - b);
+// Create a graph
+const graph = new Graph();
 
-// Print the sorted array
-console.log(numbers); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+// Add nodes to the graph
+const node1 = new Node(1);
+const node2 = new Node(2);
+const node3 = new Node(3);
+const node4 = new Node(4);
+const node5 = new Node(5);
+const node6 = new Node(6);
+
+// Add edges to the graph
+graph.addEdge(node1, node2);
+graph.addEdge(node2, node3);
+graph.addEdge(node3, node4);
+graph.addEdge(node4, node5);
+graph.addEdge(node5, node6);
+
+// Perform breadth-first search starting from node1
+graph.breadthFirstSearch(node1);
+
+// Print the order in which nodes were visited
+console.log("Nodes visited in order:");
+for (const node of graph.nodes) {
+  if (node.visited) {
+    console.log(node.value);
+  }
+}
