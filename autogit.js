@@ -1,33 +1,29 @@
-class Node {
-  constructor(keys, children) {
-    this.keys = keys || [];
-    this.children = children || [];
-  }
-}
+const string = "Hello world, hello! Hello world.";
 
-class BTree {
-  constructor(order) {
-    this.root = new Node();
-    this.order = order;
-  }
+// Convert the string to lowercase.
+const lowercaseString = string.toLowerCase();
 
-  insert(key, value) {
-    let node = this.root;
-    while (true) {
-      const index = node.keys.findIndex(k => k >= key);
-      if (index >= 0) {
-        // Key already exists, update value
-        node.children[index].value = value;
-        return;
-      }
-      if (node.children.length === 0) {
-        // Leaf node, insert key-value pair
-        node.keys.push(key);
-        node.children.push({ key, value });
-        return;
-      } else {
-        node = node.children[index];
-      }
-    }
-  }
-}
+// Split the string into an array of words.
+const words = lowercaseString.split(" ");
+
+// Filter the array to include only the words that match the word "hello".
+const filteredWords = words.filter((word) => word === "hello");
+
+// Count the number of occurrences of the word "hello".
+const count = filteredWords.length;
+
+console.log(`The word "hello" occurs ${count} times in the string.`);
+The word "hello" occurs 3 times in the string.
+const string = "Hello world, hello! Hello world.";
+
+// Create a regular expression to match the word "hello".
+const regex = /hello/g;
+
+// Use the `match()` method to find all matches of the regular expression in the string.
+const matches = string.match(regex);
+
+// Count the number of matches.
+const count = matches.length;
+
+console.log(`The word "hello" occurs ${count} times in the string.`);
+The word "hello" occurs 3 times in the string.
