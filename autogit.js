@@ -1,77 +1,37 @@
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.next = null;
-  }
-}
-
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.size = 0;
+function findLongestCommonPrefix(strs) {
+  if (strs.length === 0) {
+    return "";
   }
 
-  add(data) {
-    const newNode = new Node(data);
-    if (this.head === null) {
-      this.head = newNode;
-    } else {
-      let current = this.head;
-      while (current.next !== null) {
-        current = current.next;
+  // Find the shortest string in the array
+  let shortestStr = strs[0];
+  for (let i = 1; i < strs.length; i++) {
+    if (strs[i].length < shortestStr.length) {
+      shortestStr = strs[i];
+    }
+  }
+
+  // Iterate over the characters in the shortest string
+  for (let i = 0; i < shortestStr.length; i++) {
+    // Check if all strings have the same character at the current position
+    let char = shortestStr[i];
+    let allSame = true;
+    for (let j = 0; j < strs.length; j++) {
+      if (strs[j][i] !== char) {
+        allSame = false;
+        break;
       }
-      current.next = newNode;
     }
-    this.size++;
+
+    // If all strings have the same character at the current position, add it to the longest common prefix
+    if (allSame) {
+      longestCommonPrefix += char;
+    } else {
+      // If not, return the longest common prefix so far
+      return longestCommonPrefix;
+    }
   }
 
-  reverse() {
-    const reversedList = [];
-    let current = this.head;
-    while (current !== null) {
-      reversedList.unshift(current.data);
-      current = current.next;
-    }
-
-    const newHead = new Node(reversedList[0]);
-    let newCurrent = newHead;
-    for (let i = 1; i < reversedList.length; i++) {
-      const newNode = new Node(reversedList[i]);
-      newCurrent.next = newNode;
-      newCurrent = newCurrent.next;
-    }
-
-    this.head = newHead;
-    this.size = reversedList.length;
-  }
-
-  print() {
-    let current = this.head;
-    let output = "";
-    while (current !== null) {
-      output += current.data + " ";
-      current = current.next;
-    }
-    console.log(output);
-  }
+  // If all characters in the shortest string are the same in all strings, return the entire shortest string as the longest common prefix
+  return shortestStr;
 }
-
-const list = new LinkedList();
-list.add(1);
-list.add(2);
-list.add(3);
-list.add(4);
-list.add(5);
-
-console.log("Original list:");
-list.print();
-
-list.reverse();
-
-console.log("Reversed list:");
-list.print();
-Original list:
-1 2 3 4 5
-
-Reversed list:
-5 4 3 2 1
