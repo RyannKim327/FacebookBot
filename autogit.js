@@ -1,17 +1,16 @@
-function isPalindrome(str) {
-  // Remove non-alphanumeric characters and convert to lowercase
-  const alphanumericStr = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+function isAnagram(str1, str2) {
+  // Remove non-alphabetic characters and convert to lowercase
+  str1 = str1.replace(/[^a-z]/gi, '').toLowerCase();
+  str2 = str2.replace(/[^a-z]/gi, '').toLowerCase();
 
-  // Create the reversed version of the string
-  const reversedStr = alphanumericStr.split('').reverse().join('');
+  // Sort the strings alphabetically
+  str1 = str1.split('').sort().join('');
+  str2 = str2.split('').sort().join('');
 
-  // Compare original string with the reversed string
-  return alphanumericStr === reversedStr;
+  // Compare the sorted strings
+  return str1 === str2;
 }
 
 // Example usage
-const str1 = "A man, a plan, a canal, Panama!";
-console.log(isPalindrome(str1)); // Output: true
-
-const str2 = "Hello world";
-console.log(isPalindrome(str2)); // Output: false
+console.log(isAnagram('rail safety', 'fairy tales')); // Output: true
+console.log(isAnagram('hello', 'bye')); // Output: false
