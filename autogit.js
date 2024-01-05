@@ -1,86 +1,40 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
+function ListNode(val) {
+  this.val = val;
+  this.next = null;
 }
 
-class BST {
-  constructor() {
-    this.root = null;
+function isPalindrome(head) {
+  let slow = head;
+  let fast = head;
+
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
   }
 
-  insert(value) {
-    const newNode = new Node(value);
+  let prev = null;
 
-    if (this.root === null) {
-      this.root = newNode;
-    } else {
-      this.insertNode(this.root, newNode);
-    }
+  while (slow) {
+    const next = slow.next;
+    slow.next = prev;
+    prev = slow;
+    slow = next;
   }
 
-  insertNode(node, newNode) {
-    if (newNode.value < node.value) {
-      if (node.left === null) {
-        node.left = newNode;
-      } else {
-        this.insertNode(node.left, newNode);
-      }
-    } else {
-      if (node.right === null) {
-        node.right = newNode;
-      } else {
-        this.insertNode(node.right, newNode);
-      }
-    }
-  }
-
-  search(value) {
-    return this.searchNode(this.root, value);
-  }
-
-  searchNode(node, value) {
-    if (node === null) {
+  while (prev) {
+    if (head.val !== prev.val) {
       return false;
     }
-
-    if (value < node.value) {
-      return this.searchNode(node.left, value);
-    } else if (value > node.value) {
-      return this.searchNode(node.right, value);
-    } else {
-      return true;
-    }
+    head = head.next;
+    prev = prev.next;
   }
 
-  inOrderTraversal(callback) {
-    this.inOrderTraversalNode(this.root, callback);
-  }
-
-  inOrderTraversalNode(node, callback) {
-    if (node !== null) {
-      this.inOrderTraversalNode(node.left, callback);
-      callback(node.value);
-      this.inOrderTraversalNode(node.right, callback);
-    }
-  }
+  return true;
 }
+const head = new ListNode(1);
+head.next = new ListNode(2);
+head.next.next = new ListNode(3);
+head.next.next.next = new ListNode(2);
+head.next.next.next.next = new ListNode(1);
 
-// Usage example:
-
-const bst = new BST();
-
-bst.insert(4);
-bst.insert(2);
-bst.insert(1);
-bst.insert(3);
-bst.insert(6);
-bst.insert(5);
-bst.insert(7);
-
-console.log(bst.search(5)); // true
-console.log(bst.search(8)); // false
-
-bst.inOrderTraversal(value => console.log(value)); // 1 2 3 4 5 6 7
+console.log(isPalindrome(head)); // Output: true
