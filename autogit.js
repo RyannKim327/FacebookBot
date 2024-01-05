@@ -1,20 +1,16 @@
-// Import the necessary libraries.
-const fetch = require('node-fetch');
+let string1 = "Hello";
+let string2 = "World";
+let concatenatedString = string1 + string2;
 
-// Define the API endpoint.
-const endpoint = 'https://api.example.com/v1/endpoint';
+console.log(concatenatedString); // Output: "HelloWorld"
+let string1 = "Hello";
+let string2 = "World";
+let concatenatedString = string1.concat(string2);
 
-// Make a GET request to the API endpoint.
-fetch(endpoint)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error('Error: ' + response.status);
-    }
-    return response.json();
-  })
-  .then((data) => {
-    console.log('API response:', data);
-  })
-  .catch((error) => {
-    console.error('Error fetching API data:', error);
-  });
+console.log(concatenatedString); // Output: "HelloWorld"
+let string1 = "Hello";
+let string2 = "World";
+
+string1 += string2;
+
+console.log(string1); // Output: "HelloWorld"
