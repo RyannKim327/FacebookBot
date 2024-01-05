@@ -1,58 +1,34 @@
-class Graph {
-  constructor() {
-    this.adjList = new Map();
-  }
+function findCommonElements(array1, array2) {
+  const commonElements = [];
 
-  addVertex(vertex) {
-    this.adjList.set(vertex, []);
-  }
-
-  addEdge(vertex1, vertex2) {
-    this.adjList.get(vertex1).push(vertex2);
-    this.adjList.get(vertex2).push(vertex1);
-  }
-
-  getAdjacencyList() {
-    return this.adjList;
-  }
-}
-function dfs(graph, startVertex) {
-  let visited = [];
-  for (let vertex of graph.adjList.keys()) {
-    visited[vertex] = false;
-  }
-  dfsUtil(graph, startVertex, visited);
-}
-
-function dfsUtil(graph, vertex, visited) {
-  visited[vertex] = true;
-  console.log(vertex);
-
-  let neighbors = graph.adjList.get(vertex);
-  for (let neighbor of neighbors) {
-    if (!visited[neighbor]) {
-      dfsUtil(graph, neighbor, visited);
+  for (let i = 0; i < array1.length; i++) {
+    for (let j = 0; j < array2.length; j++) {
+      if (array1[i] === array2[j]) {
+        commonElements.push(array1[i]);
+        break; // Found a common element, move to the next element in array1
+      }
     }
   }
+
+  return commonElements;
 }
-let graph = new Graph();
+function findCommonElements(array1, array2) {
+  return array1.filter(element => array2.includes(element));
+}
+function findCommonElements(array1, array2) {
+  const set1 = new Set(array1);
+  const commonElements = [];
 
-// Adding vertices
-graph.addVertex(0);
-graph.addVertex(1);
-graph.addVertex(2);
-graph.addVertex(3);
-graph.addVertex(4);
-graph.addVertex(5);
+  array2.forEach(element => {
+    if (set1.has(element)) {
+      commonElements.push(element);
+    }
+  });
 
-// Adding edges
-graph.addEdge(0, 1);
-graph.addEdge(0, 2);
-graph.addEdge(1, 3);
-graph.addEdge(1, 4);
-graph.addEdge(2, 4);
-graph.addEdge(3, 4);
-graph.addEdge(3, 5);
+  return commonElements;
+}
+const _ = require('lodash');
 
-// Depth-First Search
-dfs(graph, 0);
+function findCommonElements(array1, array2) {
+  return _.intersection(array1, array2);
+}
