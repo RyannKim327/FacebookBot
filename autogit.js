@@ -1,40 +1,30 @@
-function ListNode(val) {
-  this.val = val;
-  this.next = null;
+const arr = [10, 5, 8, 20, 15];
+arr.sort((a, b) => b - a);
+const secondLargest = arr[1];
+console.log(secondLargest);
+const arr = [10, 5, 8, 20, 15];
+let largest = Number.MIN_VALUE;
+let secondLargest = Number.MIN_VALUE;
+
+for (let i = 0; i < arr.length; i++) {
+  if (arr[i] > largest) {
+    secondLargest = largest;
+    largest = arr[i];
+  } else if (arr[i] > secondLargest && arr[i] !== largest) {
+    secondLargest = arr[i];
+  }
 }
 
-function isPalindrome(head) {
-  let slow = head;
-  let fast = head;
-
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
+console.log(secondLargest);
+const arr = [10, 5, 8, 20, 15];
+const secondLargest = arr.reduce((largest, current) => {
+  if (current > largest[0]) {
+    largest[1] = largest[0];
+    largest[0] = current;
+  } else if (current > largest[1] && current !== largest[0]) {
+    largest[1] = current;
   }
+  return largest;
+}, [Number.MIN_VALUE, Number.MIN_VALUE])[1];
 
-  let prev = null;
-
-  while (slow) {
-    const next = slow.next;
-    slow.next = prev;
-    prev = slow;
-    slow = next;
-  }
-
-  while (prev) {
-    if (head.val !== prev.val) {
-      return false;
-    }
-    head = head.next;
-    prev = prev.next;
-  }
-
-  return true;
-}
-const head = new ListNode(1);
-head.next = new ListNode(2);
-head.next.next = new ListNode(3);
-head.next.next.next = new ListNode(2);
-head.next.next.next.next = new ListNode(1);
-
-console.log(isPalindrome(head)); // Output: true
+console.log(secondLargest);
