@@ -1,30 +1,33 @@
-const string = "Hello, World!";
+function binarySearch(arr, target, left, right) {
+  // Check if the array is empty or the target is out of range
+  if (left > right) {
+    return -1;
+  }
 
-// Reverse the string using the reverse() method
-const reversedString = string.reverse();
+  // Calculate the middle index of the current range
+  const mid = Math.floor((left + right) / 2);
 
-// Log the reversed string
-console.log(reversedString);
-!dlroW ,olleH
-const string = "Hello, World!";
+  // Check if the target is equal to the middle element
+  if (arr[mid] === target) {
+    return mid;
+  }
 
-// Create an empty string to store the reversed string
-let reversedString = "";
+  // If the target is less than the middle element, search in the left half
+  if (arr[mid] > target) {
+    return binarySearch(arr, target, left, mid - 1);
+  }
 
-// Iterate over the string in reverse order
-for (let i = string.length - 1; i >= 0; i--) {
-  // Add the current character to the reversed string
-  reversedString += string[i];
+  // If the target is greater than the middle element, search in the right half
+  if (arr[mid] < target) {
+    return binarySearch(arr, target, mid + 1, right);
+  }
 }
+const arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+const target = 13;
+const index = binarySearch(arr, target, 0, arr.length - 1);
 
-// Log the reversed string
-console.log(reversedString);
-!dlroW ,olleH
-const string = "Hello, World!";
-
-// Reverse the string using the reduce() method
-const reversedString = string.split("").reduce((acc, char) => char + acc, "");
-
-// Log the reversed string
-console.log(reversedString);
-!dlroW ,olleH
+if (index === -1) {
+  console.log("Target not found");
+} else {
+  console.log("Target found at index", index);
+}
