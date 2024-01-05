@@ -1,29 +1,38 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
+function mergeSort(array) {
+  if (array.length <= 1) {
+    return array;
   }
+
+  const middle = Math.floor(array.length / 2);
+  const left = array.slice(0, middle);
+  const right = array.slice(middle);
+
+  const sortedLeft = mergeSort(left);
+  const sortedRight = mergeSort(right);
+
+  return merge(sortedLeft, sortedRight);
 }
 
-function sumBinaryTree(root) {
-  if (root === null) {
-    return 0;
+function merge(sortedLeft, sortedRight) {
+  const result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  while (leftIndex < sortedLeft.length && rightIndex < sortedRight.length) {
+    if (sortedLeft[leftIndex] < sortedRight[rightIndex]) {
+      result.push(sortedLeft[leftIndex]);
+      leftIndex++;
+    } else {
+      result.push(sortedRight[rightIndex]);
+      rightIndex++;
+    }
   }
-  
-  // Calculate the sum of the current node and recursively sum the left and right subtrees
-  return root.value + sumBinaryTree(root.left) + sumBinaryTree(root.right);
+
+  return result.concat(sortedLeft.slice(leftIndex)).concat(sortedRight.slice(rightIndex));
 }
 
 // Example usage:
-// Create the binary tree
-const root = new Node(4);
-root.left = new Node(2);
-root.right = new Node(6);
-root.left.left = new Node(1);
-root.left.right = new Node(3);
-root.right.left = new Node(5);
-root.right.right = new Node(7);
+const unsortedArray = [5, 2, 6, 1, 3, 9];
 
-// Sum of all nodes in the binary tree
-console.log(sumBinaryTree(root)); // Output: 28
+const sortedArray = mergeSort(unsortedArray);
+console.log(sortedArray); // Output: [1, 2, 3, 5, 6, 9]
