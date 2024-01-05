@@ -1,20 +1,16 @@
-function isPrime(num) {
-  // Check if num is less than 2, as prime numbers are greater than 1
-  if (num < 2) {
-    return false;
-  }
+const arr = [4, 2, 9, 5, 1];
 
-  // Iterate from 2 to the square root of num
-  for (let i = 2; i <= Math.sqrt(num); i++) {
-    // If num is divisible evenly by any number, it is not prime
-    if (num % i === 0) {
-      return false;
-    }
-  }
+const max = Math.max(...arr);
 
-  return true;
+console.log(max); // Output: 9
+const arr = [4, 2, 9, 5, 1];
+
+let max = arr[0];
+
+for (let i = 1; i < arr.length; i++) {
+  if (arr[i] > max) {
+    max = arr[i];
+  }
 }
 
-// Example usage
-console.log(isPrime(17)); // true
-console.log(isPrime(15)); // false
+console.log(max); // Output: 9
