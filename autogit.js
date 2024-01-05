@@ -1,22 +1,18 @@
-// Function to calculate the area of a triangle
-function triangleArea(base, height) {
-// Check if the base and height are valid numbers.
- if (isNaN(base) || isNaN(height)) {
-   throw new Error("Inputs must be numeric values.");
- } else if (base <= 0 || height <= 0) {
-   throw new Error("Base and height must be greater than 0.");
- }
+function isAnagram(string1, string2) {
+  // Convert both strings to lowercase.
+  string1 = string1.toLowerCase();
+  string2 = string2.toLowerCase();
 
- // Calculate the area using the formula: (1/2) * base * height
- const area = (1 / 2) * base * height;
+  // Sort the characters in each string alphabetically.
+  string1 = string1.split('').sort().join('');
+  string2 = string2.split('').sort().join('');
 
- // Return the calculated area.
- return area;
+  // Compare the sorted strings.
+  return string1 === string2;
 }
 
-// Example usage:
-
-const area1 = triangleArea(5, 4); // Result: 10
-
-// Print the result.
-console.log("Area of the triangle:", area1);
+// Test the function with different input strings.
+console.log(isAnagram('hello', 'olleh')); // true
+console.log(isAnagram('listen', 'silent')); // true
+console.log(isAnagram('dormitory', 'dirtyroom')); // true
+console.log(isAnagram('cat', 'dog')); // false
