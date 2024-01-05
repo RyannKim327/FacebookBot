@@ -1,17 +1,18 @@
-function isPrime(number) {
-  if (number <= 1) {
-    return false;
-  }
-
-  // Check for divisors up to the square root of the number
-  for (let i = 2; i <= Math.sqrt(number); i++) {
-    if (number % i === 0) {
-      return false;
+function bubbleSort(arr) {
+  var len = arr.length;
+  for (var i = 0; i < len - 1; i++) {
+    for (var j = 0; j < len - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        var temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
     }
   }
-
-  return true;
+  return arr;
 }
-console.log(isPrime(17));  // true
-console.log(isPrime(21));  // false
-console.log(isPrime(97));  // true
+
+// Testing the algorithm
+var unsortedArray = [5, 3, 8, 2, 1, 4];
+var sortedArray = bubbleSort(unsortedArray);
+console.log(sortedArray);
