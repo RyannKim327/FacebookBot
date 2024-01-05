@@ -1,44 +1,19 @@
-// Function to find the longest increasing subsequence
-function longestIncreasingSubsequence(arr) {
-  if (arr.length === 0) {
-    return [];
+function quickSort(arr) {
+  if (arr.length <= 1) {
+    return arr;
   }
-
-  // Initialize the length of the longest increasing subsequence for each element
-  const lengths = new Array(arr.length).fill(1);
-  // Initialize the previous element in the longest increasing subsequence for each element
-  const previous = new Array(arr.length).fill(-1);
-
-  // Iterate over the array
-  for (let i = 1; i < arr.length; i++) {
-    // For each element, find the longest increasing subsequence ending at that element
-    for (let j = 0; j < i; j++) {
-      if (arr[i] > arr[j] && lengths[i] < lengths[j] + 1) {
-        lengths[i] = lengths[j] + 1;
-        previous[i] = j;
-      }
+  const pivot = arr[Math.floor(arr.length / 2)];
+  const left = [];
+  const right = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else if (arr[i] > pivot) {
+      right.push(arr[i]);
     }
   }
-
-  // Find the index of the element with the longest increasing subsequence
-  let maxIndex = 0;
-  for (let i = 1; i < arr.length; i++) {
-    if (lengths[i] > lengths[maxIndex]) {
-      maxIndex = i;
-    }
-  }
-
-  // Reconstruct the longest increasing subsequence
-  const longestSubsequence = [];
-  while (maxIndex !== -1) {
-    longestSubsequence.unshift(arr[maxIndex]);
-    maxIndex = previous[maxIndex];
-  }
-
-  return longestSubsequence;
+  return quickSort(left).concat(pivot, quickSort(right));
 }
-
-// Example usage
-const arr = [3, 1, 4, 1, 5, 9, 2, 6];
-const longestSubsequence = longestIncreasingSubsequence(arr);
-console.log(longestSubsequence); // [1, 4, 5, 9]
+const unsortedArray = [5, 3, 1, 2, 4];
+const sortedArray = quickSort(unsortedArray);
+console.log(sortedArray); // [1, 2, 3, 4, 5]
