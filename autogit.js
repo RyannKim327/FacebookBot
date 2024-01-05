@@ -1,12 +1,24 @@
-// Recursive Function to calculate the factorial
-function calculateFactorial(number) {
-  if (number <= 1) {
-    return 1; // Base case: factorial of 1 or less is 1
-  } else {
-    return number * calculateFactorial(number - 1); // Recursive case: multiply the number by the factorial of the number minus 1
-  }
-}
+const string = "Hello, world!";
 
-// Usage: Calculate the factorial of a number
-const result = calculateFactorial(5);
-console.log(`Factorial of 5 is ${result}`); // Output: Factorial of 5 is 120
+// Check if the string contains the substring "world"
+if (string.includes("world")) {
+  console.log("The string contains the substring 'world'.");
+} else {
+  console.log("The string does not contain the substring 'world'.");
+}
+const string = "Hello, world!";
+
+// Check if the string contains the substring "world"
+if (string.indexOf("world") !== -1) {
+  console.log("The string contains the substring 'world'.");
+} else {
+  console.log("The string does not contain the substring 'world'.");
+}
+const string = "Hello, world!";
+
+// Check if the string contains the substring "world"
+if (/world/.test(string)) {
+  console.log("The string contains the substring 'world'.");
+} else {
+  console.log("The string does not contain the substring 'world'.");
+}
