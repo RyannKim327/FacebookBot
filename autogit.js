@@ -1,31 +1,24 @@
-// Function to find the nth node from the end of a linked list
-// head: head of the linked list
-// n: nth node from the end to find
-function findNthNodeFromEnd(head, n) {
-  // If the list is empty or n is invalid, return null
-  if (head === null || n < 1) {
-    return null;
-  }
+// Function to find the longest common substring of two strings
+function longestCommonSubstring(str1, str2) {
+  // Create a matrix to store the lengths of the longest common substrings
+  // of the prefixes of str1 and str2
+  let matrix = new Array(str1.length + 1).fill(0).map(() => new Array(str2.length + 1).fill(0));
 
-  // Initialize two pointers, one to traverse the list and the other to lag behind by n nodes
-  let current = head;
-  let nthNode = head;
-
-  // Move the current pointer forward by n nodes
-  for (let i = 0; i < n; i++) {
-    if (current.next === null) {
-      // If the current pointer reaches the end of the list before moving forward n nodes, then the list is smaller than n, so return null
-      return null;
+  // Find the longest common substring
+  let longestSubstring = "";
+  let longestSubstringLength = 0;
+  for (let i = 1; i <= str1.length; i++) {
+    for (let j = 1; j <= str2.length; j++) {
+      if (str1[i - 1] === str2[j - 1]) {
+        matrix[i][j] = matrix[i - 1][j - 1] + 1;
+        if (matrix[i][j] > longestSubstringLength) {
+          longestSubstringLength = matrix[i][j];
+          longestSubstring = str1.substring(i - longestSubstringLength, i);
+        }
+      }
     }
-    current = current.next;
   }
 
-  // Now, move both pointers forward together until the current pointer reaches the end of the list
-  while (current.next !== null) {
-    current = current.next;
-    nthNode = nthNode.next;
-  }
-
-  // Return the nth node from the end
-  return nthNode;
+  // Return the longest common substring
+  return longestSubstring;
 }
