@@ -1,23 +1,42 @@
-// Create a function that takes a string as input
-function sayHello(name) {
-  // Check if the input is a string
-  if (typeof name !== 'string') {
-    throw new Error('Input must be a string');
+// Quick Sort Algorithm
+
+// Step 1: Pick a pivot element
+// Step 2: Partition the array around the pivot element
+// Step 3: Recursively sort the two subarrays
+
+// Function to partition the array around the pivot element
+function partition(arr, start, end) {
+  let pivot = arr[end];
+  let i = start - 1;
+
+  for (let j = start; j < end; j++) {
+    if (arr[j] < pivot) {
+      i++;
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
   }
 
-  // Return a string that greets the person by name
-  return `Hello, ${name}!`;
+  [arr[i + 1], arr[end]] = [arr[end], arr[i + 1]];
+  return i + 1;
 }
 
-// Get the user input from the command line
-const input = process.argv[2];
+// Function to sort the array using quick sort
+function quickSort(arr, start, end) {
+  if (start >= end) {
+    return;
+  }
 
-// Try to say hello to the user
-try {
-  const greeting = sayHello(input);
-  console.log(greeting);
+  let pivotIndex = partition(arr, start, end);
+
+  quickSort(arr, start, pivotIndex - 1);
+  quickSort(arr, pivotIndex + 1, end);
 }
-// Catch any errors that may occur
-catch (error) {
-  console.error(error.message);
-}
+
+// Example array
+let arr = [10, 7, 8, 9, 1, 5];
+
+// Sort the array using quick sort
+quickSort(arr, 0, arr.length - 1);
+
+// Print the sorted array
+console.log(arr); // Output: [1, 5, 7, 8, 9, 10]
