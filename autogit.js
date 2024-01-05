@@ -1,22 +1,12 @@
-function binarySearchRecursive(arr, target, start, end) {
-    if (start > end) {
-        return false;
-    }
+let array = [1, 2, 3, 4, 5];
+let elementToRemove = 3;
 
-    const middle = Math.floor((start + end) / 2);
+// Find index of the element to remove
+let index = array.indexOf(elementToRemove);
 
-    if (arr[middle] === target) {
-        return true;
-    }
-    else if (arr[middle] > target) {
-        return binarySearchRecursive(arr, target, start, middle - 1);
-    }
-    else {
-        return binarySearchRecursive(arr, target, middle + 1, end);
-    }
+// If the element exists in the array, remove it
+if (index !== -1) {
+  array.splice(index, 1);
 }
 
-// Example usage:
-const array = [1, 3, 5, 7, 9];
-const targetNumber = 7;
-console.log(binarySearchRecursive(array, targetNumber, 0, array.length - 1)); // Output: true
+console.log(array); // Output: [1, 2, 4, 5]
