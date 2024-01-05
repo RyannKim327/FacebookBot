@@ -1,42 +1,28 @@
-// Quick Sort Algorithm
-
-// Step 1: Pick a pivot element
-// Step 2: Partition the array around the pivot element
-// Step 3: Recursively sort the two subarrays
-
-// Function to partition the array around the pivot element
-function partition(arr, start, end) {
-  let pivot = arr[end];
-  let i = start - 1;
-
-  for (let j = start; j < end; j++) {
-    if (arr[j] < pivot) {
-      i++;
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
+/**
+ * Given a binary tree, find its maximum depth.
+ *
+ * The maximum depth of a binary tree is the longest path from the root node to a leaf node.
+ *
+ * @param {TreeNode} root The root node of the binary tree.
+ * @return {number} The maximum depth of the binary tree.
+ */
+const maxDepth = (root) => {
+  if (root === null) {
+    return 0;
   }
 
-  [arr[i + 1], arr[end]] = [arr[end], arr[i + 1]];
-  return i + 1;
-}
+  // Find the maximum depth of the left and right subtrees.
+  const leftDepth = maxDepth(root.left);
+  const rightDepth = maxDepth(root.right);
 
-// Function to sort the array using quick sort
-function quickSort(arr, start, end) {
-  if (start >= end) {
-    return;
-  }
+  // The maximum depth of the binary tree is the maximum of the depths of the left and right subtrees plus 1 (for the root node).
+  return Math.max(leftDepth, rightDepth) + 1;
+};
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
 
-  let pivotIndex = partition(arr, start, end);
-
-  quickSort(arr, start, pivotIndex - 1);
-  quickSort(arr, pivotIndex + 1, end);
-}
-
-// Example array
-let arr = [10, 7, 8, 9, 1, 5];
-
-// Sort the array using quick sort
-quickSort(arr, 0, arr.length - 1);
-
-// Print the sorted array
-console.log(arr); // Output: [1, 5, 7, 8, 9, 10]
+const maxDepth = maxDepth(root);
+console.log(maxDepth); // Output: 3
