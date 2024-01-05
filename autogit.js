@@ -1,17 +1,31 @@
-function isPrime(n) {
-  if (n <= 1) {
-    return false;
+function longestCommonPrefix(strings) {
+  if (strings.length === 0) {
+    return "";
   }
-  
-  for (let i = 2; i <= Math.sqrt(n); i++) {
-    if (n % i === 0) {
-      return false;
+
+  strings.sort();
+
+  const firstString = strings[0];
+  let commonPrefix = "";
+
+  for (let i = 0; i < firstString.length; i++) {
+    const char = firstString[i];
+
+    for (let j = 1; j < strings.length; j++) {
+      if (strings[j][i] !== char) {
+        return commonPrefix;
+      }
     }
+
+    commonPrefix += char;
   }
-  
-  return true;
+
+  return commonPrefix;
 }
 
-// Example usage
-console.log(isPrime(17)); // Output: true
-console.log(isPrime(15)); // Output: false
+// Example Usage:
+const strings = ['flower', 'flow', 'flight'];
+console.log(longestCommonPrefix(strings)); // Output: "fl"
+
+const strings2 = ['dog', 'racecar', 'car'];
+console.log(longestCommonPrefix(strings2)); // Output: ""
