@@ -1,10 +1,12 @@
-fetch('https://api.example.com/data')
-  .then(response => response.json()) // Parse the response as JSON
-  .then(data => {
-    // Do something with the data
-    console.log(data);
-  })
-  .catch(error => {
-    // Handle any errors
-    console.log('Error:', error);
-  });
+function factorial(n) {
+  // Base case: 0! = 1
+  if (n === 0) {
+    return 1;
+  }
+  
+  // Recursive call: n! = n * (n-1)!
+  return n * factorial(n - 1);
+}
+
+// Example usage
+console.log(factorial(5)); // Output: 120
