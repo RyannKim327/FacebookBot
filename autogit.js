@@ -1,6 +1,8 @@
-var string1 = "Hello";
-var string2 = "World";
-var concatenatedString = string1 + " " + string2; // "Hello World"
-var string1 = "Hello";
-var string2 = "World";
-var concatenatedString = string1.concat(" ", string2); // "Hello World"
+function decimalToBinary(decimalNum) {
+  return decimalNum.toString(2);
+}
+
+// Example usage
+const decimalNumber = 10;
+const binaryNumber = decimalToBinary(decimalNumber);
+console.log(binaryNumber); // Output: 1010
