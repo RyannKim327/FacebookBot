@@ -1,16 +1,20 @@
-const arr = [4, 2, 9, 5, 1];
+function findFirstRepeatedChar(str) {
+  const charMap = {};
 
-const max = Math.max(...arr);
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
 
-console.log(max); // Output: 9
-const arr = [4, 2, 9, 5, 1];
+    if (charMap[char]) {
+      return char;
+    }
 
-let max = arr[0];
-
-for (let i = 1; i < arr.length; i++) {
-  if (arr[i] > max) {
-    max = arr[i];
+    charMap[char] = 1;
   }
+
+  return null; // No repeated characters found
 }
 
-console.log(max); // Output: 9
+const str = "hello world";
+const firstRepeatedChar = findFirstRepeatedChar(str);
+
+console.log(firstRepeatedChar); // Output: l
