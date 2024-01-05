@@ -1,29 +1,36 @@
-const string = "Hello world, hello! Hello world.";
+function longestCommonSubsequence(str1, str2) {
+  // Create a matrix to store the lengths of the longest common subsequences of substrings of str1 and str2.
+  let lcsMatrix = new Array(str1.length + 1).fill(0).map(() => new Array(str2.length + 1).fill(0));
 
-// Convert the string to lowercase.
-const lowercaseString = string.toLowerCase();
+  // Fill the matrix in a bottom-up manner.
+  for (let i = 1; i <= str1.length; i++) {
+    for (let j = 1; j <= str2.length; j++) {
+      if (str1[i - 1] === str2[j - 1]) {
+        lcsMatrix[i][j] = lcsMatrix[i - 1][j - 1] + 1;
+      } else {
+        lcsMatrix[i][j] = Math.max(lcsMatrix[i - 1][j], lcsMatrix[i][j - 1]);
+      }
+    }
+  }
 
-// Split the string into an array of words.
-const words = lowercaseString.split(" ");
+  // Get the length of the longest common subsequence.
+  const lcsLength = lcsMatrix[str1.length][str2.length];
 
-// Filter the array to include only the words that match the word "hello".
-const filteredWords = words.filter((word) => word === "hello");
+  // Construct the longest common subsequence.
+  let lcs = "";
+  let i = str1.length;
+  let j = str2.length;
+  while (i > 0 && j > 0) {
+    if (str1[i - 1] === str2[j - 1]) {
+      lcs = str1[i - 1] + lcs;
+      i--;
+      j--;
+    } else if (lcsMatrix[i - 1][j] > lcsMatrix[i][j - 1]) {
+      i--;
+    } else {
+      j--;
+    }
+  }
 
-// Count the number of occurrences of the word "hello".
-const count = filteredWords.length;
-
-console.log(`The word "hello" occurs ${count} times in the string.`);
-The word "hello" occurs 3 times in the string.
-const string = "Hello world, hello! Hello world.";
-
-// Create a regular expression to match the word "hello".
-const regex = /hello/g;
-
-// Use the `match()` method to find all matches of the regular expression in the string.
-const matches = string.match(regex);
-
-// Count the number of matches.
-const count = matches.length;
-
-console.log(`The word "hello" occurs ${count} times in the string.`);
-The word "hello" occurs 3 times in the string.
+  return lcs;
+}
