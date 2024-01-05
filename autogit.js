@@ -1,38 +1,14 @@
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
+// Define the variables for the three sides of the triangle
+var side1 = 4;
+var side2 = 5;
+var side3 = 6;
 
-/**
- * Finds the intersection of two linked lists.
- *
- * @param {ListNode} head1 The head of the first linked list.
- * @param {ListNode} head2 The head of the second linked list.
- * @return {ListNode} The intersection node, or null if there is no intersection.
- */
-const getIntersectionNode = (head1, head2) => {
-  // Create a set to store the nodes in the first linked list.
-  const nodeSet = new Set();
+// Calculate the semi-perimeter of the triangle
+var semiPerimeter = (side1 + side2 + side3) / 2;
 
-  // Iterate over the first linked list and add each node to the set.
-  let current = head1;
-  while (current !== null) {
-    nodeSet.add(current);
-    current = current.next;
-  }
+// Calculate the area of the triangle
+var area = Math.sqrt(semiPerimeter * (semiPerimeter - side1) * (semiPerimeter - side2) * (semiPerimeter - side3));
 
-  // Iterate over the second linked list and check if any node is in the set.
-  current = head2;
-  while (current !== null) {
-    if (nodeSet.has(current)) {
-      return current;
-    }
-    current = current.next;
-  }
-
-  // If no intersection was found, return null.
-  return null;
-};
+// Display the result
+console.log("The area of the triangle is " + area + " square units.");
+The area of the triangle is 9.921568440163096 square units.
