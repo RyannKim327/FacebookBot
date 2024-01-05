@@ -1,46 +1,20 @@
-class Stack {
-  constructor() {
-    this.items = [];
+// Function to calculate the area of a triangle
+function triangleArea(base, height) {
+  // Check if the base and height are valid numbers
+  if (typeof base !== "number" || typeof height !== "number") {
+    throw new Error("Base and height must be numbers");
   }
-
-  push(item) {
-    this.items.push(item);
-  }
-
-  pop() {
-    if (this.items.length === 0) {
-      return undefined;
-    }
-    return this.items.pop();
-  }
-
-  peek() {
-    if (this.items.length === 0) {
-      return undefined;
-    }
-    return this.items[this.items.length - 1];
-  }
-
-  isEmpty() {
-    return this.items.length === 0;
-  }
-
-  size() {
-    return this.items.length;
-  }
+  
+  // Calculate the area of the triangle
+  const area = 0.5 * base * height;
+  
+  // Return the area
+  return area;
 }
-const stack = new Stack();
 
-stack.push(1);
-stack.push(2);
-stack.push(3);
+// Example usage
+const base = 10;
+const height = 5;
+const area = triangleArea(base, height);
 
-console.log(stack.peek()); // 3
-
-stack.pop();
-
-console.log(stack.peek()); // 2
-
-console.log(stack.isEmpty()); // false
-
-console.log(stack.size()); // 2
+console.log(`The area of the triangle is ${area} square units.`);
