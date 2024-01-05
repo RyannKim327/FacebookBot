@@ -1,14 +1,14 @@
-// Define the variables for the three sides of the triangle
-var side1 = 4;
-var side2 = 5;
-var side3 = 6;
+// Function to find the sum of all nodes in a binary tree
+function sumOfNodes(root) {
+  // If the tree is empty, return 0
+  if (root === null) {
+    return 0;
+  }
 
-// Calculate the semi-perimeter of the triangle
-var semiPerimeter = (side1 + side2 + side3) / 2;
+  // Recursively find the sum of the left and right subtrees
+  const leftSum = sumOfNodes(root.left);
+  const rightSum = sumOfNodes(root.right);
 
-// Calculate the area of the triangle
-var area = Math.sqrt(semiPerimeter * (semiPerimeter - side1) * (semiPerimeter - side2) * (semiPerimeter - side3));
-
-// Display the result
-console.log("The area of the triangle is " + area + " square units.");
-The area of the triangle is 9.921568440163096 square units.
+  // Return the sum of the root node and the subtrees
+  return root.val + leftSum + rightSum;
+}
