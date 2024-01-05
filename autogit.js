@@ -1,21 +1,48 @@
-// Function to calculate the area of a triangle using the formula:
-// Area = 0.5 * base * height
-function calculateTriangleArea(base, height) {
-  // Check if the inputs are valid numbers
-  if (typeof base !== 'number' || typeof height !== 'number') {
-    throw new Error('Inputs must be numbers');
-  }
+const word = "the";
+const string = "The cat sat on the mat. The cat was very happy.";
 
-  // Calculate the area of the triangle
-  const area = 0.5 * base * height;
+const matches = string.match(new RegExp(word, "g"));
 
-  // Return the calculated area
-  return area;
+console.log(`The word "${word}" occurs ${matches.length} times in the string.`);
+The word "the" occurs 4 times in the string.
+const word = "the";
+const string = "The cat sat on the mat. The cat was very happy.";
+
+const substrings = string.split(word);
+
+console.log(`The word "${word}" occurs ${substrings.length - 1} times in the string.`);
+The word "the" occurs 4 times in the string.
+const word = "the";
+const string = "The cat sat on the mat. The cat was very happy.";
+
+let index = string.indexOf(word);
+let count = 0;
+
+while (index !== -1) {
+  count++;
+  index = string.indexOf(word, index + 1);
 }
 
-// Sample usage
-const base = 10;
-const height = 5;
-const area = calculateTriangleArea(base, height);
+console.log(`The word "${word}" occurs ${count} times in the string.`);
+The word "the" occurs 4 times in the string.
+const word = "the";
+const string = "The cat sat on the mat. The cat was very happy.";
 
-console.log(`The area of the triangle is ${area} square units.`);
+const count = string.replace(new RegExp(word, "g"), "").length;
+
+console.log(`The word "${word}" occurs ${count} times in the string.`);
+The word "the" occurs 4 times in the string.
+const word = "the";
+const string = "The cat sat on the mat. The cat was very happy.";
+
+let count = 0;
+
+for (let i = 0; i < string.length; i++) {
+  if (string.includes(word, i)) {
+    count++;
+    i += word.length - 1;
+  }
+}
+
+console.log(`The word "${word}" occurs ${count} times in the string.`);
+The word "the" occurs 4 times in the string.
