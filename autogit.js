@@ -1,44 +1,56 @@
-function longestIncreasingSubsequence(arr) {
-  const n = arr.length;
-  // Create an array to store the lengths of the longest increasing subsequences
-  const dp = new Array(n).fill(1);
-
-  // Initialize the longest increasing subsequence length as 1
-  let maxLen = 1;
-
-  // Initialize the last element index of the longest increasing subsequence as 0
-  let lastIndex = 0;
-
-  // Compute the lengths of the longest increasing subsequences
-  for (let i = 1; i < n; i++) {
-    for (let j = 0; j < i; j++) {
-      if (arr[i] > arr[j] && dp[i] < dp[j] + 1) {
-        dp[i] = dp[j] + 1;
-        // Update the maximum length and last index of the longest increasing subsequence
-        if (dp[i] > maxLen) {
-          maxLen = dp[i];
-          lastIndex = i;
-        }
-      }
+function mergeSort(array) {
+  const length = array.length;
+  
+  // Create a new array to hold the sorted elements
+  const sortedArray = new Array(length);
+  
+  // Iterate through each sublist size
+  for (let sublistSize = 1; sublistSize < length; sublistSize *= 2) {
+    // Merge adjacent sublists of size sublistSize
+    for (let start = 0; start < length - sublistSize; start += 2 * sublistSize) {
+      const mid = start + sublistSize - 1;
+      const end = Math.min(start + 2 * sublistSize - 1, length - 1);
+      
+      merge(array, sortedArray, start, mid, end);
     }
   }
+  
+  return sortedArray;
+}
 
-  // Construct the longest increasing subsequence using the last index and lengths
-  const lis = [];
-  lis.push(arr[lastIndex]);
-
-  // Traverse backwards and add elements to the subsequence if their length is one less than the previous element
-  for (let i = lastIndex - 1; i >= 0; i--) {
-    if (dp[i] === dp[lastIndex] - 1 && arr[i] < arr[lastIndex]) {
-      lis.unshift(arr[i]);
-      lastIndex = i;
+function merge(array, sortedArray, start, mid, end) {
+  let left = start;
+  let right = mid + 1;
+  
+  // Iterate through the elements of the sublists
+  for (let i = start; i <= end; i++) {
+    // Check if left sublist is exhausted
+    if (left > mid) {
+      sortedArray[i] = array[right];
+      right++;
+    }
+    // Check if right sublist is exhausted
+    else if (right > end) {
+      sortedArray[i] = array[left];
+      left++;
+    }
+    // Compare the elements and merge them
+    else if (array[left] < array[right]) {
+      sortedArray[i] = array[left];
+      left++;
+    } else {
+      sortedArray[i] = array[right];
+      right++;
     }
   }
-
-  return lis;
+  
+  // Copy the sorted elements back to the original array
+  for (let i = start; i <= end; i++) {
+    array[i] = sortedArray[i];
+  }
 }
 
 // Example usage:
-const arr = [3, 10, 2, 1, 20];
-const lis = longestIncreasingSubsequence(arr);
-console.log(lis); // Output: [3, 10, 20]
+const array = [5, 10, 3, 8, 2, 7, 1, 6, 9, 4];
+const sortedArray = mergeSort(array);
+console.log(sortedArray); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
