@@ -1,17 +1,20 @@
-// Function to calculate factorial of a number using recursion
-function factorial(n) {
-  // Base case: factorial of 0 is 1
-  if (n === 0) {
-    return 1;
-  }
-  // Recursive case: calculate factorial by multiplying n with factorial of (n-1)
-  else {
-    return n * factorial(n - 1);
-  }
-}
+// Import the necessary libraries.
+const fetch = require('node-fetch');
 
-// Example usage
-const number = 5;
-const result = factorial(number);
-console.log(`Factorial of ${number} is: ${result}`);
-Factorial of 5 is: 120
+// Define the API endpoint.
+const endpoint = 'https://example.com/api/v1/endpoint';
+
+// Define the async function to call the API.
+const callAPI = async () => {
+  // Fetch the data from the API.
+  const response = await fetch(endpoint);
+
+  // Parse the response as JSON.
+  const data = await response.json();
+
+  // Log the data to the console.
+  console.log(data);
+};
+
+// Call the async function.
+callAPI();
