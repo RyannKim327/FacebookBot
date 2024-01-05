@@ -1,14 +1,41 @@
-// Calculate the factorial of a number using a recursive function
-function factorial(number) {
-  // Base case: factorial of 0 is 1
-  if (number === 0) {
-    return 1;
-  }
-  // Recursive case: calculate factorial by multiplying number by factorial of number-1
-  else {
-    return number * factorial(number - 1);
+// Iterative depth-limited search algorithm
+function depthLimitedSearch(graph, start, limit) {
+  // Initialize the stack and visited set
+  let stack = [start];
+  let visited = new Set();
+  visited.add(start);
+
+  // Loop while the stack is not empty and the limit is not reached
+  while (stack.length > 0 && limit > 0) {
+    // Pop the current node from the stack
+    let node = stack.pop();
+
+    // Process the current node
+    console.log(node);
+
+    // Decrement the limit
+    limit--;
+
+    // Add the current node's neighbors to the stack
+    for (let neighbor of graph[node]) {
+      if (!visited.has(neighbor)) {
+        stack.push(neighbor);
+        visited.add(neighbor);
+      }
+    }
   }
 }
-// Calculate the factorial of 5
-const result = factorial(5);
-console.log(`The factorial of 5 is: ${result}`); // Output: The factorial of 5 is: 120
+
+// Example graph
+const graph = {
+  A: ['B', 'C'],
+  B: ['D', 'E'],
+  C: ['F', 'G'],
+  D: [],
+  E: [],
+  F: [],
+  G: [],
+};
+
+// Perform depth-limited search from node A with a limit of 3
+depthLimitedSearch(graph, 'A', 3);
