@@ -1,20 +1,24 @@
-// Import the necessary libraries.
-const fetch = require('node-fetch');
+function interpolationSearch(arr, target) {
+  let low = 0;
+  let high = arr.length - 1;
 
-// Define the API endpoint.
-const endpoint = 'https://example.com/api/v1/endpoint';
+  while (low <= high) {
+    // Calculate the position of the target value using interpolation
+    let pos = Math.floor(low + (((high - low) / (arr[high] - arr[low])) * (target - arr[low])));
 
-// Define the async function to call the API.
-const callAPI = async () => {
-  // Fetch the data from the API.
-  const response = await fetch(endpoint);
+    // Check if the target value is at the interpolated position
+    if (arr[pos] === target) {
+      return pos;
+    }
 
-  // Parse the response as JSON.
-  const data = await response.json();
+    // Determine which subarray to search next
+    if (arr[pos] < target) {
+      low = pos + 1;
+    } else {
+      high = pos - 1;
+    }
+  }
 
-  // Log the data to the console.
-  console.log(data);
-};
-
-// Call the async function.
-callAPI();
+  // Target value not found
+  return -1;
+}
