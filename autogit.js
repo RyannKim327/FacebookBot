@@ -1,15 +1,51 @@
-function factorial(num) {
-  if (num === 0 || num === 1) {
-    return 1;
-  }
-  
-  let result = 1;
-  for (let i = 2; i <= num; i++) {
-    result *= i;
-  }
-  
-  return result;
-}
-console.log(factorial(5)); // Output: 120
-console.log(factorial(0)); // Output: 1
-console.log(factorial(10)); // Output: 3628800
+// Importing the Axios library
+const axios = require('axios');
+
+// Example API endpoint URL
+const apiUrl = 'https://api.example.com/data';
+
+// Making a GET request
+axios.get(apiUrl)
+  .then(response => {
+    // Handling the response data
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handling any errors
+    console.error(error);
+  });
+
+// Making a POST request
+const postData = { name: 'John Doe', age: 30 };
+axios.post(apiUrl, postData)
+  .then(response => {
+    // Handling the response data
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handling any errors
+    console.error(error);
+  });
+
+// Making a PUT request
+const putData = { id: 123, name: 'Jane Smith', age: 25 };
+axios.put(apiUrl, putData)
+  .then(response => {
+    // Handling the response data
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handling any errors
+    console.error(error);
+  });
+
+// Making a DELETE request
+axios.delete(apiUrl)
+  .then(response => {
+    // Handling the response data
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handling any errors
+    console.error(error);
+  });
