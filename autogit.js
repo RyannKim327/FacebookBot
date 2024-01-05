@@ -1,44 +1,20 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}
-class Queue {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-  }
-}
-enqueue(value) {
-  const newNode = new Node(value);
-
-  if (!this.head) {
-    this.head = newNode;
-    this.tail = newNode;
-  } else {
-    this.tail.next = newNode;
-    this.tail = newNode;
-  }
-}
-dequeue() {
-  if (!this.head) {
-    return null;
+function isPrime(num) {
+  // 1 and numbers less than 1 are not prime
+  if (num <= 1) {
+    return false;
   }
 
-  const dequeuedValue = this.head.value;
-  this.head = this.head.next;
-
-  if (!this.head) {
-    this.tail = null;
+  // Check prime numbers from 2 to the square root of num
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      // num is divisible by i, so it's not prime
+      return false;
+    }
   }
 
-  return dequeuedValue;
+  return true;
 }
-peek() {
-  if (!this.head) {
-    return null;
-  }
 
-  return this.head.value;
-}
+// Usage
+console.log(isPrime(17)); // Output: true
+console.log(isPrime(21)); // Output: false
