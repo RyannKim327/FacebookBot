@@ -1,37 +1,40 @@
-function findLongestCommonPrefix(strs) {
-  if (strs.length === 0) {
-    return "";
+function isPalindrome(head) {
+  if (head === null || head.next === null) {
+    return true;
   }
 
-  // Find the shortest string in the array
-  let shortestStr = strs[0];
-  for (let i = 1; i < strs.length; i++) {
-    if (strs[i].length < shortestStr.length) {
-      shortestStr = strs[i];
+  // Reverse the linked list
+  let reversedHead = reverseList(head);
+
+  // Traverse the original and reversed lists simultaneously
+  let originalCurrent = head;
+  let reversedCurrent = reversedHead;
+
+  // Compare the data of corresponding nodes
+  while (originalCurrent !== null && reversedCurrent !== null) {
+    if (originalCurrent.data !== reversedCurrent.data) {
+      return false;
     }
+
+    originalCurrent = originalCurrent.next;
+    reversedCurrent = reversedCurrent.next;
   }
 
-  // Iterate over the characters in the shortest string
-  for (let i = 0; i < shortestStr.length; i++) {
-    // Check if all strings have the same character at the current position
-    let char = shortestStr[i];
-    let allSame = true;
-    for (let j = 0; j < strs.length; j++) {
-      if (strs[j][i] !== char) {
-        allSame = false;
-        break;
-      }
-    }
+  // If all corresponding nodes have the same data, the linked list is a palindrome
+  return true;
+}
 
-    // If all strings have the same character at the current position, add it to the longest common prefix
-    if (allSame) {
-      longestCommonPrefix += char;
-    } else {
-      // If not, return the longest common prefix so far
-      return longestCommonPrefix;
-    }
+function reverseList(head) {
+  let previousNode = null;
+  let currentNode = head;
+  let nextNode;
+
+  while (currentNode !== null) {
+    nextNode = currentNode.next;
+    currentNode.next = previousNode;
+    previousNode = currentNode;
+    currentNode = nextNode;
   }
 
-  // If all characters in the shortest string are the same in all strings, return the entire shortest string as the longest common prefix
-  return shortestStr;
+  return previousNode;
 }
