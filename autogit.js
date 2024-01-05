@@ -1,28 +1,24 @@
-const str1 = "Hello";
-const str2 = "World!";
+function firstNonRepeatingCharacter(string) {
+  // Create an object to store the count of each character in the string
+  const charCount = {};
 
-// Concatenate the two strings using the `+` operator
-const concatenatedString = str1 + str2;
+  // Iterate over the string and increment the count of each character
+  for (let i = 0; i < string.length; i++) {
+    const char = string[i];
+    charCount[char] = charCount[char] ? charCount[char] + 1 : 1;
+  }
 
-console.log(concatenatedString); // Output: "HelloWorld!"
-const str1 = "Hello";
-const str2 = "World!";
+  // Iterate over the object and find the first character with a count of 1
+  for (let char in charCount) {
+    if (charCount[char] === 1) {
+      return char;
+    }
+  }
 
-// Concatenate the two strings using the `concat()` method
-const concatenatedString = str1.concat(str2);
+  // Return null if no non-repeating character is found
+  return null;
+}
 
-console.log(concatenatedString); // Output: "HelloWorld!"
-let str1 = "Hello";
-const str2 = "World!";
-
-// Concatenate the two strings using the `+=` operator
-str1 += str2;
-
-console.log(str1); // Output: "HelloWorld!"
-const str1 = "Hello";
-const str2 = "World!";
-
-// Concatenate the two strings using Template Literals
-const concatenatedString = `${str1} ${str2}`;
-
-console.log(concatenatedString); // Output: "Hello World!"
+console.log(firstNonRepeatingCharacter("hello")); // "h"
+console.log(firstNonRepeatingCharacter("leetcode")); // "l"
+console.log(firstNonRepeatingCharacter("aabbccdd")); // null
