@@ -1,38 +1,17 @@
-function mergeSort(array) {
-  if (array.length <= 1) {
-    return array;
+function isPrime(number) {
+  if (number <= 1) {
+    return false;
   }
 
-  const middle = Math.floor(array.length / 2);
-  const left = array.slice(0, middle);
-  const right = array.slice(middle);
-
-  const sortedLeft = mergeSort(left);
-  const sortedRight = mergeSort(right);
-
-  return merge(sortedLeft, sortedRight);
-}
-
-function merge(sortedLeft, sortedRight) {
-  const result = [];
-  let leftIndex = 0;
-  let rightIndex = 0;
-
-  while (leftIndex < sortedLeft.length && rightIndex < sortedRight.length) {
-    if (sortedLeft[leftIndex] < sortedRight[rightIndex]) {
-      result.push(sortedLeft[leftIndex]);
-      leftIndex++;
-    } else {
-      result.push(sortedRight[rightIndex]);
-      rightIndex++;
+  // Check for divisors up to the square root of the number
+  for (let i = 2; i <= Math.sqrt(number); i++) {
+    if (number % i === 0) {
+      return false;
     }
   }
 
-  return result.concat(sortedLeft.slice(leftIndex)).concat(sortedRight.slice(rightIndex));
+  return true;
 }
-
-// Example usage:
-const unsortedArray = [5, 2, 6, 1, 3, 9];
-
-const sortedArray = mergeSort(unsortedArray);
-console.log(sortedArray); // Output: [1, 2, 3, 5, 6, 9]
+console.log(isPrime(17));  // true
+console.log(isPrime(21));  // false
+console.log(isPrime(97));  // true
