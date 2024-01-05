@@ -1,58 +1,47 @@
-// Preprocessing Phase
-function preprocess(pattern) {
-    const alphabetSize = 256;
-    const badCharacterTable = new Array(alphabetSize).fill(-1);
-    const goodSuffixTable = [];
+const Graph = require('graphlib').Graph;
+const graph = new Graph();
+graph.setNode('A');
+graph.setNode('B');
+graph.setNode('C');
+graph.setNode('D');
+graph.setEdge('A', 'B');
+graph.setEdge('B', 'C');
+graph.setEdge('C', 'D');
+graph.setEdge('D', 'A');
+const stack = [];
+const components = new Set();
+const visited = new Set();
 
-    for (let i = 0; i < pattern.length; i++) {
-        badCharacterTable[pattern.charCodeAt(i)] = i;
+function dfs(vertex) {
+  visited.add(vertex);
+  stack.push(vertex);
+
+  for (let neighbor of graph.neighbors(vertex)) {
+    if (!visited.has(neighbor)) {
+      dfs(neighbor);
+    }
+  }
+
+  if (stack[stack.length - 1] === vertex) {
+    const component = [];
+
+    while (stack.length > 0) {
+      const v = stack.pop();
+      component.push(v);
+
+      if (v === vertex) {
+        break;
+      }
     }
 
-    let suffixLength = pattern.length;
-
-    for (let i = pattern.length - 1; i >= 0; i--) {
-        while (suffixLength > 0 && pattern.charAt(suffixLength - 1) != pattern.charAt(i)) {
-            goodSuffixTable[suffixLength - 1] = suffixLength;
-            suffixLength = goodSuffixTable[suffixLength] || 0;
-        }
-
-        suffixLength--;
-        goodSuffixTable[i] = suffixLength;
-    }
-
-    return { badCharacterTable, goodSuffixTable };
+    components.add(component);
+  }
 }
 
-// Searching Phase
-function boyerMoore(text, pattern) {
-    const preprocessedData = preprocess(pattern);
-    const badCharacterTable = preprocessedData.badCharacterTable;
-    const goodSuffixTable = preprocessedData.goodSuffixTable;
-    let patternIndex = pattern.length - 1;
-
-    while (patternIndex < text.length) {
-        let textIndex = patternIndex;
-
-        for (let i = pattern.length - 1; i >= 0; i--) {
-            if (pattern.charAt(i) != text.charAt(textIndex)) {
-                patternIndex += Math.max(1, patternIndex - badCharacterTable[text.charCodeAt(textIndex)]);
-                break;
-            }
-
-            textIndex--;
-
-            if (i == 0) {
-                return patternIndex;
-            }
-        }
-
-        patternIndex += goodSuffixTable[patternIndex] || 1;
-    }
-
-    return -1;
+for (let vertex of graph.nodes()) {
+  if (!visited.has(vertex)) {
+    dfs(vertex);
+  }
 }
-const text = 'This is a sample text for string searching.';
-const pattern = 'string';
-
-const result = boyerMoore(text, pattern);
-console.log(result); // Output: 19
+console.log(components);
+Set([ [ 'A', 'B', 'C', 'D' ] ])
