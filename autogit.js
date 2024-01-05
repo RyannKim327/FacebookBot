@@ -1,67 +1,42 @@
-// Node class
-class Node {
-  constructor(data, next = null) {
-    this.data = data;
-    this.next = next;
+function findKthSmallestElement(arr, k) {
+  // Sort the array in ascending order
+  arr.sort((a, b) => a - b);
+  // Return the kth smallest element at index k-1
+  return arr[k - 1];
+}
+function findKthSmallestElement(arr, k) {
+  // Create a min-heap using Heap() or similar data structures
+  const heap = new Heap();
+  // Insert all elements of the array into the min-heap
+  for (let i = 0; i < arr.length; i++) {
+    heap.insert(arr[i]);
+  }
+  // Pop elements from the min-heap k times to get the kth smallest element
+  for (let i = 0; i < k - 1; i++) {
+    heap.extractMin();
+  }
+  // Return the minimum element at the top of the min-heap
+  return heap.extractMin();
+}
+function findKthSmallestElement(arr, k) {
+  // Select a pivot element
+  const pivot = arr[Math.floor(arr.length / 2)];
+  // Partition the array into two subarrays
+  const left = [];
+  const right = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else if (arr[i] > pivot) {
+      right.push(arr[i]);
+    }
+  }
+  // Recursively find the kth smallest element in the appropriate subarray
+  if (k <= left.length) {
+    return findKthSmallestElement(left, k);
+  } else if (k > left.length + 1) {
+    return findKthSmallestElement(right, k - left.length - 1);
+  } else {
+    return pivot;
   }
 }
-
-// Linked list class
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
-  }
-
-  // Add a node to the end of the list
-  add(data) {
-    const newNode = new Node(data);
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
-    }
-    this.size++;
-  }
-
-  // Find the nth node from the end of the list
-  findNthFromEnd(n) {
-    // Check if the index is valid
-    if (n <= 0 || n > this.size) {
-      throw new Error("Invalid index");
-    }
-
-    // Find the length of the list
-    let length = this.size;
-
-    // Calculate the index of the nth node from the start of the list
-    const index = length - n;
-
-    // Traverse the list from the start, counting the nodes until you reach the nth node
-    let current = this.head;
-    let count = 0;
-    while (current) {
-      if (count === index) {
-        return current.data;
-      }
-      current = current.next;
-      count++;
-    }
-  }
-}
-
-// Create a linked list
-const list = new LinkedList();
-list.add(1);
-list.add(2);
-list.add(3);
-list.add(4);
-list.add(5);
-
-// Find the 2nd node from the end of the list
-const nthNode = list.findNthFromEnd(2);
-
-console.log(nthNode); // Output: 4
