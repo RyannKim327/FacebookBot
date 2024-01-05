@@ -1,29 +1,28 @@
-function binarySearch(arr, target) {
-  let start = 0;
-  let end = arr.length - 1;
+// Function to find the longest common prefix of an array of strings
+function longestCommonPrefix(arr) {
+  // If the array is empty, return an empty string
+  if (arr.length === 0) {
+    return "";
+  }
 
-  while (start <= end) {
-    let middleIndex = Math.floor((start + end) / 2);
-    let middleElement = arr[middleIndex];
+  // Find the minimum length of all the strings in the array
+  let minLength = arr[0].length;
+  for (let i = 1; i < arr.length; i++) {
+    minLength = Math.min(minLength, arr[i].length);
+  }
 
-    if (target === middleElement) {
-      return middleIndex;
-    } else if (target < middleElement) {
-      end = middleIndex - 1;
-    } else {
-      start = middleIndex + 1;
+  // Iterate over the characters in the minimum length string
+  for (let i = 0; i < minLength; i++) {
+    // Compare the character at the current index in all the strings
+    let char = arr[0][i];
+    for (let j = 1; j < arr.length; j++) {
+      if (char !== arr[j][i]) {
+        // If the character is not the same in all the strings, return the prefix up to the current index
+        return arr[0].substring(0, i);
+      }
     }
   }
 
-  return -1; // Target not found
-}
-
-const arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
-const target = 15;
-
-const result = binarySearch(arr, target);
-if (result === -1) {
-  console.log("Target not found.");
-} else {
-  console.log(`Target found at index ${result}.`);
+  // If the loop completes without returning, all the strings have the same prefix, so return the minimum length string
+  return arr[0].substring(0, minLength);
 }
