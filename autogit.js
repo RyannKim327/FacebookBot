@@ -1,21 +1,10 @@
-function findFirstRepeatedCharacter(str) {
-  const charMap = {}; // Hash table to store characters and their frequency
-
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i];
-    if (charMap[char]) {
-      // If the character exists in the hash table, it's a repeat
-      return char;
-    } else {
-      // Otherwise, add the character to the hash table
-      charMap[char] = true;
-    }
-  }
-
-  // If no repeated character is found, return null or any other relevant value
-  return null;
+function getRandomNumber(min, max) {
+  // The Math.random() function returns a random number between 0 (inclusive) and 1 (exclusive)
+  // We multiply it by (max - min + 1) so that the range is inclusive of both min and max
+  // Then we use the Math.floor() function to round down the number to the nearest integer
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const string = "hello world";
-const repeatedChar = findFirstRepeatedCharacter(string);
-console.log(repeatedChar); // Output: 'l'
+// Example usage: generating a random number between 1 and 10
+var randomNumber = getRandomNumber(1, 10);
+console.log(randomNumber);
