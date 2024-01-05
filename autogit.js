@@ -1,39 +1,28 @@
-/*
-Given a linked list, find the nth node from the end of the list.
+function breadthFirstSearch(graph, startNode) {
+  // Create a queue and enqueue the starting node
+  let queue = [startNode];
 
-Example:
-Input: [1, 2, 3, 4, 5], n = 2
-Output: 4
+  // Create a set to keep track of visited nodes
+  let visited = new Set();
 
-Strategy:
-1. Find the length of the linked list.
-2. Subtract n from the length to find the index of the nth node from the end.
-3. Traverse the linked list from the beginning, stopping at the index found in step 2.
-4. Return the node at the index found in step 3.
-*/
-const findNthNodeFromEnd = (head, n) => {
-  // If the linked list is empty or n is invalid, return null.
-  if (!head || n <= 0) {
-    return null;
+  // While the queue is not empty
+  while (queue.length > 0) {
+
+    // Dequeue a node from the queue
+    let currentNode = queue.shift();
+
+    // Mark the node as visited
+    visited.add(currentNode);
+
+    // Explore the node's neighbors
+    for (let neighbor of graph[currentNode]) {
+      if (!visited.has(neighbor)) {
+        // Enqueue the neighbor if it has not been visited
+        queue.push(neighbor);
+      }
+    }
   }
 
-  // Find the length of the linked list.
-  let length = 0;
-  let current = head;
-  while (current) {
-    length++;
-    current = current.next;
-  }
-
-  // Subtract n from the length to find the index of the nth node from the end.
-  const index = length - n;
-
-  // Traverse the linked list from the beginning, stopping at the index found in step 2.
-  current = head;
-  for (let i = 0; i < index; i++) {
-    current = current.next;
-  }
-
-  // Return the node at the index found in step 3.
-  return current;
-};
+  // Return the visited nodes
+  return visited;
+}
