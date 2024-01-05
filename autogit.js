@@ -1,47 +1,49 @@
-function lcs(str1, str2) {
-  // Create the DP table
-  const dp = new Array(str1.length + 1).fill(0).map(() => new Array(str2.length + 1).fill(0));
-
-  // Initialize the first row and column to 0
-  for (let i = 0; i <= str1.length; i++) {
-    dp[i][0] = 0;
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
   }
-  for (let j = 0; j <= str2.length; j++) {
-    dp[0][j] = 0;
-  }
-
-  // Iterate over the DP table
-  for (let i = 1; i <= str1.length; i++) {
-    for (let j = 1; j <= str2.length; j++) {
-      if (str1[i - 1] == str2[j - 1]) {
-        dp[i][j] = dp[i - 1][j - 1] + 1;
-      } else {
-        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-      }
-    }
-  }
-
-  // Reconstruct the LCS
-  let lcs = "";
-  let i = str1.length;
-  let j = str2.length;
-  while (i > 0 && j > 0) {
-    if (str1[i - 1] == str2[j - 1]) {
-      lcs = str1[i - 1] + lcs;
-      i--;
-      j--;
-    } else if (dp[i - 1][j] > dp[i][j - 1]) {
-      i--;
-    } else {
-      j--;
-    }
-  }
-
-  return lcs;
 }
-const str1 = "ABCDGH";
-const str2 = "AEDFHR";
 
-const lcs = lcs(str1, str2);
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
 
-console.log(lcs); // Output: "ADH"
+  reverse() {
+    let prev = null;
+    let current = this.head;
+    let next;
+
+    while (current) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+
+    this.head = prev;
+  }
+
+  print() {
+    let current = this.head;
+    while (current) {
+      console.log(current.data);
+      current = current.next;
+    }
+  }
+}
+
+const linkedList = new LinkedList();
+linkedList.head = new Node(10);
+linkedList.head.next = new Node(20);
+linkedList.head.next.next = new Node(30);
+linkedList.head.next.next.next = new Node(40);
+
+console.log("Original Linked List:");
+linkedList.print();
+
+linkedList.reverse();
+
+console.log("Reversed Linked List:");
+linkedList.print();
