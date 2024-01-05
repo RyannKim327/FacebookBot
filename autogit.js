@@ -1,57 +1,13 @@
-class TrieNode {
-  constructor() {
-    this.children = {};
-    this.isEndOfWord = false;
-  }
-}
-class Trie {
-  constructor() {
-    this.root = new TrieNode();
-  }
+const string = "The quick brown fox jumps over the lazy dog";
+const word = "the";
 
-  // Insert a word into the trie
-  insert(word) {
-    let current = this.root;
-    for (let i = 0; i < word.length; i++) {
-      const char = word[i];
-      if (!current.children[char]) {
-        current.children[char] = new TrieNode();
-      }
-      current = current.children[char];
-    }
-    current.isEndOfWord = true;
-  }
+// To make the search case-insensitive, use the "i" flag in the regular expression
+const regex = new RegExp(word, "gi");
 
-  // Search for a word in the trie
-  search(word) {
-    let current = this.root;
-    for (let i = 0; i < word.length; i++) {
-      const char = word[i];
-      if (!current.children[char]) {
-        return false;
-      }
-      current = current.children[char];
-    }
-    return current.isEndOfWord;
-  }
+// Use the match method with the regex to get an array of matches
+const matches = string.match(regex);
 
-  // Check if a given prefix exists in the trie
-  startsWith(prefix) {
-    let current = this.root;
-    for (let i = 0; i < prefix.length; i++) {
-      const char = prefix[i];
-      if (!current.children[char]) {
-        return false;
-      }
-      current = current.children[char];
-    }
-    return true;
-  }
-}
-const trie = new Trie();
-trie.insert("apple");
-console.log(trie.search("apple")); // true
-console.log(trie.search("app")); // false
-console.log(trie.startsWith("app")); // true
-trie.insert("app");
-console.log(trie.search("app")); // true
+// Count the number of matches
+const count = matches ? matches.length : 0;
+
+console.log(`Number of occurrences of "${word}": ${count}`);
