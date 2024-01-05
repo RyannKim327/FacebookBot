@@ -1,43 +1,36 @@
-let fib0 = 0;
-let fib1 = 1;
-let fib2 = fib0 + fib1;
+async function fetchData() {
+  const url = "http://api.example.com/data"; // Replace with your API endpoint
 
-while (fib2 < arr.length) {
-  fib0 = fib1;
-  fib1 = fib2;
-  fib2 = fib0 + fib1;
-}
-function fibonacciSearch(arr, key) {
-  let fib0 = 0;
-  let fib1 = 1;
-  let fib2 = fib0 + fib1;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("Data received: ", data);
+    // Handle the data here
 
-  while (fib2 < arr.length) {
-    fib0 = fib1;
-    fib1 = fib2;
-    fib2 = fib0 + fib1;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    // Handle error here
   }
-
-  let offset = -1;
-  let mid = -1;
-
-  while (fib2 > 1) {
-    const index = Math.min(offset + fib0, arr.length - 1);
-
-    if (arr[index] === key) {
-      mid = index;
-      break;
-    } else if (arr[index] < key) {
-      fib0 = fib1;
-      fib1 = fib2;
-      fib2 = fib0 + fib1;
-      offset = index;
-    } else {
-      fib2 = fib1;
-      fib1 = fib0;
-      fib0 = fib2 - fib1;
-    }
-  }
-
-  return mid;
 }
+
+async function makeAsyncTask() {
+  const AsyncTask = Java.use("android.os.AsyncTask");
+  const task = AsyncTask.$new();
+
+  const doInBackground = AsyncTask.doInBackground.overload("java.lang.Object[]");
+  const onPostExecute = AsyncTask.onPostExecute.overload("java.lang.Object");
+
+  doInBackground.implementation = function(params) {
+    const taskResult = fetchData(); // Call the async function to fetch data
+    return taskResult; // Return the result of the async function
+  };
+
+  onPostExecute.implementation = function(result) {
+    console.log("Async task finished. Result:", result);
+    // Handle the result here
+  };
+
+  task.execute(); // Execute the async task
+}
+
+makeAsyncTask();
