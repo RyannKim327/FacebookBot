@@ -1,24 +1,46 @@
-const string = "Hello, world!";
+class Stack {
+  constructor() {
+    this.items = [];
+  }
 
-// Check if the string contains the substring "world"
-if (string.includes("world")) {
-  console.log("The string contains the substring 'world'.");
-} else {
-  console.log("The string does not contain the substring 'world'.");
-}
-const string = "Hello, world!";
+  push(item) {
+    this.items.push(item);
+  }
 
-// Check if the string contains the substring "world"
-if (string.indexOf("world") !== -1) {
-  console.log("The string contains the substring 'world'.");
-} else {
-  console.log("The string does not contain the substring 'world'.");
-}
-const string = "Hello, world!";
+  pop() {
+    if (this.items.length === 0) {
+      return undefined;
+    }
+    return this.items.pop();
+  }
 
-// Check if the string contains the substring "world"
-if (/world/.test(string)) {
-  console.log("The string contains the substring 'world'.");
-} else {
-  console.log("The string does not contain the substring 'world'.");
+  peek() {
+    if (this.items.length === 0) {
+      return undefined;
+    }
+    return this.items[this.items.length - 1];
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  size() {
+    return this.items.length;
+  }
 }
+const stack = new Stack();
+
+stack.push(1);
+stack.push(2);
+stack.push(3);
+
+console.log(stack.peek()); // 3
+
+stack.pop();
+
+console.log(stack.peek()); // 2
+
+console.log(stack.isEmpty()); // false
+
+console.log(stack.size()); // 2
