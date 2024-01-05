@@ -1,44 +1,89 @@
-// Boyer-Moore-Horspool algorithm for string searching
-
-function bmhs(text, pattern) {
-  // Build a bad character table
-  const badcharTable = {};
-  for (let i = 0; i < pattern.length - 1; i++) {
-    badcharTable[pattern[i]] = pattern.length - i - 1;
+class PriorityQueue {
+  constructor() {
+    this.values = [];
   }
-
-  // Search the text for the pattern
-  let m = pattern.length;
-  let n = text.length;
-  let s = 0;  // shift of the pattern
-  while (s <= n - m) {
-    let j = m - 1;
-    // Find a mismatch between the pattern and the text
-    while (j >= 0 && pattern[j] === text[s + j]) {
-      j--;
-    }
-
-    // If there is a mismatch, shift the pattern by the bad character rule
-    if (j < 0) {
-      // Pattern found
-      return s;
-    } else {
-      let shift = Math.max(1, badcharTable[text[s + j]] || m);
-      s += shift;
-    }
+  enqueue(value, priority) {
+    this.values.push({ value, priority });
+    this.sort();
   }
-
-  // Pattern not found
-  return -1;
+  dequeue() {
+    return this.values.shift();
+  }
+  sort() {
+    this.values.sort((a, b) => a.priority - b.priority);
+  }
 }
 
-// Example usage
-const text = "Hello, world! This is a test.";
-const pattern = "test";
-const result = bmhs(text, pattern);
+function dijkstra(graph, start, end) {
+  // Create a priority queue to store the nodes we need to visit.
+  const queue = new PriorityQueue();
 
-if (result === -1) {
-  console.log("Pattern not found.");
-} else {
-  console.log(`Pattern found at index ${result}.`);
+  // Initialize distances to infinity for all nodes, except the start node, which is set to 0.
+  const distances = Array(graph.length).fill(Infinity);
+  distances[start] = 0;
+
+  // Initialize the previous node for each node to null.
+  const previous = Array(graph.length).fill(null);
+
+  // Add the start node to the queue.
+  queue.enqueue(start, 0);
+
+  // While the queue is not empty, visit the node with the smallest distance.
+  while (queue.values.length > 0) {
+    // Get the node with the smallest distance.
+    const { value: current } = queue.dequeue();
+
+    // If we reached the end node, we're done.
+    if (current === end) {
+      break;
+    }
+
+    // Loop through all the neighbors of the current node.
+    for (const neighbor of graph[current]) {
+      // Calculate the distance to the neighbor.
+      const distance = distances[current] + graph[current][neighbor];
+
+      // If the new distance is shorter than the current distance, update the distance and previous node for the neighbor.
+      if (distance < distances[neighbor]) {
+        distances[neighbor] = distance;
+        previous[neighbor] = current;
+
+        // Add the neighbor to the queue.
+        queue.enqueue(neighbor, distance);
+      }
+    }
+  }
+
+  // If we didn't reach the end node, there is no path from the start node to the end node.
+  if (distances[end] === Infinity) {
+    return null;
+  }
+
+  // Reconstruct the shortest path from the end node to the start node.
+  const path = [];
+  let current = end;
+  while (current !== null) {
+    path.unshift(current);
+    current = previous[current];
+  }
+
+  // Return the shortest path.
+  return path;
 }
+1 ---- 2
+| \   / |
+|  \ /  |
+|   3    |
+\   |   /
+ \  |  /
+  \ | /
+   4
+const graph = [
+  [{ neighbor: 2, weight: 1 }, { neighbor: 3, weight: 4 }],
+  [{ neighbor: 1, weight: 1 }, { neighbor: 3, weight: 2 }, { neighbor: 4, weight: 5 }],
+  [{ neighbor: 1, weight: 4 }, { neighbor: 2, weight: 2 }],
+  [{ neighbor: 1, weight: 4 }, { neighbor: 4, weight: 1 }],
+  [{ neighbor: 2, weight: 5 }, { neighbor: 3, weight: 1 }]
+];
+const shortestPath = dijkstra(graph, 1, 4);
+[1, 2, 4]
