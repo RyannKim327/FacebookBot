@@ -1,22 +1,20 @@
-function burrowsWheelerTransform(input) {
-  const cyclicShifts = [];
-  
-  // Generate all cyclic shifts
-  for (let i = 0; i < input.length; i++) {
-    cyclicShifts.push(input.substr(i) + input.substr(0, i));
-  }
-  
-  // Sort cyclic shifts in lexicographic order
-  cyclicShifts.sort();
-  
-  // Find the last column of sorted cyclic shifts
-  const transformedString = cyclicShifts.map(shift => shift.charAt(input.length - 1)).join("");
-  
-  return transformedString;
+function isAnagram(str1, str2) {
+  // Step 1: Convert to lowercase
+  str1 = str1.toLowerCase();
+  str2 = str2.toLowerCase();
+
+  // Step 2: Remove non-alphabetic characters
+  str1 = str1.replace(/[^a-z]/g, '');
+  str2 = str2.replace(/[^a-z]/g, '');
+
+  // Step 3: Sort the character arrays
+  const sortedStr1 = str1.split('').sort().join('');
+  const sortedStr2 = str2.split('').sort().join('');
+
+  // Step 6: Compare the sorted strings
+  return sortedStr1 === sortedStr2;
 }
 
-// Example usage
-const inputString = "banana";
-const transformed = burrowsWheelerTransform(inputString);
-console.log(transformed);
-annb$aa
+// Example usage:
+console.log(isAnagram('listen', 'silent')); // true
+console.log(isAnagram('hello', 'hi')); // false
