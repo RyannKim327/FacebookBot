@@ -1,13 +1,9 @@
-const string = "The quick brown fox jumps over the lazy dog";
-const word = "the";
+function calculateTriangleArea(base, height) {
+  return (base * height) / 2;
+}
 
-// To make the search case-insensitive, use the "i" flag in the regular expression
-const regex = new RegExp(word, "gi");
-
-// Use the match method with the regex to get an array of matches
-const matches = string.match(regex);
-
-// Count the number of matches
-const count = matches ? matches.length : 0;
-
-console.log(`Number of occurrences of "${word}": ${count}`);
+// Example usage:
+var base = 4;
+var height = 6;
+var area = calculateTriangleArea(base, height);
+console.log('The area of the triangle is: ' + area);
