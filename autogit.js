@@ -1,17 +1,11 @@
-function reverseWords(str) {
-  // Split the string into an array of words
-  var words = str.split(' ');
-
-  // Reverse the order of the words in the array
-  words.reverse();
-
-  // Join the words back into a string
-  var reversedStr = words.join(' ');
-
-  return reversedStr;
+// Function to calculate the area of a triangle
+function calculateTriangleArea(base, height) {
+  var area = (base * height) / 2;
+  return area;
 }
 
 // Example usage
-var originalStr = "Hello, world!";
-var reversedStr = reverseWords(originalStr);
-console.log(reversedStr); // Output: "world! Hello,"
+var base = 10;
+var height = 5;
+var triangleArea = calculateTriangleArea(base, height);
+console.log("The area of the triangle is: " + triangleArea);
