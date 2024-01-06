@@ -1,26 +1,46 @@
-function hasCycle(head) {
-  let slow = head;
-  let fast = head;
-
-  while (fast !== null && fast.next !== null) {
-    slow = slow.next;
-    fast = fast.next.next;
-
-    if (slow === fast) {
-      return true; // Found a cycle
+function buildTable(pattern) {
+  let table = [0];
+  let prefix = 0;
+  
+  for (let i = 1; i < pattern.length; i++) {
+    if (pattern[i] === pattern[prefix]) {
+      prefix++;
+    } else {
+      prefix = 0;
+    }
+    table[i] = prefix; 
+  }
+  
+  return table;
+}
+function knuthMorrisPratt(text, pattern) {
+  let table = buildTable(pattern);
+  let positions = [];
+  
+  let textIndex = 0;
+  let patternIndex = 0;
+  
+  while (textIndex < text.length) {
+    if (pattern[patternIndex] === text[textIndex]) {
+       if (patternIndex === pattern.length - 1) {
+         positions.push(textIndex - pattern.length + 1);
+         patternIndex = table[patternIndex];
+       }
+       patternIndex++;
+       textIndex++;
+    } else if (patternIndex > 0) {
+      patternIndex = table[patternIndex - 1];
+    } else {
+      patternIndex = 0;
+      textIndex++;
     }
   }
-
-  return false; // No cycle found
+  
+  return positions;
 }
-// Sample linked list with a cycle
-const node1 = { value: 1 };
-const node2 = { value: 2 };
-const node3 = { value: 3 };
-const node4 = { value: 4 };
-node1.next = node2;
-node2.next = node3;
-node3.next = node4;
-node4.next = node2; // Cycle from node4 to node2
+let text = "ABC ABCDAB ABCDABCDABDE";
+let pattern = "ABCDABD";
 
-console.log(hasCycle(node1)); // Output: true
+let positions = knuthMorrisPratt(text, pattern);
+console.log("Pattern found at positions:", positions);
+Pattern found at positions: [15]
