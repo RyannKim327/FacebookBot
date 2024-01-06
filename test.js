@@ -36,18 +36,18 @@ let _commitments = 1
 let run = async () => {
 	const time = date("Asia/Manila")
 	const m = `${time.getMonth() + 1}-${time.getDate()}-${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`
-	// const m2 = [
-	// 	"Sana ako pa rin",
-	// 	"Bakit na mimiss ko pa rin sya",
-	// 	"Ano kaya ang susunod na ilalagay ko dito",
-	// 	"From valentines, hanggang pasko, na sana pati bagong taon",
-	// 	"Ang cute nya, lalo na pag inis sya saken",
-	// 	"Wala, talaga lang attractive sya saken",
-	// 	"Nugagawen kapag miss ko na sya?",
-	// 	"Parang malabo na pala, di na ko aasa",
-	// 	"Mahirap lang isipin, pero tanggap ko.",
-	// 	"Kahit anong gawin prii, sya pa rin."
-	// ]
+	const mm2 = [
+		"Sana ako pa rin",
+		"Bakit na mimiss ko pa rin sya",
+		"Ano kaya ang susunod na ilalagay ko dito",
+		"From valentines, hanggang pasko, na sana pati bagong taon",
+		"Ang cute nya, lalo na pag inis sya saken",
+		"Wala, talaga lang attractive sya saken",
+		"Nugagawen kapag miss ko na sya?",
+		"Parang malabo na pala, di na ko aasa",
+		"Mahirap lang isipin, pero tanggap ko.",
+		"Kahit anong gawin prii, sya pa rin."
+	]
 	const m2 = [
 		"a random javascript code that has input",
 		"a random javascript code that uses fetch",
@@ -161,8 +161,7 @@ let run = async () => {
 	
 	
 	try{
-		let { data } = await axios.get(`https://hercai.onrender.com/v3-beta/hercai?question=${m3}`)
-		
+		let { data } = await axios.get(`https://hercai.onrender.com/turbo-16k/hercai?question=${m3}`)
 		let datas = data.reply.split("\n")
 		let result = ""
 		let active = false
@@ -181,9 +180,11 @@ let run = async () => {
 		
 		// exec("git config --global user.name \"RyannKim327\"", (e) => {console.error(e)})
 		// exec("git config --global user.email \"rksesgundo123@gmail.com\"", (e) => {console.error(e)})
-		
-		fs.writeFileSync("autogit.js", result, "utf-8")
-		setTimeout(() => {
+		if(result == ""){
+			fs.writeFileSync("Auto git.txt", mm2[Math.floor(Math,random() * mm2.length)], "utf-8")
+		}else{
+			fs.writeFileSync("autogit.js", result, "utf-8")
+		}setTimeout(() => {
 			console.log(`-----${_commitments}-----`)
 			console.log("Git add")
 			exec("git add .", (e) => {
