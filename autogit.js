@@ -1,38 +1,23 @@
-function findLongestIncreasingSubsequence(arr) {
-  const n = arr.length;
-  // Initialize an array to store the length of the longest increasing subsequence ending at each index
-  const lisLengths = Array(n).fill(1);
-
-  // Compute the longest increasing subsequence for each index
-  for (let i = 1; i < n; i++) {
-    for (let j = 0; j < i; j++) {
-      if (arr[i] > arr[j] && lisLengths[i] < lisLengths[j] + 1) {
-        lisLengths[i] = lisLengths[j] + 1;
+function bubbleSort(arr) {
+  var len = arr.length;
+  var swapped;
+  
+  do {
+    swapped = false;
+    
+    for (var i = 0; i < len - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        var temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+        swapped = true;
       }
     }
-  }
-
-  // Find the maximum length from the lisLengths array
-  let maxLength = 0;
-  for (let i = 0; i < n; i++) {
-    if (lisLengths[i] > maxLength) {
-      maxLength = lisLengths[i];
-    }
-  }
-
-  // Find the longest increasing subsequence using the lisLengths array
-  let longestIncreasingSubsequence = [];
-  for (let i = n - 1; i >= 0; i--) {
-    if (lisLengths[i] === maxLength) {
-      longestIncreasingSubsequence.unshift(arr[i]);
-      maxLength--;
-    }
-  }
-
-  return longestIncreasingSubsequence;
+  } while (swapped);
+  
+  return arr;
 }
 
 // Example usage:
-const arr = [3, 4, -1, 0, 6, 2, 3];
-const longestSubsequence = findLongestIncreasingSubsequence(arr);
-console.log(longestSubsequence); // Output: [-1, 0, 2, 3]
+var array = [5, 8, 2, 1, 6, 3];
+console.log(bubbleSort(array));
