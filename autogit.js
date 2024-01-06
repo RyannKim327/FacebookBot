@@ -1,18 +1,29 @@
-function reverseWords(str) {
-  // Step 1: Split the string into an array of words
-  var words = str.split(' ');
+function binarySearch(array, target) {
+  let left = 0;
+  let right = array.length - 1;
 
-  // Step 2: Reverse the array
-  var reversedWords = words.reverse();
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
 
-  // Step 3: Join the array back into a string
-  var reversedString = reversedWords.join(' ');
+    if (array[mid] === target) {
+      return mid;
+    } else if (array[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
 
-  // Return the reversed string
-  return reversedString;
+  return -1; // target value not found in the array
 }
 
-// Example usage
-var inputString = "Hello World";
-var reversedString = reverseWords(inputString);
-console.log(reversedString); // Output: "World Hello"
+// Example usage:
+const myArray = [1, 3, 6, 8, 12, 15, 24];
+const targetValue = 8;
+
+const index = binarySearch(myArray, targetValue);
+if (index !== -1) {
+  console.log("Element found at index", index);
+} else {
+  console.log("Element not found in the array");
+}
