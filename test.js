@@ -196,8 +196,8 @@ let run = async () => {
 						if(e) console.error(e)
 						setTimeout(() => {
 							console.log("Git push")
-							exec(`git push`, (e) => {
-								if(e) console.error(e)
+							// exec(`git push`, (e) => {
+							//	if(e) console.error(e)
 								console.log("Close")
 								setTimeout(() => {
 									_commitments++
@@ -209,7 +209,7 @@ let run = async () => {
 										process.exit(0)
 									}
 								}, 2000)
-							})
+							//})
 						}, 2000)
 					})
 				}, 1000)
