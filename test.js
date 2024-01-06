@@ -206,9 +206,9 @@ let run = async () => {
 										process.exit(0)
 									}
 								}, 2000)
-						// exec(`git push`, (e) => {
-						console.log("Git push")
+							// exec(`git push`, (e) => {
 							//	if(e) console.error(e)
+							console.log("Git push")
 							//})
 						}, 2000)
 					})

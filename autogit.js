@@ -1,21 +1,46 @@
-function longestCommonPrefix(strings) {
-  if (strings.length === 0) {
-    return "";
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.children = [];
   }
-  
-  for (let i = 0; i < strings[0].length; i++) {
-    const char = strings[0][i];
-    
-    for (let j = 1; j < strings.length; j++) {
-      if (strings[j][i] !== char) {
-        return strings[0].substring(0, i);
+
+  addChild(child) {
+    this.children.push(child);
+  }
+}
+
+function depthLimitedSearch(root, target, maxDepth) {
+  const stack = [];
+  stack.push({ node: root, depth: 0 });
+
+  while (stack.length > 0) {
+    const { node, depth } = stack.pop();
+
+    if (node.value === target) {
+      return node;
+    }
+
+    if (depth < maxDepth) {
+      for (let child of node.children.reverse()) {
+        stack.push({ node: child, depth: depth + 1 });
       }
     }
   }
-  
-  return strings[0];
+
+  return null; // Target not found within the given depth limit
 }
 
-// Example usage:
-const strings = ["apple", "appy", "appease"];
-console.log(longestCommonPrefix(strings)); // Output: "app"
+// Example usage
+const root = new Node(1);
+const node2 = new Node(2);
+const node3 = new Node(3);
+const node4 = new Node(4);
+const node5 = new Node(5);
+
+root.addChild(node2);
+root.addChild(node3);
+node2.addChild(node4);
+node2.addChild(node5);
+
+console.log(depthLimitedSearch(root, 5, 2)); // Output: Node { value: 5, children: [] }
+console.log(depthLimitedSearch(root, 6, 3)); // Output: null (Target not found within the depth limit)
