@@ -56,21 +56,21 @@ module.exports = async (api, event, regex) => {
 			}
 		}
 		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
-		const strm = ytdl(url, {
-			quality: "lowestaudio"
-		})
+
 		const info = await ytdl.getInfo(url)
 		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
-		strm.pipe(file).on("end", async () => {
+		ytdl(url, {
+			quality: "lowestaudio"
+		}).pipe(file).on("end", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
 			let sec = lengthTime % 60
 			const time = `${min}:${sec}`
 			api.sendMessage({
-				body: `Here's your requests ${reqBy}:\nTitle: ${font(info.videoDetails.title)}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}`,
+				body: `Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}`,
 				mentions:[{
 					id: event.senderID,
 					tag: user[event.senderID]['name']
