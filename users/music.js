@@ -57,16 +57,18 @@ module.exports = async (api, event, regex) => {
 		}
 		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
 		
-		const strm = ytdl(url, {
-			quality: "lowestaudio"
-		})
+		// const strm = ytdl(url, {
+		//	quality: "lowestaudio"
+		// })
 
 		const info = await ytdl.getInfo(url)
 		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
-		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+		ytdl(url, {
+			quality; 'lowestaudio'
+		}).pipe(file).on("finish", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
 			let sec = lengthTime % 60
