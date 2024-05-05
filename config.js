@@ -632,6 +632,7 @@ let start = (state) => {
 			setTimeout(() => {
 				if(!fs.existsSync("./temp")){
 					fs.mkdirSync("./temp")
+					console.log("Removed temp files")
 				}
 			}, 500)
 		})

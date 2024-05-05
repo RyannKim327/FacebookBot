@@ -64,7 +64,7 @@ module.exports = async (api, event, regex) => {
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
-		strm.pipe(fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)).on("end", async () => {
+		strm.pipe(file).on("end", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
 			let sec = lengthTime % 60
