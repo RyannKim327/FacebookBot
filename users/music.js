@@ -3,9 +3,9 @@ const fs = require("fs")
 const YoutubeMusicApi = require('youtube-music-api')
 const yt = new YoutubeMusicApi()
 const ytdl = require('ytdl-core');
-const ffmpeg = require('@ffmpeg-installer/ffmpeg')
-const ffmpegs = require('fluent-ffmpeg')
-ffmpegs.setFfmpegPath(ffmpeg.path)
+// const ffmpeg = require('@ffmpeg-installer/ffmpeg')
+// const ffmpegs = require('fluent-ffmpeg')
+// ffmpegs.setFfmpegPath(ffmpeg.path)
 
 const afk = require("../utils/afk")
 const gender = require("../utils/gender")
@@ -25,8 +25,8 @@ module.exports = async (api, event, regex) => {
 		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
-		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/
-		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]+)/
+		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/gi
+		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]{11})/gi
 		let music = {}
 		if(yt_1.test(data)){
 			music = {
@@ -57,14 +57,14 @@ module.exports = async (api, event, regex) => {
 		}
 		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
 		const strm = ytdl(url, {
-			quality: "lowest"
+			quality: "lowestaudio"
 		})
 		const info = await ytdl.getInfo(url)
 		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
-		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+		strm.pipe(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
 			let sec = lengthTime % 60
