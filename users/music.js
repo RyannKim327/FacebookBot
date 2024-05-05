@@ -3,9 +3,9 @@ const fs = require("fs")
 const YoutubeMusicApi = require('youtube-music-api')
 const yt = new YoutubeMusicApi()
 const ytdl = require('ytdl-core');
-// const ffmpeg = require('@ffmpeg-installer/ffmpeg')
-// const ffmpegs = require('fluent-ffmpeg')
-// ffmpegs.setFfmpegPath(ffmpeg.path)
+const ffmpeg = require('@ffmpeg-installer/ffmpeg')
+const ffmpegs = require('fluent-ffmpeg')
+ffmpegs.setFfmpegPath(ffmpeg.path)
 
 const afk = require("../utils/afk")
 const gender = require("../utils/gender")
@@ -56,15 +56,17 @@ module.exports = async (api, event, regex) => {
 			}
 		}
 		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
+		
+		const strm = ytdl(url, {
+			quality: "lowestaudio"
+		})
 
 		const info = await ytdl.getInfo(url)
 		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
-		ytdl(url, {
-			quality: "lowestaudio"
-		}).pipe(file).on("end", async () => {
+		ffmpegs(strm).audioBitrate(96).save(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
 			let sec = lengthTime % 60
