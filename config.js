@@ -626,16 +626,20 @@ let start = (state) => {
 		prefix = json_.prefix
 
 		interval_()
-
-		fs.rm("./temp", { recursive: true }, (e) => {
+		
+		if(fs.exists(`${__dirname}/..temp/`)){
+		fs.rm(`${__dirname}/temp/`, { recursive: true }, (e) => {
 			console.log(`Deleted ${mydate('Asia/Manila')}`)
 			setTimeout(() => {
-				if(!fs.existsSync("./temp")){
-					fs.mkdirSync("./temp")
+				if(!fs.existsSync(`${__dirname}/temp/`)){
+					fs.mkdirSync(`${__dirname}/temp/`)
 					console.log("Removed temp files")
 				}
 			}, 500)
 		})
+		}else{
+			fs.mkdirSync(`${__dirname}/temp/`)
+		}
 		api.setOptions(options)
 
 		let listener_ = await doListen(api)
