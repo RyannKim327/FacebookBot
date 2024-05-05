@@ -610,15 +610,15 @@ let start = (state) => {
 		// 	})
 		// }
 
-		setInterval(() => {
-			axios.get("https://facebookbot-wm8g.onrender.com")
-		}, ((1000 * 60) * 60))
+		// setInterval(() => {
+			// axios.get("https://facebookbot-wm8g.onrender.com")
+		// }, ((1000 * 60) * 60))
 
-		if(refreshed){
-			await cron(api)
-			await cron_api(api)
-			refreshed = false
-		}
+		// if(refreshed){
+			// await cron(api)
+			// await cron_api(api)
+			// refreshed = false
+		// }
 		resetOneTime()
 
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json_), "utf8")
