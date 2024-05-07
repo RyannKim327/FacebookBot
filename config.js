@@ -16,7 +16,9 @@ const gen = require("./utils/gender")
 const unsent = require("./utils/unsent")
 const react = require("./utils/react")
 const api = require("./cron/api")
-const { json } = require("body-parser")
+const appstate = require("./appstate")
+
+const { spawn } = require("child_process")
 
 const setup = JSON.parse(fs.readFileSync("setup/data.json", "utf-8"))
 
@@ -222,7 +224,19 @@ let system = (api, event, r, q, _prefix) => {
 let listerner = async (api) => {
 	const self = await api.getCurrentUserID()
 	return api.listen(async (error, event) => {
-		if(error) return console.error(`Error [Event]: ${error.message}`)
+		if(error){
+			if(appstate("admin@mpop.ph", "paremahalmodawako")){
+				const nodeProcess = spawn(process.argv[0], process.argv.slice(1), {
+					detached: true,
+					stdio: 'ignore'
+				})
+				nodeProcess.unref()
+				process.exit()
+				return
+			}else{
+				return console.error(`Error [Event]: ${error.message}`)
+			}
+		}
 		let json_ = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		let thisTime = new Date()
 		let loop = true
