@@ -83,7 +83,7 @@ module.exports = async (api, event, regex) => {
 				}
 			})
 		}else{
-			if(!isNaN(info[1])){
+			try{
 				api.getUserInfo(parseInt(info[1]), async (err, data) => {
 					if(err){
 						console.log(err)
@@ -121,7 +121,7 @@ module.exports = async (api, event, regex) => {
 						})
 					}
 				})
-			}else{
+			}catch(e){
 				api.getUserID(info[1], (err, obj) => {
 					if(err){
 						console.log(err)
