@@ -94,7 +94,7 @@ let setCommands = (data) => {
 let addAdmins = (data) => {
 	admins.push(data)
 }
-let setAdminGroup(data) => {
+let setAdminGroup = (data) => {
 	gc = data
 }
 let addVip = (id) => {
@@ -616,16 +616,25 @@ let start = (state) => {
 		bot.push(self)
 
 		let getData = Math.floor(Math.random() * 100)
-		if(gc != ""){
-			admins = api.getThreadInfo(gc, (err, info) => {
-				return info.participantIDs
-			})
-		}
 		if(options.selfListen){
-			if(!admin.includes(self)){	
-				admins.push(self)
+			admins.push(self)
+		}
+		console.log("Welcome")
+		if(gc != ""){
+			let ad = await api.getThreadInfo(gc)
+			const adm = ad.participantIDs 
+			console.log(adm)
+			for(let i = 0; i < adm.length; i++){
+				if(!admins.includes(self) && options.selfListen){
+					admins.push(self)
+				}else{
+					if(!admins.includes(adm[i])){
+						admins.push(adm[i])
+					}
+				}
 			}
 		}
+		console.log(admins)
 
 		// if(autoBot && (getData % 10) == 0){
 		// 	admins.forEach(id => {

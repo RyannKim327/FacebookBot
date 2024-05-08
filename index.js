@@ -720,7 +720,6 @@ config.setOptions({
 	autoReconnect: true,
 	logLevel: "silent",
 	updatePresence: true,
-	online: true,
 })
 
 config.start({
