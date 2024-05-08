@@ -8,7 +8,7 @@ module.exports = (api, event) => {
 		})
 	}else{
 		if(getAdminGroup() != ""){
-			api.sendMessage(`Last checked ${mydate("Asia/Manila")}`, getAdminGroup(), (err, msg))
+			api.sendMessage(`Last checked ${mydate("Asia/Manila")}`, getAdminGroup(), (err, msg) => {})
 		}
 		api.setMessageReaction("👍", event.messageID, (e) => {}, true)
 		setTimeout((e) => {
