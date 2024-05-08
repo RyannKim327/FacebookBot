@@ -2,6 +2,7 @@ const config = require("./config")
 const server = require("./server")
 const repl = require("./replit_only.js")
 const dump = require("./dump")
+const fs = require("fs")
 
 dump()
 
@@ -707,9 +708,10 @@ config.add("answer", {
 	category: "game"
 })
 
-config.addAdmins("100011558238843")
-config.addAdmins("100081698814451")
-config.addAdmins("61555199001800")
+// config.addAdmins("100011558238843")
+// config.addAdmins("100081698814451")
+// config.addAdmins("61555199001800")
+config.setAdminGroup("7045133965567738")
 
 config.setOptions({
 	listenEvents: true,
@@ -718,10 +720,11 @@ config.setOptions({
 	autoReconnect: true,
 	logLevel: "silent",
 	updatePresence: true,
+	online: true,
 })
 
 config.start({
-	appState: JSON.parse(process.env['user'])
+	appState: JSON.parse(fs.readFileSync("setup/asset.json", "utf-8"))
 })
 
 

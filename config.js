@@ -65,6 +65,7 @@ let commands = []
 let prefix
 let name = ""
 let admins = []
+let gc = ""
 
 let setDefaultName = (data) => {
 	defName = data
@@ -92,6 +93,9 @@ let setCommands = (data) => {
 }
 let addAdmins = (data) => {
 	admins.push(data)
+}
+let setAdminGroup(data) => {
+	gc = data
 }
 let addVip = (id) => {
 	vips +=  `${id}, `
@@ -612,8 +616,16 @@ let start = (state) => {
 		bot.push(self)
 
 		let getData = Math.floor(Math.random() * 100)
-		if(options.selfListen)
-			admins.push(self)
+		if(gc != ""){
+			admins = api.getThreadInfo(gc, (err, info) => {
+				return info.participantIDs
+			})
+		}
+		if(options.selfListen){
+			if(!admin.includes(self)){	
+				admins.push(self)
+			}
+		}
 
 		// if(autoBot && (getData % 10) == 0){
 		// 	admins.forEach(id => {
@@ -628,11 +640,11 @@ let start = (state) => {
 			// axios.get("https://facebookbot-wm8g.onrender.com")
 		// }, ((1000 * 60) * 60))
 
-		// if(refreshed){
-			// await cron(api)
-			// await cron_api(api)
-			// refreshed = false
-		// }
+		if(refreshed){
+			cron(api)
+			cron_api(api)
+			refreshed = false
+		}
 		resetOneTime()
 
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json_), "utf8")
@@ -664,6 +676,7 @@ let start = (state) => {
 module.exports = {
 	add,
 	addAdmins,
+	setAdminGroup,
 	setCommands,
 	setDefaultName,
 	setName,
