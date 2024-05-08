@@ -726,7 +726,10 @@ config.start({
 
 
 let run = () => {
+	let minute = Math.floor(Math.random() * 60)
+	let second = Math.floor(Math.random() * 60)
 	console.log("Run")
-	setTimeout(run, (1000 * 60) * 60)
+	setTimeout(run, (1000 * second) * minute)
 }
+run()
 // server()
