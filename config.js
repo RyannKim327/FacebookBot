@@ -118,6 +118,9 @@ let setPrefix = (data) => {
 let getAdmins = () => {
 	return admins
 }
+let getAdminGroup = () => {
+	return gc
+}
 let getName = () => {
 	return name
 }
@@ -619,11 +622,9 @@ let start = (state) => {
 		if(options.selfListen){
 			admins.push(self)
 		}
-		console.log("Welcome")
 		if(gc != ""){
 			let ad = await api.getThreadInfo(gc)
 			const adm = ad.participantIDs 
-			console.log(adm)
 			for(let i = 0; i < adm.length; i++){
 				if(!admins.includes(self) && options.selfListen){
 					admins.push(self)
@@ -634,7 +635,6 @@ let start = (state) => {
 				}
 			}
 		}
-		console.log(admins)
 
 		// if(autoBot && (getData % 10) == 0){
 		// 	admins.forEach(id => {
@@ -699,6 +699,7 @@ module.exports = {
 	getMsgs,
 	time,
 	getAdmins,
+	getAdminGroup,
 	getName,
 	getPrefix,
 
