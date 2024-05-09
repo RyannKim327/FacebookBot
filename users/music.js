@@ -13,6 +13,7 @@ const react =  require("../utils/react")
 const font = require("../utils/font")
 
 module.exports = async (api, event, regex) => {
+	const timestart = Date.now()
 	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
 		return api.sendMessage("Your request is still in progress, please wait for a moment", event.threadID, (e, m) => {
 			if(e){
@@ -25,8 +26,8 @@ module.exports = async (api, event, regex) => {
 		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
 		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
-		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/gi
-		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]{11})/gi
+		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/i
+		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]{11})/i
 		let music = {}
 		if(yt_1.test(data)){
 			music = {
@@ -67,14 +68,16 @@ module.exports = async (api, event, regex) => {
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
 		ytdl(url, {
-			quality; 'lowestaudio'
+			quality: 'lowestaudio'
 		}).pipe(file).on("finish", async () => {
 			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 			let min = Math.floor(lengthTime / 60)
 			let sec = lengthTime % 60
 			const time = `${min}:${sec}`
+			const consume = new Date(Date.now() - timestart)
+			const time_ = `${consume.getMinutes()}:${consume.getSeconds()}`
 			api.sendMessage({
-				body: `Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}`,
+				body: `Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`,
 				mentions:[{
 					id: event.senderID,
 					tag: user[event.senderID]['name']

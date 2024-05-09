@@ -427,7 +427,7 @@ let listerner = async (api) => {
 
 let doListen = async (api) => {
 	const self = await api.getCurrentUserID()
-	return api.listen(async (error, event) => {
+	return api.listenMqrr(async (error, event) => {
 		if(error){
 			console.error(`Error [Listen Emitter]: ${JSON.stringify(error)}`)
 			console.log(`Restart:`)

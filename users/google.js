@@ -34,7 +34,7 @@ module.exports = async (api, event, regex) => {
 		})
 		api.setMessageReaction("", event.messageID, (e) => {}, true)
 	}else{
-		if(data.did_you_mean != undefined){
+		if(data.did_you_mean){
 			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID, (e, m) => {
 				if(e){
 					api.setMessageReaction(react, event.messageID, (e) => {}, true)
@@ -42,21 +42,21 @@ module.exports = async (api, event, regex) => {
 				afk(api, json)
 			})
 		}	
-		if(data.knowledge_panel.title != "N/A" && data.knowledge_panel.lyrics == undefined){
+		if(data.knowledge_panel.title != null && data.knowledge_panel.lyrics == null){
 			let a = data.knowledge_panel
 			let objs = Object.keys(a)
 			let message = `${a.title}`
-			if(a.type != undefined || a.type != "N/A")
+			if(a.type != undefined || a.type != null)
 				message += ` - ${a.type}`
 			message += "\n\n"
-			if(a.description != "N/A")
+			if(a.description != null)
 				message += `~ ${a.description}\n`
-			if(data.featured_snippet.description != "N/A")
+			if(data.featured_snippet.description != null)
 				message += `~ ${data.featured_snippet.description}\n`
 			message += "\n"
 			objs.forEach(r => {
 				let key = r.replace(/_/gi, " ").toUpperCase()
-				if(r != "title" && r != "type" && r != "description" && r != "url" && r != "images"){
+				if(r != "title" && r != "type" && r != "description" && r != "url" && r != "images" && r != "lyrics"){
 					if(Array.isArray(a[r])){
 						message += `${key}:\n`
 						let number = 1
@@ -64,7 +64,11 @@ module.exports = async (api, event, regex) => {
 						for(let i in rate){
 							let keys = Object.keys(rate[i])
 							keys.forEach(s => {
-								message += `  ${number}. ${s.toUpperCase()} - ${rate[i][s]}\n`
+								if(rate[i][s] != null && rate[i][s].length > 0){
+									if(s.toLowerCase() != "icon"){
+										message += `  * ${s.toUpperCase()} - ${rate[i][s]}\n`
+									}
+								}
 								number++
 							})
 						}
@@ -73,15 +77,15 @@ module.exports = async (api, event, regex) => {
 					}
 				}
 			})
-			if(a.url != undefined || a.url != "N/A"){
+			if(a.url != undefined || a.url != null){
 				message += `\nSource: ${a.url}`
 			}
 			let sendMsg = {
 				body: message
 			}
-			if(a.images != undefined){
+			if(a.images.length > 0){
 				let num = 1
-				if(a.images[0].url != undefined){
+				if(a.images[0].url != null){
 					let name = `image_${num}.jpg`
 					let dir = `${__dirname}/../temp/${name}`
 					let file = fs.createWriteStream("temp/" + name)
@@ -104,8 +108,7 @@ module.exports = async (api, event, regex) => {
 						})
 					})
 				}
-			}
-			if(a.images == undefined){
+			}else{
 				api.sendMessage(sendMsg, event.threadID, (e, m) => {
 					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 						if(e){
@@ -117,10 +120,10 @@ module.exports = async (api, event, regex) => {
 				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
-		}else if(data.knowledge_panel.lyrics != undefined){
+		}else if(data.knowledge_panel.lyrics != null){
 			let a = data.knowledge_panel
 			let by = ""
-			if(a.type != undefined)
+			if(a.type != null)
 				by = a.type.match(/Song\sby\s([\w\W]+)/)[1]
 			let message = `Title: ${a.title} - ${by}\n\n${a.lyrics}`
 			api.sendMessage(message, event.threadID, (e, m) => {
@@ -133,10 +136,10 @@ module.exports = async (api, event, regex) => {
 				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
-		}else if(data.featured_snippet.title != "N/A" && data.featured_snippet.description != "N/A"){
+		}else if(data.featured_snippet.title != null && data.featured_snippet.description != null){
 			let a = data.featured_snippet
 			let message = `${a.title}\n~ ${a.description}`
-			if(a.url != undefined || a.url != "N/A"){
+			if(a.url != undefined || a.url != null){
 				message += `\n${a.url}`
 			}
 			api.sendMessage(message, event.threadID, (e, m) => {
@@ -149,7 +152,7 @@ module.exports = async (api, event, regex) => {
 				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
-		}else if(data.translation != undefined){
+		}else if(data.translation.source_text != null){
 			let a = data.translation
 			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
@@ -161,7 +164,7 @@ module.exports = async (api, event, regex) => {
 				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
-		}else if(data.dictionary != undefined){
+		}else if(data.dictionary.word != null){
 			let a = data.dictionary
 			let message = a.word + "\n" + a.phonetic + "\n\nDefinitions\n"
 			let i = 1
@@ -171,7 +174,7 @@ module.exports = async (api, event, regex) => {
 			})
 			message += "\n"
 			i = 1
-			if(a.examples != undefined){
+			if(a.examples.length > 0){
 				message += "Examples:\n"
 				a.examples.forEach(r => {
 					message += i + ". " + r + "\n"
@@ -216,7 +219,7 @@ module.exports = async (api, event, regex) => {
 				})
 			}
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
-		}else if(data.unit_converter != undefined){
+		}else if(data.unit_converter.input != null){
 			let a = data.unit_converter
 			api.sendMessage(`Input: ${a.input}\nOutput: ${a.output}\n\nFormula ${a.formula}`, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
@@ -228,7 +231,7 @@ module.exports = async (api, event, regex) => {
 				afk(api, json)
 			})
 			api.setMessageReaction("", event.messageID, (e) => {}, true)
-		}else if(data.weather != undefined){
+		}else if(data.weather.location != null){
 			let a = data.weather
 			api.sendMessage(`Location: ${a.location}\nForecast: ${a.forecast}\nPrecipitation: ${a.precipitation}\nHumidity: ${a.humidity}\nTemperature: ${a.temperature}\nWind speed: ${a.wind}`, event.threadID, (e, m) => {
 				if(e){

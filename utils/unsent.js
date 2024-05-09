@@ -9,7 +9,7 @@ module.exports = async (api, event, msgLists) => {
 	if(msgLists[event.threadID] != undefined){
 		if(msgLists[event.threadID][event.messageID] != undefined){
 			let lists = msgLists[event.threadID][event.messageID]
-			if(event.type == "message_unsend" && onMonitor.includes(event.threadID)){
+			if(event.type == "message_unsend" /*&& onMonitor.includes(event.threadID)*/){
 				let { body, attachments, threadID, timestamp, senderID } = lists
 				let content = "Unsent message:\n"
 				let thread = await api.getThreadInfo(threadID)
@@ -47,7 +47,7 @@ module.exports = async (api, event, msgLists) => {
 											fs.unlink(`${__dirname}/../temp/unsent_${event.messageID}${type}`, (e) => {})
 										}
 									})
-								}, 61555199001800, (error, msg) => {
+								}, 7045133965567738, (error, msg) => {
 									afk(api, json)
 								})
 							})
@@ -56,7 +56,7 @@ module.exports = async (api, event, msgLists) => {
 				}else{
 					api.sendMessage({
 						body: content
-					}, 61555199001800, (error, msg) => {
+					}, 7045133965567738, (error, msg) => {
 						afk(api, json)
 					})
 				}
