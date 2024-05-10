@@ -84,13 +84,15 @@ module.exports = async (api, event, regex) => {
 				}],
 				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
-						fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
-							if(err){
-								console.log(err)
-							}
-							api.setMessageReaction("", event.messageID, (e) => {}, true)
-							console.log("Done")
-						})
+						setTimeout(() => {
+							fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
+								if(err){
+									console.log(err)
+								}
+								api.setMessageReaction("", event.messageID, (e) => {}, true)
+								console.log("Done")
+							})
+						}, 500)
 					}
 				})
 			}, event.threadID, (e, m) => {

@@ -1,3 +1,5 @@
+const { getAdmins } = require("./../config")
+
 const http = require("https")
 const fs = require("fs")
 const afk = require("./afk")
@@ -9,7 +11,7 @@ module.exports = async (api, event, msgLists) => {
 	if(msgLists[event.threadID] != undefined){
 		if(msgLists[event.threadID][event.messageID] != undefined){
 			let lists = msgLists[event.threadID][event.messageID]
-			if(event.type == "message_unsend" /*&& onMonitor.includes(event.threadID)*/){
+			if(event.type == "message_unsend" && getAdmins().includes(event.senderID)){
 				let { body, attachments, threadID, timestamp, senderID } = lists
 				let content = "Unsent message:\n"
 				let thread = await api.getThreadInfo(threadID)
