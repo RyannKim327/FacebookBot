@@ -462,6 +462,18 @@ config.add("imgtxt", {
 	category: "multimedia"
 })
 
+config.add("gemini", {
+	title: "Attachment Identifier",
+	description: "A gemini P vision powered AI which recognized the attachment send by the user. Credits to Haze",
+	commands: [
+		"identify"
+	],
+	type: [
+		"message_reply"
+	],
+	category: "multimedia"
+})
+
 config.add("lexi", {
 	title: "Lexica Art",
 	description: "Test mode image generator",
