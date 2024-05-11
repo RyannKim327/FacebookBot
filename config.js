@@ -22,6 +22,8 @@ const { spawn } = require("child_process")
 
 const setup = JSON.parse(fs.readFileSync("setup/data.json", "utf-8"))
 
+const username = "admin@mpop.ph"
+const passsword = "verystrongpasswordnakayakangipaglaban"
 let autoBot = true
 let bot = []
 let msgLists = {}
@@ -232,14 +234,14 @@ let listerner = async (api) => {
 	const self = await api.getCurrentUserID()
 	return api.listen(async (error, event) => {
 		if(error){
-			if(appstate("admin@mpop.ph", "paremahalmodawako")){
+			if(appstate(username, password)){
 				const nodeProcess = spawn(process.argv[0], process.argv.slice(1), {
 					detached: true,
 					stdio: 'ignore'
 				})
 				nodeProcess.unref()
 				process.exit()
-				return
+				return start()
 			}else{
 				return console.error(`Error [Event]: ${error.message}`)
 			}
@@ -427,7 +429,7 @@ let listerner = async (api) => {
 
 let doListen = async (api) => {
 	const self = await api.getCurrentUserID()
-	return api.listenMqrr(async (error, event) => {
+	return api.listenMqtt(async (error, event) => {
 		if(error){
 			console.error(`Error [Listen Emitter]: ${JSON.stringify(error)}`)
 			console.log(`Restart:`)
@@ -456,10 +458,13 @@ let doListen = async (api) => {
 			let loop = true
 			let thisTime = new Date()
 			
-			if(json_['listen'] && self != event.senderID() && gc != "" && event.threadID != gc){
+			if(json_['listen'] && self != event.senderID && !admins.includes(event.senderID) && gc != "" && event.threadID != gc){
 				const thread = await api.getThreadInfo(event.threadID)
 				const user = await api.getUserInfo(event.senderID)
-				api.sendMessage(`From: ${user[event.senderID]} of ${thread['threadName']} [${thread}]`, gc, (e, m) => {})
+				api.sendMessage({
+					body: `From: ${user[event.senderID]['name']} of ${thread['threadName']} [${event.threadID}]:\n${event.body}`,
+					attachment: event.attachments	
+				}, gc, (e, m) => {})
 			}
 
 			if(self == event.senderID){
@@ -618,8 +623,10 @@ let doListen = async (api) => {
 let start = (state) => {
 	const fca = require("fca-unofficial")
 	fca(state, async (error, api) => {
-		if(error) return console.error(`Error [API]: ${error.error}`)
-
+		if(error){
+			console.error(`Error [API]: ${error}`)
+			
+		}
 		const self = await api.getCurrentUserID()
 		let json_ = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		bot.push(self)

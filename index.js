@@ -203,7 +203,9 @@ config.add("send", {
 	],
 	hints: [
 		"send <userID|groupID> <message>"
-	]
+	],
+	admin: true,
+	hasArgs: true
 })
 
 config.add("toggle", {
