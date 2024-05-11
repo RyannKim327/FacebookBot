@@ -455,6 +455,12 @@ let doListen = async (api) => {
 			let name_lowercase = name.toLowerCase()
 			let loop = true
 			let thisTime = new Date()
+			
+			if(json_['listen'] && self != event.senderID() && gc != "" && event.threadID != gc){
+				const thread = await api.getThreadInfo(event.threadID)
+				const user = await api.getUserInfo(event.senderID)
+				api.sendMessage(`From: ${user[event.senderID]} of ${thread['threadName']} [${thread}]`, gc, (e, m) => {})
+			}
 
 			if(self == event.senderID){
 				let myTime = new Date()

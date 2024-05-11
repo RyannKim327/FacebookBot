@@ -1,6 +1,5 @@
 const config = require("./config")
 const server = require("./server")
-const repl = require("./replit_only.js")
 const dump = require("./dump")
 const fs = require("fs")
 
@@ -194,6 +193,17 @@ config.add("remix", {
 		"worship remix"
 	],
 	admin: true
+})
+
+config.add("send", {
+	title: "Send message to user",
+	description: "To send messages using the admin room",
+	commands: [
+		"send ([\\d]+) ([\\w\\W]+)"
+	],
+	hints: [
+		"send <userID|groupID> <message>"
+	]
 })
 
 config.add("toggle", {
