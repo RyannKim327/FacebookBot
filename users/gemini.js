@@ -38,6 +38,7 @@ module.exports = async (api, event) => {
           message += `The image shows:\n${data.response}`
         }else{
           message += `The ${nth(i + 1)} image shows:\n${data.response}.\n`
+          i++
         }
       }
       api.sendMessage(message, event.threadID, (e, m) => {})
