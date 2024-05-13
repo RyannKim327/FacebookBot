@@ -464,7 +464,7 @@ config.add("imgtxt", {
 
 config.add("gemini", {
 	title: "Attachment Identifier",
-	description: "A gemini P vision powered AI which recognized the attachment send by the user. Credits to Haze",
+	description: "A gemini Pro-vision powered AI which recognized the attachment send by the user. Credits to Haze",
 	commands: [
 		"identify"
 	],
