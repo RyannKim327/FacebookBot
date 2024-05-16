@@ -624,8 +624,7 @@ let start = (state) => {
 	const fca = require("fca-unofficial")
 	fca(state, async (error, api) => {
 		if(error){
-			console.error(`Error [API]: ${error}`)
-			
+			console.error(`Error [API]: ${error}`)	
 		}
 		const self = await api.getCurrentUserID()
 		let json_ = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))

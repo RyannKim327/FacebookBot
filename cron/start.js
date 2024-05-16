@@ -35,6 +35,7 @@ let quote = async () => {
 module.exports = async (api) => {
 	let self = await api.getCurrentUserID()
 	cronjob.schedule("0 0 * * *", () => {
+		let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		json.busylist = []
 		fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")
 	},{
