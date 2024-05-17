@@ -3,6 +3,8 @@
 
 > A simple facebook bot which trying to help students to their needs.
 
+---
+### Terms and Conditions
 -- Projects --
 
 1. Don't sell my projects, even you make some modifications, instead, give them my source for free and sell what's yours.
@@ -19,6 +21,7 @@
 4. Making me as an anonymous is a huge help for me, not to avoid them, but to avoid popularity.
 5. Thank me if you're done, or I'll helped you.
 
+---
 ### Credits
 1. Savador
 2. John Jeremy Antiguo
