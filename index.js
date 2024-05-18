@@ -466,11 +466,16 @@ config.add("gemini", {
 	title: "Attachment Identifier",
 	description: "A gemini Pro-vision powered AI which recognized the attachment send by the user. Credits to Haze",
 	commands: [
+		"identify ([\\w\\W]+)",
 		"identify"
+	],
+	hints: [
+		"identify (parameter [optional]) [reply only]"
 	],
 	type: [
 		"message_reply"
 	],
+	hasArgs: true,
 	category: "multimedia"
 })
 

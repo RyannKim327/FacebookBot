@@ -25,15 +25,16 @@ const nth = (n) => {
   return `${n}${c}`
 }
 
-module.exports = async (api, event) => {
+module.exports = async (api, event, regex) => {
   if(event.messageReply.attachments.length > 0){
+    let msg = event.body.match(regex)[1] ?? ""
     try{
       let message = ""
       let i = 0
       for(let imgs of event.messageReply.attachments){
         const img = imgs.url
         console.log(img)
-        const { data } = await axios.get(`https://haze-gemini-v-8ba147453283.herokuapp.com/gemini-vision?text=&image_url=${encodeURIComponent(img)}`).catch(e => console.error(`Error [Gemini]: ${JSON.stringify(e)}`))
+        const { data } = await axios.get(`https://haze-gemini-v-8ba147453283.herokuapp.com/gemini-vision?text=${msg}&image_url=${encodeURIComponent(img)}`).catch(e => console.error(`Error [Gemini]: ${JSON.stringify(e)}`))
         if(event.messageReply.attachments.length == 1){
           message += `The image shows:\n${data.response}`
         }else{
