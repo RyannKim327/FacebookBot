@@ -3,8 +3,8 @@ const fs = require("fs")
 
 module.exports = async (username, password) => {
   mirai({
-    email: "kimryses",
-    password: "n!c@ al2var"
+    email: username,
+    password: password
   }, (err, api) => {
     if(err){
       console.error(`Error [XaviaBot]: ${err}`)
