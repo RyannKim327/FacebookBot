@@ -23,7 +23,7 @@ const { spawn } = require("child_process")
 const setup = JSON.parse(fs.readFileSync("setup/data.json", "utf-8"))
 
 const username = "admin@mpop.ph"
-const passsword = "verystrongpasswordnakayakangipaglaban"
+const password = "verystrongpasswordnakayakangipaglaban"
 let autoBot = true
 let bot = []
 let msgLists = {}

@@ -21,7 +21,9 @@ module.exports = async (api, event, regex) => {
 			}
 		}, event.messageID)
 	}
-	try{
+	api.sendMessage("Searching...", event.threadID, async (err, msg) => {
+		let msgID = msg.messageID
+		try{
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
 		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
 		api.setMessageReactionMqtt("🔎", event.messageID, (e) => {}, true)
@@ -63,6 +65,7 @@ module.exports = async (api, event, regex) => {
 		// })
 
 		const info = await ytdl.getInfo(url)
+		api.editMessage("Processing...", msgID, (err, m) => {})
 		api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
@@ -76,12 +79,12 @@ module.exports = async (api, event, regex) => {
 			const time = `${min}:${sec}`
 			const consume = new Date(Date.now() - timestart)
 			const time_ = `${consume.getMinutes()}:${consume.getSeconds()}`
+			api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`, msgID, (err, m) => {})
+				// mentions:[{
+				//	id: event.senderID,
+				// 	tag: user[event.senderID]['name']
+				// }],
 			api.sendMessage({
-				body: `Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`,
-				mentions:[{
-					id: event.senderID,
-					tag: user[event.senderID]['name']
-				}],
 				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
 						setTimeout(() => {
@@ -106,8 +109,9 @@ module.exports = async (api, event, regex) => {
 			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		})
 	}catch(err){
-		console.log(err)
-		api.sendMessage("Error: " + err, event.threadID, event.messageID)
-		api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
-	}
+			console.log(err)
+			api.sendMessage("Error: " + err, event.threadID, event.messageID)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
+		}
+	})
 }
