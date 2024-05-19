@@ -1,4 +1,4 @@
-const mirai = require("@xaviabot/fca-unofficial")
+const mirai = require("mirai-fca-unofficial")
 const fs = require("fs")
 
 module.exports = async (username, password) => {
