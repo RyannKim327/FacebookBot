@@ -25,7 +25,7 @@ module.exports = async (api, event) => {
 				}]
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}else if(event.type == "message" && json.off.includes(event.threadID)){
@@ -44,7 +44,7 @@ module.exports = async (api, event) => {
 					body: `Bot actions are now enabled for ${thread.threadName}`
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 				})
 			}else{
@@ -57,7 +57,7 @@ module.exports = async (api, event) => {
 					}]
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 				})
 			}
@@ -75,7 +75,7 @@ module.exports = async (api, event) => {
 				}]
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}else if(event.type == "message" && !json.off.includes(event.threadID)){
@@ -87,7 +87,7 @@ module.exports = async (api, event) => {
 					body: `Bot actions are now disabled for ${thread.threadName}`
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 				})
 			}else{
@@ -100,7 +100,7 @@ module.exports = async (api, event) => {
 					}]
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 				})
 			}

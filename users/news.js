@@ -15,7 +15,7 @@ module.exports = async (api, event, regex) => {
 		console.log(today[0])
 		api.sendMessage(message, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})
@@ -24,14 +24,14 @@ module.exports = async (api, event, regex) => {
 			let news = await manila.article(event.body.match(regex)[1])
 			api.sendMessage(`Title: ${news.title}\n- ${news.author}\n[${news.date}]\n\n${news.body.join("\n\n")}`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
 		}catch(e){
 			api.sendMessage(`There's an error happens.`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})

@@ -22,7 +22,7 @@ module.exports = async (api, event) => {
 	let _music = music.content[Math.floor(Math.random() * music.content.length)]
 	const url = `https://www.youtube.com/watch?v=${_music.videoId}`
 	if(!fs.existsSync(name)){
-		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
+		api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
 		try{
 			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}_videoke.mp4`)
 			const strm = ytdl(url, {
@@ -41,7 +41,7 @@ module.exports = async (api, event) => {
 								if(err){
 									console.log(err)
 								}
-								api.setMessageReaction("", event.messageID, (e) => {}, true)
+								api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 								console.log("Done")
 							})
 						}

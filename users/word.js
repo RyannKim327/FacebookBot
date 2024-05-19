@@ -22,7 +22,7 @@ module.exports = async (api, event, regex) => {
 	if(info == null){
 		return api.sendMessage(`Can't find the word ${word}`, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})
@@ -71,7 +71,7 @@ module.exports = async (api, event, regex) => {
 					})
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
@@ -120,7 +120,7 @@ module.exports = async (api, event, regex) => {
 		msg += `License: ${info.license.name}`
 		api.sendMessage(msg, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
 		afk(api, json)
 	})

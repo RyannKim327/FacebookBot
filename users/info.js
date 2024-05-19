@@ -102,7 +102,7 @@ module.exports = async (api, event) => {
 	message += "\n" + q[Math.floor(Math.random() * q.length)]
 	api.sendMessage(message, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
 		afk(api, json)
 	})

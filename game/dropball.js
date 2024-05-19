@@ -35,7 +35,7 @@ module.exports = (api, event, regex) => {
 	let str = drop(num)
 	api.sendMessage(str, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
 	})
 }

@@ -12,7 +12,7 @@ module.exports = (api, event, regex) => {
 	json.name = data
 	api.sendMessage(`New bot name set as ${data}`, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
 	})
 	setName(data)

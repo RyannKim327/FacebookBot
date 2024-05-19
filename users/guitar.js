@@ -24,7 +24,7 @@ module.exports = async (api, event, regex) => {
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	api.sendMessage(`Title: ${y.title}\nArtist: ${y.artist}\nKey: ${y.key}\n\n${y.chords}`, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
 		afk(api, json)
 	})

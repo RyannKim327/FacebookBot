@@ -22,22 +22,22 @@ let search = async (info) => {
 module.exports = async (api, event, regex) => {
 	let body = event.body.match(regex)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
-	api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
+	api.setMessageReactionMqtt("🔎", event.messageID, (e) => {}, true)
 	let data = await search(body[1])
 	console.log(data)
 	if(data == null){
 		api.sendMessage("An error occured. Please try again later.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})
-		api.setMessageReaction("", event.messageID, (e) => {}, true)
+		api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 	}else{
 		if(data.did_you_mean){
 			api.sendMessage(`Did you mean: ${data.did_you_mean}.`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
@@ -112,14 +112,14 @@ module.exports = async (api, event, regex) => {
 				api.sendMessage(sendMsg, event.threadID, (e, m) => {
 					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+							api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json)
 					})
 					afk(api, json)
 				})
 			}
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}else if(data.knowledge_panel.lyrics != null){
 			let a = data.knowledge_panel
 			let by = ""
@@ -129,13 +129,13 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage(message, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
 				afk(api, json)
 			})
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}else if(data.featured_snippet.title != null && data.featured_snippet.description != null){
 			let a = data.featured_snippet
 			let message = `${a.title}\n~ ${a.description}`
@@ -145,25 +145,25 @@ module.exports = async (api, event, regex) => {
 			api.sendMessage(message, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
 				afk(api, json)
 			})
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}else if(data.translation.source_text != null){
 			let a = data.translation
 			api.sendMessage(`Original Text: ${a.source_text}\nTranslated: ${a.target_text}\n\nTranslated: ${a.source_language} - ${a.target_language}`, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
 				afk(api, json)
 			})
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}else if(data.dictionary.word != null){
 			let a = data.dictionary
 			let message = a.word + "\n" + a.phonetic + "\n\nDefinitions\n"
@@ -199,7 +199,7 @@ module.exports = async (api, event, regex) => {
 						}, event.threadID, (e, m) => {
 							if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 								if(e){
-									api.setMessageReaction(react, event.messageID, (e) => {}, true)
+									api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 								}
 								afk(api, json)
 							})
@@ -211,35 +211,35 @@ module.exports = async (api, event, regex) => {
 				api.sendMessage(message, event.threadID, (e, m) => {
 					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+							api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json)
 					})
 					afk(api, json)
 				})
 			}
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}else if(data.unit_converter.input != null){
 			let a = data.unit_converter
 			api.sendMessage(`Input: ${a.input}\nOutput: ${a.output}\n\nFormula ${a.formula}`, event.threadID, (e, m) => {
 				if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
 				afk(api, json)
 			})
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}else if(data.weather.location != null){
 			let a = data.weather
 			api.sendMessage(`Location: ${a.location}\nForecast: ${a.forecast}\nPrecipitation: ${a.precipitation}\nHumidity: ${a.humidity}\nTemperature: ${a.temperature}\nWind speed: ${a.wind}`, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}else{
 			if(data.results.length > 0){
 				let a = data.results.OrganicResult
@@ -263,7 +263,7 @@ module.exports = async (api, event, regex) => {
 				api.sendMessage(message, event.threadID, (e, m) => {
 					if(e) return api.sendMessage(e, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+							api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json)
 					})
@@ -272,12 +272,12 @@ module.exports = async (api, event, regex) => {
 			}else{
 				api.sendMessage("There's no results found, might have server error. Please try again later.", event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json)
 				})
 			}
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}
 	}
 }

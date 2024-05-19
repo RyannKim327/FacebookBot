@@ -290,7 +290,7 @@ let listerner = async (api) => {
 			trialCard[event.senderID] = undefined
 			return api.sendMessage("Auto AI messages are closed, to reactivate, kindly wait for an hour.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}
@@ -311,7 +311,7 @@ let listerner = async (api) => {
 			if(event.threadID == event.senderID){
 				api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 				})
 				json_.busylist.push(event.threadID)
@@ -320,7 +320,7 @@ let listerner = async (api) => {
 				if(event.mentions[self] != undefined){
 					api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+							api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 						}
 					})
 					json_.busylist.push(event.threadID)
@@ -337,7 +337,7 @@ let listerner = async (api) => {
 			if(event.threadID == event.senderID){
 				api.sendMessage(msg, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json_)
 				})
@@ -345,7 +345,7 @@ let listerner = async (api) => {
 				if(event.mentions[self] != undefined){
 					api.sendMessage(msg, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+							api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json)
 					})
@@ -378,7 +378,7 @@ let listerner = async (api) => {
 					}]
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json_)
 				})
@@ -477,7 +477,7 @@ let doListen = async (api) => {
 			}
 
 			if(event.senderID == 100080934841785){
-				api.setMessageReaction("🥺", event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt("🥺", event.messageID, (e) => {}, true)
 			}
 
 			if(json_.ai && event.type == "message_reply"){
@@ -496,7 +496,7 @@ let doListen = async (api) => {
 				trialCard[event.senderID] = undefined
 				return api.sendMessage("Auto AI messages are closed, to reactivate, kindly wait for an hour.", event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 				})
 			}
@@ -505,7 +505,7 @@ let doListen = async (api) => {
 				if(event.threadID == event.senderID){
 					api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+							api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 						}
 					})
 					json_.busylist.push(event.threadID)
@@ -514,7 +514,7 @@ let doListen = async (api) => {
 					if(event.mentions[self] != undefined){
 						api.sendMessage("The account owner is currently busy, please wait for a moment.", event.threadID, (e, m) => {
 							if(e){
-								api.setMessageReaction(react, event.messageID, (e) => {}, true)
+								api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 							}
 						})
 						json_.busylist.push(event.threadID)
@@ -531,7 +531,7 @@ let doListen = async (api) => {
 				if(event.threadID == event.senderID){
 					api.sendMessage(msg, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+							api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json_)
 					})
@@ -539,7 +539,7 @@ let doListen = async (api) => {
 					if(event.mentions[self] != undefined){
 						api.sendMessage(msg, event.threadID, (e, m) => {
 							if(e){
-								api.setMessageReaction(react, event.messageID, (e) => {}, true)
+								api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 							}
 							afk(api, json_)
 						})
@@ -571,7 +571,7 @@ let doListen = async (api) => {
 					}]
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.setMessageReaction(react, event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 					}
 					afk(api, json_)
 				})
@@ -621,12 +621,13 @@ let doListen = async (api) => {
 }
 
 let start = (state) => {
-	const fca = require("fca-unofficial")
+	const fca = require("@xaviabot/fca-unofficial")
 	fca(state, async (error, api) => {
 		if(error){
 			console.error(`Error [API]: ${error}`)	
 		}
-		const self = await api.getCurrentUserID()
+		
+		const self = api.getCurrentUserID()
 		let json_ = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 		bot.push(self)
 

@@ -6,7 +6,7 @@ module.exports = (api, event) => {
 	json.ai = !json.ai
 	api.sendMessage(`AI Mode: ${json.ai}`, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
 	})
 	fs.writeFileSync("data/preferences.json", JSON.stringify(json), "utf8")

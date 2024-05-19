@@ -13,7 +13,7 @@ module.exports = async (api, event) => {
 	if(json.ingame[event.senderID] != undefined){
 		api.sendMessage(`You're still in game. Please answer this:\n${json.ingame[event.senderID]}\n\nTo answer, kindly message ${ getPrefix() }answer [your answer here]`, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}
 		}, event.messageID)
 	}else{
@@ -23,7 +23,7 @@ module.exports = async (api, event) => {
 		json.current_game[event.senderID] = "bugtong"
 		api.sendMessage(`Here's your bugtong:\n~ ${b.b}\n\nTo answer, kindly message ${ getPrefix() }answer [your answer here]`, event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}
 		})
 		fs.writeFileSync("data/games.json", JSON.stringify(json), "utf8")

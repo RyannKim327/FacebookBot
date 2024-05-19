@@ -13,7 +13,7 @@ module.exports = async (api, event) => {
 		if(a[0].type != "photo")
 			return api.sendMessage("I can't find any image here.", event.messageReply.threadID, (err, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
@@ -22,7 +22,7 @@ module.exports = async (api, event) => {
 		let r = request(a[0].url)
 		r.pipe(file)
 		r.on("close", async () => {
-			api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
 			let s = await sc.scan(`./temp/${msg}.jpg`, 2, 3)
 			let msg2 = "The text I get here in this image is:\n\n" + s.result
 			if(s.result.length < 1)
@@ -34,12 +34,12 @@ module.exports = async (api, event) => {
 				}
 				afk(api, json)
 			}, event.messageReply.messageID)
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		})
 	}else{
 		api.sendMessage("I can't find any image here.", event.messageReply.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}
 			afk(api, json)
 		})

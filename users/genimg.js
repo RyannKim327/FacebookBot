@@ -23,7 +23,7 @@ module.exports = async (api, event, regex) => {
 	console.log(x)
 	let y = await config(x)
 	let f = fs.createWriteStream(`temp/ai.jpg`)
-	api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
+	api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
 	http.get(y.data[0].url, r => {
 		r.pipe(f)
 		f.on("finish", () => {
@@ -31,16 +31,16 @@ module.exports = async (api, event, regex) => {
 				body: "Generated Image",
 				attachment: fs.createReadStream(`${__dirname}/../temp/ai.jpg`).on("end", () => {
 					fs.unlink(`${__dirname}/../temp/ai.jpg`, (e) => {
-						api.setMessageReaction("", event.messageID, (e) => {}, true)
+						api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 					})
 				})
 			}, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
 		})
 	})
-	api.setMessageReaction("", event.messageID, (e) => {}, true)
+	api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 }

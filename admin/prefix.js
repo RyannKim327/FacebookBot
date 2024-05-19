@@ -9,7 +9,7 @@ module.exports = (api, event, regex) => {
 	json.prefix = data
 	api.sendMessage(`Bot prefix changed from ${getPrefix()} to ${data}`, event.threadID, (e, m) => {
 		if(e){
-			api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
 	})
 	setPrefix(data)

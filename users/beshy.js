@@ -5,7 +5,7 @@ module.exports = (api, event, regex) => {
 	const besh = body.trim().replace(/\s+/g, "🤸‍♂️")
 	api.sendMessage(besh, event.threadID,(e, m) => {
 		if(e){
-			api.setMessageReaction(react, event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
 		afk(api, json)
 	})

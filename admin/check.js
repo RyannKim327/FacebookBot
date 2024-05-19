@@ -10,9 +10,9 @@ module.exports = (api, event) => {
 		if(getAdminGroup() != ""){
 			api.sendMessage(`Last checked ${mydate("Asia/Manila")}`, getAdminGroup(), (err, msg) => {})
 		}
-		api.setMessageReaction("👍", event.messageID, (e) => {}, true)
+		api.setMessageReactionMqtt("👍", event.messageID, (e) => {}, true)
 		setTimeout((e) => {
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}, 15000)
 	}
 }

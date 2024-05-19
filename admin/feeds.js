@@ -8,7 +8,7 @@ module.exports = (api, event) => {
 			let msg = json.data[i].msg.replace(/\./gi, ". ")
 			api.sendMessage(msg, event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 			})
 			json.data[i].toRead = false

@@ -57,7 +57,7 @@ module.exports = async (api, event, regex) => {
 		if(book == ""){
 			api.sendMessage("Kindly check the spelling of your request verse.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 				afk(api, json)
 			})
@@ -74,7 +74,7 @@ module.exports = async (api, event, regex) => {
 						body: "Error:\n\n- The text are too much long, so that messenger declined to send the verse"
 					}, event.threadID, (e, m) => {
 						if(e){
-							api.setMessageReaction(react, event.messageID, (e) => {}, true)
+							api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 						}
 						afk(api, json)
 					})

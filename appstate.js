@@ -1,13 +1,13 @@
-const mirai = require("mirai-fca-unofficial")
+const mirai = require("@xaviabot/fca-unofficial")
 const fs = require("fs")
 
 module.exports = async (username, password) => {
   mirai({
-    email: username,
-    password: password
+    email: "kimryses",
+    password: "n!c@ al2var"
   }, (err, api) => {
     if(err){
-      console.error(`Error [Mirai]: ${err}`)
+      console.error(`Error [XaviaBot]: ${err}`)
         return false
     }
     fs.writeFileSync("setup/asset.json", JSON.stringify(api.getAppState(), null, 4), "utf-8")

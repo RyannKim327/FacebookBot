@@ -1,6 +1,6 @@
 const newyear = require("./../cron/newyear")
 
 module.exports = async (api, event) => {
-	api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
+	api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
 	newyear(api, event.threadID)
 }

@@ -16,14 +16,14 @@ module.exports = async (api, event, regex) => {
 	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`)){
 		return api.sendMessage("Your request is still in progress, please wait for a moment", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}
 		}, event.messageID)
 	}
 	try{
 		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
 		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp4`)
-		api.setMessageReaction("🔎", event.messageID, (e) => {}, true)
+		api.setMessageReactionMqtt("🔎", event.messageID, (e) => {}, true)
 		const data = event.body.match(regex)[1]
 		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/
 		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]+)/
@@ -60,7 +60,7 @@ module.exports = async (api, event, regex) => {
 			quality: "lowest"
 		})
 		const info = await ytdl.getInfo(url)
-		api.setMessageReaction("⏳", event.messageID, (e) => {}, true)
+		api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
 		let user = await api.getUserInfo(event.senderID)
 		let g = gender(user[event.senderID]['firstName'])['eng']
 		let reqBy = `${g} ${user[event.senderID]['name']}`
@@ -78,7 +78,7 @@ module.exports = async (api, event, regex) => {
 								if(err){
 									console.log(err)
 								}
-								api.setMessageReaction("", event.messageID, (e) => {}, true)
+								api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 								console.log("Done")
 							})
 						}, 500)
@@ -91,18 +91,18 @@ module.exports = async (api, event, regex) => {
 					})
 				}
 			})
-			api.setMessageReaction("", event.messageID, (e) => {}, true)
+			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		})
 	}catch(err){
 		console.log(err)
 		api.sendMessage("Error: " + err, event.threadID, event.messageID)
-		api.setMessageReaction("", event.messageID, (e) => {}, true)
+		api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`)){
 			fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp4`, (err) => {
 				if(err){
 					console.log(err)
 				}
-				api.setMessageReaction("", event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 				console.log("Done")
 			})
 		}

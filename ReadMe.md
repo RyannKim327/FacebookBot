@@ -36,7 +36,8 @@
 11. LuanRT
 12. Schemavery
 13. VanBanLaNhat
-14. RapidApi
-15. Node Package Manager JS
-16. To all api used to this projects
-17. And to all testers and groups
+14. XaviaTeam
+15. RapidApi
+16. Node Package Manager JS
+17. To all api used to this projects
+18. And to all testers and groups

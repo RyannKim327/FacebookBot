@@ -8,7 +8,7 @@ module.exports = async (api, event) => {
 		json.busylist = []
 		api.sendMessage("Busy lists cleared.", event.threadID, (e, m) => {
 			if(e){
-				api.setMessageReaction(react, event.messageID, (e) => {}, true)
+				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}
 		})
 	}else if(event.body == (getPrefix() + "busy")){
@@ -18,14 +18,14 @@ module.exports = async (api, event) => {
 			json.busylist = []
 			api.sendMessage("Busy mode on.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}else{
 			json.busylist = []
 			api.sendMessage("Busy mode off.", event.threadID, (e, m) => {
 				if(e){
-					api.setMessageReaction(react, event.messageID, (e) => {}, true)
+					api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 				}
 			})
 		}
