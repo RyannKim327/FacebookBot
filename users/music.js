@@ -24,91 +24,92 @@ module.exports = async (api, event, regex) => {
 	api.sendMessage("Searching...", event.threadID, async (err, msg) => {
 		let msgID = msg.messageID
 		try{
-		const json = JSON.parse(fs.readFileSync("data/preferences.json"))
-		const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
-		api.setMessageReactionMqtt("🔎", event.messageID, (e) => {}, true)
-		const data = event.body.match(regex)[1]
-		const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/i
-		const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]{11})/i
-		let music = {}
-		if(yt_1.test(data)){
-			music = {
-				"content": [
-					{
-						"videoId": data.match(yt_1)[1]
-					}
-				]
-			}
-		}else if(yt_2.test(data)){
-			music = {
-				"content": [
-					{
-						"videoId": data.match(yt_2)[1].split("?")[0]
-					}
-				]
-			}
-		}else{
-			await yt.initalize()
-			music = await yt.search(data.replace(/[^\w\s]/gi, ''), "video")
-			if(music.content.length <= 0){
-				throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
+			const json = JSON.parse(fs.readFileSync("data/preferences.json"))
+			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
+			api.setMessageReactionMqtt("🔎", event.messageID, (e) => {}, true)
+			const data = event.body.match(regex)[1]
+			const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/i
+			const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]{11})/i
+			let music = {}
+			if(yt_1.test(data)){
+				music = {
+					"content": [
+						{
+							"videoId": data.match(yt_1)[1]
+						}
+					]
+				}
+			}else if(yt_2.test(data)){
+				music = {
+					"content": [
+						{
+							"videoId": data.match(yt_2)[1].split("?")[0]
+						}
+					]
+				}
 			}else{
-				if(music.content[0].videoId == undefined){
-					throw new Error(`${data.replace(/[^\w\s]/gi, '')} is not found on youtube music. Try to add the singer, maybe I can find it.`)
+				await yt.initalize()
+				music = await yt.search(data.replace(/[^\w\s]/gi, ''), "video")
+				if(music.content.length <= 0){
+					throw new Error(`${data.replace(/[^\w\s]/gi, '')} returned no results found`)
+				}else{
+					if(music.content[0].videoId == undefined){
+						throw new Error(`${data.replace(/[^\w\s]/gi, '')} is not found on youtube music. Try to add the singer, maybe I can find it.`)
+					}
 				}
 			}
-		}
-		const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`
-		
-		// const strm = ytdl(url, {
-		//	quality: "lowestaudio"
-		// })
-
-		const info = await ytdl.getInfo(url)
-		api.editMessage("Processing...", msgID, (err, m) => {})
-		api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
-		let user = await api.getUserInfo(event.senderID)
-		let g = gender(user[event.senderID]['firstName'])['eng']
-		let reqBy = `${g} ${user[event.senderID]['name']}`
-		ytdl(url, {
-			quality: 'lowestaudio'
-		}).pipe(file).on("finish", async () => {
-			let lengthTime = parseInt(info.videoDetails.lengthSeconds)
-			let min = Math.floor(lengthTime / 60)
-			let sec = lengthTime % 60
-			const time = `${min}:${sec}`
-			const consume = new Date(Date.now() - timestart)
-			const time_ = `${consume.getMinutes()}:${consume.getSeconds()}`
-			api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`, msgID, (err, m) => {})
-				// mentions:[{
-				//	id: event.senderID,
-				// 	tag: user[event.senderID]['name']
-				// }],
-			api.sendMessage({
-				attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
-					if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
-						setTimeout(() => {
-							fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
-								if(err){
-									console.log(err)
-								}
-								api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
-								console.log("Done")
-							})
-						}, 500)
+			const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`		
+			// const strm = ytdl(url, {
+			//	quality: "lowestaudio"
+			// })
+			const info = await ytdl.getInfo(url)
+			api.editMessage("Processing...", msgID, (err, m) => {})
+			api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
+			let user = await api.getUserInfo(event.senderID)
+			let g = gender(user[event.senderID]['firstName'])['eng']
+			let reqBy = `${g} ${user[event.senderID]['name']}`
+			ytdl(url, {
+				quality: 'lowestaudio'
+			}).pipe(file).on("finish", async () => {
+				let lengthTime = parseInt(info.videoDetails.lengthSeconds)
+				let min = Math.floor(lengthTime / 60)
+				let sec = lengthTime % 60
+				const time = `${min}:${sec}`
+				const consume = new Date(Date.now() - timestart)
+				const time_ = `${consume.getMinutes()}:${consume.getSeconds()}`
+				// api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`, msgID, (err, m) => {})
+					// mentions:[{
+					//	id: event.senderID,
+					// 	tag: user[event.senderID]['name']
+					// }],
+				api.sendMessage({
+					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
+						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+							setTimeout(() => {
+								fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
+									if(err){
+										api.editMessage(`${err.message}`, msgID, (e, m) => {})
+										console.log(err)
+									}else{
+										api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`, msgID, (e, m) => {})
+									}
+									api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
+									console.log("Done")
+								})
+							}, 500)
+						}
+					})
+				}, event.threadID, (e, m) => {
+					if(e){
+						api.sendMessage(e.message, event.threadID, (e, m) => {
+							api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
+							afk(api, json)
+						})
 					}
 				})
-			}, event.threadID, (e, m) => {
-				if(e){
-					api.sendMessage(e.message, event.threadID, (e, m) => {
-						api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
-						afk(api, json)
-					})
-				}
+				api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 			})
-			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
-		})
-	}catch(err){
+		}catch(err){
 			console.log(err)
 			api.sendMessage("Error: " + err, event.threadID, event.messageID)
 			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
