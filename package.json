@@ -24,10 +24,12 @@
     "pdfdrive-ebook-scraper": "^2.0.0",
     "pls-img-txt": "^0.0.3",
     "request": "^2.88.2",
+    "stream": "^0.0.2",
     "top100bbworship": "^1.0.0",
     "ultimate-guitar": "^1.0.2-test-2",
     "youtube-music-api": "^1.0.6",
     "youtube-s-dl": "^1.0.9-beta",
+    "youtubei.js": "^5.8.0",
     "ytdl-core": "^4.11.5"
   },
   "scripts": {
