@@ -11,7 +11,8 @@ module.exports = async (api, event, msgLists) => {
 	if(msgLists[event.threadID] != undefined){
 		if(msgLists[event.threadID][event.messageID] != undefined){
 			let lists = msgLists[event.threadID][event.messageID]
-			if(event.type == "message_unsend" && getAdmins().includes(event.senderID)){
+			const admins = getAdmins()
+			if(event.type == "message_unsend" && admins.includes(event.senderID)){
 				let { body, attachments, threadID, timestamp, senderID } = lists
 				let content = "Unsent message:\n"
 				let thread = await api.getThreadInfo(threadID)

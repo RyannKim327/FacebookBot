@@ -1,6 +1,5 @@
 const fs = require("fs")
 const cronjob = require("node-cron")
-const axios = require("axios")
 
 const left = require("./auto/left")
 
@@ -24,6 +23,7 @@ const setup = JSON.parse(fs.readFileSync("setup/data.json", "utf-8"))
 
 const username = "admin@mpop.ph"
 const password = "verystrongpasswordnakayakangipaglaban"
+
 let autoBot = true
 let bot = []
 let msgLists = {}

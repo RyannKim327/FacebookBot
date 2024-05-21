@@ -111,7 +111,10 @@ module.exports = async (api, event, regex) => {
 			})
 		}catch(err){
 			console.log(err)
-			api.sendMessage("Error: " + err, event.threadID, event.messageID)
+			api.editMessage("Error: " + err, msgID, (e, m) => {})
+			if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+				fs.unlinkSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}`, (e) => {})
+			}
 			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}
 	})
