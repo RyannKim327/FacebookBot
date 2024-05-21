@@ -69,13 +69,14 @@ let name = ""
 let admins = []
 let gc = ""
 
-let setDefaultName = (data) => {
+function setDefaultName(data) {
 	defName = data
 }
-let getMsgs = () => {
+
+function getMsgs() {
 	return msgLists
 }
-let add = (script, data) => {
+function add(script, data) {
 	if(script != "" && data.title != ""){
 		commands.push({
 			script,
@@ -83,7 +84,8 @@ let add = (script, data) => {
 		})
 	}
 }
-let setCommands = (data) => {
+
+function setCommands(data) {
 	if(typeof data != 'object'){
 		try{
 			data = JSON.parse(data)
@@ -93,40 +95,40 @@ let setCommands = (data) => {
 	}
 	commands = data
 }
-let addAdmins = (data) => {
+function addAdmins(data) {
 	admins.push(data)
 }
-let setAdminGroup = (data) => {
+function setAdminGroup(data){
 	gc = data
 }
-let addVip = (id) => {
+function addVip (id) {
 	vips +=  `${id}, `
 }
-let removeVip = (id) => {
+function removeVip(id) {
 	vips.replace(`${id}, `, "")
 }
-let checkVip = () => {
+function checkVip() {
 	return vips
 }
-let setName = (data) => {
+function setName(data) {
 	name = data
 }
-let setOptions = (data) => {
+function setOptions(data) {
 	options = data
 }
-let setPrefix = (data) => {
+function setPrefix(data) {
 	prefix = data
 }
-let getAdmins = () => {
+function getAdmins() {
 	return admins
 }
-let getAdminGroup = () => {
+function getAdminGroup() {
 	return gc
 }
-let getName = () => {
+function getName() {
 	return name
 }
-let getPrefix = () => {
+function getPrefix() {
 	return prefix
 }
 
@@ -230,9 +232,9 @@ let system = (api, event, r, q, _prefix) => {
 	}
 }
 
-let listerner = async (api) => {
+let listener = async (api) => {
 	const self = await api.getCurrentUserID()
-	return api.listen(async (error, event) => {
+	return api.listenMqtt(async (error, event) => {
 		if(error){
 			if(appstate(username, password)){
 				const nodeProcess = spawn(process.argv[0], process.argv.slice(1), {
@@ -449,7 +451,7 @@ let doListen = async (api) => {
 				msgLists[event.threadID][event.messageID] = event
 			}
 		}
-		unsent(api, event, msgLists)
+		unsent(api, event, msgLists, admins)
 		left(api, event)
 		if(event.body != null && (json_.status || admins.includes(event.senderID))){
 			let body = event.body

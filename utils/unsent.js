@@ -4,14 +4,13 @@ const http = require("https")
 const fs = require("fs")
 const afk = require("./afk")
 
-module.exports = async (api, event, msgLists) => {
+module.exports = async (api, event, msgLists, admins) => {
 	const self = await api.getCurrentUserID()
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let onMonitor = ["5949341968502700", "6679894578723312", "4740250299437612", "5401028143307467", "5500055473411242", "100018362431224", "5572548646186754", "4780024218775309", "5893956287308812", "5424954817625723", "3527050254067351", "4650249085041633", "6094178293994418"]
 	if(msgLists[event.threadID] != undefined){
 		if(msgLists[event.threadID][event.messageID] != undefined){
 			let lists = msgLists[event.threadID][event.messageID]
-			const admins = getAdmins()
 			if(event.type == "message_unsend" && admins.includes(event.senderID)){
 				let { body, attachments, threadID, timestamp, senderID } = lists
 				let content = "Unsent message:\n"

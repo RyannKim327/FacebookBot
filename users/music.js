@@ -78,10 +78,6 @@ module.exports = async (api, event, regex) => {
 				const consume = new Date(Date.now() - timestart)
 				const time_ = `${consume.getMinutes()}:${consume.getSeconds()}`
 				// api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`, msgID, (err, m) => {})
-					// mentions:[{
-					//	id: event.senderID,
-					// 	tag: user[event.senderID]['name']
-					// }],
 				api.sendMessage({
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
@@ -106,7 +102,7 @@ module.exports = async (api, event, regex) => {
 							afk(api, json)
 						})
 					}
-				})
+				}, msgID)
 				api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 			})
 		}catch(err){
