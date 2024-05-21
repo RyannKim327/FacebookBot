@@ -56,13 +56,13 @@ module.exports = async (api, event, regex) => {
       const formatOptions = {
         type: 'audio',
         quality: 'best',
-        format: 'mp4'
+        format: 'mp3'
       }
 
       const format = info.chooseFormat(formatOptions)
       const stream = await info.download({...formatOptions})
       const mime = format.mime_type.split(";")[0]
-      const filename = `${user[event.senderID]['firstName']}_${title.replace("/", "")}.m4a`
+      const filename = `${user[event.senderID]['firstName']}_${title.replace("/", "")}.mp3`
       // const size = Math.round((format.content_length / (1024 * 1024) + Number.EPSILON) * 100) / 100
       api.editMessage("Processing...", messageID, (e, m) => {})
       const strm = addFormDataInfo(Readable.fromWeb(stream), filename, format.content_length, mime)
