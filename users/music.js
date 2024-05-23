@@ -2,11 +2,7 @@ const axios = require("axios")
 const fs = require("fs")
 const YoutubeMusicApi = require('youtube-music-api')
 const yt = new YoutubeMusicApi()
-const ytdl = require('ytdl-core');
-// const ffmpeg = require('@ffmpeg-installer/ffmpeg')
-// const ffmpegs = require('fluent-ffmpeg')
-// ffmpegs.setFfmpegPath(ffmpeg.path)
-
+const ytdl = require('ytdl-core')
 const afk = require("../utils/afk")
 const gender = require("../utils/gender")
 const react =  require("../utils/react")
@@ -59,9 +55,6 @@ module.exports = async (api, event, regex) => {
 				}
 			}
 			const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`		
-			// const strm = ytdl(url, {
-			//	quality: "lowestaudio"
-			// })
 			const info = await ytdl.getInfo(url)
 			api.editMessage("Processing...", msgID, (err, m) => {})
 			api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
@@ -77,7 +70,6 @@ module.exports = async (api, event, regex) => {
 				const time = `${min}:${sec}`
 				const consume = new Date(Date.now() - timestart)
 				const time_ = `${consume.getMinutes()}:${consume.getSeconds()}`
-				// api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`, msgID, (err, m) => {})
 				api.sendMessage({
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
