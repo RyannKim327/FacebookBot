@@ -9,7 +9,7 @@ const react =  require("../utils/react")
 const font = require("../utils/font")
 
 module.exports = async (api, event, regex) => {
-	const timestart = Date.now()
+	const timestart = Date.now() / 1000
 	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
 		return api.sendMessage("Your request is still in progress, please wait for a moment", event.threadID, (e, m) => {
 			if(e){
@@ -67,9 +67,9 @@ module.exports = async (api, event, regex) => {
 				let lengthTime = parseInt(info.videoDetails.lengthSeconds)
 				let min = Math.floor(lengthTime / 60)
 				let sec = lengthTime % 60
-				const time = `${min}:${sec}`
-				const consume = new Date(Date.now() - timestart)
-				const time_ = `${consume.getMinutes()}:${consume.getSeconds()}`
+				let time = `${min <  10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}`
+				const consume = ((Date.now() / 1000) - timestart)
+				const time_ = consume.toFixed(2)
 				api.sendMessage({
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
@@ -79,7 +79,7 @@ module.exports = async (api, event, regex) => {
 										api.editMessage(`${err.message}`, msgID, (e, m) => {})
 										console.log(err)
 									}else{
-										api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_}`, msgID, (e, m) => {})
+										api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_} seconds`, msgID, (e, m) => {})
 									}
 									api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 									console.log("Done")

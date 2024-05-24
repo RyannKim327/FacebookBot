@@ -1,4 +1,4 @@
-const { getAdmins } = require("./../config")
+// const { getAdmins } = require("./../config")
 
 const http = require("https")
 const fs = require("fs")
