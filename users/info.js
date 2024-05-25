@@ -18,9 +18,11 @@ module.exports = async (api, event) => {
 		"Mart Anthony Salazar",
 		"Eljohn Mago",
 		"Jovanny De Leon",
+		"Danilo Manto",
 		"LuanRT",
 		"Schemavery",
 		"VanBanLaNhat",
+		"XaviaTeam",
 		"Labs Bible",
 		"Biblegateway",
 		"Zenquotes",
@@ -54,7 +56,7 @@ module.exports = async (api, event) => {
 	let user = await api.getUserInfo(myID)
 	let json = JSON.parse(fs.readFileSync("data/preferences.json", "utf8"))
 	let myname = () => {
-	let usn = user[myID]['name']
+		let usn = user[myID]['name']
 		if(user[myID]['name'].toLowerCase().includes("bot")){
 			usn.replace(/bot/gi, "")
 		}

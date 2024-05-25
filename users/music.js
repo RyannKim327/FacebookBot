@@ -70,6 +70,8 @@ module.exports = async (api, event, regex) => {
 				let time = `${min <  10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}`
 				const consume = ((Date.now() / 1000) - timestart)
 				const time_ = consume.toFixed(2)
+				const filesize = fs.statSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).size
+				const mb = (filesize / 1024) / 1024
 				api.sendMessage({
 					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
 						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
@@ -79,7 +81,7 @@ module.exports = async (api, event, regex) => {
 										api.editMessage(`${err.message}`, msgID, (e, m) => {})
 										console.log(err)
 									}else{
-										api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_} seconds`, msgID, (e, m) => {})
+										api.editMessage(`Here's your requests ${reqBy}:\nTitle: ${info.videoDetails.title}\nUploaded by: ${info.videoDetails.author.name}\nDuration: ${time}\n${info.videoDetails.video_url}\nTime Process: ${time_} seconds\nFile Size: ${mb.toFixed(2)}`, msgID, (e, m) => {})
 									}
 									api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 									console.log("Done")
