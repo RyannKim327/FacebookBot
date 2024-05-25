@@ -4,7 +4,7 @@ const { getPrefix } = require("./../config")
 const react = require("./../utils/react")
 
 let getBugtong = async () => {
-	let { data } = await axios.get("https://api-pinoy-bugtong.vercel.app")
+	let { data } = await axios.get("https://pinoy-bugtong-api.onrender.com/question")
 	return data
 }
 
@@ -18,10 +18,10 @@ module.exports = async (api, event) => {
 		}, event.messageID)
 	}else{
 		let b = await getBugtong()
-		json.ingame[event.senderID] = b.b
-		json.answer[event.senderID] = b.s
+		json.ingame[event.senderID] = b.question
+		json.answer[event.senderID] = b.id
 		json.current_game[event.senderID] = "bugtong"
-		api.sendMessage(`Here's your bugtong:\n~ ${b.b}\n\nTo answer, kindly message ${ getPrefix() }answer [your answer here]`, event.threadID, (e, m) => {
+		api.sendMessage(`Here's your bugtong:\n~ ${b.question}\n\nTo answer, kindly message ${ getPrefix() }answer [your answer here]`, event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 			}

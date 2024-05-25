@@ -1,18 +1,31 @@
+const axios = require("axios")
 const fs = require("fs")
 const react = require("./../utils/react")
 
-module.exports = (api, event, regex) => {
+async function bugtong(id, answer){
+	let { data } = await axios.get(`https://pinoy-bugtong-api.onrender.com/answer?id=${encodeURI(id)}&answer=${encodeURI(answer)}`)
+	return data
+}
+
+module.exports = async (api, event, regex) => {
 	let body = event.body.match(regex)[1]
 	let json = JSON.parse(fs.readFileSync("data/games.json", "utf8"))
-	if(json.answer[event.senderID] == undefined){
+	if(json.ingame[event.senderID] == undefined){
 		api.sendMessage("Please play a game first.", event.threadID)
 	}else{
 		let data = json.answer[event.senderID]
+		let nbugtong = false
+		if(json.current_game[event.senderID] == "bugtong"){
+			let newdata = await bugtong(json.answer[event.senderID], body)
+			if(newdata.correct){
+				nbugtong = true
+			}
+		}
 		let score = json[json.current_game[event.senderID]]['score'][event.senderID]
 		if(score == undefined){
 			json[json.current_game[event.senderID]]['score'][event.senderID] = 0
 		}
-		if(data.includes(body)){
+		if((data.includes(body) && json.current_game[event.senderID] != "bugtong") || (json.current_game[event.senderID] == "bugtong") && nbugtong){
 			json[json.current_game[event.senderID]]['score'][event.senderID]  += 1
 			api.sendMessage("You've got it.", event.threadID, (e, m) => {
 				if(e){

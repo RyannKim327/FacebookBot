@@ -617,6 +617,12 @@ let doListen = async (api) => {
 						}
 					}
 				})
+				if(event.body != prefix && loop && json_.ai == false && (admins.includes(event.senderID) || (json_.status && !cooldowns.ai.includes(event.senderID) && !json_.off.includes(event.threadID) && !json_.off.includes(event.senderID) && !json_.saga.includes(event.threadID) && json_.cooldown[event.senderID] == undefined))){
+					event.body = event.body.substring(1)
+					openai(api, event)
+					if(/give\b|create\b|what is (^your name)\b/.test(event.body))
+						cd(api, event, "ai", json_)
+				}
 			}
 		}
 	})
