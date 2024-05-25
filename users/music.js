@@ -24,14 +24,14 @@ module.exports = async (api, event, regex) => {
 			const file = fs.createWriteStream(`temp/${event.threadID}_${event.senderID}.mp3`)
 			api.setMessageReactionMqtt("🔎", event.messageID, (e) => {}, true)
 			const data = event.body.match(regex)[1]
-			const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11}$)/i
+			const yt_1 = /youtube.com\/watch\?v=([a-zA-Z0-9\-_]{11})/i
 			const yt_2 = /youtu.be\/([a-zA-Z0-9\-_]{11})/i
 			let music = {}
 			if(yt_1.test(data)){
 				music = {
 					"content": [
 						{
-							"videoId": data.match(yt_1)[1]
+							"videoId": data.match(yt_1)[1].split("&")[0]
 						}
 					]
 				}
