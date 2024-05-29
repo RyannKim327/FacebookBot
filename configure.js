@@ -1,142 +1,129 @@
-const fca = require("fca-unofficial")
-const cron = require("node-cron")
-const axios = require("axios")
 const fs = require("fs")
 
-const jobs = require("./cron/start")
-const cron_api = require("./config/api")
-const openai = require("./auto/openai")
-const unsent = require("./utils/unsent")
+const date = require("./utils/date")
 const regex = require("./utils/regex")
 
-let admins = []
-let commands = []
-let cooldown = {}
-let antiUnsent = {}
-let options = {
+// NOTE: String Variables
+let _calls = ""
+let _adminGC = ""
+
+// NOTE: Lists Variables
+let _admins = []
+let _intervals = []
+let _commands = []
+
+// NOTE: JSON Variables
+let _opts = {
 	listenEvents: true,
-	selfListen: false,
-	forceLogin: true,
-	autoReconnect: true,
-	logLevel: "silent",
-	updatePresence: true,
+	selfListen: true,
 }
 
-const addAdmin = (ID) => {
-	admins.push(ID)
-} 
 
-const insert = (file) => {
-	if(typeof(file) != "object"){
-		file = JSON.parse(file)
-	}
-	for(let c = 0; c < file.length; c++){
-		let command = file[c]
-		commands.push(command)
-	}
+// NOTE: START of Add Functions
+function addAdmin(id){
+	admins.push(_admins)
 }
 
-const doListen = async (api) => {
-	return api.listen(async (error, event) => {
-		if(error){
-			return console.error(`Error [Events]: ${error.message}`)
-		}
+function addCommand(command){
+	_commands.push(command)
+}
 
-		let pref = JSON.parse(fs.readFileSync("data/preferences", "utf-8"))
+// NOTE: END of Add Functions
 
-		if(options.autoMarkRead){
-			await api.autoMarkReadAll()
-		}
+// NOTE: START Set Functions
+function setAdminGC(id){
+	_adminGC = id
+}
 
-		if(antiUnsent[event.threadID] == undefined){
-			antiUnsent[event.threadID] = {"": ""}
-		}
+// NOTE: END of Set Functions
 
-		if(antiUnsent[event.threadID][event.messageID]){
-			if(antiUnsent[event.threadID][event.messageID] == undefined && (event.type == "message" || event.type == "message_reply")){
-				antiUnsent[event.threadID][event.messageID] = event
-			}
-		}
+// NOTE: START of Get Functions
+function getAdmins(){
+	return _admins
+}
 
-		unsent(api, event, antiUnsent)
+function getAdminGC(){
+	return _adminGC
+}
 
-		if(event.body != null && (pref.status || admins.includes(event.senderID))){
-			
-			for(let c = 0; c < commands.length; c++){
-				const command = commands[c]
-				if(body.startsWith(pref.prefix)){
-					const reg = regex(`${command.command}`)
-					let permission = "user"
-					if(command.permission){
-						permission = command.permission
-					}
-					if(permission == "user"){
-						const script = require(`./${command.type}/${command.script}`)
-						if(reg.test(event.body)){
-							if(command.command.includes("(") && command.command.includes(")")){
-								return script(api, event, reg)
+function getCommands(){
+	return _commands
+}
+
+// NOTE: END of Get Functions
+
+// NOTE: CORE Function
+function __core__(api){
+	api.listenMqtt(async (error, event) => {
+		if(error) return console.error(`Error [FCA Events]: ${JSON.stringify(error)}`)
+		const setup = JSON.parse(fs.readFileSync("data/preferences.json", "utf-8"))
+		
+		if(event.body != null){
+			let aiResponse = true
+			_commands.map(async (command, index) => {
+				// NOTE: Prefix
+				if(event.body.startsWith(setup.prefix)){
+					command.commands.map((c, i) => {
+						const text = `${prefix}${c}`
+						const expression = regex(text)
+						if(expression.test(event.body)){
+							if(command.admin){
+								if(_admins.includes(event.senderID)){
+									require(`./admin/${command.script}`)(api, event, regex)
+								}
 							}else{
-								return script(api, event)
+
 							}
 						}
-					}else if(permission == "admin"){
-						const script = require(`./${command.type}/${command.script}`)
-						if(reg.test(event.body)){
-							if(command.command.includes("(") && command.command.includes(")")){
-								return script(api, event, reg)
-							}else{
-								return script(api, event)
-							}
-						}
-					}
+					})
 				}
-			}
+			})
 		}
-
 	})
 }
 
-const start = (state) => {
-	if(typeof(state) != "object"){
-		try{
-			state = JSON.parse(state)
-		}catch(e){
-			return console.error(`${e.message}`)
-		}
-	}
-	fca(state, async (error, api) => {
-		if(error){
-			return console.error(`Error [API]: ${error.message}`)
-		}
-		const self = api.getCurrentUserID()
-		const pref = JSON.parse(fs.readFileSync("data/preferences.json", "utf-8"))
+// NOTE: Main Function
+function main(state){
+	require("@xaviabot/fca-unofficial")(state, async (error, api) => {
+		if(error)
+			return console.error(`Error [FCA API]: ${JSON.stringify(error)}`)
+
+		const botID = await api.getCurrentUserID()
+		const temp_folder = `${__dirname}/temp/`
+		if(_opts.sselfListen) admins.push(botID)
 		
-		if(options.selfListen){
-			admins.push(self)
+		if(fs.existsSync(temp_folder)){
+			fs.rm(temp_folder, { recursive: true }, (error) => {
+				if(error) return console.error(`Error [Remove Temporary Folder]: ${JSON.stringify(error)}`)
+				console.log(`Deleted Temporary Folder ${date("Asia/Manila")}`)
+				setTimeout(() => {
+					if(!fs.existsSync(temp_folder)){
+						fs.mkdirSync(temp_folder)
+						console.log(`Recreated Temporary Folder`)
+					}
+				}, 500)
+			})
+		}else{
+			fs.mkdirSync(temp_folder)
+			console.log(`Temporary Folder Created`)
 		}
-		cron(api)
-		cron_api(api)
 
-		fs.rm("./temp", {recursive: true}, (e) => {
-			console.log(`Remove temp folder: Done`)
-			setTimeout(() => {
-				if(!fs.existsSync("./temp")){
-					console.log(`Retrieving temp folder: Done`)
-					fs.mkdirSync("./temp")
-				}
-			}, 500)
-		})
-
-		api.setOptions(options)
-
-		await doListen(api)
-
-		setInterval(() => {
-			axios.get("https://fbnode.mpoprevii.repl.co")
-		}, ((1000 * 60) * 60))
+		api.setOptions(_opts)
+		__core__(api)
 	})
 }
 
 module.exports = {
-	insert
+
+	// NOTE: Export Add functions
+	addAdmin,
+
+	main,
+
+	// NOTE: Export Get Functions
+	getAdmins,
+	getAdminGC,
+
+	// NOTE: Export Set Functions
+	setAdminGC
 }

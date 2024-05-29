@@ -3,10 +3,11 @@ const fs = require("fs")
 const YoutubeMusicApi = require('youtube-music-api')
 const yt = new YoutubeMusicApi()
 const ytdl = require('ytdl-core')
-const afk = require("../utils/afk")
-const gender = require("../utils/gender")
-const react =  require("../utils/react")
-const font = require("../utils/font")
+const afk = require("./../utils/afk")
+const gender = require(".././utils/gender")
+const react =  require("./../utils/react")
+const font = require("./../utils/font")
+const logs = require("./../utils/logs")
 
 module.exports = async (api, event, regex) => {
 	const timestart = Date.now() / 1000

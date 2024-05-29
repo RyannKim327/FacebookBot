@@ -4,12 +4,13 @@ const http = require("https")
 const cron = require("node-cron")
 const afk = require("./../utils/afk")
 const g = require("./../utils/gender")
+const logs = require("./../utils/logs")
 
 let quote = async () => {
 	let result = await axios.get("https://zenquotes.io/api/quotes").then(r => {
 		return r.data
 	}).catch(e => {
-		console.error(`Error [Axios Quotes]: ${e}`)
+		logs(`Error [Axios Quotes]: ${e}`)
 		return null
 	})
 	return result

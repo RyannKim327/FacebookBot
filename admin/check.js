@@ -1,10 +1,11 @@
 const { getAdminGroup } = require("./../config")
 const mydate = require("./../utils/date")
+const logs = require("./../utils/logs")
 
 module.exports = (api, event) => {
 	if(getAdminGroup() == event.threadID){
 		api.sendMessage(`Last checked is ${mydate("Asia/Manila")}`, event.threadID, (err, msg) => {
-			if(err) return console.error(`Error [Check]: ${JSON.stringify(err, null, 2)}`)
+			if(err) return logs(`Error [Check]: ${JSON.stringify(err, null, 2)}`)
 		})
 	}else{
 		if(getAdminGroup() != ""){

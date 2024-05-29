@@ -6,6 +6,7 @@ const left = require("./auto/left")
 const cron = require("./cron/start")
 const cron_api = require("./cron/api")
 const openai = require("./auto/openai")
+const logs = require("./utils/logs")
 
 const mydate = require("./utils/date")
 const afk = require("./utils/afk")
@@ -433,7 +434,7 @@ let doListen = async (api) => {
 	const self = await api.getCurrentUserID()
 	return api.listenMqtt(async (error, event) => {
 		if(error){
-			console.error(`Error [Listen Emitter]: ${JSON.stringify(error)}`)
+			logs(`Error [Listen Emitter]: ${JSON.stringify(error)}`)
 			console.log(`Restart:`)
 		}
 
@@ -632,7 +633,7 @@ let start = (state) => {
 	const fca = require("@xaviabot/fca-unofficial")
 	fca(state, async (error, api) => {
 		if(error){
-			console.error(`Error [API]: ${error}`)	
+			logs(`Error [API]: ${error}`)	
 		}
 		
 		const self = api.getCurrentUserID()
@@ -685,11 +686,11 @@ let start = (state) => {
 		
 		if(fs.existsSync(`${__dirname}/temp/`)){
 			fs.rm(`${__dirname}/temp/`, { recursive: true }, (e) => {
-				console.log(`Deleted ${mydate('Asia/Manila')}`)
+				logs(`Deleted ${mydate('Asia/Manila')}`)
 				setTimeout(() => {
 					if(!fs.existsSync(`${__dirname}/temp/`)){
 						fs.mkdirSync(`${__dirname}/temp/`)
-						console.log("Removed temp files")
+						logs("Removed temp files")
 					}
 				}, 500)
 			})

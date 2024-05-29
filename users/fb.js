@@ -1,12 +1,13 @@
 const fs = require("fs")
 const request = require("request")
+const logs = require("./../utils/logs")
 
 module.exports = async (api, event, regex) => {
 	let message = ""
 	if(event.type == "message_reply"){
 		api.getUserInfo(event.messageReply.senderID, async (err, data) => {
 			if(err){
-				console.log(err)
+				logs(err)
 				api.sendMessage("Error occured", event.threadID, event.messageID)
 			}else{
 				let d = data[event.messageReply.senderID]
@@ -134,7 +135,7 @@ module.exports = async (api, event, regex) => {
 				console.log(e)
 				api.getUserID(info[1], (err, obj) => {
 					if(err){
-						console.log(err)
+						logs(err)
 						api.sendMessage("Error occured, either not found, deleted or deactivated", event.threadID, event.messageID)
 					}else{
 						let iter = 0
