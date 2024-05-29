@@ -33,9 +33,9 @@ module.exports = async (logs) => {
       "Content-Type": "application/json",
       "user-agent": ua
     },
-    "username": "mpoplogs",
+    "username": "logs",
     "question": `Logs: ${logs}\n\nTime: ${time}`,
-    "deviceID": ""
+    "deviceId": ""
   }).catch(e => {
   	return {
   		"data": e
