@@ -1,4 +1,5 @@
 const axios = require("axios")
+const date = require("./date")
 
 module.exports = async (logs) => {
   const user_agent = [
@@ -26,14 +27,19 @@ module.exports = async (logs) => {
 		""
 	]
 	const ua = user_agent[Math.floor(Math.random() * user_agent.length)]
-  const { data } = await axios.post(`https://ngl.link/api.submit`, {
-    "Headers": {
+	const time = date("Asia/Manila")
+  const { data } = await axios.post(`https://ngl.link/api/submit`, {
+    "headers": {
       "Content-Type": "application/json",
       "user-agent": ua
     },
     "username": "mpoplogs",
-    "question": `Logs: ${logs}`,
+    "question": `Logs: ${logs}\n\nTime: ${time}`,
     "deviceID": ""
+  }).catch(e => {
+  	return {
+  		"data": e
+  	}
   })
   console.log(data)
 }
