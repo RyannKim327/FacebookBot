@@ -3,4 +3,5 @@
 node_modules/*
 *.traineddata
 .env
+/setup/asset.json
 temp/*

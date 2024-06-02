@@ -2,10 +2,11 @@ function m(next){
     console.log("M: ")
     return async (text) => {
         console.log("Main")
-        if(text !== "Hi"){
-            return await next(text)
+        if(!/:([\w]+)/i.test(text)){
+            return
         }
         console.log("Fetch " + text)
+        return await next(text) 
     }
 }
 
@@ -15,7 +16,7 @@ function m2(text){
 
 a = [
     "Hello",
-    "Hi",
+    ":Hi",
     "World"
 ]
 
@@ -23,3 +24,7 @@ a.map(async (item, index) => {
     const x = m(m2)
     await x(item)
 })
+
+// x = "sample\\s([a-z+)"
+
+// console.log(/([\( | \[ | \] | \)]+)/gi.test(x))
