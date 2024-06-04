@@ -92,7 +92,7 @@ module.exports = async (api, event, regex) => {
 					})
 				}, event.threadID, (e, m) => {
 					if(e){
-						api.sendMessage(e.message, event.threadID, (e, m) => {
+i						api.editMessage(e.message, msgID, (e, m) => {
 							api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 							afk(api, json)
 						})
