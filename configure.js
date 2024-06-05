@@ -1,5 +1,7 @@
 const fs = require("fs")
 
+const command_middleware = reqiuire("./middlewares/command")
+
 const date = require("./utils/date")
 const regex = require("./utils/regex")
 
@@ -61,19 +63,22 @@ function __core__(api){
 		if(event.body != null){
 			let aiResponse = true
 			_commands.map(async (command, index) => {
+				// NOTE: This is for importing the file only
+				let path = "user"
+				if(command.admin){
+					if(admins.includes(event.senderID)){
+						path = "admin"
+					}
+				}
+				const _command = require(`./${path}/${command.script}`)
+				const middleware = command_middleware(_command)
 				// NOTE: Prefix
 				if(event.body.startsWith(setup.prefix)){
 					command.commands.map((c, i) => {
 						const text = `${prefix}${c}`
 						const expression = regex(text)
 						if(expression.test(event.body)){
-							if(command.admin){
-								if(_admins.includes(event.senderID)){
-									require(`./admin/${command.script}`)(api, event, regex)
-								}
-							}else{
-
-							}
+							middleware(api, event, expression)
 						}
 					})
 				}
