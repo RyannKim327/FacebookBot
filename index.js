@@ -1,9 +1,5 @@
 const config = require("./config")
-const server = require("./server")
-const dump = require("./dump")
 const fs = require("fs")
-
-dump()
 
 config.add("admin", {
 	title: "Admin commands",
@@ -764,4 +760,3 @@ let run = () => {
 	setTimeout(run, (1000 * second) * minute)
 }
 run()
-// server()
