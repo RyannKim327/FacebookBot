@@ -11,7 +11,8 @@ const logs = require("./../utils/logs")
 
 module.exports = async (api, event, regex) => {
 	const timestart = Date.now() / 1000
-	if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+	const filename = `${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`
+	if(fs.existsSync(filename)){
 		return api.sendMessage("Ang iyong kahilinga'y malabo pang ibigay, subukan mo bukas, baka pwede na.", event.threadID, (e, m) => {
 			if(e){
 				api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
@@ -71,13 +72,13 @@ module.exports = async (api, event, regex) => {
 				let time = `${min <  10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}`
 				const consume = ((Date.now() / 1000) - timestart)
 				const time_ = consume.toFixed(2)
-				const filesize = fs.statSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).size
+				const filesize = fs.statSync(filename).size
 				const mb = (filesize / 1024) / 1024
 				api.sendMessage({
-					attachment: fs.createReadStream(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`).on("end", async () => {
-						if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
+					attachment: fs.createReadStream(filename).on("end", async () => {
+						if(fs.existsSync(filename)){
 							setTimeout(() => {
-								fs.unlink(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`, (err) => {
+								fs.unlink(filename, (err) => {
 									if(err){
 										api.editMessage(`${err.message}`, msgID, (e, m) => {})
 										console.log(err)
@@ -103,8 +104,8 @@ module.exports = async (api, event, regex) => {
 		}catch(err){
 			console.log(err)
 			api.editMessage("Error: " + err, msgID, (e, m) => {})
-			if(fs.existsSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}.mp3`)){
-				fs.unlinkSync(`${__dirname}/../temp/${event.threadID}_${event.senderID}`, (e) => {})
+			if(fs.existsSync(filename)){
+				fs.unlink(filename, (e) => {})
 			}
 			api.setMessageReactionMqtt("", event.messageID, (e) => {}, true)
 		}
