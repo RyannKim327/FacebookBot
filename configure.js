@@ -5,23 +5,23 @@ const command_middleware = reqiuire("./middlewares/command")
 const date = require("./utils/date")
 const regex = require("./utils/regex")
 
-// NOTE: String Variables
+// INFO: String Variables
 let _calls = ""
 let _adminGC = ""
 
-// NOTE: Lists Variables
+// INFO: Lists Variables
 let _admins = []
 let _intervals = []
 let _commands = []
 
-// NOTE: JSON Variables
+// INFO: JSON Variables
 let _opts = {
 	listenEvents: true,
 	selfListen: true,
 }
 
 
-// NOTE: START of Add Functions
+// INFO: START of Add Functions
 function addAdmin(id){
 	admins.push(_admins)
 }
@@ -32,14 +32,14 @@ function addCommand(command){
 
 // NOTE: END of Add Functions
 
-// NOTE: START Set Functions
+// INFO: START Set Functions
 function setAdminGC(id){
 	_adminGC = id
 }
 
 // NOTE: END of Set Functions
 
-// NOTE: START of Get Functions
+// INFO: START of Get Functions
 function getAdmins(){
 	return _admins
 }
@@ -54,7 +54,7 @@ function getCommands(){
 
 // NOTE: END of Get Functions
 
-// NOTE: CORE Function
+// INFO: CORE Function
 function __core__(api){
 	api.listenMqtt(async (error, event) => {
 		if(error) return console.error(`Error [FCA Events]: ${JSON.stringify(error)}`)
@@ -72,7 +72,7 @@ function __core__(api){
 				}
 				const _command = require(`./${path}/${command.script}`)
 				const middleware = command_middleware(_command)
-				// NOTE: Prefix
+				// INFO: Prefix
 				if(event.body.startsWith(setup.prefix)){
 					command.commands.map((c, i) => {
 						const text = `${prefix}${c}`
@@ -87,7 +87,7 @@ function __core__(api){
 	})
 }
 
-// NOTE: Main Function
+// INFO: Main Function
 function main(state){
 	require("@xaviabot/fca-unofficial")(state, async (error, api) => {
 		if(error)
@@ -120,15 +120,15 @@ function main(state){
 
 module.exports = {
 
-	// NOTE: Export Add functions
+	// INFO: Export Add functions
 	addAdmin,
 
 	main,
 
-	// NOTE: Export Get Functions
+	// INFO: Export Get Functions
 	getAdmins,
 	getAdminGC,
 
-	// NOTE: Export Set Functions
+	// INFO: Export Set Functions
 	setAdminGC
 }
