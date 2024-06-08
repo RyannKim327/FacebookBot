@@ -1,8 +1,9 @@
 const fs = require("fs")
 
-const command_middleware = reqiuire("./middlewares/command")
+const command_middleware = require("./middlewares/command")
 
 const date = require("./utils/date")
+const log = require("./utils/logs")
 const regex = require("./utils/regex")
 
 // INFO: String Variables
@@ -13,13 +14,30 @@ let _adminGC = ""
 let _admins = []
 let _intervals = []
 let _commands = []
+const categories = [
+	"ai",
+	"dump",
+	"education",
+	"game",
+	"multimedia",
+	"onetime",
+	"theology"
+]
 
 // INFO: JSON Variables
 let _opts = {
 	listenEvents: true,
 	selfListen: true,
 }
-
+const cooldown_rate = {
+	"ai": 5,
+	"dump": 0,
+	"education": 2.5,
+	"game": 0,
+	"multimedia": 3,
+	"onetime": 0,
+	"theology": .5
+}
 
 // INFO: START of Add Functions
 function addAdmin(id){
@@ -56,6 +74,7 @@ function getCommands(){
 
 // INFO: CORE Function
 function __core__(api){
+	// TODO: This is the main loop process of the bot where it listen to a thread to gather some infomations.
 	api.listenMqtt(async (error, event) => {
 		if(error) return console.error(`Error [FCA Events]: ${JSON.stringify(error)}`)
 		const setup = JSON.parse(fs.readFileSync("data/preferences.json", "utf-8"))
@@ -63,6 +82,7 @@ function __core__(api){
 		if(event.body != null){
 			let aiResponse = true
 			_commands.map(async (command, index) => {
+				
 				// NOTE: This is for importing the file only
 				let path = "user"
 				if(command.admin){
@@ -72,7 +92,8 @@ function __core__(api){
 				}
 				const _command = require(`./${path}/${command.script}`)
 				const middleware = command_middleware(_command)
-				// INFO: Prefix
+				
+				// TODO: Prefix
 				if(event.body.startsWith(setup.prefix)){
 					command.commands.map((c, i) => {
 						const text = `${prefix}${c}`
@@ -89,18 +110,19 @@ function __core__(api){
 
 // INFO: Main Function
 function main(state){
+	// INFO: The main function trigger the server to start the process for the facebook bot.
 	require("@xaviabot/fca-unofficial")(state, async (error, api) => {
 		if(error)
 			return console.error(`Error [FCA API]: ${JSON.stringify(error)}`)
 
 		const botID = await api.getCurrentUserID()
 		const temp_folder = `${__dirname}/temp/`
-		if(_opts.sselfListen) admins.push(botID)
+		if(_opts.selfListen) admins.push(botID)
 		
 		if(fs.existsSync(temp_folder)){
 			fs.rm(temp_folder, { recursive: true }, (error) => {
-				if(error) return console.error(`Error [Remove Temporary Folder]: ${JSON.stringify(error)}`)
-				console.log(`Deleted Temporary Folder ${date("Asia/Manila")}`)
+				if(error) return log(`Error [Remove Temporary Folder]: ${JSON.stringify(error)}`)
+				log(`Deleted Temporary Folder ${date("Asia/Manila")}`)
 				setTimeout(() => {
 					if(!fs.existsSync(temp_folder)){
 						fs.mkdirSync(temp_folder)
