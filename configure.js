@@ -86,7 +86,7 @@ function __core__(api){
 				// NOTE: This is for importing the file only
 				let path = "user"
 				if(command.admin){
-					if(admins.includes(event.senderID)){
+					if(_admins.includes(event.senderID)){
 						path = "admin"
 					}
 				}
@@ -117,7 +117,7 @@ function main(state){
 
 		const botID = await api.getCurrentUserID()
 		const temp_folder = `${__dirname}/temp/`
-		if(_opts.selfListen) admins.push(botID)
+		if(_opts.selfListen) _admins.push(botID)
 		
 		if(fs.existsSync(temp_folder)){
 			fs.rm(temp_folder, { recursive: true }, (error) => {
