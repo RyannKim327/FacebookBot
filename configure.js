@@ -39,9 +39,19 @@ const cooldown_rate = {
 	"theology": .5
 }
 
+let cooldowns = {
+	"ai": "",
+	"dump": "",
+	"education": "",
+	"game": "",
+	"multimedia": "",
+	"onetime": "",
+	"theology": ""
+}
+
 // INFO: START of Add Functions
 function addAdmin(id){
-	admins.push(_admins)
+	_admins.push(id)
 }
 
 function addCommand(command){
@@ -144,12 +154,14 @@ module.exports = {
 
 	// INFO: Export Add functions
 	addAdmin,
+	addCommand,
 
 	main,
 
 	// INFO: Export Get Functions
 	getAdmins,
 	getAdminGC,
+	getCommands,
 
 	// INFO: Export Set Functions
 	setAdminGC
