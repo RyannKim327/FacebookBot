@@ -1,32 +1,19 @@
-const fs = require("fs")
-const config = require("./config")
-const server = require("./server")
-const repl = require("./replit_only.js")
+const config = require("./configure")
 
-config.setCommands(JSON.parse(fs.readFileSync("commandsments.json", "utf-8")))
-
-// doing some test with auto git modified
-
-config.addAdmins("100011558238843")
-config.addAdmins("100081698814451")
-
-config.setOptions({
-	listenEvents: true,
-	selfListen: true,
-	forceLogin: true,
-	autoReconnect: true,
-	logLevel: "silent",
-	updatePresence: true,
+// INFO: Adding commands
+config.addCommand({
+	name: "Admin Command List",
+	description: "Just a helpdesk for admins",
+	script: admin,
+	category: "onetime",
+	command: "admin",
+	admin: true
 })
 
-config.start({
-	appState: JSON.parse(process.env['user'])
+config.addCommand({
+	name: "Help desk",
+	description: "A command for introduction and showing all list commands available for all users",
+	script: "help",
+	category: "onetime",
+	command: "help"
 })
-
-
-let run = () => {
-	console.log("Run")
-	setTimeout(run, (1000 * 60) * 60)
-}
-server()
-// repl()
