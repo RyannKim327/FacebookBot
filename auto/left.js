@@ -1,8 +1,5 @@
 const fs = require("fs")
 const ytdl = require('ytdl-core');
-const ffmpeg = require('@ffmpeg-installer/ffmpeg')
-const ffmpegs = require('fluent-ffmpeg')
-ffmpegs.setFfmpegPath(ffmpeg.path)
 
 module.exports = async (api, event) => {
 	if(event.type == "event"){
@@ -22,9 +19,10 @@ module.exports = async (api, event) => {
 			})
 			const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${song}`)
 			const name = `${__dirname}/../temp/${event.logMessageData.leftParticipantFbId}_farewell.mp3`
+			const file = fs.createWriteStream(`temp/${event.logMessageData.leftParticipantFbId}_farewell.mp3`)
 			const user = await api.getUserInfo(event.logMessageData.leftParticipantFbId)
 			const fullname = user[event.logMessageData.leftParticipantFbId]['name']
-			ffmpegs(yt).audioBitrate(96).save(name).on("end", () => {
+			yt.pipe(file).on("end", () => {
 				api.sendMessage({
 					"body": `Farewell to you ${fullname}, we will miss you\nA song dedicated for you entitiled: ${info.videoDetails.title}`,
 					"attachment": fs.createReadStream(name).on("end", () => {
