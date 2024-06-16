@@ -44,6 +44,67 @@ config.addCommand({
 	]
 })
 
+// NOTE: End of admin commands
+
+// INFO: Start of game commands
+
+config.addCommand({
+	name: "Answer to a game",
+	description: "This program will only trigger once you activate one of the games",
+	script: "answer",
+	command: "answer ([\\w\\W]+)",
+	hint: [
+		"answer [your answer]"
+	],
+	category: "game"
+})
+
+config.addCommand({
+	name: "Ball Drop",
+	description: "A game similar to ball drop",
+	script: "dropball",
+	command: "drop ([1-5]+)",
+	hint: [
+		"drop [a number from 1 to 5]"
+	]
+})
+
+config.addCommand({
+	name: "Filipino Riddles",
+	description: "A filipino based riddles powered by the contributors online",
+	script: "bugtong",
+	command: "bugtong",
+	category: "game"
+})
+
+config.addCommand({
+	name: "Jack 'n Poy",
+	description: "A filipino game also known as Rock, Paper, Scissors",
+	script: "jnp",
+	command: "jnp ([r | p | s]+)",
+	hint: [
+		"jnp [choice] (choice must be r, p, and s where r is for rock, p is for paper and s is for scissors)"
+	]
+})
+
+config.add({
+	name: "Roll dice",
+	description: "Roll a dice between you and an opponent",
+	script: "dice",
+	command: "dice",
+	hint: [
+		"dice (for vs computer)",
+		"dice <message_reply> (for vs a human)"
+	],
+	message_type: [
+		"message",
+		"message_reply"
+	]
+})
+
+// NOTE: End of games command
+
+
 // INFO: All user's Commands
 config.addCommand({
 	name: "Help desk",
@@ -97,6 +158,14 @@ config.addCommand({
 		"message",
 		"message_reply"
 	]
+})
+
+config.addCommand({
+	name: "Games lists",
+	description: "A command that shows all the games and its commands to use.",
+	script: "game",
+	command: "games",
+	category: "onetime"
 })
 
 config.addCommand({
@@ -158,6 +227,9 @@ config.addCommand({
 		"music [youtube url]"
 	]
 })
+
+// NOTE: End of user commands
+
 
 config.setAdminGC("7045133965567738")
 
