@@ -13,10 +13,14 @@
         outline: none;
       }
       main {
+        display: flex;
+        flex-direction: column;
         background-color: #dedede;
         margin: 0.5rem;
         border-radius: 5px;
         padding: 0.25rem;
+        height: 95vh;
+        box-sizing: border-box;
       }
 
       main > #header {
@@ -52,6 +56,8 @@
         border-radius: 5px;
         font-family: "Courier New", monospace;
         font-size: small;
+        box-sizing: border-box;
+        height: 100%;
       }
     </style>
   </head>
@@ -75,14 +81,92 @@
       <div id="base"></div>
     </main>
     <script>
+      // TODO: To create a function that get the element easily
       const $ = (element) => {
         return document.querySelector(element);
       };
-      function print(text) {}
+
+      // INFO: Initiation of the base
+      const base = $("#base");
+
+      function print(text) {
+        // TODO: A function that prints the characters one by one
+        let i = 0;
+        const speed = 50;
+        const label = document.createElement("label");
+        label.innerHTML += "&emsp;";
+        function __type__() {
+          if (i < text.length) {
+            label.innerHTML += text[i];
+            i++;
+            setTimeout(() => {
+              __type__();
+            }, speed);
+          } else {
+            label.style.display = "block";
+            createInsert();
+          }
+        }
+        base.appendChild(label);
+        __type__();
+      }
+
+      function commands(value) {
+        value = value.toLowerCase();
+        const command = {
+          help: "Help Command",
+        };
+      }
+
+      function createInsert() {
+        // TODO: To create input as like of a command line
+        const a = document.createElement("div");
+        const b = document.createElement("p");
+        const c = document.createElement("input");
+
+        const _a = a.style;
+        _a.padding = "0 .5rem";
+
+        const _b = b.style;
+        b.innerHTML =
+          "<font color='pink'>MPOP Reverse II</font> on <font color='purple'>service</font> as <font color='#0f0'>N!X</font>";
+
+        const _c = c.style;
+        _c.display = "block";
+        _c.backgroundColor = "transparent";
+        _c.border = "none";
+        _c.color = "white";
+        _c.boxSizing = "border-box";
+        _c.width = "100%";
+        c.autofocus = "true";
+        c.addEventListener("keyup", (event) => {
+          if (event.keyCode === 13) {
+            if (c.value != "") {
+              event.preventDefault();
+              const d = document.createElement("p");
+              const _d = d.style;
+              d.textContent = c.value;
+
+              commands(c.value);
+
+              a.appendChild(d);
+              a.removeChild(c);
+            }
+          }
+        });
+
+        a.appendChild(b);
+        a.appendChild(c);
+        base.appendChild(a);
+      }
+
       window,
         (onload = () => {
+          // INFO: First initiation after webpage load
+
           const intro =
             'Welcome to N!x Bot welcomming page. To explore more about us, kindly type "help" without any quotation mark. Thank you.';
+          print(intro);
         });
     </script>
   </body>
