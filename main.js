@@ -41,7 +41,60 @@ config.addCommand({
 	message_type: [
 		"message",
 		"message_reply"
-	]
+	],
+	admin: true
+})
+
+config.addCommand({
+	name: "Message Pin",
+	description: "A command to pin a specific message through message reply",
+	script: "pin",
+	command: "pin",
+	prefix: "_",
+	message_type: [
+		"message",
+		"message_reply",
+	],
+	admin: true
+})
+
+config.addCommand({
+	name: "Name changer",
+	description: "This is to easily change the bot nickname for AI command",
+	script: "name",
+	command: "name as ([\\w]+)",
+	hint: [
+		"name as [new bot nickname]"
+	],
+	admin: true
+})
+
+config.addCommand({
+	name: "Prefix changer",
+	description: "A command to change the current prefix of the bot",
+	script: "prefix",
+	command: "prefix ([\\W]+)",
+	hint: [
+		"prefix [any symbol exept backslash]"
+	],
+	admin: true
+})
+
+
+config.addCommand({
+	name: "Status toggler",
+	description: "A command to toggle or switch the bot on and off",
+	script: "toggle",
+	command: "toggle",
+	admin: true
+})
+
+config.addCommand({
+	name: "Unsent a message",
+	description: "A command where it unsents the message that the bot sent",
+	script: "unsent",
+	command: "remove_message",
+	admin: true
 })
 
 // NOTE: End of admin commands
@@ -204,6 +257,14 @@ config.addCommand({
 		"chords [song title]",
 		"chords [song title with singer]"
 	]
+})
+
+config.addCommand({
+	name: "Message show pin",
+	description: "A command that shows the current pinned message in a thread pinned by the admin",
+	script: "pin",
+	command: "pin",
+	category: "dump"
 })
 
 config.addCommand({

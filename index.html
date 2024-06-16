@@ -194,6 +194,7 @@
           c.focus();
           c.autofocus = "true";
         }, 250);
+
         c.addEventListener("keyup", (event) => {
           if (event.keyCode === 13) {
             if (c.value != "") {
@@ -215,13 +216,11 @@
         base.appendChild(a);
       }
 
-      window,
-        (onload = () => {
-          // INFO: First initiation after webpage load
-
-          const intro = `Welcome to ${bot} bot, please note that this webpage is not a typical webpage as you think, you need to type each command you want as you will going to do with ${bot}. Thank you for reaching this page as part of your curiousity. For more information, kindly type "help" without any quotation marks.\nThank you and enjoy.`;
-          print(intro);
-        });
+      window.onload = () => {
+        // INFO: First initiation after webpage load
+        const intro = `Welcome to ${bot} bot, please note that this webpage is not a typical webpage as you think, you need to type each command you want as you will going to do with ${bot}. Thank you for reaching this page as part of your curiousity. For more information, kindly type "help" without any quotation marks.\nThank you and enjoy.`;
+        print(intro);
+      };
     </script>
   </body>
 </html>

@@ -163,6 +163,8 @@ module.exports = {
 	addAdmin,
 	addCommand,
 
+	cooldowns,
+	cooldown_rate,
 	main,
 
 	// INFO: Export Get Functions
