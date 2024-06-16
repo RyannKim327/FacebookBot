@@ -1,4 +1,5 @@
 const config = require("./configure")
+const fs = require("fs")
 
 // INFO: Adding commands
 
@@ -42,6 +43,7 @@ config.addCommand({
 		"message_reply"
 	]
 })
+
 // INFO: All user's Commands
 config.addCommand({
 	name: "Help desk",
@@ -157,4 +159,4 @@ config.addCommand({
 	]
 })
 
-
+config,main(JSON.parse(fs.readFileSync("setup/asset.json", "utf8")))

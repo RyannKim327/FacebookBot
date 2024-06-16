@@ -120,6 +120,9 @@ function __core__(api){
 // INFO: Main Function
 function main(state){
 	// INFO: The main function trigger the server to start the process for the facebook bot.
+	if(typeof(state) !== "object"){
+		state = JSON.parse(state)
+	}
 	require("@xaviabot/fca-unofficial")(state, async (error, api) => {
 		if(error)
 			return console.error(`Error [FCA API]: ${JSON.stringify(error)}`)
