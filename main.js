@@ -159,4 +159,17 @@ config.addCommand({
 	]
 })
 
+config.setAdminGC("7045133965567738")
+
+config.setOptions({
+	listenEvents: true,
+	selfListen: true,
+	forceLogin: true,
+	autoReconnect: true,
+	logLevel: "silent",
+	updatePresence: true,
+	userAgent: "Mozilla/5.0 (Linux; Android 11; itel P651L Build/RP1A.201005.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/124.0.6367.179 Mobile Safari/537.36[FBAN/EMA;FBLC/en_GB;FBAV/399.0.0.16.120;]"
+})
+
 config,main(JSON.parse(fs.readFileSync("setup/asset.json", "utf8")))
+

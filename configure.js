@@ -65,6 +65,11 @@ function setAdminGC(id){
 	_adminGC = id
 }
 
+function setOptions(opts){
+	if(typeof(opts) !== "object") return
+	_opts = opts
+}
+
 // NOTE: END of Set Functions
 
 // INFO: START of Get Functions
@@ -166,5 +171,6 @@ module.exports = {
 	getCommands,
 
 	// INFO: Export Set Functions
-	setAdminGC
+	setAdminGC,
+	setOptions
 }
