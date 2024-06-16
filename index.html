@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>N!X Bot</title>
+    <meta
+      name="og:description"
+      content="A webpage for N!X Bot as well as the webpage where provides the MPOP's Terms and Condition"
+    />
+    <meta
+      name="og:keyword"
+      content="MPOP, MPOP Reverse II, MPOPRevii, MPOP Reverse, RyannKim327, RySes, N!X Bot, NIX, NIXBot, FacebookBot"
+    />
     <style>
       * {
         margin: 0;
@@ -57,13 +65,18 @@
         background-color: rgba(0, 0, 0, 0.5);
         color: #ffffff;
         margin: 0.15rem;
-        padding: 0.25rem;
+        padding: 0.25rem 1rem;
         border-radius: 5px;
         font-family: "Courier New", monospace;
         font-size: small;
         box-sizing: border-box;
         height: 100%;
         overflow-y: scroll;
+      }
+      @media only screen and (max-height: 1000px) {
+        main {
+          height: 90vh;
+        }
       }
     </style>
   </head>
@@ -105,7 +118,7 @@
           let i = 0;
           const speed = 15;
           const label = document.createElement("p");
-          label.innerHTML += "&emsp;";
+          label.innerHTML += "";
           function __type__() {
             if (i < text.length) {
               label.innerHTML += text[i];
@@ -138,8 +151,8 @@
           return;
         }
         const command = {
-          help: "Help Command",
-          terms: `Here are the terms and conditions about MPOP Reverse II and the policies once you used ${bot} Bot\n1. Help others, for those who want to learn, and be a better coder and/or programmer, I wanna you to share your knowledge, this would be a great pleasure of mine.\n2. Never add and/or mention my name, from REAL ACCOUNT, up to DUMMIES, and also the HangDroid PH and MPOP Reverse II in any kind of platforms and media. Just give my name if they need help.\n3. Never give me any credits, instead do the first condition.\n4. Making me as an anonymous is a huge help for me, not to avoid them, but to avoid popularity.\n5. Thank me if you're done, or I'll helped you.`,
+          help: `Thank you for reaching this page, here are the lists of commands that you may use to this entire webpage:\n1. help\n -> This command will lists all the commands you may use to the entire website.\n2. clear\n -> This command will clear the entire text in the interface or the box.\n 3. terms\n -> This command will lists all the terms and condition as well as the policies that related to MPOP Reverse II as well as the policy and terms of use for ${bot} bot.`,
+          terms: `Here are the terms and conditions about MPOP Reverse II and the policies once you used ${bot} Bot:\n1. Help others, for those who want to learn, and be a better coder and/or programmer, I wanna you to share your knowledge, this would be a great pleasure of mine.\n2. Never add and/or mention my name, from REAL ACCOUNT, up to DUMMIES, and also the HangDroid PH and MPOP Reverse II in any kind of platforms and media. Just give my name if they need help.\n3. Never give me any credits, instead do the first condition.\n4. Making me as an anonymous is a huge help for me, not to avoid them, but to avoid popularity.\n5. Thank me if you're done, or I'll helped you.`,
           clear: "",
         };
 
@@ -155,7 +168,6 @@
         const c = document.createElement("input");
 
         const _a = a.style;
-        _a.padding = "0 .5rem";
 
         const _b = b.style;
         b.innerHTML = `<font color='#ffc0ce'>MPOP Reverse II</font> on <font color='#eee4b1'>service</font> as <font color='#0f0'>${bot}</font>`;
@@ -198,8 +210,7 @@
         (onload = () => {
           // INFO: First initiation after webpage load
 
-          const intro =
-            'Welcome to N!x Bot welcomming page. To explore more about us, kindly type "help" without any quotation mark. Thank you.';
+          const intro = `Welcome to ${bot} bot, please note that this webpage is not a typical webpage as you think, you need to type each command you want as you will going to do with ${bot}. Thank you for reaching this page as part of your curiousity. For more information, kindly type "help" without any quotation marks.\nThank you and enjoy.`;
           print(intro);
         });
     </script>
