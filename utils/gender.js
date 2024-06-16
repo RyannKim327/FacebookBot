@@ -1,6 +1,8 @@
 const fs = require("fs")
 
 module.exports = (name) => {
+	// TODO: Gender identification program
+	// INFO: It was just based on the name provided and inserted to the data that was given by the administrator
 	let names = name.toLowerCase()
 	let json = JSON.parse(fs.readFileSync("data/gender.json", "utf8"))
 	let gender = {

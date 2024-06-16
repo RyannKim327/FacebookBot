@@ -1,15 +1,26 @@
 const config = require("./configure")
 
 // INFO: Adding commands
+
+// INFO: Admin Commands
 config.addCommand({
 	name: "Admin Command List",
 	description: "Just a helpdesk for admins",
-	script: admin,
+	script: "admin",
 	category: "onetime",
 	command: "admin",
 	admin: true
 })
 
+config.addCommand({
+	name: "AI Toggle",
+	description: "This is to toggle the AI auto chat",
+	script: "ai",
+	command: "ai",
+	admin: true
+})
+
+// INFO: All user's Commands
 config.addCommand({
 	name: "Help desk",
 	description: "A command for introduction and showing all list commands available for all users",
@@ -27,6 +38,15 @@ config.addCommand({
 	hint: [
 		"audioverse [bookname] [chapter]"
 	]
+})
+
+config.addCommand({
+	name: "Baybayin Transliterator",
+	description: "A command that transliterate the normal alplabet into baybayin. Please make sure you translate the word from a language into tagalog",
+	script: "baybayin",
+	category: "education",
+	command: "baybay ([\\w\\W]+)",
+	hint: "baybay [word or phrase]"
 })
 
 config.addCommand({
@@ -67,6 +87,17 @@ config.addCommand({
 	],
 	message_type: [
 		"message_reply"
+	]
+})
+
+command.addCommand({
+	name: "Google Search Engine",
+	description: "A powerful search engine powered by Google",
+	script: "google",
+	category: "education",
+	command: "search ([\\w\\W]+)",
+	hint: [
+		"google [anything you want to search]"
 	]
 })
 

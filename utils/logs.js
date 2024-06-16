@@ -2,6 +2,8 @@ const axios = require("axios")
 const date = require("./date")
 
 module.exports = async (logs) => {
+  // TODO: This is just a log catcher that sends thru your NGL account
+  // INFO: Just modify the username below.
   const user_agent = [
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
 		"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
@@ -33,7 +35,7 @@ module.exports = async (logs) => {
       "Content-Type": "application/json",
       "user-agent": ua
     },
-    "username": "logs",
+    "username": "enter your username here", // TODO: Insert your username here
     "question": `Logs: ${logs}\n\nTime: ${time}`,
     "deviceId": ""
   }).catch(e => {
