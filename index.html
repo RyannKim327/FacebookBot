@@ -12,10 +12,14 @@
         user-select: none;
         outline: none;
       }
+      body {
+        background-color: #333333;
+      }
+
       main {
         display: flex;
         flex-direction: column;
-        background-color: #dedede;
+        background-color: #211951;
         margin: 0.5rem;
         border-radius: 5px;
         padding: 0.25rem;
@@ -45,6 +49,7 @@
       }
 
       main > #header > #title > h3 {
+        color: #ffffff;
         font-family: "Courier New", monospace;
       }
 
@@ -58,6 +63,7 @@
         font-size: small;
         box-sizing: border-box;
         height: 100%;
+        overflow-y: scroll;
       }
     </style>
   </head>
@@ -88,34 +94,58 @@
 
       // INFO: Initiation of the base
       const base = $("#base");
+      const bot = "n!x";
 
       function print(text) {
         // TODO: A function that prints the characters one by one
-        let i = 0;
-        const speed = 50;
-        const label = document.createElement("label");
-        label.innerHTML += "&emsp;";
-        function __type__() {
-          if (i < text.length) {
-            label.innerHTML += text[i];
-            i++;
-            setTimeout(() => {
-              __type__();
-            }, speed);
-          } else {
-            label.style.display = "block";
-            createInsert();
+        const texts = text.split("\n");
+        let x = 0;
+        function __core__() {
+          text = texts[x];
+          let i = 0;
+          const speed = 15;
+          const label = document.createElement("p");
+          label.innerHTML += "&emsp;";
+          function __type__() {
+            if (i < text.length) {
+              label.innerHTML += text[i];
+              i++;
+              base.scrollTo(0, base.scrollHeight);
+              setTimeout(() => {
+                __type__();
+              }, speed);
+            } else {
+              label.style.display = "block";
+              if (x >= texts.length - 1) {
+                createInsert();
+              } else {
+                x++;
+                __core__();
+              }
+            }
           }
+          base.appendChild(label);
+          __type__();
         }
-        base.appendChild(label);
-        __type__();
+        __core__();
       }
 
       function commands(value) {
         value = value.toLowerCase();
+        if (value == "clear") {
+          base.innerHTML = "";
+          createInsert();
+          return;
+        }
         const command = {
           help: "Help Command",
+          terms: `Here are the terms and conditions about MPOP Reverse II and the policies once you used ${bot} Bot\n1. Help others, for those who want to learn, and be a better coder and/or programmer, I wanna you to share your knowledge, this would be a great pleasure of mine.\n2. Never add and/or mention my name, from REAL ACCOUNT, up to DUMMIES, and also the HangDroid PH and MPOP Reverse II in any kind of platforms and media. Just give my name if they need help.\n3. Never give me any credits, instead do the first condition.\n4. Making me as an anonymous is a huge help for me, not to avoid them, but to avoid popularity.\n5. Thank me if you're done, or I'll helped you.`,
+          clear: "",
         };
+
+        print(
+          command[value] ?? `${value} is not existed on the command lists.`,
+        );
       }
 
       function createInsert() {
@@ -128,8 +158,7 @@
         _a.padding = "0 .5rem";
 
         const _b = b.style;
-        b.innerHTML =
-          "<font color='pink'>MPOP Reverse II</font> on <font color='purple'>service</font> as <font color='#0f0'>N!X</font>";
+        b.innerHTML = `<font color='#ffc0ce'>MPOP Reverse II</font> on <font color='#eee4b1'>service</font> as <font color='#0f0'>${bot}</font>`;
 
         const _c = c.style;
         _c.display = "block";
@@ -138,7 +167,12 @@
         _c.color = "white";
         _c.boxSizing = "border-box";
         _c.width = "100%";
-        c.autofocus = "true";
+        _c.fontSize = "small";
+        _c.fontFamily = "'Courier New', monospace";
+        setTimeout(() => {
+          c.focus();
+          c.autofocus = "true";
+        }, 250);
         c.addEventListener("keyup", (event) => {
           if (event.keyCode === 13) {
             if (c.value != "") {
