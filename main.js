@@ -20,6 +20,28 @@ config.addCommand({
 	admin: true
 })
 
+config.addCommand({
+	name: "Bot Status checker",
+	description: "Just to check if the bot is still alive or not",
+	script: "check",
+	command: "check",
+	admin: true
+})
+
+config.addCommand({
+	name: "Gender Configuration",
+	description: "This is to add the user's gender to the dataset",
+	script: "gender",
+	command: "gender ([\\w]+) as ([m|f]+)",
+	hint: [
+		"gender this as [male | female] <message_reply>",
+		"gender [name] as [male | female]"
+	],
+	message_type: [
+		"message",
+		"message_reply"
+	]
+})
 // INFO: All user's Commands
 config.addCommand({
 	name: "Help desk",
