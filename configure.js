@@ -91,6 +91,7 @@ function __core__(api){
 		
 		if(event.body != null){
 			let aiResponse = true
+			event.body = event.body.replace(/\( | \[ | \] | \)/gi, "")
 			_commands.map(async (command, index) => {
 				
 				// NOTE: This is for importing the file only
@@ -105,13 +106,11 @@ function __core__(api){
 				
 				// TODO: Prefix
 				if(event.body.startsWith(setup.prefix)){
-					command.commands.map((c, i) => {
-						const text = `${prefix}${c}`
-						const expression = regex(text)
-						if(expression.test(event.body)){
-							middleware(api, event, expression)
-						}
-					})
+					const text = `${prefix}${command.command}`
+					const expression = regex(text)
+					if(expression.test(event.body) && command.message_type.includes(event.type)){
+						middleware(api, event, expression)
+					}
 				}
 			})
 		}
