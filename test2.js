@@ -3,3 +3,5 @@ a = JSON.stringify({
 })
 
 console.log(typeof(a) !== "object")
+
+// NOTE: Walang pinagbago, sya pa rin
