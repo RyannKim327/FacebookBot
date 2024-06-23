@@ -102,7 +102,10 @@ module.exports = async (api, event) => {
 		i += 1
 	})
 	message += "\n" + q[Math.floor(Math.random() * q.length)]
-	api.sendMessage(message, event.threadID, (e, m) => {
+	api.sendMessage({
+		body: message,
+		url: "https://ryannkim327.is-a.dev/FacebookBot"
+		}, event.threadID, (e, m) => {
 		if(e){
 			api.setMessageReactionMqtt(react, event.messageID, (e) => {}, true)
 		}
