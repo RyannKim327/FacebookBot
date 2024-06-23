@@ -19,6 +19,7 @@
       name="og:keyword"
       content="MPOP, MPOP Reverse II, MPOPRevii, MPOP Reverse, RyannKim327, RySes, N!X Bot, NIX, NIXBot, FacebookBot"
     />
+
     <style>
       * {
         margin: 0;
@@ -187,6 +188,8 @@
           window.location.href = `https://facebook.com/messages/t/${fb_id}`;
           return;
         }
+
+        // INFO: This is the JSON data for the normal printed text
         const command = {
           help: `Thank you for reaching this page, here are the lists of commands that you may use to this entire webpage:\n1. help\n -> This command will lists all the commands you may use to the entire website.\n2. about\n -> This command will give you a brief introduction about the mission and vission why ${bot} was developed and maintained.\n3. clear\n -> This command will clear the entire text in the interface or the box.\n4. contact\n -> This command will show the contact lists where you can communicate with me/us.\n5. start\n -> This command will redirect you to the messenger bot named ${bot}.\n6. terms\n -> This command will lists all the terms and condition as well as the policies that related to MPOP Reverse II as well as the policy and terms of use for ${bot} bot.`,
           terms: `Here are the terms and conditions about MPOP Reverse II and the policies once you used ${bot} Bot:\n1. Help others, for those who want to learn, and be a better coder and/or programmer, I wanna you to share your knowledge, this would be a great pleasure of mine.\n2. Never add and/or mention my name, from REAL ACCOUNT, up to DUMMIES, and also the HangDroid PH and MPOP Reverse II in any kind of platforms and media. Just give my name if they need help.\n3. Never give me any credits, instead do the first condition.\n4. Making me as an anonymous is a huge help for me, not to avoid them, but to avoid popularity.\n5. Thank me if you're done, or I'll helped you.`,
@@ -195,6 +198,8 @@
           clear: "",
           start: "",
         };
+
+        // NOTE: This is the JSON data for listing with links
         const links = {
           contact: {
             Facebook: "https://www.facebook.com//MPOP.ph",
