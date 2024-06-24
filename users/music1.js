@@ -19,7 +19,14 @@ module.exports = async (api, event, regex) => {
 			}
 		}, event.messageID)
 	}
-	api.sendMessage("Wait lang, hahanapan lang kita ng ibabagay sa iyo.", event.threadID, async (err, msg) => {
+	const wait_messages = [
+		"Wait lang, hahanapan lang kita ng ibabagay sa iyo",
+		"Matuto kang mag hintay, hanggang dumating ang oras na wala na sya sayo",
+		"Sandali, hindi mo ba ako na miss?",
+		"Sya pa rin naman ang gusto ko, kaya parehas na tayong mag hintay dito"
+	]
+	let random = Math.floor(Math.random() * wait_messages.length)
+	api.sendMessage(wait_messages[random], event.threadID, async (err, msg) => {
 		let msgID = msg.messageID
 		try{
 			const json = JSON.parse(fs.readFileSync("data/preferences.json"))
@@ -58,7 +65,15 @@ module.exports = async (api, event, regex) => {
 			}
 			const url = `https://www.youtube.com/watch?v=${music.content[0].videoId}`		
 			const info = await ytdl.getInfo(url)
-			api.editMessage("Ayan, pasko na, hindi pa tapos, ayos lang yan, ikaw nga kinausap, tapos ngayon may iba nang nahanap.", msgID, (err, m) => {})
+			const open_now = [
+				"Ayan, pasko na, hindi pa tapos, ayos lang yan, ikaw nga kinausap, tapos ngayon may iba nang hinahanap",
+				"Alam kong na mimiss mo na sya, pero wag mo nang babalikan",
+				"May darating, tapos may aalis",
+				"May mga oras talaga na akala mo nanjan na, pero ITS A PRANK",
+				"Darating ang araw na magiging kayo din, pero ayaw kong dumating ung araw na yun"
+			]
+			random = Math.floor(Math.random() * open_now.length)
+			api.editMessage(open_now[random], msgID, (err, m) => {})
 			api.setMessageReactionMqtt("⏳", event.messageID, (e) => {}, true)
 			let user = await api.getUserInfo(event.senderID)
 			let g = gender(user[event.senderID]['firstName'])['tag']
