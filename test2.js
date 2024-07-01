@@ -4,4 +4,4 @@ a = JSON.stringify({
 
 console.log(typeof(a) !== "object")
 
-// NOTE: Walang pinagbago, sya pa rin
+// NOTE: Miss ko na sya
