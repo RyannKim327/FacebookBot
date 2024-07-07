@@ -98,7 +98,7 @@
           <span class="circle" style="background-color: green">&emsp;</span>
         </nav>
         <div id="title">
-          <h3>N!X Bot</h3>
+          <h3 id="bot_name"></h3>
         </div>
         <div>
           <span class="circle">&emsp;</span>
@@ -119,6 +119,7 @@
       const bot = "ar!a";
       const fb_id = "61560057928370";
 
+      $("#bot_name").textContent = `${bot}`;
       function print(text, links = {}) {
         // TODO: A function that prints the characters one by one
         const texts = text.split("\n");
